@@ -87,8 +87,10 @@ function Gra_DrawMMap(x, y, mypic)
     lib.DrawMMap(x, y, mypic)
 end
 
--- 裁剪并清除(x1, y1)-(x2, y2)矩形内的画面
+-- 裁剪并清除(x1, y1)-(x2, y2)矩形内的画面，并根据游戏状态显示背景图
 -- 如果没有参数，则清除整个屏幕表面
+-- 总共有6种情况，分别是：
+-- 游戏开始、大地图、场景、战斗、死亡，以及其他
 -- 注意该函数并不直接刷新显示屏幕
 function Gra_Cls(x1, y1, x2, y2)
     -- 第一个参数为nil，表示没有参数，用缺省
@@ -97,28 +99,20 @@ function Gra_Cls(x1, y1, x2, y2)
     end
 
     Gra_SetClip(x1, y1, x2, y2)         -- 裁剪窗口
-    Gra_SetBackGround()                 -- 根据游戏状态显示背景图
-    Gra_SetClip(0, 0, 0, 0)             -- 裁剪全屏
-end
-
--- 根据游戏状态显示背景图
--- 总共有6种情况，分别是：
--- 游戏开始、大地图、场景、战斗、死亡，以及其他
-function Gra_SetBackGround()
-    -- 游戏状态为GAME_START
+    -- 游戏状态为GAME_START，载入开始画面
     if (jy.status == GAME_START) then
         Gra_FillColor(0, 0, 0, 0, 0)
         Gra_LoadPicture(cc.title_image, -1, -1)
-    -- 游戏状态为GAME_MMAP
+    -- 游戏状态为GAME_MMAP，载入大地图背景
     elseif (jy.status == Game_MMAP) then
         Gra_DrawMMap(jy.base["人X"], jy.base["人Y"], Gra_GetMyPic())
-    -- 游戏状态为GAME_SMAP
+    -- 游戏状态为GAME_SMAP，载入场景背景
     elseif (jy.status == GAME_SMAP) then
         Gra_DrawSMap()
-    -- 游戏状态为GAME_WMAP
+    -- 游戏状态为GAME_WMAP，载入战斗背景
     elseif (jy.status == GAME_WMAP) then
         Gra_WarDrawMap(0)
-    -- 游戏状态为GAME_DEAD
+    -- 游戏状态为GAME_DEAD，载入失败画面
     elseif (jy.status == GAME_DEAD) then
         Gra_FillColor(0, 0, 0, 0, 0)
         Gra_LoadPicture(cc.dead_image, -1, -1)
@@ -126,6 +120,7 @@ function Gra_SetBackGround()
     else
         Gra_FillColor(0, 0, 0, 0, 0)
     end
+    Gra_SetClip(0, 0, 0, 0)             -- 裁剪全屏
 end
 
 -- menu_item：表，每项保存一个子表，内容为一个菜单项的定义

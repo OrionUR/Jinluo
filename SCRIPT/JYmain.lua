@@ -5,26 +5,27 @@
 ----------------------------------------
 
 
--- 加载其他所有lua文件
+-- 加载所有lua文件
 function IncludeFile()
-    package.path = CONFIG.ScriptLuaPath            -- 设置加载路径
-    require("JYconst")                            -- 加载其他文件，使用require避免重复加载
-    require("JYwar")
-    require("JYgraphic")
-    require("kdef")
-    require("ItemInfo")
-    require("PersonInfo")
-    require("SkillInfo")
-    require("MP")
+    package.path = CONFIG.ScriptLuaPath -- 设置加载路径
+    -- 加载其他文件，使用require避免重复加载
+    require("JYconst")                  -- 常量定义
+    require("JYwar")                    -- 战斗程序
+    require("JYgraphic")                -- 图像画面程序
+    require("kdef")                     -- 事件程序
+    require("ItemInfo")                 -- 物品信息
+    require("PersonInfo")               -- 人物信息
+    require("SkillInfo")                -- 武功信息
+    require("MP")                       -- 门派相关
 end
 
 -- 设置游戏内部使用的全程变量
 function SetGlobal()
-    jy = {}                             -- test
+    jy = {}                             -- 非战斗状态时使用的全局变量
 
-    jy.status = GAME_INIT               -- 保存Rx数据
+    jy.status = GAME_INIT               -- 游戏状态
     jy.base = {}                        -- 基本数据
-    jy.person_num = 0                   -- 人物个数
+    jy.person_num = 0                   -- 人物数量
     jy.person = {}                      -- 人物数据
     jy.thing_num = 0                    -- 物品数量
     jy.thing = {}                       -- 物品数据
@@ -53,24 +54,20 @@ function SetGlobal()
     jy.thing_use = -1
     jy.current_d = -1                   -- 当前调用D*的编号
     jy.old_d_pass = -1                  -- 上次触发路过事件的D*编号，避免多次触发
-    jy.current_event_type = -1          -- 当前触发事件的方式，1空格，2物品，3路过
+    jy.current_event_type = -1          -- 当前触发事件的方式，1 空格，2 物品，3 路过
     jy.current_thing = -1               -- 当前选择物品，触发事件使用
     jy.mmap_music = -1                  -- 切换大地图音乐，返回大地图时，如果设置，则播放此音乐
     jy.current_midi = -1                -- 当前播放的音乐id，用来在关闭音乐时保存音乐id
-    jy.enable_music = 1                 -- 是否播放音乐，0不播放，1播放
-    jy.enable_sound = 1                 -- 是否播放音效，0不播放，1播放
+    jy.enable_music = 1                 -- 是否播放音乐，0 不播放，1 播放
+    jy.enable_sound = 1                 -- 是否播放音效，0 不播放，1 播放
 
-    war = {}                            -- 战斗使用的全程变量，这里占个位置，因为程序后面不允许全局变量了，具体内容在WarSetGlobal函数中
+    war = {}                            -- 战斗使用的全程变量
+                                        -- 这里占个位置，因为程序后面不允许全局变量了
+                                        -- 具体内容在WarSetGlobal函数中
 
     auto_move_tab = {[0] = 0}
     jy.restart = 0                      -- 返回游戏初始界面
     jy.walk_count = 0                   -- 走路计步
-
-    is_viewing_kung_fu_scrolls = 0
-
-    yc = {}                             -- 隐藏角色
-    yc.zjh = 0
-    yc.gxz = 0
 end
 
 -- 主程序入口
@@ -108,9 +105,9 @@ function JY_Main_Sub()
     math.randomseed(tonumber(tostring(os.time()):reverse():sub(1,6)))
     jy.status = GAME_START              -- 改变游戏状态
     lib.PicInit(cc.palette_file)        -- 加载原来的256色调色板
-    lib.FillColor(0, 0, 0, 0, 0)        -- 
+    Gra_FillColor()                     -- 屏幕黑屏
 
-    Gra_SetAllPNGAddress()              -- 载入所有贴图地址
+    Gra_SetAllPNGAddress()              -- 载入所有贴图地址并分配id
 
     while true do
         if jy.restart == 1 then
@@ -247,7 +244,7 @@ function StartMenu()
 
         -- Gra_DrawStrBox(-1, cc.start_menu_y, "请稍候...", C_GOLD, cc.default_font)
         Gra_ShowScreen()
-        lib.Delay(2000)
+        Delay(2000)
         -- local result = Loadrecord(r)
         -- if result ~= nil then
         --     return StartMenu()
@@ -286,9 +283,9 @@ function TitleSelection()
     -- 鼠标位置判定
     -- x轴起始位置，y轴起始位置，x轴结束位置，y轴结束位置
     local mouse_detect = {
-        {450, 320, 650, 380},
-        {450, 420, 650, 580},
-        {450, 520, 650, 680}
+        {450, 300, 650, 395},
+        {450, 400, 650, 495},
+        {450, 500, 650, 595}
     }
     local tmp                   -- 临时变量，用来临时存放数据
     local picid                 -- 图像id
@@ -299,7 +296,7 @@ function TitleSelection()
         local result = 0        -- 返回值，确定鼠标在的位置
         
         for i = 1, #mouse_detect do
-            if (mx >= mouse_detect[i][1]) and (mx <= mouse_detect[i][3]) and (my >= mouse_detect[i][2]) and my <= (mouse_detect[i][4]) then
+            if mx >= mouse_detect[i][1] and mx <= mouse_detect[i][3] and my >= mouse_detect[i][2] and my <= mouse_detect[i][4] then
                 result = i
                 break
             end
@@ -312,6 +309,7 @@ function TitleSelection()
         if jy.restart == 1 then
             return
         end
+        -- local keypress, ktype, mx, my = lib.GetKey()
         local keypress, ktype, mx, my = WaitKey()
         -- 按键「下」和「右」效果一致，都是跳向下一个选项
         if keypress == VK_DOWN or keypress == VK_RIGHT then
@@ -329,7 +327,7 @@ function TitleSelection()
             end
         -- 使用鼠标操作
         else
-            if (ktype == 2 or ktype == 3) then
+            if ktype == 2 or ktype == 3 then
                 -- 鼠标在选项范围内，则选中该选项
                 tmp = OnButton(mx, my)
                 if tmp > 0 then
@@ -357,9 +355,9 @@ function TitleSelection()
         end
 
         -- 显示版本号
-        Gra_DrawString(cc.screen_w - 115 - 810, cc.screen_h - 30 - 670, cc.version, C_WHITE, cc.font_small1)
+        Gra_DrawString(600, 250, cc.version, M_Indigo, cc.font_big3)
         Gra_ShowScreen()
-        lib.Delay(cc.frame)
+        Delay(cc.frame)
     end
 
     return choice
@@ -727,6 +725,11 @@ function WaitKey()
     return key, ktype, mx, my
 end
 
+-- 延时t毫秒
+function Delay(t)
+    lib.Delay(t)
+end
+
 
 -- 清屏
 function instruct_0()
@@ -885,8 +888,7 @@ end
 -- delay为第一个重复的延迟毫秒数，interval为多少毫秒重复一次
 -- ESC, RETURN 和SPACE键已经取消重复，一直按下也只认为是按下一次
 
--- lib.Delay(t)
--- 延时t毫秒
+
 
 -- lib.GetKey()
 -- 得到当前按键键码，键码定义参见SDL文档

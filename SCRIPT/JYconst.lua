@@ -1,6 +1,6 @@
 -- 设置全局变量CC，保存游戏中使用的常数
 function SetGlobalConst()
-    -- 无酒不欢：基本完整的SDL2键码，便于设置快捷键
+    -- 基本完整的SDL2键码，便于设置快捷键
     VK_ESCAPE = 27
     VK_SPACE = 32           -- 注意这里的空格实际上不需要定义，因为底层会自动把空格转换成回车
     VK_RETURN = 13
@@ -72,7 +72,7 @@ function SetGlobalConst()
     M_Red = Gra_RGB(255, 0, 0)                  -- 红
     M_SandyBrown = Gra_RGB(244, 164, 96)        -- 黄褐色
     M_YellowGreen = Gra_RGB(154, 205, 50)       -- 黄绿
-    M_SeaGreen = Gra_RGB(46, 139, 87)           --海 绿
+    M_SeaGreen = Gra_RGB(46, 139, 87)           -- 海 绿
     M_MediumTurquoise = Gra_RGB(72, 209, 204)   -- 宝石绿
     M_RoyalBlue = Gra_RGB(65, 105, 225)         -- 宝蓝色
     M_Purple = Gra_RGB(128, 0, 128)             -- 紫
@@ -223,7 +223,7 @@ function SetGlobalConst()
     cc.team_num = 15                 -- 队伍人数
     cc.my_thing_num = 950             -- 主角物品数量
     cc.week = 1                     -- 周目
-    cc.version = ""                 -- 版本号
+    cc.version = "v2000"                 -- 版本号
     cc.timer = {                    -- 动态显示提示
         stime = 0,
         status = 0,

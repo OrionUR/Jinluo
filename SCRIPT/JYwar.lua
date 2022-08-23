@@ -1,3 +1,7 @@
+-- 设置战斗全局变量
+function WarSetGlobal()
+end
+
 -- 特色指令
 function War_SpecialMenu() 
 end
