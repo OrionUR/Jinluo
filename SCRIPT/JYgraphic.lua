@@ -302,7 +302,7 @@ function Gra_ShowMenu(menu_item, num_item, num_show, x1, y1, x2, y2, is_box, is_
         end
 
         Gra_ShowScreen()
-        local key_press, ktype, mx, my = WaitKey(1)
+        local key_press, ktype, mx, my = WaitKey()
         lib.Delay(cc.frame)
         -- ESC或者鼠标右键取消
         if (key_press == VK_ESCAPE) or (ktype == 4) then
