@@ -20,7 +20,7 @@ end
 
 -- 设置游戏内部使用的全程变量
 function SetGlobal()
-    jy = {}
+    jy = {}                             -- test
 
     jy.status = GAME_INIT               -- 保存Rx数据
     jy.base = {}                        -- 基本数据
