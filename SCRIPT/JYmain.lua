@@ -727,6 +727,9 @@ end
 
 -- —” ±t∫¡√Î
 function Delay(t)
+    if t <= 0 then
+        return
+    end
     lib.Delay(t)
 end
 
