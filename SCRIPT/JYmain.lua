@@ -78,8 +78,8 @@ end
 
 -- 错误处理，打印错误信息
 function MyErrFun(err)
-    lib.Debug(err)                      -- 输出错误信息
-    lib.Debug(debug.traceback())        -- 输出调用堆栈信息
+    Debug(err)                      -- 输出错误信息
+    Debug(debug.traceback())        -- 输出调用堆栈信息
 end
 
 -- 真正的游戏主程序入口
@@ -99,7 +99,7 @@ function JY_Main_Sub()
         end
     })
 
-    lib.Debug("JY_Main start")
+    Debug("JY_Main start")
 
     -- 初始化随机数发生器
     math.randomseed(tonumber(tostring(os.time()):reverse():sub(1,6)))
@@ -271,7 +271,7 @@ end
 
 -- 游戏开始画面选择
 function TitleSelection()
-    lib.Debug("TitleSelection")
+    Debug("TitleSelection")
     local choice = 1            -- 选项，1开始游戏，2载入游戏，3退出游戏，默认在1的位置
     -- 选项
     -- 未选中时的贴图，选中时的贴图，x轴位置，y轴位置
@@ -540,7 +540,7 @@ function LoadRecord(id)
 
     LoadSMap(sFile, cc.temp_s_filename, jy.scene_num, cc.s_width, cc.s_height, dFile, cc.d_num, 11)
     collectgarbage()
-    lib.Debug(string.format("Loadrecord time=%d", GetTime() - time))
+    Debug(string.format("Loadrecord time=%d", GetTime() - time))
     jy.load_time = GetTime()
     rest()
 
@@ -632,7 +632,7 @@ function SaveList()
     local menu_x = (cc.screen_w - 24 * cc.default_font - 2 * cc.menu_border_pixel) / 2
     local menu_y = (cc.screen_h - 9 * (cc.default_font + cc.row_pixel)) / 2
     local r = Gra_ShowMenu(menu, cc.save_num, 10, menu_x, menu_y, 0, 0, 1, 1, cc.default_font, C_WHITE, C_GOLD)
-    lib.Debug("SaveList")
+    Debug("SaveList")
     CleanMemory()
 
     return r
@@ -727,12 +727,23 @@ end
 
 -- 延时t毫秒
 function Delay(t)
+    -- 参数校验
     if t <= 0 then
         return
     end
+
     lib.Delay(t)
 end
 
+-- 在主程序目录下的debug.txt文件中输出调试字符串
+function Debug(str)
+    -- 参数校验
+    if str == nil then
+        return
+    end
+
+    lib.Debug(str)
+end
 
 -- 清屏
 function instruct_0()
@@ -882,9 +893,6 @@ end
 
 -- lib.CleanWarMap(level, v)
 -- 给level层战斗数据全部赋值v
-
--- lib.Debug(str)
--- 在主程序目录下的debug.txt文件中输出调试字符串
 
 -- lib.EnableKeyRepeat(delay, interval)
 -- 设置键盘重复率
