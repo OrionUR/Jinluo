@@ -1,5 +1,10 @@
 -- 设置战斗全局变量
 function WarSetGlobal()
+    war.person = {}         -- 战斗人物数据
+    war.person_num = -1     -- 战斗人物数量
+    war.cur_id = -1         -- 当前行动人物id
+    war.show_head = -1      -- 显示头像
+    war.show_hp = -1        -- 显示生命
 end
 
 -- 特色指令
