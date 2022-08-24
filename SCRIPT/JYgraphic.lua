@@ -6,8 +6,236 @@
 
 
 
+-- 切换全屏和窗口，调用一次，改变一次状态
+function Gra_FullScreen()
+    lib.FullScreen()
+end
+
+-- 裁剪窗口，设置以后所有对表面的绘图操作都只影响(x1, y1)-(x2, y2)的矩形框内部
+-- 如果x1, y1, x2, y2均为0，则裁剪窗口为整个表面
+-- 本函数在内部维护一个裁剪窗口列表，ShowScreen函数使用此列表来更新实际的屏幕显示
+-- 每调用一次，裁剪窗口数量+1，最多为20个
+-- 当x1, y1, x2, y2均为0时，清除全部裁剪窗口
+-- 若调用时不带参数，则默认xy均为0
+function Gra_SetClip(x1, y1, x2, y2)
+    -- 省略时的默认值
+    if not x1 then
+        x1, y1, x2, y2 = 0, 0, 0, 0
+    end
+
+    local err = -1          -- 错误码
+    if not y1 or not x2 or not y2 then
+        err = 1             -- 参数省略错误
+    elseif x1 < 0 or y1 < 0 or x2 < 0 or y2 < 0 then
+        err = 2  
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("Gra_SetClip Error, error code: " .. err)
+        return
+    end
+
+    lib.SetClip(x1, y1, x2, y2)
+end
+
+-- 用颜色color来填充表面的矩形(x1, y1)-(x2, y2)，color为32位RGB，从高到低字节为0RGB
+-- 如果x1, y1, x2, y2均为0，则填充整个表面
+-- 这里的矩形(x1, y1)-(x2, y2)，要在裁剪函数Gra_SetClip范围内，否则无效
+-- 若调用时不带参数，则默认xy均为0，颜色为黑色
+function Gra_FillColor(x1, y1, x2, y2, color)
+    -- 省略时的默认值
+    if not x1 then
+        x1, y1, x2, y2, color = 0, 0, 0, 0, 0
+    end
+
+    local err = -1          -- 错误码
+    if not y1 or not x2 or not y2 or not color then
+        err = 1             -- 参数省略错误
+    elseif x1 < 0 or y1 < 0 or x2 < 0 or y2 < 0 then
+        err = 2             -- xy错误
+    elseif color < 0 then
+        err = 3             -- color错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("Gra_FillColor Error, error code: " .. err)
+        return
+    end
+
+    lib.FillColor(x1, y1, x2, y2, color)
+end
+
+-- 刷新屏幕
+-- 若是不调用这个函数，所有改变画面的操作，都不会正确显示出来
+-- 这里基本上是将lib.ShowSurface函数重新封装使用
+-- flag：=0 or nil 显示全部表面
+--       =1 按照SetClip设置的矩形依次显示，如果没有矩形，则不显示
+function Gra_ShowScreen(flag)
+    -- 省略时的默认值
+    if not flag then
+        flag = 0
+    end
+
+    local err = -1          -- 错误码
+    if flag ~= 0 or flag ~= 1 then
+        err = 1             -- flag错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("Gra_FillColor Error, error code: " .. err)
+        return
+    end
+
+    lib.ShowSurface(flag)
+end
+
+-- 把表面矩形(x1, y1)-(x2, y2)内所有点的亮度降低为bright倍
+-- bright取值为0-256，0表示全黑，256表示亮度不变
+-- 若调用时不带参数，则默认无效果
+function Gra_Background(x1, y1, x2, y2, bright)
+    -- 省略时的默认值
+    if not x1 then
+        x1, y1, x2, y2, bright = 0, 0, 0, 0, 256
+    end
+
+    local err = -1          -- 错误码
+    if not y1 or not x2 or not y2 or not bright then
+        err = 1             -- 参数省略错误
+    elseif x1 < 0 or y1 < 0 or x2 < 0 or y2 < 0 then
+        err = 2             -- xy错误
+    elseif bright < 0 or bright > 256 then
+        err = 3             -- bright错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("Gra_Background Error, error code: " .. err)
+        return
+    end
+
+    lib.Background(x1, y1, x2, y2, bright)
+end
+
+-- 绘制矩形(x1,y1)-(x2,y2)，线框为单个像素，颜色为color
+-- 若调用时不带参数，则默认xy均为0，颜色为黑色
+function Gra_DrawRect(x1, y1, x2, y2, color)
+    -- 省略时的默认值
+    if not x1 then
+        x1, y1, x2, y2, color = 0, 0, 0, 0, 0
+    end
+
+    local err = -1          -- 错误码
+    if not y1 or not x2 or not y2 or not color then
+        err = 1             -- 参数省略错误
+    elseif x1 < 0 or y1 < 0 or x2 < 0 or y2 < 0 then
+        err = 2             -- xy错误
+    elseif color < 0 then
+        err = 3             -- color错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("Gra_DrawRect Error, error code: " .. err)
+        return
+    end
+
+    lib.DrawRect(x1, y1, x2, y2, color)
+end
+
+-- lib.DrawStr(x, y, str, color, size, fontname, charset, OScharset)
+-- 在(x, y)位置写字符串
+-- str：需要写的字符串
+-- color：字体颜色，省略时使用默认值
+-- size：字体像素大小，省略时使用默认值
+-- fontname：字体名字，省略时使用默认值
+-- charset：字符串字符集，0 GBK, 1 BIG5，省略时使用默认值
+-- OScharset: 0 显示简体，1 显示繁体，省略时使用默认值
+-- 此函数直接显示阴影字，在lua中不用处理阴影字了，这样可以提高字符串显示速度
+function Gra_DrawStr(x, y, str, color, size, fontname, charset, os_charset)
+    -- 省略时的默认值
+    if not color then
+        color = C_BLACK
+    elseif not size then
+        size = cc.default_font
+    elseif not fontname then
+        fontname = cc.font_name
+    elseif not charset then
+        charset = cc.src_char_set
+    elseif not os_charset then
+        os_charset = cc.os_char_set
+
+    local err = -1      -- 错误码
+    if not x or not y or not str then
+        err = 1         -- 参数省略错误
+    elseif x < 0 or y < 0 then
+        err = 2         -- xy错误
+    elseif type(str) ~= "string" then
+        err = 3         -- str错误
+    elseif color < 0 then
+        err = 4         -- color错误
+    elseif size < 0 then
+        err = 5         -- size错误
+    elseif type(fontname) ~= "string" then
+        err = 6         -- fontname错误
+    elseif charset ~= 0 or charset ~= 1 then
+        err = 7         -- charset错误
+    elseif os_charset ~= 0 or os_charset ~= 1 then
+        err = 8         -- os_charset错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("Gra_DrawStr Error, error code: " .. err)
+        return
+    end
+
+    lib.DrawStr(x, y, str, color, size, fontname, charset, os_charset)
+end
+
+-- 初始化贴图Cache，默认加载原来的256色调色板
+-- 在转换场景前调用，清空所有保存的贴图文件信息
+function Gra_PicInit()
+    -- 第一次调用时需要加载调色板，以后就不需要了，设置str为空字符串即可
+    lib.PicInit(cc.palette_file)
+end
+
+-- 显示图片文件filename到位置x, y
+-- 支持的文件扩展名为bmp / png / jpg等
+-- 若x = -1, y = -1，则显示在屏幕中间
+-- 函数会在内存中保存上一次加载的图片文件，以加快重复加载的速度
+-- 用空文件名调用将会清除占用的内存
+function Gra_LoadPicture(filename, x, y)
+    -- 省略时的默认值
+    if not filename then
+        filename, x, y = "", 0, 0
+    end
+
+    local err = -1      -- 错误码
+    if not x or not y then
+        err = 1         -- 参数省略错误
+    elseif type(filename) ~= "string" then
+        err = 2         -- filename错误
+    elseif x < 0 or y < 0 then
+        err = 3         -- xy错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("Gra_LoadPicture Error, error code: " .. err)
+        return
+    end
+
+    lib.LoadPicture(filename, x, y)
+end
+
+-- lib.GetPicXY(id, picid)
+-- 得到贴图大小，返回贴图宽、高、x偏移、y偏移
+
 -- 设置需要读取所有贴图的fileid
--- 头像1，物品2，特效3，半身像4，UI5
+-- 1 头像，2 物品，3 特效，4 半身像，5 UI
 -- 附上需要用到的C函数说明
 -- lib.LoadPNGPath(path, fileid, num, percent)
 -- 载入png图片路径
@@ -28,65 +256,6 @@ function Gra_SetAllPNGAddress()
     lib.LoadPNGPath(cc.ui_path, 5, cc.ui_num, LimitX(cc.screen_w / 1360 * 100, 0, 100))
 end
 
--- 设置颜色RGB
-function Gra_RGB(r, g, b)
-    return r * 65536 + g * 256 + b
-end
-
--- 刷新屏幕
--- 若是不调用这个函数，所有改变画面的操作，都不会正确显示出来
--- 这里基本上是将lib.ShowSurface函数重新封装使用
--- flag：=0 or nil 显示全部表面
---       =1 按照SetClip设置的矩形依次显示，如果没有矩形，则不显示
-function Gra_ShowScreen(flag)
-    if flag == nil then
-        flag = 0
-    end
-    lib.ShowSurface(flag)
-end
-
--- 设置裁剪窗口，设置以后所有对表面的绘图操作都只影响(x1, y1)-(x2, y2)的矩形框内部
--- 如果x1, y1, x2, y2均为0，则裁剪窗口为整个表面
--- 本函数在内部维护一个裁剪窗口列表，ShowScreen函数使用此列表来更新实际的屏幕显示
--- 每调用一次，裁剪窗口数量+1，最多为20个
--- 当x1, y1, x2, y2均为0时，清除全部裁剪窗口
--- 若调用时不带参数，则默认均为0
-function Gra_SetClip(x1, y1, x2, y2)
-    if (x1 == nil) then
-        x1, y1, x2, y2 = 0, 0, 0, 0
-    end
-    lib.SetClip(x1, y1, x2, y2)
-end
-
--- 用颜色color来填充表面的矩形(x1, y1)-(x2, y2)，color为32位RGB，从最高字节依次为R, G, B
--- 如果x1, y1, x2, y2均为0，则填充整个表面
--- 这里的矩形(x1, y1)-(x2, y2)，要在裁剪函数Gra_SetClip范围内，否则无效
-function Gra_FillColor(x1, y1, x2, y2, color)
-    if (x1 == nil) then
-        x1, y1, x2, y2, color = 0, 0, 0, 0, 0
-    end
-    lib.FillColor(x1, y1, x2, y2, color)
-end
-
--- 显示图片文件filename到位置x, y
--- 支持的文件扩展名为bmp / png / jpg等
--- 若x = -1, y = -1，则显示在屏幕中间
--- 函数会在内存中保存上一次加载的图片文件，以加快重复加载的速度
--- 用空文件名调用将会清除占用的内存
-function Gra_LoadPicture(filename, x, y)
-    if (filename == nil) then
-        filename, x, y = "", 0, 0
-    end
-    lib.LoadPicture(filename, x, y)
-end
-
--- 在表面绘制主地图
--- (x, y)：主角坐标
--- mypic：主角贴图编号(注意这里是实际编号，不用除2)
-function Gra_DrawMMap(x, y, mypic)
-    lib.DrawMMap(x, y, mypic)
-end
-
 -- 裁剪并清除(x1, y1)-(x2, y2)矩形内的画面，并根据游戏状态显示背景图
 -- 如果没有参数，则清除整个屏幕表面
 -- 总共有6种情况，分别是：
@@ -94,7 +263,7 @@ end
 -- 注意该函数并不直接刷新显示屏幕
 function Gra_Cls(x1, y1, x2, y2)
     -- 第一个参数为nil，表示没有参数，用缺省
-    if x1 == nil then
+    if not x1 then
         x1, y1, x2, y2 = 0, 0, 0, 0
     end
 
@@ -391,25 +560,28 @@ end
 -- 计算主角当前贴图
 function Gra_GetMyPic()
     local my_pic
-    -- 在大地图进入海面时，贴图改为乘船贴图
+
+    -- 乘船时偏移计算
     if (jy.status == Game_MMAP) and (jy.base["乘船"] == 1) then
         if jy.my_current_pic >= 4 then
             jy.my_current_pic = 0
         end
     else
-        if jy.my_current_pic > 6 then 
+        if jy.my_current_pic > 6 then
             jy.my_current_pic = 1
         end
     end
 
+    -- 移动时主角贴图
     if jy.base["乘船"] == 0 then
-        if jy.base["畅想"] == 757 then
-            my_pic = cc.my_start_pic_cg + jy.base["人方向"] * 7 + jy.my_current_pic
-        elseif jy.person[0]["性别"] == 0 then
+        -- 男性
+        if jy.person[0]["性别"] == 0 then
             my_pic = cc.my_start_pic_m + jy.base["人方向"] * 7 + jy.my_current_pic
+        -- 女性
         else
             my_pic = cc.my_start_pic_f + jy.base["人方向"] * 7 + jy.my_current_pic
         end
+    -- 船
     else
         my_pic = cc.boat_start_pic + jy.base["人方向"] * 4 + jy.my_current_pic
     end
@@ -417,38 +589,62 @@ function Gra_GetMyPic()
     return my_pic
 end
 
+-- 在表面绘制主地图
+-- (x, y)：主角坐标
+-- mypic：主角贴图编号(注意这里是实际编号，不用除2)
+function Gra_DrawMMap(x, y, mypic)
+    local err = -1      -- 错误码
+    if not x or not y or not mypic then
+        err = 1         -- 参数省略错误
+    elseif x < 0 or y < 0 then
+        err = 2         -- xy错误
+    elseif mypic < 0 then
+        err = 3         -- mypic错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("Gra_DrawMMap Error, error code: " .. err)
+        return
+    end
+
+    lib.DrawMMap(x, y, mypic)
+end
+
 -- 绘制场景地图
 function Gra_DrawSMap()
-    local x0 = jy.sub_scene_x + jy.base["人X1"] - 1         -- 绘图中心点
+    -- x轴中心点
+    local x0 = jy.sub_scene_x + jy.base["人X1"] - 1
+    -- y轴中心点
     local y0 = jy.sub_scene_y + jy.base["人Y1"] - 1
-
-    local x = LimitX(x0, 12, 45) - jy.base["人X1"]
-    local y = LimitX(y0, 12, 45) - jy.base["人Y1"]
+    -- 场景编号
+    local sceneid = jy.sub_scene
+    -- 主角坐标
+    local x, y = jy.base["人X1"], jy.base["人Y1"]
+    -- x轴中心偏移
+    local xoff = LimitX(x0, 12, 45) - jy.base["人X1"]
+    -- y轴中心偏移
+    local yoff = LimitX(y0, 12, 45) - jy.base["人Y1"]
+    -- 主角贴图
+    local mypic = jy.my_pic
 
     if CONFIG.Zoom == 100 then
-        lib.DrawSMap(jy.sub_scene, jy.base["人X1"], jy.base["人Y1"], x, y, jy.my_pic)
+        lib.DrawSMap(sceneid, x, y, xoff, yoff, mypic)
     else
-        lib.DrawSMap(jy.sub_scene, jy.base["人X1"], jy.base["人Y1"], jy.sub_scene_x, jy.sub_scene_y, jy.my_pic)
+        lib.DrawSMap(sceneid, x, y, jy.sub_scene_x, jy.sub_scene_y, mypic)
     end
 end
 
--- 绘制战斗地图
--- flag = 0，绘制基本战斗地图
---      = 1，显示可移动的路径，(v1, v2)当前移动坐标，白色背景（雪地战斗）
---      = 2，显示可移动的路径，(v1, v2)当前移动坐标，黑色背景
---      = 3，命中的人物用白色轮廓显示
---      = 4，战斗动作动画，v1战斗人物pic，v2贴图所属的加载文件id，v3武功效果pic，-1表示没有武功效果
-function Gra_WarDrawMap(flag, v1, v2, v3, v4, v5, ex, ey, px, py)
-    local x = war.person[war.cur_id]["坐标X"]
-    local y = war.person[war.cur_id]["坐标Y"]
-
-    -- if jy.status == GAME_WMAP then
-    --     x = war.person[war.cur_id]["坐标X"]
-    --     y = war.person[war.cur_id]["坐标Y"]
-    -- else
-    --     x = jy.base["人X1"]
-    --     y = jy.base["人Y1"]
-    -- end
+-- 绘制战斗画面
+-- flag =0 绘制基本战斗地图
+--      =1 显示可移动的路径，(v1, v2)当前移动坐标，白色背景（雪地战斗）
+--      =2 显示可移动的路径，(v1, v2)当前移动坐标，黑色背景
+--      =3 命中的人物用白色轮廓显示
+--      =4 战斗动作动画，v1战斗人物pic，v2贴图所属的加载文件id，v3武功效果pic，-1表示没有武功效果
+-- xy：战斗人坐标
+function Gra_DrawWarMap(flag, v1, v2, v3, v4, v5, ex, ey, px, py)
+    local x = war.person[war.cur_id]["坐标X"]       -- 当前人物x轴坐标
+    local y = war.person[war.cur_id]["坐标Y"]       -- 当前人物y轴坐标
 
     if not v4 then
         v4 = jy.sub_scene
@@ -460,34 +656,42 @@ function Gra_WarDrawMap(flag, v1, v2, v3, v4, v5, ex, ey, px, py)
     px = px or 0
     py = py or 0
 
+    -- 绘制基本战斗地图
     if flag == 0 then
         lib.DrawWarMap(0, x, y, 0, 0, -1, v4)
+    -- 绘制可移动的路径，(v1, v2)为当前移动坐标
     elseif flag == 1 then
-        -- 胡斐居，雪山，有间客栈，凌霄城，北京城，华山绝顶
+        -- 白色背景（雪地战斗）
+        -- 0 玉笔峰，2 雪山，3 沧州，39 凌霄城，107 北京城，111 华山绝顶
         if v4 == 0 or v4 == 2 or v4 == 3 or v4 == 39 or v4 == 107 or v4 == 111 then
             lib.DrawWarMap(1, x, y, v1, v2, -1, v4)
+        -- 黑色背景
         else
             lib.DrawWarMap(2, x, y, v1, v2, -1, v4)
         end
-    elseif flag == 2 then
+    -- 绘制命中人物效果
+    elseif flag == 3 then
         lib.DrawWarMap(3, x, y, 0, 0, -1, v4)
+    -- 绘制战斗动作动画
     elseif flag == 4 then
         lib.DrawWarMap(4, x, y, v1, v2, v3, v4, v5, ex, ey)
-    -- 单人动画
+    -- 绘制单人动画
     elseif flag == 6 then
         lib.DrawWarMap(6, x, y, v1, v2, v3, v4, v5, ex, ey, px, py)
-    -- 防御动画
+    -- 绘制防御动画
     elseif flag == 7 then
         lib.DrawWarMap(7, x, y, 0, 0, v3, v4, v5, ex, ey, px, py)
     end
 
+    -- 显示头像
     if war.show_head == 1 then
         Gra_WarShowHead()
     end
 
+    -- 人物模型头上永久显血
     if CONFIG.HPDisplay == 1 then
         if war.show_hp == 1 then
-            Gra_HpDisplayWhenIdle()          -- 战斗时人物模型头上显血
+            Gra_HpDisplayWhenIdle()
         end
     end
 end
@@ -607,28 +811,314 @@ function Gra_HpDisplayWhenIdle()
     end
 end
 
--- 显示字符串并等待击键，字符串带框，显示在屏幕中间
-function Gra_DrawStrBoxWaitKey(s, color, size, flag, boxcolor)
+-- 显示一串文字
+-- xy：xy坐标
+-- str：要显示的字符串
+-- color：颜色
+-- size：文字大小
+function Gra_DrawString(x, y, str, color, size)
+    if x == -1 then
+        local len = #str
+        local w = size * len / 2 + 2 * cc.menu_border_pixel
+        x = (cc.screen_w - size / 2 * len - 2 * cc.menu_border_pixel) / 2
+    end
+    if y == -1 then
+        y = (cc.screen_h - size - 2 * cc.menu_border_pixel) / 2
+    end
+    -- if x ~= -1 and y ~= -1 then
+    lib.DrawStr(x, y, str, color, size, cc.font_name, cc.src_char_set, cc.os_char_set)
+    -- else
+        -- do return end
+    -- end
+end
+
+-- 显示一串文字，有边框
+-- xy：xy坐标，如果都为-1，则在屏幕中间显示
+-- str：要显示的字符串
+-- color：颜色
+-- size：文字大小
+-- boxcolor：边框颜色
+function Gra_DrawStrBox(x, y, str, color, size, boxcolor)
+    local len = #str                                            -- 字符长度
+    local w = size * len / 2 + 2 * cc.menu_border_pixel         -- 显示框的宽
+    local h = size + 2 * cc.menu_border_pixel                   -- 显示框的高
+    if (boxcolor ==  nil) then                                  -- 若无指定背景色，则默认白色
+        boxcolor = C_WHITE
+    end
+
+    if (x == -1) then
+        x = (cc.screen_w - size / 2 * len - 2 * cc.menu_border_pixel) / 2
+    end
+    if (y == -1) then
+        y = (cc.screen_h - size - 2 * cc.menu_border_pixel) / 2
+    end
+
+    Gra_DrawBox(x, y, x + w - 1, y + h - 1, boxcolor)
+    Gra_DrawString(x + cc.menu_border_pixel, y + cc.menu_border_pixel, str, color, size)
+end
+
+-- 显示一串文字，有边框，带有是与否选项
+-- xy：xy坐标，如果都为-1，则在屏幕中间显示
+-- str：要显示的字符串
+-- color：颜色
+-- size：文字大小
+-- boxcolor：边框颜色
+function Gra_DrawStrBoxYesNo(x, y, str, color, size, boxcolor)
     if jy.restart == 1 then
         return
     end
 
-    GetKey()
+    WaitKey()
+    -- 字符长度
+    local len = #str
+    -- 对话框宽度
+    local w = size * len / 2 + 2 * cc.menu_border_pixel
+    -- 对话框高度
+    local h = size + 2 * cc.menu_border_pixel
+
+    -- 屏幕中间显示
+    if x == -1 then
+        x = (cc.screen_w - size / 2 * len - 2 * cc.menu_border_pixel) / 2
+    end
+    if y == -1 then
+        y = (cc.screen_h - size / 2 * cc.menu_border_pixel) / 2
+    end
+
     Gra_Cls()
-    
+    -- 绘制对话框
+    Gra_DrawStrBox(x, y, str, color, size, boxcolor)
+    -- 是否菜单
+    local menu = {
+        {"确定/是", nil, 1},
+        {"取消/否", nil, 2}
+    }
+    -- 绘制菜单
+    local r = Gra_ShowMenu(menu, 2, 0, x + w - 4 * size - 2 * cc.menu_border_pixel, y + h + cc.menu_border_pixel, 0, 0, 1, 0, cc.default_font, C_ORANGE, C_WHITE)
+    -- 判断返回
+    if r == 1 then
+        return true
+    else
+        return false
+    end
+end
+
+-- 在屏幕中间显示一串文字，有边框，按任意键后内容才消失
+-- str：要显示的字符串
+-- color：颜色
+-- size：文字大小
+-- boxcolor：边框颜色
+function Gra_DrawStrBoxWaitKey(str, color, size, flag, boxcolor)
+    if jy.restart == 1 then
+        return
+    end
+
+    WaitKey()
+    Gra_Cls()
     -- 分开多种
     if flag == nil then
         if boxcolor == nil then
-            Gra_DrawStrBox(-1, -1, s, color, size)
+            Gra_DrawStrBox(-1, -1, str, color, size)
         else
-            Gra_DrawStrBox(-1, -1, s, color, size, boxcolor)
+            Gra_DrawStrBox(-1, -1, str, color, size, boxcolor)
         end
     else
-        Gra_DrawStrBox3(-1, -1, s, color, size, flag)
+        Gra_DrawStrBox3(-1, -1, str, color, size, flag)
     end
     Gra_ShowScreen()
     WaitKey()
 end
+
+-- 显示对话框
+-- str：对话框显示的字符串
+-- pid：人物编号
+-- flag：对话框位置，1 左上，2 左下，3 右上，4 右下，5 上中无头像，6 下中
+-- name：对话时显示的名字
+function Say(str, pid, flag, name)
+    if jy.restart == 1 then
+        return
+    end
+
+    local bx = cc.fit_width         -- 最大宽度
+    local by = cc.fit_high          -- 最大高度
+    local picw = 130                -- 头像图片最大宽度
+    local pich = 130                -- 头像图片最大高度
+    local talkxnum = 30             -- 最大列数
+    local talkynum = 3              -- 最大行数
+    local dx = 2                    -- 默认宽度
+    local dy = 2                    -- 默认高度
+    local boxpicw = picw + 10       -- 对话框图片宽度
+    local boxpich = pich + 10       -- 对话框图片高度
+    -- 对话框总宽度
+    local boxtalkw = talkxnum * cc.default_font + 10
+    local boxtalkh = boxpich - 27   -- 对话框总高度
+    local headid = pid              -- 人物头像id
+
+    -- 若参数name为空，则获取pid人物的半身像
+    if name == nil then
+        headid = jy.person[pid]["半身像"]
+    end
+    -- 获取pid人物的名字
+    name = name or jy.person[pid]["姓名"]
+    local talkborder = (pich - talkynum * cc.default_font) / (talkynum + 1) - 5
+
+    -- 头像和对话的坐标table
+    local xy = {
+        -- 1 左上
+        {headx = dx, heady = dy, 
+        talkx = dx + boxpicw + 2, talky = dy + 27, 
+        namex = dx + boxpicw + 2, namey = dy, 
+        showhead = 1},
+        -- 2 左下
+        {headx = dx + 68, heady = cc.screen_h - dy - boxpich + 40,
+        talkx = dx + boxpicw + 2 + 160, talky = cc.screen_h - dy - boxpich + 27, 
+        namex = dx + boxpicw - 50, namey = cc.screen_h - dy - boxpich + 100, 
+        showhead = 1},
+        -- 3 右上
+        {headx = cc.screen_w - 1 - dx - boxpicw, heady = dy,
+        talkx = cc.screen_w - 1 - dx - boxpicw - boxtalkw - 2, talky = dy + 27, 
+        namex = cc.screen_w - 1 - dx - boxpicw - 96, namey = dy, 
+        showhead = 1},
+        -- 4 右下
+        {headx = cc.screen_w - 1 - dx - boxpicw - 80, heady = cc.screen_h - dy - boxpich + 40,
+        talkx = cc.screen_w - 1 - dx - boxpicw - boxtalkw - 2 - 150, talky = cc.screen_h - dy - boxpich + 27, 
+        namex = cc.screen_w - 1 - dx - boxpicw - 26, namey = cc.screen_h - dy - boxpich + 100, 
+        showhead = 1},
+        -- 5 上中，无头像
+        {headx = dx, heady = dy, 
+        talkx = dx + boxpicw - 43, talky = dy + 27, 
+        namex = dx + boxpicw + 2, namey = dy, 
+        showhead = 0},
+        -- 6 下中
+        {headx = cc.screen_w - 1 - dx - boxpicw, heady = cc.screen_h - dy - boxpich,
+        talkx = cc.screen_w - 1 - dx - boxpicw - boxtalkw - 2, talky = cc.screen_h - dy - boxpich + 27, 
+        namex = cc.screen_w - 1 - dx - boxpicw - 96, namey = cc.screen_h - dy - boxpich, 
+        showhead = 1}
+    }
+
+    -- 默认主角对话框头像在左下，其他人在右下
+    if pid == 0 then
+        if name ~= jy.person[pid]["姓名"] then
+            flag = 2
+        else
+            flag = 4
+        end
+    else
+        flag = 2
+    end
+
+    -- 无头像
+    if xy[flag].showhead == 0 then
+        headid = -1
+    end
+
+    WaitKey()
+
+    local function ReadStr(str)
+        local T1 = {}
+        local T2 = {}
+        local T3 = {}
+        -- 美观起见，针对不同字体同一行显示，需要微调ｙ坐标，以及字号
+        -- 以默认的字体为标准，启体需下移，细黑需上移
+    end
+
+    local page, cx, cy = 0, 0, 0        -- test
+    local color = C_WHITE
+    local t = 0
+    local font = cc.font_name
+
+    while string.len(s) >= 1 do
+        WaitKey()
+        if jy.restart == 1 then
+            break
+        end
+        if page == 0 then
+            Gra_Cls()
+            if headid >= 0 then
+                local w, h = lib.GetPNGXY(1, headid * 2)
+                local x = (picw - w) / 2
+                local y = (pich - h) / 2
+                lib.LoadPicture(cc.say_box_file, -1, -1)
+                lib.LoadPNG(90, headid * 2, xy[flag].headx + 5 + x - 76, xy[flag].heady + 5 + y - by * 220, 1)
+                lib.LoadPicture(cc.say_box_file, xy[flag].namex - 35, xy[flag].namey - 10, 1)
+                MyDrawString(xy[flag].namex, xy[flag].namex + 96, xy[flag].namey + 1, name, C_CYGOLD, 24)
+            end
+            page = 1
+        end
+
+        local strsub
+        strsub = string.sub(str, 1, 1)
+        if strsub == "*" then
+            str = string.sub(str, 2, -1)
+        else
+            -- 判断单双字符
+            if string.byte(str, 1, 1) > 127 then
+                strsub = string.sub(str, 1, 2)
+                str = string.sub(str, 3, -1)
+            else
+                strsub = string.sub(str, 1, 1)
+                str = string.sub(str, 2, -1)
+            end
+        end
+
+        -- 开始控制逻辑
+        if strsub == "*" then
+        elseif strsub == "Ｈ" then
+            cx = 0
+            cy = cy + 1
+            if cy == 3 then
+                cy = 0
+                page = 0
+            end
+        elseif strsub == "Ｐ" then
+            cx = 0
+            cy = 0
+            page = 0
+        elseif strsub == "ｐ" then
+            Gra_ShowScreen()
+            Delay(50)
+        elseif strsub == "ｗ" then
+            Gra_ShowScreen()
+            WaitKey()
+        elseif strsub == "Ｎ" then
+            str = jy.person[pid]["姓名"] .. str
+        elseif strsub == "ｎ" then
+            str = jy.person[0]["姓名"] .. str
+        else
+            local kz1, kz2 = ReadStr(str)
+            if kz1 == 1 then
+                t = kz2
+            elseif kz1 == 2 then
+                color = kz2
+            elseif kz1 == 3 then
+                font = kz2
+            else
+                lib.DrawStr()
+            end
+        end
+    end
+end
+
+-- 设置颜色RGB
+function Gra_RGB(r, g, b)
+    return r * 65536 + g * 256 + b
+end
+
+-- 分离颜色的RGB分量
+function Gra_GetRGB(color)
+    color = color % (65536 * 256)
+    local r = math.floor(color / 65536)
+    color = color % 65536
+    local g = math.floor(color / 256)
+    local b = color % 256
+
+    return r, g, b
+end
+
+----------------------------------------
+----------------------------------------
+----------------------------------------
+----------------------------------------
+----------------------------------------
 
 -- 绘制一个带背景的白色方框，四角凹进
 function Gra_DrawBox(x1, y1, x2, y2, color)
@@ -662,26 +1152,6 @@ function Gra_DrawBox1(x1, y1, x2, y2, color)
 	lib.DrawRect(x2 - 1, y2 - s + 1, x2 - 1, y2 - 2, color)
 end
 
--- 显示带框的字符串
--- (x, y)坐标，如果都为-1，则在屏幕中间显示
-function Gra_DrawStrBox(x, y, str, color, size, boxcolor)
-    local len = #str                                            -- 字符长度
-    local w = size * len / 2 + 2 * cc.menu_border_pixel         -- 显示框的宽
-    local h = size + 2 * cc.menu_border_pixel                   -- 显示框的高
-    if (boxcolor ==  nil) then                                  -- 若无指定背景色，则默认白色
-        boxcolor = C_WHITE
-    end
-
-    if (x == -1) then
-        x = (cc.screen_w - size / 2 * len - 2 * cc.menu_border_pixel) / 2
-    end
-    if (y == -1) then
-        y = (cc.screen_h - size - 2 * cc.menu_border_pixel) / 2
-    end
-
-    Gra_DrawBox(x, y, x + w - 1, y + h - 1, boxcolor)
-    Gra_DrawString(x + cc.menu_border_pixel, y + cc.menu_border_pixel, str, color, size)
-end
 
 function Gra_DrawStrBox2(x, y, str, color, size, bjcolor)
     local strarray = {}
@@ -813,38 +1283,6 @@ function Gra_DrawBoxTitleSub(x1, y1, x2, y2, tx1, ty1, tx2, ty2, color)
     Gra_DrawBox1(tx1, ty1, tx2, ty2, color)
 end
 
-function Gra_QZXS(s)
-    Gra_DrawStrBoxWaitKey(s, C_GOLD, cc.default_font)
-end
-
--- 显示阴影字符串
-function Gra_DrawString(x, y, str, color, size)
-    if x == -1 then
-        local len = #str
-        local w = size * len / 2 + 2 * cc.menu_border_pixel
-        x = (cc.screen_w - size / 2 * len - 2 * cc.menu_border_pixel) / 2
-    end
-    if y == -1 then
-        y = (cc.screen_h - size - 2 * cc.menu_border_pixel) / 2
-    end
-    -- if x ~= -1 and y ~= -1 then
-    lib.DrawStr(x, y, str, color, size, cc.font_name, cc.src_char_set, cc.os_char_set)
-    -- else
-        -- do return end
-    -- end
-end
-
--- 分离颜色的RGB分量
-function Gra_GetRGB(color)
-    color = color % (65536 * 256)
-    local r = math.floor(color / 65536)
-    color = color % 65536
-    local g = math.floor(color / 256)
-    local b = color % 256
-
-    return r, g, b
-end
-
 ----------------------------------------
 --
 -- orionids：以下函数都是主程序引擎提供的可以在lua中调用的函数
@@ -853,55 +1291,12 @@ end
 --
 ----------------------------------------
 
--- lib.Background(x1, y1, x2, y2, Bright)
--- 把表面内矩形(x1, y1)-(x2, y2)内所有点的亮度降低为Bright倍
--- Bright取值为0-256，0表示全黑，256表示亮度不变
-
--- lib.DrawRect(x1, y1, x2, y2, color)
--- 绘制矩形(x1,y1)-(x2,y2)，线框为单个像素，颜色为color
-
--- lib.DrawSMap(sceneid, x, y, xoff, yoff, mypic)
--- 绘场景地图
--- sceneid：场景编号，x、y：主角坐标，xoff、yoff：场景中心偏移，mypic：主角贴图*2
-
--- lib.DrawStr(x, y, str, color, size, fontname, charset, OScharset)
--- 在(x, y)位置写字符串str
--- color：字体颜色，size：字体像素大小，fontname：字体名字
--- charset：字符串字符集，0 GBK, 1 BIG5
--- OScharset: 0 显示简体，1 显示繁体
--- 此函数直接显示阴影字，在lua中不用处理阴影字了，这样可以提高字符串显示速度
-
--- lib.DrawWarMap(flag, x, y, v1,v2)
--- 绘战斗地图
--- flag = 0，绘制基本战斗地图
---      = 1，显示可移动的路径，(v1, v2)当前移动坐标，白色背景（雪地战斗）
---      = 2，显示可移动的路径，(v1, v2)当前移动坐标，黑色背景
---      = 3，命中的人物用白色轮廓显示
---      = 4，战斗动作动画，v1战斗人物pic，v2贴图所属的加载文件id，v3武功效果pic，-1表示没有武功效果
--- xy，战斗人坐标
-
-
-
--- lib.FullScreen()
--- 切换全屏和窗口，调用一次，改变一次状态
-
--- lib.GetD(Sceneid, id, i)
--- 读D*数据
--- sceneid：场景编号，id：该场景D编号，i：第几个数据
-
 -- lib.GetMMap(x, y, flag)
 -- 取主地图结构相应坐标的值
 -- flag = 0 earth, 1 surface, 2 building, 3 buildx, 4 buildy
 
--- lib.GetPicXY(id, picid)
--- 得到贴图大小，返回贴图宽、高、x偏移、y偏移
-
 -- lib.GetPNGXY(fileid, picid)
 -- 得到PNG图片的XY值
-
--- lib.GetS(id, x, y, level)
--- 读S*数据
--- id：场景编号，x、y：坐标，level：层数
 
 -- lib.GetWarMap(x, y, level)
 -- 取战斗地图数据
@@ -911,13 +1306,6 @@ end
 -- 贴图文件依次为earth、surface、building、buildx、buildy
 -- xmax、ymax为主地图宽、高，目前均为480
 -- x, y为主角坐标
-
--- lib.LoadPicture(filename, x, y) 
--- 显示图片文件filename到位置x, y
--- 支持的文件扩展名为bmp / png / jpg等
--- 若x = -1, y = -1，则显示在屏幕中间
--- 函数会在内存中保存上一次加载的图片文件，以加快重复加载的速度
--- 用空文件名调用将会清除占用的内存
 
 -- lib.LoadPNG(fileid, picid, x, y, flag)
 -- 载入指定png图片
@@ -946,10 +1334,7 @@ end
 -- x_max、x_max：地图大小
 -- 战斗地图只读取两层数据，其余为工作数据区
 
--- lib.PicInit(str)
--- 初始化贴图Cache，str为调色板文件
--- 在转换场景前调用，清空所有保存的贴图文件信息
--- 第一次调用时需要加载调色板，以后就不需要了，设置str为空字符串即可
+
 
 -- lib.PicLoadCache(id, picid, x, y, flag, value)
 -- 加载id所指示的贴图文件中编号为picid / 2（为保持兼容，这里依然除2）的贴图到表面的(x, y)坐标
@@ -988,14 +1373,6 @@ end
 
 -- lib.SaveSMap(Sfilename, Dfilename)
 -- 保存S*和D*
-
-
-
--- lib.SetD(Sceneid, id, i, v)
--- 写D*数据v
-
--- lib.SetS(id, x, y, level, v)
--- 写场景数据v
 
 -- lib.ShowSlow(t, flag)
 -- 把表面缓慢显示到屏幕
