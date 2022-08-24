@@ -104,9 +104,8 @@ function JY_Main_Sub()
     -- 初始化随机数发生器
     math.randomseed(tonumber(tostring(os.time()):reverse():sub(1,6)))
     jy.status = GAME_START              -- 改变游戏状态
-    lib.PicInit(cc.palette_file)        -- 加载原来的256色调色板
+    Gra_PicInit()                       -- 初始化贴图Cache
     Gra_FillColor()                     -- 屏幕黑屏
-
     Gra_SetAllPNGAddress()              -- 载入所有贴图地址并分配id
 
     while true do
@@ -682,6 +681,112 @@ function SetDataFromStruct(data, offset, t_struct, key, v)
         end
         Byte.setstr(data, t[1] + offset, t[3], s)
     end
+end
+
+-- 读S*
+-- id：场景编号
+-- xy：坐标
+-- level：层数
+function GetS(id, x, y, level)
+    local err = -1      -- 错误码
+    if not id or not x or not y or not level then
+        err = 1         -- 参数省略错误
+    elseif id < 0 then
+        err = 2         -- id错误
+    elseif x < 0 or y < 0 then
+        err = 3         -- xy错误
+    elseif level < 0 or level > 5 then
+        err = 4         -- level错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("GetS Error, error code: " .. err)
+        return
+    end
+
+    return lib.GetS(id, x, y, level)
+end
+
+-- 写S*
+-- id：场景编号
+-- xy：坐标
+-- level：层数
+-- v：写入的值
+function SetS(id, x, y, level, v)
+    local err = -1      -- 错误码
+    if not id or not x or not y or not level or not v then
+        err = 1         -- 参数省略错误
+    elseif id < 0 then
+        err = 2         -- id错误
+    elseif x < 0 or y < 0 then
+        err = 3         -- xy错误
+    elseif level < 0 or level > 5 then
+        err = 4         -- level错误
+    elseif type(v) ~= "number" then
+        err = 5         -- v错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("SetS Error, error code: " .. err)
+        return
+    end
+
+    return lib.SetS(id, x, y, level)
+end
+
+-- 读D*
+-- sceneid：场景编号
+-- id：该场景D*编号
+-- i：第几个数据
+function GetD(sceneid, id, i)
+    local err = -1      -- 错误码
+    if not sceneid or not id or not i then
+        err = 1         -- 参数省略错误
+    elseif sceneid < 0 then
+        err = 2         -- sceneid错误
+    elseif id < 0 then
+        err = 3         -- id错误
+    elseif i < 0 then
+        err = 4         -- i错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("GetD Error, error code: " .. err)
+        return
+    end
+
+    return lib.GetD(sceneid, id, i)
+end
+
+-- 写D*
+-- sceneid：场景编号
+-- id：该场景D*编号
+-- i：第几个数据
+-- v：写入的值
+function SetD(sceneid, id, i, v)
+    local err = -1      -- 错误码
+    if not sceneid or not id or not i or not v then
+        err = 1         -- 参数省略错误
+    elseif sceneid < 0 then
+        err = 2         -- sceneid错误
+    elseif id < 0 then
+        err = 3         -- id错误
+    elseif i < 0 then
+        err = 4         -- i错误
+    elseif type(v) ~= "number" then
+        err = 5         -- v错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("SetD Error, error code: " .. err)
+        return
+    end
+
+    return lib.SetD(sceneid, id, i, v)
 end
 
 -- 获取文件长度
