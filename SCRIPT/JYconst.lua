@@ -133,6 +133,8 @@ function SetGlobalConst()
     -- 实际的屏幕宽度与高度
     cc.screen_w = lib.GetScreenW()          -- 窗口设定的最大宽度
     cc.screen_h = lib.GetScreenH()          -- 窗口设定的最大高度
+    cc.fit_width = cc.screen_w / 1360       -- 最佳比例宽度
+    cc.fit_high = cc.screen_h / 768         -- 最佳比例高度
     cc.src_char_set = 0                     -- 源代码的字符集，0：gb，1：big5，用于转换R×。如果源码被转换为big5，则应设为1
     cc.os_char_set = CONFIG.CharSet         -- OS字符集，-1：系统判断，0：GB, 1：Big5
     cc.font_name = CONFIG.FontName          -- 显示字体
