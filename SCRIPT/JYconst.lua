@@ -135,8 +135,8 @@ function SetGlobalConst()
     cc.screen_h = lib.GetScreenH()          -- 窗口设定的最大高度
     cc.fit_width = cc.screen_w / 1360       -- 最佳比例宽度
     cc.fit_high = cc.screen_h / 768         -- 最佳比例高度
-    cc.src_char_set = 0                     -- 源代码的字符集，0：gb，1：big5，用于转换R×。如果源码被转换为big5，则应设为1
-    cc.os_char_set = CONFIG.CharSet         -- OS字符集，-1：系统判断，0：GB, 1：Big5
+    cc.src_char_set = 0                     -- 源代码的字符集，0 BGK，1 Big5，用于转换R×
+    cc.os_char_set = CONFIG.CharSet         -- OS字符集，0 简体, 1 繁体
     cc.font_name = CONFIG.FontName          -- 显示字体
 
     -- 定义记录文件名。S和D由于是固定大小，因此不再定义idx了
@@ -560,7 +560,7 @@ function SetGlobalConst()
     cc.direct_y = {-1, 0, 0, 1}                  -- 不同方向y的加减值，用于走路改变坐标值
     cc.my_start_pic_m = 2501                       -- 男主角走路起始贴图
     cc.my_start_pic_f = 5001                       -- 女主角走路起始贴图
-    cc.my_start_pic_cg = 5201                      -- 主角走路起始贴图
+    cc.my_start_pic_na = 5201                      -- 备用人物走路起始贴图
     cc.boat_start_pic = 3715                      -- 船起始贴图
     -- cc.Level = 30                               -- 人物等级
     -- cc.Exp = {                                  -- 每等级经验
