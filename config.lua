@@ -30,18 +30,18 @@ CONFIG.Bj = 1                       -- 暴击震动，0 不动，1 动
 -- 贴图大小设置
 CONFIG.Zoom = 140                   -- 100时为远景，200时为近景
 if CONFIG.Zoom > 100 then
-	CONFIG.XScale = math.modf(CONFIG.XScale * CONFIG.Zoom / 100)        -- 贴图宽度的一半
-	CONFIG.YScale = math.modf(CONFIG.YScale * CONFIG.Zoom / 100)        -- 贴图高度的一半
+    CONFIG.XScale = math.modf(CONFIG.XScale * CONFIG.Zoom / 100)        -- 贴图宽度的一半
+    CONFIG.YScale = math.modf(CONFIG.YScale * CONFIG.Zoom / 100)        -- 贴图高度的一半
 end
 -- 设置各个数据文件的路径，如果是其他目录标志和windows不同的OS, 如linux，则改为合适的路径
-CONFIG.Operation = 0                    -- 0:Windows，1:android
-if CONFIG.Operation == 1 then           -- android目录
-	CONFIG.CurrentPath = "/sdcard/JYLDCR/"
-	CONFIG.MP3 = 0                      -- 是否打开MP3
-else                                    -- Windows目录
-	CONFIG.CurrentPath = "./"
-	CONFIG.LargeMemory = 1              -- 内存是否足够大，0小内存，1大内存
-	CONFIG.MP3 = 1                      -- 是否打开MP3
+CONFIG.Operation = 0                -- 0 Windows，1 android
+if CONFIG.Operation == 0 then       -- Windows目录
+    CONFIG.CurrentPath = "./"
+    CONFIG.LargeMemory = 1          -- 内存是否足够大，0 小内存，1 大内存
+    CONFIG.MP3 = 1                  -- 是否打开MP3
+else                                -- android目录
+    CONFIG.CurrentPath = "/sdcard/JYLDCR/"
+    CONFIG.MP3 = 0                  -- 是否打开MP3
 end
 
 -- 设置游戏目录下各个文件夹代指的变量
@@ -49,21 +49,19 @@ CONFIG.DataPath = CONFIG.CurrentPath.."data/"
 CONFIG.PicturePath = CONFIG.CurrentPath.."pic/"
 CONFIG.SoundPath = CONFIG.CurrentPath.."sound/"
 CONFIG.ScriptPath = CONFIG.CurrentPath.."script/"
-CONFIG.CEventPath = CONFIG.ScriptPath .. "CEvent/"
-CONFIG.WuGongPath = CONFIG.ScriptPath .. "WuGong/"
-CONFIG.HelpPath = CONFIG.ScriptPath .. "Help/"
+CONFIG.HelpPath = CONFIG.ScriptPath .. "help/"
 CONFIG.ScriptLuaPath = string.format("?.lua;%sscript/?.lua;%sscript/?.lua", CONFIG.CurrentPath, CONFIG.CurrentPath)
 -- lua主程序名
-CONFIG.JYMain_Lua = CONFIG.ScriptPath .. "JYmain.lua"
+CONFIG.JYMain_Lua = CONFIG.ScriptPath .. "jymain.lua"
 -- 字体选择
-CONFIG.ZT=0
+CONFIG.ZT = 0
 -- 字体
 CONFIG.FontName = CONFIG.CurrentPath..string.format("font/%s.ttf", CONFIG.ZT)
 -- 使用FMOD播放MIDI，需要gm.dls文件
 if CONFIG.MP3 == 0 then
-	CONFIG.MidSF2 = CONFIG.SoundPath.."mid.sf2"
+    CONFIG.MidSF2 = CONFIG.SoundPath.."mid.sf2"
 else
-	CONFIG.MidSF2 = ""
+    CONFIG.MidSF2 = ""
 end
 -- 显示主地图x和y方向增加的贴图数，以保证所有贴图能全部显示
 CONFIG.MMapAddX = 2                 -- 大地图XY
@@ -75,14 +73,19 @@ CONFIG.WMapAddY = 16
 CONFIG.MusicVolume = 0              -- 设置播放音乐的音量(0-128)
 CONFIG.SoundVolume = 50             -- 设置播放音效的音量(0-128)
 
+-- 大内存
 if CONFIG.LargeMemory == 1 then
-    CONFIG.MAXCacheNum = 1200       -- 贴图缓存数量，一般500-1000。如果在debug.txt中经常出现"pic cache is full"，可以适当增加
-	CONFIG.CleanMemory = 0          -- 场景切换时是否清理lua内存，0不清理，1清理
-	CONFIG.LoadFullS = 1            -- 0只载入当前场景，1整个S*文件载入内存，由于S*有4M多，这样可以解决很多内存
+    -- 贴图缓存数量，一般500-1000。如果在debug.txt中经常出现"pic cache is full"，可以适当增加
+    CONFIG.MAXCacheNum = 1200
+    -- 场景切换时是否清理lua内存，0 不清理，1 清理
+    CONFIG.CleanMemory = 0
+    -- 0 只载入当前场景，1 整个S*文件载入内存，由于S*有4M多，这样可以解决很多内存
+    CONFIG.LoadFullS = 1
+-- 小内存
 else
     CONFIG.MAXCacheNum = 500
-	CONFIG.CleanMemory = 1
-	CONFIG.LoadFullS = 0
+    CONFIG.CleanMemory = 1
+    CONFIG.LoadFullS = 0
 end
 
 -- 按键的位置，-1为默认位置
