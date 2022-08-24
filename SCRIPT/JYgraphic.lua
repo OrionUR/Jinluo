@@ -79,13 +79,13 @@ function Gra_ShowScreen(flag)
     end
 
     local err = -1          -- 错误码
-    if flag ~= 0 or flag ~= 1 then
+    if flag ~= 0 and flag ~= 1 then
         err = 1             -- flag错误
     end
 
     -- 错误时返回错误码
     if err > 0 then
-        Debug("Gra_FillColor Error, error code: " .. err)
+        Debug("Gra_ShowScreen Error, error code: " .. err)
         return
     end
 
@@ -156,21 +156,18 @@ end
 -- 此函数直接显示阴影字，在lua中不用处理阴影字了，这样可以提高字符串显示速度
 function Gra_DrawStr(x, y, str, color, size, fontname, charset, os_charset)
     -- 省略时的默认值
-    if not color then
-        color = C_BLACK
-    elseif not size then
-        size = cc.default_font
-    elseif not fontname then
+    if not fontname then
         fontname = cc.font_name
     elseif not charset then
         charset = cc.src_char_set
     elseif not os_charset then
         os_charset = cc.os_char_set
+    end
 
     local err = -1      -- 错误码
-    if not x or not y or not str then
+    if not x or not y or not str or not color or not size then
         err = 1         -- 参数省略错误
-    elseif x < 0 or y < 0 then
+    elseif x < -1 or y < -1 then
         err = 2         -- xy错误
     elseif type(str) ~= "string" then
         err = 3         -- str错误
@@ -218,7 +215,7 @@ function Gra_LoadPicture(filename, x, y)
         err = 1         -- 参数省略错误
     elseif type(filename) ~= "string" then
         err = 2         -- filename错误
-    elseif x < 0 or y < 0 then
+    elseif x < -1 or y < -1 then
         err = 3         -- xy错误
     end
 
@@ -596,7 +593,7 @@ function Gra_DrawMMap(x, y, mypic)
     local err = -1      -- 错误码
     if not x or not y or not mypic then
         err = 1         -- 参数省略错误
-    elseif x < 0 or y < 0 then
+    elseif x < -1 or y < -1 then
         err = 2         -- xy错误
     elseif mypic < 0 then
         err = 3         -- mypic错误

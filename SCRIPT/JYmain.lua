@@ -9,14 +9,14 @@
 function IncludeFile()
     package.path = CONFIG.ScriptLuaPath -- 设置加载路径
     -- 加载其他文件，使用require避免重复加载
-    require("JYconst")                  -- 常量定义
-    require("JYwar")                    -- 战斗程序
-    require("JYgraphic")                -- 图像画面程序
+    require("jyconst")                  -- 常量定义
+    require("jywar")                    -- 战斗程序
+    require("jygraphic")                -- 图像画面程序
     require("kdef")                     -- 事件程序
-    require("ItemInfo")                 -- 物品信息
-    require("PersonInfo")               -- 人物信息
-    require("SkillInfo")                -- 武功信息
-    require("MP")                       -- 门派相关
+    require("jyitem")                   -- 物品信息
+    require("jyperson")                 -- 人物信息
+    require("jyskill")                  -- 武功信息
+    require("jyenterprise")             -- 门派相关
 end
 
 -- 设置游戏内部使用的全程变量
