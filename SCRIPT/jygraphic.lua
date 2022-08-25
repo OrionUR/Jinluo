@@ -67,9 +67,7 @@ function Gra_FillColor(x1, y1, x2, y2, color)
     lib.FillColor(x1, y1, x2, y2, color)
 end
 
--- 刷新屏幕
--- 若是不调用这个函数，所有改变画面的操作，都不会正确显示出来
--- 这里基本上是将lib.ShowSurface函数重新封装使用
+-- 刷新屏幕，若是不调用这个函数，所有改变画面的操作，都不会正确显示出来
 -- flag：=0 or nil 显示全部表面
 --       =1 按照SetClip设置的矩形依次显示，如果没有矩形，则不显示
 function Gra_ShowScreen(flag)
@@ -145,15 +143,14 @@ function Gra_DrawRect(x1, y1, x2, y2, color)
     lib.DrawRect(x1, y1, x2, y2, color)
 end
 
--- lib.DrawStr(x, y, str, color, size, fontname, charset, OScharset)
 -- 在(x, y)位置写字符串
+-- 此函数直接显示阴影字，在lua中不用处理阴影字了，这样可以提高字符串显示速度
 -- str：需要写的字符串
 -- color：字体颜色，省略时使用默认值
 -- size：字体像素大小，省略时使用默认值
 -- fontname：字体名字，省略时使用默认值
 -- charset：字符串字符集，0 GBK, 1 BIG5，省略时使用默认值
 -- OScharset: 0 显示简体，1 显示繁体，省略时使用默认值
--- 此函数直接显示阴影字，在lua中不用处理阴影字了，这样可以提高字符串显示速度
 function Gra_DrawStr(x, y, str, color, size, fontname, charset, os_charset)
     -- 省略时的默认值
     if not fontname then
@@ -228,8 +225,11 @@ function Gra_LoadPicture(filename, x, y)
     lib.LoadPicture(filename, x, y)
 end
 
--- lib.GetPicXY(id, picid)
 -- 得到贴图大小，返回贴图宽、高、x偏移、y偏移
+function Gra_GetPicXY(id, picid)
+    return lib.GetPicXY(id, picid)
+end
+
 
 -- 设置需要读取所有贴图的fileid
 -- 1 头像，2 物品，3 特效，4 半身像，5 UI

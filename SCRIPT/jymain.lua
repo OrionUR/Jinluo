@@ -120,13 +120,15 @@ function JY_Main_Sub()
         PlayMidi(75)                    -- 播放音乐
         Gra_Cls()                       -- 清屏
         lib.ShowSlow(20, 0)             -- 缓慢显示画面
-        
+        local x, y, xoff, yoff = lib.GetPicXY(5, 2)
+        Debug("x = "..x..", y = "..y..", xoff = "..xoff..", yoff = "..yoff)
+        return
 
         -- local r = StartMenu()           -- 显示游戏开始菜单画面
-        local r = TitleSelection()
-        if r ~= nil then
-            return
-        end
+        -- local r = TitleSelection()
+        -- if r ~= nil then
+        --     return
+        -- end
 
         -- lib.LoadPicture("", 0, 0)               -- 载入图片
         -- GetKey()                            -- 获取键值
