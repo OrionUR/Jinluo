@@ -1,95 +1,95 @@
 ----------------------------------------
 --
--- orionidsï¼šä»¥ä¸‹ä¸ºä¸»ç¨‹åºä»¥åŠç›¸å…³å‡½æ•°
+-- orionids£ºÒÔÏÂÎªÖ÷³ÌĞòÒÔ¼°Ïà¹Øº¯Êı
 -- 
 ----------------------------------------
 
 
--- åŠ è½½æ‰€æœ‰luaæ–‡ä»¶
+-- ¼ÓÔØËùÓĞluaÎÄ¼ş
 function IncludeFile()
-    package.path = CONFIG.ScriptLuaPath -- è®¾ç½®åŠ è½½è·¯å¾„
-    -- åŠ è½½å…¶ä»–æ–‡ä»¶ï¼Œä½¿ç”¨requireé¿å…é‡å¤åŠ è½½
-    require("jyconst")                  -- å¸¸é‡å®šä¹‰
-    require("jywar")                    -- æˆ˜æ–—ç¨‹åº
-    require("jygraphic")                -- å›¾åƒç”»é¢ç¨‹åº
-    require("kdef")                     -- äº‹ä»¶ç¨‹åº
-    require("jyitem")                   -- ç‰©å“ä¿¡æ¯
-    require("jyperson")                 -- äººç‰©ä¿¡æ¯
-    require("jyskill")                  -- æ­¦åŠŸä¿¡æ¯
-    require("jyenterprise")             -- é—¨æ´¾ç›¸å…³
+    package.path = CONFIG.ScriptLuaPath -- ÉèÖÃ¼ÓÔØÂ·¾¶
+    -- ¼ÓÔØÆäËûÎÄ¼ş£¬Ê¹ÓÃrequire±ÜÃâÖØ¸´¼ÓÔØ
+    require("jyconst")                  -- ³£Á¿¶¨Òå
+    require("jywar")                    -- Õ½¶·³ÌĞò
+    require("jygraphic")                -- Í¼Ïñ»­Ãæ³ÌĞò
+    require("kdef")                     -- ÊÂ¼ş³ÌĞò
+    require("jyitem")                   -- ÎïÆ·ĞÅÏ¢
+    require("jyperson")                 -- ÈËÎïĞÅÏ¢
+    require("jyskill")                  -- Îä¹¦ĞÅÏ¢
+    require("jyenterprise")             -- ÃÅÅÉÏà¹Ø
 end
 
--- è®¾ç½®æ¸¸æˆå†…éƒ¨ä½¿ç”¨çš„å…¨ç¨‹å˜é‡
+-- ÉèÖÃÓÎÏ·ÄÚ²¿Ê¹ÓÃµÄÈ«³Ì±äÁ¿
 function SetGlobal()
-    jy = {}                             -- éæˆ˜æ–—çŠ¶æ€æ—¶ä½¿ç”¨çš„å…¨å±€å˜é‡
+    jy = {}                             -- ·ÇÕ½¶·×´Ì¬Ê±Ê¹ÓÃµÄÈ«¾Ö±äÁ¿
 
-    jy.status = GAME_INIT               -- æ¸¸æˆçŠ¶æ€
-    jy.base = {}                        -- åŸºæœ¬æ•°æ®
-    jy.person_num = 0                   -- äººç‰©æ•°é‡
-    jy.person = {}                      -- äººç‰©æ•°æ®
-    jy.thing_num = 0                    -- ç‰©å“æ•°é‡
-    jy.thing = {}                       -- ç‰©å“æ•°æ®
-    jy.scene_num = 0                    -- åœºæ™¯æ•°é‡
-    jy.scene = {}                       -- åœºæ™¯æ•°æ®
-    jy.wugong_num = 0                   -- æ­¦åŠŸæ•°é‡
-    jy.wugong = {}                      -- æ­¦åŠŸæ•°æ®
-    jy.shop_num = 0                     -- å•†åº—æ•°é‡
-    jy.shop = {}                        -- å•†åº—æ•°æ®
+    jy.status = GAME_INIT               -- ÓÎÏ·×´Ì¬
+    jy.base = {}                        -- »ù±¾Êı¾İ
+    jy.person_num = 0                   -- ÈËÎïÊıÁ¿
+    jy.person = {}                      -- ÈËÎïÊı¾İ
+    jy.thing_num = 0                    -- ÎïÆ·ÊıÁ¿
+    jy.thing = {}                       -- ÎïÆ·Êı¾İ
+    jy.scene_num = 0                    -- ³¡¾°ÊıÁ¿
+    jy.scene = {}                       -- ³¡¾°Êı¾İ
+    jy.wugong_num = 0                   -- Îä¹¦ÊıÁ¿
+    jy.wugong = {}                      -- Îä¹¦Êı¾İ
+    jy.shop_num = 0                     -- ÉÌµêÊıÁ¿
+    jy.shop = {}                        -- ÉÌµêÊı¾İ
 
-    jy.my_current_pic = 0               -- ä¸»è§’å½“å‰èµ°è·¯è´´å›¾åœ¨è´´å›¾æ–‡ä»¶ä¸­åç§»
-    jy.my_pic = 0                       -- ä¸»è§’å½“å‰è´´å›¾
-    jy.my_tick = 0                      -- ä¸»è§’æ²¡æœ‰èµ°è·¯çš„æŒç»­å¸§æ•°
-    jy.my_tick2 = 0                     -- æ˜¾ç¤ºäº‹ä»¶åŠ¨ç”»çš„èŠ‚æ‹
-    jy.load_time = 0                    -- è¯»å–æ—¶é—´
-    jy.save_time = 0                    -- ä¿å­˜æ—¶é—´
-    jy.game_time = 0                    -- æ¸¸æˆæ—¶é•¿
-    jy.gold = 0                         -- æ¸¸æˆé“¶ä¸¤
-    jy.year = 1                         -- å¹´
-    jy.month = 1                        -- æœˆ
-    jy.day = 1                          -- æ—¥
+    jy.my_current_pic = 0               -- Ö÷½Çµ±Ç°×ßÂ·ÌùÍ¼ÔÚÌùÍ¼ÎÄ¼şÖĞÆ«ÒÆ
+    jy.my_pic = 0                       -- Ö÷½Çµ±Ç°ÌùÍ¼
+    jy.my_tick = 0                      -- Ö÷½ÇÃ»ÓĞ×ßÂ·µÄ³ÖĞøÖ¡Êı
+    jy.my_tick2 = 0                     -- ÏÔÊ¾ÊÂ¼ş¶¯»­µÄ½ÚÅÄ
+    jy.load_time = 0                    -- ¶ÁÈ¡Ê±¼ä
+    jy.save_time = 0                    -- ±£´æÊ±¼ä
+    jy.game_time = 0                    -- ÓÎÏ·Ê±³¤
+    jy.gold = 0                         -- ÓÎÏ·ÒøÁ½
+    jy.year = 1                         -- Äê
+    jy.month = 1                        -- ÔÂ
+    jy.day = 1                          -- ÈÕ
 
-    jy.sub_scene = -1                   -- å½“å‰å­åœºæ™¯ç¼–å·
-    jy.sub_scene_x = 0                  -- å­åœºæ™¯æ˜¾ç¤ºä½ç½®åç§»ï¼Œåœºæ™¯ç§»åŠ¨æŒ‡ä»¤ä½¿ç”¨
+    jy.sub_scene = -1                   -- µ±Ç°×Ó³¡¾°±àºÅ
+    jy.sub_scene_x = 0                  -- ×Ó³¡¾°ÏÔÊ¾Î»ÖÃÆ«ÒÆ£¬³¡¾°ÒÆ¶¯Ö¸ÁîÊ¹ÓÃ
     jy.sub_scene_y = 0
     jy.thing_use = -1
-    jy.current_d = -1                   -- å½“å‰è°ƒç”¨D*çš„ç¼–å·
-    jy.old_d_pass = -1                  -- ä¸Šæ¬¡è§¦å‘è·¯è¿‡äº‹ä»¶çš„D*ç¼–å·ï¼Œé¿å…å¤šæ¬¡è§¦å‘
-    jy.current_event_type = -1          -- å½“å‰è§¦å‘äº‹ä»¶çš„æ–¹å¼ï¼Œ1 ç©ºæ ¼ï¼Œ2 ç‰©å“ï¼Œ3 è·¯è¿‡
-    jy.current_thing = -1               -- å½“å‰é€‰æ‹©ç‰©å“ï¼Œè§¦å‘äº‹ä»¶ä½¿ç”¨
-    jy.mmap_music = -1                  -- åˆ‡æ¢å¤§åœ°å›¾éŸ³ä¹ï¼Œè¿”å›å¤§åœ°å›¾æ—¶ï¼Œå¦‚æœè®¾ç½®ï¼Œåˆ™æ’­æ”¾æ­¤éŸ³ä¹
-    jy.current_midi = -1                -- å½“å‰æ’­æ”¾çš„éŸ³ä¹idï¼Œç”¨æ¥åœ¨å…³é—­éŸ³ä¹æ—¶ä¿å­˜éŸ³ä¹id
-    jy.enable_music = 1                 -- æ˜¯å¦æ’­æ”¾éŸ³ä¹ï¼Œ0 ä¸æ’­æ”¾ï¼Œ1 æ’­æ”¾
-    jy.enable_sound = 1                 -- æ˜¯å¦æ’­æ”¾éŸ³æ•ˆï¼Œ0 ä¸æ’­æ”¾ï¼Œ1 æ’­æ”¾
+    jy.current_d = -1                   -- µ±Ç°µ÷ÓÃD*µÄ±àºÅ
+    jy.old_d_pass = -1                  -- ÉÏ´Î´¥·¢Â·¹ıÊÂ¼şµÄD*±àºÅ£¬±ÜÃâ¶à´Î´¥·¢
+    jy.current_event_type = -1          -- µ±Ç°´¥·¢ÊÂ¼şµÄ·½Ê½£¬1 ¿Õ¸ñ£¬2 ÎïÆ·£¬3 Â·¹ı
+    jy.current_thing = -1               -- µ±Ç°Ñ¡ÔñÎïÆ·£¬´¥·¢ÊÂ¼şÊ¹ÓÃ
+    jy.mmap_music = -1                  -- ÇĞ»»´óµØÍ¼ÒôÀÖ£¬·µ»Ø´óµØÍ¼Ê±£¬Èç¹ûÉèÖÃ£¬Ôò²¥·Å´ËÒôÀÖ
+    jy.current_midi = -1                -- µ±Ç°²¥·ÅµÄÒôÀÖid£¬ÓÃÀ´ÔÚ¹Ø±ÕÒôÀÖÊ±±£´æÒôÀÖid
+    jy.enable_music = 1                 -- ÊÇ·ñ²¥·ÅÒôÀÖ£¬0 ²»²¥·Å£¬1 ²¥·Å
+    jy.enable_sound = 1                 -- ÊÇ·ñ²¥·ÅÒôĞ§£¬0 ²»²¥·Å£¬1 ²¥·Å
 
-    war = {}                            -- æˆ˜æ–—ä½¿ç”¨çš„å…¨ç¨‹å˜é‡
-                                        -- è¿™é‡Œå ä¸ªä½ç½®ï¼Œå› ä¸ºç¨‹åºåé¢ä¸å…è®¸å…¨å±€å˜é‡äº†
-                                        -- å…·ä½“å†…å®¹åœ¨WarSetGlobalå‡½æ•°ä¸­
+    war = {}                            -- Õ½¶·Ê¹ÓÃµÄÈ«³Ì±äÁ¿
+                                        -- ÕâÀïÕ¼¸öÎ»ÖÃ£¬ÒòÎª³ÌĞòºóÃæ²»ÔÊĞíÈ«¾Ö±äÁ¿ÁË
+                                        -- ¾ßÌåÄÚÈİÔÚWarSetGlobalº¯ÊıÖĞ
 
     auto_move_tab = {[0] = 0}
-    jy.restart = 0                      -- è¿”å›æ¸¸æˆåˆå§‹ç•Œé¢
-    jy.walk_count = 0                   -- èµ°è·¯è®¡æ­¥
+    jy.restart = 0                      -- ·µ»ØÓÎÏ·³õÊ¼½çÃæ
+    jy.walk_count = 0                   -- ×ßÂ·¼Æ²½
 end
 
--- ä¸»ç¨‹åºå…¥å£
+-- Ö÷³ÌĞòÈë¿Ú
 function JY_Main()
-    os.remove("debug.txt")              -- æ¸…é™¤ä»¥å‰çš„debugè¾“å‡º
-    xpcall(JY_Main_Sub, MyErrFun)       -- æ•è·è°ƒç”¨é”™è¯¯
+    os.remove("debug.txt")              -- Çå³ıÒÔÇ°µÄdebugÊä³ö
+    xpcall(JY_Main_Sub, MyErrFun)       -- ²¶»ñµ÷ÓÃ´íÎó
 end
 
--- é”™è¯¯å¤„ç†ï¼Œæ‰“å°é”™è¯¯ä¿¡æ¯
+-- ´íÎó´¦Àí£¬´òÓ¡´íÎóĞÅÏ¢
 function MyErrFun(err)
-    Debug(err)                      -- è¾“å‡ºé”™è¯¯ä¿¡æ¯
-    Debug(debug.traceback())        -- è¾“å‡ºè°ƒç”¨å †æ ˆä¿¡æ¯
+    Debug(err)                      -- Êä³ö´íÎóĞÅÏ¢
+    Debug(debug.traceback())        -- Êä³öµ÷ÓÃ¶ÑÕ»ĞÅÏ¢
 end
 
--- çœŸæ­£çš„æ¸¸æˆä¸»ç¨‹åºå…¥å£
+-- ÕæÕıµÄÓÎÏ·Ö÷³ÌĞòÈë¿Ú
 function JY_Main_Sub()
     ct = {}
-    IncludeFile()                       -- å¯¼å…¥å…¶ä»–æ¨¡å—
-    SetGlobalConst()                    -- è®¾ç½®å…¨å±€å˜é‡ccï¼Œåœ¨JYconst.lua
-    SetGlobal()                         -- è®¾ç½®å…¨å±€å˜é‡jy
+    IncludeFile()                       -- µ¼ÈëÆäËûÄ£¿é
+    SetGlobalConst()                    -- ÉèÖÃÈ«¾Ö±äÁ¿cc£¬ÔÚJYconst.lua
+    SetGlobal()                         -- ÉèÖÃÈ«¾Ö±äÁ¿jy
 
-    -- ç¦æ­¢è®¿é—®å…¨å±€å˜é‡
+    -- ½ûÖ¹·ÃÎÊÈ«¾Ö±äÁ¿
     setmetatable(_G, {
         __newindex = function (_, n)
             error("attempt read write to undeclared variable " .. n, 2)
@@ -101,12 +101,12 @@ function JY_Main_Sub()
 
     Debug("JY_Main start")
 
-    -- åˆå§‹åŒ–éšæœºæ•°å‘ç”Ÿå™¨
+    -- ³õÊ¼»¯Ëæ»úÊı·¢ÉúÆ÷
     math.randomseed(tonumber(tostring(os.time()):reverse():sub(1,6)))
-    jy.status = GAME_START              -- æ”¹å˜æ¸¸æˆçŠ¶æ€
-    Gra_PicInit()                       -- åˆå§‹åŒ–è´´å›¾Cache
-    Gra_FillColor()                     -- å±å¹•é»‘å±
-    Gra_SetAllPNGAddress()              -- è½½å…¥æ‰€æœ‰è´´å›¾åœ°å€å¹¶åˆ†é…id
+    jy.status = GAME_START              -- ¸Ä±äÓÎÏ·×´Ì¬
+    Gra_PicInit()                       -- ³õÊ¼»¯ÌùÍ¼Cache
+    Gra_FillColor()                     -- ÆÁÄ»ºÚÆÁ
+    Gra_SetAllPNGAddress()              -- ÔØÈëËùÓĞÌùÍ¼µØÖ·²¢·ÖÅäid
 
     while true do
         if jy.restart == 1 then
@@ -117,38 +117,38 @@ function JY_Main_Sub()
             break
         end
 
-        PlayMidi(75)                    -- æ’­æ”¾éŸ³ä¹
-        Gra_Cls()                       -- æ¸…å±
-        lib.ShowSlow(20, 0)             -- ç¼“æ…¢æ˜¾ç¤ºç”»é¢
+        PlayMidi(75)                    -- ²¥·ÅÒôÀÖ
+        Gra_Cls()                       -- ÇåÆÁ
+        lib.ShowSlow(20, 0)             -- »ºÂıÏÔÊ¾»­Ãæ
         
 
-        -- local r = StartMenu()           -- æ˜¾ç¤ºæ¸¸æˆå¼€å§‹èœå•ç”»é¢
+        -- local r = StartMenu()           -- ÏÔÊ¾ÓÎÏ·¿ªÊ¼²Ëµ¥»­Ãæ
         local r = TitleSelection()
         if r ~= nil then
             return
         end
 
-        -- lib.LoadPicture("", 0, 0)               -- è½½å…¥å›¾ç‰‡
-        -- GetKey()                            -- è·å–é”®å€¼
+        -- lib.LoadPicture("", 0, 0)               -- ÔØÈëÍ¼Æ¬
+        -- GetKey()                            -- »ñÈ¡¼üÖµ
 
-        -- Game_Cycle()                            -- æ¸¸æˆå¾ªç¯
+        -- Game_Cycle()                            -- ÓÎÏ·Ñ­»·
     end
 end
 
--- æ¸…ç†luaå†…å­˜
+-- ÇåÀíluaÄÚ´æ
 function CleanMemory()
     if CONFIG.CleanMemory == 1 then
-        -- åšä¸€æ¬¡å®Œæ•´çš„åƒåœ¾æ”¶é›†å¾ªç¯
+        -- ×öÒ»´ÎÍêÕûµÄÀ¬»øÊÕ¼¯Ñ­»·
         collectgarbage("collect")
     end
 end
 
--- æ¸¸æˆå¼€å§‹èœå•ç”»é¢
+-- ÓÎÏ·¿ªÊ¼²Ëµ¥»­Ãæ
 function StartMenu()
     Gra_Cls()
 
     local menu_return = TitleSelection()
-    if menu_return == 1 then                    -- æ–°çš„æ¸¸æˆ
+    if menu_return == 1 then                    -- ĞÂµÄÓÎÏ·
         Gra_Cls()
         -- NewGame()
 
@@ -156,22 +156,22 @@ function StartMenu()
             do return end
         end
 
-        -- ç•…æƒ³æ¨è¿‡åˆå§‹åœºæ™¯
-        if jy.base["ç•…æƒ³"] == 58 then
+        -- ³©ÏëÑî¹ı³õÊ¼³¡¾°
+        if jy.base["³©Ïë"] == 58 then
             jy.sub_scene = 18
-            jy.base["äººX"] = 144
-            jy.base["äººY"] = 218
-            jy.base["äººX1"] = 30
-            jy.base["äººY1"] = 32
-        -- å…¶ä»–äºº
+            jy.base["ÈËX"] = 144
+            jy.base["ÈËY"] = 218
+            jy.base["ÈËX1"] = 30
+            jy.base["ÈËY1"] = 32
+        -- ÆäËûÈË
         else
             jy.sub_scene = cc.new_game_scene_id
-            jy.base["äººX1"] = cc.new_game_scene_x
-            jy.base["äººY1"] = cc.new_game_scene_y
+            jy.base["ÈËX1"] = cc.new_game_scene_x
+            jy.base["ÈËY1"] = cc.new_game_scene_y
         end
 
-        -- ç”·å¥³ä¸»è§’åˆ¤å®š
-        if jy.person[0]["æ€§åˆ«"] == 0 then
+        -- ÄĞÅ®Ö÷½ÇÅĞ¶¨
+        if jy.person[0]["ĞÔ±ğ"] == 0 then
             jy.my_pic = cc.new_person_pic_m
         else
             jy.my_pic = cc.new_person_pic_f
@@ -183,41 +183,41 @@ function StartMenu()
         Init_SMap(0)
         lib.ShowSlow(20, 0)
 
-        -- å¼€å±€äº‹ä»¶
-        if jy.base["ç•…æƒ³"] == 58 then             -- ç•…æƒ³æ¨è¿‡
+        -- ¿ª¾ÖÊÂ¼ş
+        if jy.base["³©Ïë"] == 58 then             -- ³©ÏëÑî¹ı
             CallCEvent(4187)
-        else                                      -- å…¶ä»–äºº
+        else                                      -- ÆäËûÈË
             CallCEvent(691)
         end
 
-        -- ç•…æƒ³å¼€å±€è·å¾—è‡ªèº«çš„è£…å¤‡
-        if jy.base["ç•…æƒ³"] > 0 then
-            if jy.person[0]["æ­¦å™¨"] ~= -1 and jy.base["ç•…æƒ³"] ~= 27 then
-                instruct_2(jy.person[0]["æ­¦å™¨"], 1)
-                jy.person[0]["æ­¦å™¨"] = -1
+        -- ³©Ïë¿ª¾Ö»ñµÃ×ÔÉíµÄ×°±¸
+        if jy.base["³©Ïë"] > 0 then
+            if jy.person[0]["ÎäÆ÷"] ~= -1 and jy.base["³©Ïë"] ~= 27 then
+                instruct_2(jy.person[0]["ÎäÆ÷"], 1)
+                jy.person[0]["ÎäÆ÷"] = -1
             end
-            if jy.person[0]["é˜²å…·"] ~= -1 then
-                instruct_2(jy.person[0]["é˜²å…·"], 1)
-                jy.person[0]["é˜²å…·"] = -1
+            if jy.person[0]["·À¾ß"] ~= -1 then
+                instruct_2(jy.person[0]["·À¾ß"], 1)
+                jy.person[0]["·À¾ß"] = -1
             end
-            if jy.person[0]["åéª‘"] ~= -1 then
-                instruct_2(jy.person[0]["åéª‘"], 1)
-                jy.person[0]["åéª‘"] = -1
+            if jy.person[0]["×øÆï"] ~= -1 then
+                instruct_2(jy.person[0]["×øÆï"], 1)
+                jy.person[0]["×øÆï"] = -1
             end
         end
 
-        -- ç•…æƒ³å°¹å…‹è¥¿è·å¾—ä¸€ä¸‡ä¸¤
-        if jy.base["ç•…æƒ³"] == 158 then
+        -- ³©ÏëÒü¿ËÎ÷»ñµÃÒ»ÍòÁ½
+        if jy.base["³©Ïë"] == 158 then
             instruct_2(174, 10000)
         end
-        -- æ ‡ä¸»å¯ä»¥åœ¨äº‘å²­æ´èŠ±é’±å­¦ä¹ è¿·è¸ªæ­¥
-        if jy.base["æ ‡å‡†"] > 0 then
+        -- ±êÖ÷¿ÉÒÔÔÚÔÆÁë¶´»¨Ç®Ñ§Ï°ÃÔ×Ù²½
+        if jy.base["±ê×¼"] > 0 then
             addevent(41, 0, 1, 4144, 1, 8694)
         end
         instruct_10(104)
         instruct_10(105)
 
-        -- å‘¨ç›®å¥–åŠ±
+        -- ÖÜÄ¿½±Àø
         os.remove(CONFIG.DataPath .. 'TgJL')
         for i = 1, #cc.commodity do
             if cc.commodity[i][5] > 0 then
@@ -228,20 +228,20 @@ function StartMenu()
         tgsave(1)
 
         cc.tgjl = {}
-    -- è½½å…¥æ—§çš„è¿›åº¦
+    -- ÔØÈë¾ÉµÄ½ø¶È
     elseif menu_return == 2 then
         --lib.LoadPNG(5, 501 * 2, -1, -1, 1)
         --Gra_ShowScreen()
-        Gra_DrawStrBox(-1, cc.screen_h * 1 / 6 - 20, "è¯»å–è¿›åº¦", LimeGreen, cc.font_big3, C_GOLD)
-        -- Gra_DrawStrBox(-1, cc.screen_h / 2 - 20, "è¯»å–è¿›åº¦", LimeGreen, cc.font_big2, C_GOLD)
+        Gra_DrawStrBox(-1, cc.screen_h * 1 / 6 - 20, "¶ÁÈ¡½ø¶È", LimeGreen, cc.font_big3, C_GOLD)
+        -- Gra_DrawStrBox(-1, cc.screen_h / 2 - 20, "¶ÁÈ¡½ø¶È", LimeGreen, cc.font_big2, C_GOLD)
         -- local r = SaveList()
-        -- -- ESCé‡æ–°è¿”å›é€‰é¡¹
+        -- -- ESCÖØĞÂ·µ»ØÑ¡Ïî
         -- if r < 1 then
         --     local s = StartMenu()
         --     return s
         -- end
 
-        -- Gra_DrawStrBox(-1, cc.start_menu_y, "è¯·ç¨å€™...", C_GOLD, cc.default_font)
+        -- Gra_DrawStrBox(-1, cc.start_menu_y, "ÇëÉÔºò...", C_GOLD, cc.default_font)
         Gra_ShowScreen()
         Delay(2000)
         -- local result = Loadrecord(r)
@@ -249,13 +249,13 @@ function StartMenu()
         --     return StartMenu()
         -- end
 
-        -- if jy.base["æ— ç”¨"] ~= -1 then
+        -- if jy.base["ÎŞÓÃ"] ~= -1 then
         --     if jy.sub_scene < 0 then
         --         CleanMemory()
         --     end
         --     lib.ShowSlow(20, 1)
         --     jy.status = GAME_SMAP
-        --     jy.sub_scene = jy.base["æ— ç”¨"]
+        --     jy.sub_scene = jy.base["ÎŞÓÃ"]
         --     jy.mmap_music = -1
         --     jy.my_pic = Gra_GetMyPic()
         --     Init_SMap(1)
@@ -268,31 +268,31 @@ function StartMenu()
     end
 end
 
--- æ¸¸æˆå¼€å§‹ç”»é¢é€‰æ‹©
+-- ÓÎÏ·¿ªÊ¼»­ÃæÑ¡Ôñ
 function TitleSelection()
     Debug("TitleSelection")
-    local choice = 1            -- é€‰é¡¹ï¼Œ1å¼€å§‹æ¸¸æˆï¼Œ2è½½å…¥æ¸¸æˆï¼Œ3é€€å‡ºæ¸¸æˆï¼Œé»˜è®¤åœ¨1çš„ä½ç½®
-    -- é€‰é¡¹
-    -- æœªé€‰ä¸­æ—¶çš„è´´å›¾ï¼Œé€‰ä¸­æ—¶çš„è´´å›¾ï¼Œxè½´ä½ç½®ï¼Œyè½´ä½ç½®
+    local choice = 1            -- Ñ¡Ïî£¬1¿ªÊ¼ÓÎÏ·£¬2ÔØÈëÓÎÏ·£¬3ÍË³öÓÎÏ·£¬Ä¬ÈÏÔÚ1µÄÎ»ÖÃ
+    -- Ñ¡Ïî
+    -- Î´Ñ¡ÖĞÊ±µÄÌùÍ¼£¬Ñ¡ÖĞÊ±µÄÌùÍ¼£¬xÖáÎ»ÖÃ£¬yÖáÎ»ÖÃ
     local buttons = {
         {3, 6, 550, 350},
         {4, 7, 550, 450},
         {5, 8, 550, 550}
     }
-    -- é¼ æ ‡ä½ç½®åˆ¤å®š
-    -- xè½´èµ·å§‹ä½ç½®ï¼Œyè½´èµ·å§‹ä½ç½®ï¼Œxè½´ç»“æŸä½ç½®ï¼Œyè½´ç»“æŸä½ç½®
+    -- Êó±êÎ»ÖÃÅĞ¶¨
+    -- xÖáÆğÊ¼Î»ÖÃ£¬yÖáÆğÊ¼Î»ÖÃ£¬xÖá½áÊøÎ»ÖÃ£¬yÖá½áÊøÎ»ÖÃ
     local mouse_detect = {
         {450, 300, 650, 395},
         {450, 400, 650, 495},
         {450, 500, 650, 595}
     }
-    local tmp                   -- ä¸´æ—¶å˜é‡ï¼Œç”¨æ¥ä¸´æ—¶å­˜æ”¾æ•°æ®
-    local picid                 -- å›¾åƒid
+    local tmp                   -- ÁÙÊ±±äÁ¿£¬ÓÃÀ´ÁÙÊ±´æ·ÅÊı¾İ
+    local picid                 -- Í¼Ïñid
 
-    -- åˆ¤æ–­é¼ æ ‡æ˜¯å¦åœ¨æŒ‰é’®ä¸Š
-    -- mx, myï¼šxè½´yè½´
+    -- ÅĞ¶ÏÊó±êÊÇ·ñÔÚ°´Å¥ÉÏ
+    -- mx, my£ºxÖáyÖá
     local function OnButton(mx, my)
-        local result = 0        -- è¿”å›å€¼ï¼Œç¡®å®šé¼ æ ‡åœ¨çš„ä½ç½®
+        local result = 0        -- ·µ»ØÖµ£¬È·¶¨Êó±êÔÚµÄÎ»ÖÃ
         
         for i = 1, #mouse_detect do
             if mx >= mouse_detect[i][1] and mx <= mouse_detect[i][3] and my >= mouse_detect[i][2] and my <= mouse_detect[i][4] then
@@ -310,31 +310,31 @@ function TitleSelection()
         end
         -- local keypress, ktype, mx, my = lib.GetKey()
         local keypress, ktype, mx, my = WaitKey()
-        -- æŒ‰é”®ã€Œä¸‹ã€å’Œã€Œå³ã€æ•ˆæœä¸€è‡´ï¼Œéƒ½æ˜¯è·³å‘ä¸‹ä¸€ä¸ªé€‰é¡¹
+        -- °´¼ü¡¸ÏÂ¡¹ºÍ¡¸ÓÒ¡¹Ğ§¹ûÒ»ÖÂ£¬¶¼ÊÇÌøÏòÏÂÒ»¸öÑ¡Ïî
         if keypress == VK_DOWN or keypress == VK_RIGHT then
             PlayWav(77)
             choice = choice + 1
             if choice > #buttons then
                 choice = 1
             end
-        -- æŒ‰é”®ã€Œä¸Šã€å’Œã€Œå·¦ã€æ•ˆæœä¸€è‡´ï¼Œéƒ½æ˜¯è·³å‘ä¸Šä¸€ä¸ªé€‰é¡¹
+        -- °´¼ü¡¸ÉÏ¡¹ºÍ¡¸×ó¡¹Ğ§¹ûÒ»ÖÂ£¬¶¼ÊÇÌøÏòÉÏÒ»¸öÑ¡Ïî
         elseif keypress == VK_UP or keypress == VK_LEFT then
             PlayWav(77)
             choice = choice - 1
             if choice < 1 then
                 choice = #buttons
             end
-        -- ä½¿ç”¨é¼ æ ‡æ“ä½œ
+        -- Ê¹ÓÃÊó±ê²Ù×÷
         else
             if ktype == 2 or ktype == 3 then
-                -- é¼ æ ‡åœ¨é€‰é¡¹èŒƒå›´å†…ï¼Œåˆ™é€‰ä¸­è¯¥é€‰é¡¹
+                -- Êó±êÔÚÑ¡Ïî·¶Î§ÄÚ£¬ÔòÑ¡ÖĞ¸ÃÑ¡Ïî
                 tmp = OnButton(mx, my)
                 if tmp > 0 then
                     choice = tmp
                     PlayWav(77)
                 end
             end
-            -- ç©ºæ ¼æˆ–å›è½¦æˆ–é¼ æ ‡åœ¨å·¦é”®è§¦å‘åˆ¤å®š
+            -- ¿Õ¸ñ»ò»Ø³µ»òÊó±êÔÚ×ó¼ü´¥·¢ÅĞ¶¨
             if keypress == VK_RETURN or (ktype == 3 and OnButton(mx, my) > 0) then
                 break
             end
@@ -343,17 +343,17 @@ function TitleSelection()
         Gra_Cls()
 
         for i = 1, #buttons do
-            -- -- é€‰é¡¹è´´å›¾
+            -- -- Ñ¡ÏîÌùÍ¼
             picid = buttons[i][1]
             if i == choice then
                 picid = buttons[i][2]
             end
             
-            -- UIçš„fileid = 5
+            -- UIµÄfileid = 5
             lib.LoadPNG(5, picid * 2, buttons[i][3], buttons[i][4], 1)
         end
 
-        -- æ˜¾ç¤ºç‰ˆæœ¬å·
+        -- ÏÔÊ¾°æ±¾ºÅ
         Gra_DrawString(600, 250, cc.version, M_Indigo, cc.font_big3)
         Gra_ShowScreen()
         Delay(cc.frame)
@@ -362,32 +362,32 @@ function TitleSelection()
     return choice
 end
 
--- é€‰æ‹©æ–°æ¸¸æˆï¼Œè®¾ç½®ä¸»è§’åˆå§‹å±æ€§
+-- Ñ¡ÔñĞÂÓÎÏ·£¬ÉèÖÃÖ÷½Ç³õÊ¼ÊôĞÔ
 function NewGame()
 end
 
--- æ¸¸æˆä¸»å¾ªç¯
+-- ÓÎÏ·Ö÷Ñ­»·
 function GameCycle()
 end
 
--- åˆå§‹åŒ–å¤§åœ°å›¾æ•°æ®
+-- ³õÊ¼»¯´óµØÍ¼Êı¾İ
 function InitMMap()
 end
 
--- æ’­æ”¾midi
--- idï¼šè¦æ’­æ”¾çš„éŸ³ä¹id
+-- ²¥·Åmidi
+-- id£ºÒª²¥·ÅµÄÒôÀÖid
 function PlayMidi(id)
     jy.current_midi = id
-    if jy.enable_music == 0 then                -- å¦‚æœæ¸¸æˆå†…è®¾ç½®ä¸ºä¸æ’­æ”¾éŸ³ä¹ï¼Œåˆ™è¿”å›
+    if jy.enable_music == 0 then                -- Èç¹ûÓÎÏ·ÄÚÉèÖÃÎª²»²¥·ÅÒôÀÖ£¬Ôò·µ»Ø
         return
     end
-    if id >= 0 then                             -- è°ƒç”¨Cå‡½æ•°æ’­æ”¾è®¾å®šçš„éŸ³ä¹è·¯å¾„çš„éŸ³ä¹ï¼ŒéŸ³ä¹ä¸ºid + 1
+    if id >= 0 then                             -- µ÷ÓÃCº¯Êı²¥·ÅÉè¶¨µÄÒôÀÖÂ·¾¶µÄÒôÀÖ£¬ÒôÀÖÎªid + 1
         lib.PlayMIDI(string.format(cc.midi_file, id + 1))
     end
 end
 
--- æ’­æ”¾éŸ³æ•ˆ
--- idï¼šè¦æ’­æ”¾çš„éŸ³æ•ˆid
+-- ²¥·ÅÒôĞ§
+-- id£ºÒª²¥·ÅµÄÒôĞ§id
 function PlayWav(id)
     if jy.enable_sound == 0 then
         return
@@ -397,21 +397,21 @@ function PlayWav(id)
     end
 end
 
--- è¯»å–æ¸¸æˆè¿›åº¦
--- id = 0 æ–°è¿›åº¦ï¼Œ= 1/2/3 è¿›åº¦
--- è¿™é‡Œæ˜¯å…ˆæŠŠæ•°æ®è¯»å…¥Byteæ•°ç»„ä¸­ï¼Œç„¶åå®šä¹‰è®¿é—®ç›¸åº”è¡¨çš„æ–¹æ³•ï¼Œåœ¨è®¿é—®è¡¨æ—¶ç›´æ¥ä»æ•°ç»„è®¿é—®
--- ä¸ä»¥å‰çš„å®ç°ç›¸æ¯”ï¼Œä»æ–‡ä»¶ä¸­è¯»å–å’Œä¿å­˜åˆ°æ–‡ä»¶çš„æ—¶é—´æ˜¾è‘—åŠ å¿«ã€‚è€Œä¸”å†…å­˜å ç”¨å°‘äº†
+-- ¶ÁÈ¡ÓÎÏ·½ø¶È
+-- id = 0 ĞÂ½ø¶È£¬= 1/2/3 ½ø¶È
+-- ÕâÀïÊÇÏÈ°ÑÊı¾İ¶ÁÈëByteÊı×éÖĞ£¬È»ºó¶¨Òå·ÃÎÊÏàÓ¦±íµÄ·½·¨£¬ÔÚ·ÃÎÊ±íÊ±Ö±½Ó´ÓÊı×é·ÃÎÊ
+-- ÓëÒÔÇ°µÄÊµÏÖÏà±È£¬´ÓÎÄ¼şÖĞ¶ÁÈ¡ºÍ±£´æµ½ÎÄ¼şµÄÊ±¼äÏÔÖø¼Ó¿ì¡£¶øÇÒÄÚ´æÕ¼ÓÃÉÙÁË
 function LoadRecord(id)
     local zipfile = string.format('data/save/Save_%d', id)
     if id ~= 0 and (existFile(zipfile) == false) then
-        QZXS("æ­¤å­˜æ¡£æ•°æ®ä¸å…¨ï¼Œä¸èƒ½è¯»å–ï¼Œè¯·é€‰æ‹©å…¶ä»–å­˜æ¡£æˆ–é‡æ–°å¼€å§‹")
+        QZXS("´Ë´æµµÊı¾İ²»È«£¬²»ÄÜ¶ÁÈ¡£¬ÇëÑ¡ÔñÆäËû´æµµ»òÖØĞÂ¿ªÊ¼")
         return -1
     end
     Byte.unzip(zipfile, 'r.grp', 'd.grp', 's.grp', 'tjm')
     
     local time = GetTime()
 
-    -- è¯»å–R*.idxæ–‡ä»¶
+    -- ¶ÁÈ¡R*.idxÎÄ¼ş
     local data = Byte.create(6 * 4)
     Byte.loadfile(data, cc.r_idx_filename[0], 0, 6 * 4)
 
@@ -430,12 +430,12 @@ function LoadRecord(id)
         dFile = cc.d_filename[id]
     end
 
-    -- è¯»å–R*.grpæ–‡ä»¶
-    -- åŸºæœ¬æ•°æ®
+    -- ¶ÁÈ¡R*.grpÎÄ¼ş
+    -- »ù±¾Êı¾İ
     jy.data_base = Byte.create(idx[1] - idx[0])
     Byte.loadfile(jy.data_base, grpFile, idx[0], idx[1] - idx[0])
-    -- è®¾ç½®è®¿é—®åŸºæœ¬æ•°æ®çš„æ–¹æ³•ï¼Œè¿™æ ·å°±å¯ä»¥ç”¨è®¿é—®è¡¨çš„æ–¹å¼è®¿é—®äº†
-    -- è€Œä¸ç”¨æŠŠäºŒè¿›åˆ¶æ•°æ®è½¬åŒ–ä¸ºè¡¨ï¼ŒèŠ‚çº¦åŠ è½½æ—¶é—´å’Œç©ºé—´
+    -- ÉèÖÃ·ÃÎÊ»ù±¾Êı¾İµÄ·½·¨£¬ÕâÑù¾Í¿ÉÒÔÓÃ·ÃÎÊ±íµÄ·½Ê½·ÃÎÊÁË
+    -- ¶ø²»ÓÃ°Ñ¶ş½øÖÆÊı¾İ×ª»¯Îª±í£¬½ÚÔ¼¼ÓÔØÊ±¼äºÍ¿Õ¼ä
     local meta_t = {
         __index = function(t, k)
             return GetDataFromStruct(jy.data_base, 0, cc.base_s, k)
@@ -447,7 +447,7 @@ function LoadRecord(id)
     }
     setmetatable(jy.base, meta_t)
 
-    -- äººç‰©æ•°æ®
+    -- ÈËÎïÊı¾İ
     jy.person_num = math.floor((idx[2] - idx[1]) / cc.person_size)
     jy.data_person = Byte.create(cc.person_size * jy.person_num)
     Byte.loadfile(jy.data_person, grpFile, idx[1], cc.person_size * jy.person_num)
@@ -465,7 +465,7 @@ function LoadRecord(id)
         setmetatable(jy.person[i], meta_t)
     end
 
-    -- ç‰©å“æ•°æ®
+    -- ÎïÆ·Êı¾İ
     jy.thing_num = math.floor((idx[3] - idx[2]) / cc.thing_size)
     jy.data_thing = Byte.create(cc.thing_size * jy.thing_num)
     Byte.loadfile(jy.data_thing, grpFile, dix[2], cc.thing_size * jy.thing_num)
@@ -483,7 +483,7 @@ function LoadRecord(id)
         setmetatable(jy.thing[i], meta_t)
     end
 
-    -- åœºæ™¯æ•°æ®
+    -- ³¡¾°Êı¾İ
     jy.scene_num = math.floor((idx[4] - idx[3]) / cc.scene_size)
     jy.data_scene = Byte.create(cc.scene_size * jy.scene_num)
     Byte.loadfile(jy.data_scene, grpFile, dix[3], cc.scene_size * jy.scene_num)
@@ -501,7 +501,7 @@ function LoadRecord(id)
         setmetatable(jy.scene[i], meta_t)
     end
 
-    -- æ­¦åŠŸæ•°æ®
+    -- Îä¹¦Êı¾İ
     jy.wugong_num = math.floor((idx[5] - idx[4]) / cc.wugong_size)
     jy.data_wugong = Byte.create(cc.wugong_size * jy.wugong_num)
     Byte.loadfile(jy.data_wugong, grpFile, dix[4], cc.wugong_size * jy.wugong_num)
@@ -519,7 +519,7 @@ function LoadRecord(id)
         setmetatable(jy.wugong[i], meta_t)
     end
 
-    -- å•†åº—æ•°æ®
+    -- ÉÌµêÊı¾İ
     jy.shop_num = math.floor((idx[6] - idx[5]) / cc.shop_size)
     jy.data_shop = Byte.create(cc.shop_size * jy.shop_num)
     Byte.loadfile(jy.data_shop, grpFile, dix[5], cc.shop_size * jy.shop_num)
@@ -553,9 +553,9 @@ function LoadRecord(id)
     os.remove('tjm')
 end
 
--- å­˜æ¡£åˆ—è¡¨
+-- ´æµµÁĞ±í
 function SaveList()
-    -- è¯»å–R*.idxæ–‡ä»¶
+    -- ¶ÁÈ¡R*.idxÎÄ¼ş
     local idx_data = Byte.create(24)
     Byte.loadfile(idx_data, cc.r_idx_filename[0], 0, 24)
     local idx = {}
@@ -564,67 +564,67 @@ function SaveList()
         idx[i] = Byte.get32(idx_data, 4 * (i - 1))
     end
     local table_struct = {}
-    table_struct["å§“å"] = {idx[1]+8, 2, 10}
-    table_struct["èµ„è´¨"] = {idx[1]+122, 0, 2}
-    table_struct["æ— ç”¨"] = {idx[0]+2, 0, 2}
-    table_struct["éš¾åº¦"] = {idx[0]+24, 0, 2}
-    table_struct["æ ‡å‡†"] = {idx[0]+26, 0, 2}
-    table_struct["ç•…æƒ³"] = {idx[0]+28, 0, 2}
-    table_struct["ç‰¹æ®Š"] = {idx[0]+30, 0, 2}
-    table_struct["å¤©ä¹¦æ•°é‡"] = {idx[0]+36, 0, 2}
-    table_struct["æ­¦åŠŸæ•°é‡"] = {idx[0]+38, 0, 2}
-    table_struct["åœºæ™¯åç§°"] = {idx[3]+2, 2, 10}
-    table_struct["ç¢ç‰‡"] = {idx[0]+40, 0, 2}
-    -- ä¸»è§’ç¼–å·
-    table_struct["é˜Ÿä¼1"] = {idx[0]+52, 0, 2}
+    table_struct["ĞÕÃû"] = {idx[1]+8, 2, 10}
+    table_struct["×ÊÖÊ"] = {idx[1]+122, 0, 2}
+    table_struct["ÎŞÓÃ"] = {idx[0]+2, 0, 2}
+    table_struct["ÄÑ¶È"] = {idx[0]+24, 0, 2}
+    table_struct["±ê×¼"] = {idx[0]+26, 0, 2}
+    table_struct["³©Ïë"] = {idx[0]+28, 0, 2}
+    table_struct["ÌØÊâ"] = {idx[0]+30, 0, 2}
+    table_struct["ÌìÊéÊıÁ¿"] = {idx[0]+36, 0, 2}
+    table_struct["Îä¹¦ÊıÁ¿"] = {idx[0]+38, 0, 2}
+    table_struct["³¡¾°Ãû³Æ"] = {idx[3]+2, 2, 10}
+    table_struct["ËéÆ¬"] = {idx[0]+40, 0, 2}
+    -- Ö÷½Ç±àºÅ
+    table_struct["¶ÓÎé1"] = {idx[0]+52, 0, 2}
 
-    -- è¯»å–R*.grpæ–‡ä»¶
+    -- ¶ÁÈ¡R*.grpÎÄ¼ş
     local len = FileLength(cc.r_grp_filename[0])
     local data = Byte.create(len)
 
-    -- è¯»å–SMAP.grp
+    -- ¶ÁÈ¡SMAP.grp
     local slen = FileLength(cc.s_filename[0])
     local sdata = Byte.create(slen)
     local menu = {}
     for i = 1, cc.save_num do
         local name = ""
         local sname = ""
-        local nd = ""           -- éš¾åº¦
+        local nd = ""           -- ÄÑ¶È
         local time = ""
-        local tssl = ""         -- å¤©ä¹¦æ•°é‡
-        local zjlx = ""         -- ä¸»è§’ç±»å‹
-        local zz = ""           -- èµ„è´¨
+        local tssl = ""         -- ÌìÊéÊıÁ¿
+        local zjlx = ""         -- Ö÷½ÇÀàĞÍ
+        local zz = ""           -- ×ÊÖÊ
 
         if PD_ExistFile(string.format("data/save/Save_%d", i)) then
             Byte.loadfilefromzip(data, string.format("data/save/Save_%d", i), "r.grp", 0, len)
-            local pid = GetDataFromStruct(data, 0, table_struct, "é˜Ÿä¼1")
-            name = GetDataFromStruct(data, pid * cc.person_size, table_struct, "å§“å")
-            zz = GetDataFromStruct(data, pid * cc.person_size, table_struct, "èµ„è´¨")
-            local wy = GetDataFromStruct(data, 0, table_struct, "æ— ç”¨")
+            local pid = GetDataFromStruct(data, 0, table_struct, "¶ÓÎé1")
+            name = GetDataFromStruct(data, pid * cc.person_size, table_struct, "ĞÕÃû")
+            zz = GetDataFromStruct(data, pid * cc.person_size, table_struct, "×ÊÖÊ")
+            local wy = GetDataFromStruct(data, 0, table_struct, "ÎŞÓÃ")
             if wy == -1 then
-                sname = "å¤§åœ°å›¾"
+                sname = "´óµØÍ¼"
             else
-                sname = GetDataFromStruct(data, wy * cc.scene_size, table_struct, "åœºæ™¯åç§°") .. ""
+                sname = GetDataFromStruct(data, wy * cc.scene_size, table_struct, "³¡¾°Ãû³Æ") .. ""
             end
-            local lxid1 = GetDataFromStruct(data, 0, table_struct, "æ ‡å‡†")
-            local lxid2 = GetDataFromStruct(data, 0, table_struct, "ç•…æƒ³")
-            local lxid3 = GetDataFromStruct(data, 0, table_struct, "ç‰¹æ®Š")
+            local lxid1 = GetDataFromStruct(data, 0, table_struct, "±ê×¼")
+            local lxid2 = GetDataFromStruct(data, 0, table_struct, "³©Ïë")
+            local lxid3 = GetDataFromStruct(data, 0, table_struct, "ÌØÊâ")
             if lxid1 > 0 then
-                zjlx = "æ ‡å‡†"
+                zjlx = "±ê×¼"
             elseif lxid2 > 0 then
-                zjlx = "ç•…æƒ³"
+                zjlx = "³©Ïë"
             elseif lxid3 > 0 then
-                zjlx = "ç‰¹æ®Š"
+                zjlx = "ÌØÊâ"
             end
-            local wz = GetDataFromStruct(data, 0, table_struct, "éš¾åº¦")
-            tssl = GetDataFromStruct(data, 0, table_struct, "å¤©ä¹¦æ•°é‡") .. "æœ¬"
+            local wz = GetDataFromStruct(data, 0, table_struct, "ÄÑ¶È")
+            tssl = GetDataFromStruct(data, 0, table_struct, "ÌìÊéÊıÁ¿") .. "±¾"
             nd = MODEXZ2[wz]
         end
 
         if i < 10 then
-            menu[i] = {string.format("å­˜æ¡£%02d %-4s %-10s %-4s %4s %4s %-10s", i, zjlx, name, nd, zz, tssl, sname), nil, 1}
+            menu[i] = {string.format("´æµµ%02d %-4s %-10s %-4s %4s %4s %-10s", i, zjlx, name, nd, zz, tssl, sname), nil, 1}
         else
-            menu[i] = {string.format("è‡ªåŠ¨æ¡£ %-4s %-10s %-4s %4s %4s %-10s", zjlx, name, nd, zz, tssl, sname), nil, 1}
+            menu[i] = {string.format("×Ô¶¯µµ %-4s %-10s %-4s %4s %4s %-10s", zjlx, name, nd, zz, tssl, sname), nil, 1}
         end
     end
 
@@ -637,11 +637,11 @@ function SaveList()
     return r
 end
 
--- ä»æ•°æ®çš„ç»“æ„ä¸­ç¿»è¯‘æ•°æ®ï¼Œç”¨æ¥å–æ•°æ®
--- dataï¼šäºŒè¿›åˆ¶æ•°ç»„
--- offsetï¼šdataä¸­çš„åç§»
--- t_structï¼šæ•°æ®çš„ç»“æ„ï¼Œåœ¨jyconstä¸­æœ‰å¾ˆå¤šå®šä¹‰
--- keyï¼šè®¿é—®çš„key
+-- ´ÓÊı¾İµÄ½á¹¹ÖĞ·­ÒëÊı¾İ£¬ÓÃÀ´È¡Êı¾İ
+-- data£º¶ş½øÖÆÊı×é
+-- offset£ºdataÖĞµÄÆ«ÒÆ
+-- t_struct£ºÊı¾İµÄ½á¹¹£¬ÔÚjyconstÖĞÓĞºÜ¶à¶¨Òå
+-- key£º·ÃÎÊµÄkey
 function GetDataFromStruct(data, offset, t_struct, key)
     local t = t_struct[key]
     local r
@@ -660,12 +660,12 @@ function GetDataFromStruct(data, offset, t_struct, key)
     return r
 end
 
--- ä»æ•°æ®çš„ç»“æ„ä¸­ç¿»è¯‘æ•°æ®ï¼Œç”¨æ¥ä¿å­˜æ•°æ®
--- dataï¼šäºŒè¿›åˆ¶æ•°ç»„
--- offsetï¼šdataä¸­çš„åç§»
--- t_structï¼šæ•°æ®çš„ç»“æ„ï¼Œåœ¨jyconstä¸­æœ‰å¾ˆå¤šå®šä¹‰
--- keyï¼šè®¿é—®çš„key
--- vï¼šå†™å…¥çš„å€¼
+-- ´ÓÊı¾İµÄ½á¹¹ÖĞ·­ÒëÊı¾İ£¬ÓÃÀ´±£´æÊı¾İ
+-- data£º¶ş½øÖÆÊı×é
+-- offset£ºdataÖĞµÄÆ«ÒÆ
+-- t_struct£ºÊı¾İµÄ½á¹¹£¬ÔÚjyconstÖĞÓĞºÜ¶à¶¨Òå
+-- key£º·ÃÎÊµÄkey
+-- v£ºĞ´ÈëµÄÖµ
 function SetDataFromStruct(data, offset, t_struct, key, v)
     local t = t_struct[key]
     if t[2] == 0 then
@@ -683,23 +683,23 @@ function SetDataFromStruct(data, offset, t_struct, key, v)
     end
 end
 
--- è¯»S*
--- idï¼šåœºæ™¯ç¼–å·
--- xyï¼šåæ ‡
--- levelï¼šå±‚æ•°
+-- ¶ÁS*
+-- id£º³¡¾°±àºÅ
+-- xy£º×ø±ê
+-- level£º²ãÊı
 function GetS(id, x, y, level)
-    local err = -1      -- é”™è¯¯ç 
+    local err = -1      -- ´íÎóÂë
     if not id or not x or not y or not level then
-        err = 1         -- å‚æ•°çœç•¥é”™è¯¯
+        err = 1         -- ²ÎÊıÊ¡ÂÔ´íÎó
     elseif id < 0 then
-        err = 2         -- idé”™è¯¯
+        err = 2         -- id´íÎó
     elseif x < 0 or y < 0 then
-        err = 3         -- xyé”™è¯¯
+        err = 3         -- xy´íÎó
     elseif level < 0 or level > 5 then
-        err = 4         -- levelé”™è¯¯
+        err = 4         -- level´íÎó
     end
 
-    -- é”™è¯¯æ—¶è¿”å›é”™è¯¯ç 
+    -- ´íÎóÊ±·µ»Ø´íÎóÂë
     if err > 0 then
         Debug("GetS Error, error code: " .. err)
         return
@@ -708,26 +708,26 @@ function GetS(id, x, y, level)
     return lib.GetS(id, x, y, level)
 end
 
--- å†™S*
--- idï¼šåœºæ™¯ç¼–å·
--- xyï¼šåæ ‡
--- levelï¼šå±‚æ•°
--- vï¼šå†™å…¥çš„å€¼
+-- Ğ´S*
+-- id£º³¡¾°±àºÅ
+-- xy£º×ø±ê
+-- level£º²ãÊı
+-- v£ºĞ´ÈëµÄÖµ
 function SetS(id, x, y, level, v)
-    local err = -1      -- é”™è¯¯ç 
+    local err = -1      -- ´íÎóÂë
     if not id or not x or not y or not level or not v then
-        err = 1         -- å‚æ•°çœç•¥é”™è¯¯
+        err = 1         -- ²ÎÊıÊ¡ÂÔ´íÎó
     elseif id < 0 then
-        err = 2         -- idé”™è¯¯
+        err = 2         -- id´íÎó
     elseif x < 0 or y < 0 then
-        err = 3         -- xyé”™è¯¯
+        err = 3         -- xy´íÎó
     elseif level < 0 or level > 5 then
-        err = 4         -- levelé”™è¯¯
+        err = 4         -- level´íÎó
     elseif type(v) ~= "number" then
-        err = 5         -- vé”™è¯¯
+        err = 5         -- v´íÎó
     end
 
-    -- é”™è¯¯æ—¶è¿”å›é”™è¯¯ç 
+    -- ´íÎóÊ±·µ»Ø´íÎóÂë
     if err > 0 then
         Debug("SetS Error, error code: " .. err)
         return
@@ -736,23 +736,23 @@ function SetS(id, x, y, level, v)
     return lib.SetS(id, x, y, level)
 end
 
--- è¯»D*
--- sceneidï¼šåœºæ™¯ç¼–å·
--- idï¼šè¯¥åœºæ™¯D*ç¼–å·
--- iï¼šç¬¬å‡ ä¸ªæ•°æ®
+-- ¶ÁD*
+-- sceneid£º³¡¾°±àºÅ
+-- id£º¸Ã³¡¾°D*±àºÅ
+-- i£ºµÚ¼¸¸öÊı¾İ
 function GetD(sceneid, id, i)
-    local err = -1      -- é”™è¯¯ç 
+    local err = -1      -- ´íÎóÂë
     if not sceneid or not id or not i then
-        err = 1         -- å‚æ•°çœç•¥é”™è¯¯
+        err = 1         -- ²ÎÊıÊ¡ÂÔ´íÎó
     elseif sceneid < 0 then
-        err = 2         -- sceneidé”™è¯¯
+        err = 2         -- sceneid´íÎó
     elseif id < 0 then
-        err = 3         -- idé”™è¯¯
+        err = 3         -- id´íÎó
     elseif i < 0 then
-        err = 4         -- ié”™è¯¯
+        err = 4         -- i´íÎó
     end
 
-    -- é”™è¯¯æ—¶è¿”å›é”™è¯¯ç 
+    -- ´íÎóÊ±·µ»Ø´íÎóÂë
     if err > 0 then
         Debug("GetD Error, error code: " .. err)
         return
@@ -761,26 +761,26 @@ function GetD(sceneid, id, i)
     return lib.GetD(sceneid, id, i)
 end
 
--- å†™D*
--- sceneidï¼šåœºæ™¯ç¼–å·
--- idï¼šè¯¥åœºæ™¯D*ç¼–å·
--- iï¼šç¬¬å‡ ä¸ªæ•°æ®
--- vï¼šå†™å…¥çš„å€¼
+-- Ğ´D*
+-- sceneid£º³¡¾°±àºÅ
+-- id£º¸Ã³¡¾°D*±àºÅ
+-- i£ºµÚ¼¸¸öÊı¾İ
+-- v£ºĞ´ÈëµÄÖµ
 function SetD(sceneid, id, i, v)
-    local err = -1      -- é”™è¯¯ç 
+    local err = -1      -- ´íÎóÂë
     if not sceneid or not id or not i or not v then
-        err = 1         -- å‚æ•°çœç•¥é”™è¯¯
+        err = 1         -- ²ÎÊıÊ¡ÂÔ´íÎó
     elseif sceneid < 0 then
-        err = 2         -- sceneidé”™è¯¯
+        err = 2         -- sceneid´íÎó
     elseif id < 0 then
-        err = 3         -- idé”™è¯¯
+        err = 3         -- id´íÎó
     elseif i < 0 then
-        err = 4         -- ié”™è¯¯
+        err = 4         -- i´íÎó
     elseif type(v) ~= "number" then
-        err = 5         -- vé”™è¯¯
+        err = 5         -- v´íÎó
     end
 
-    -- é”™è¯¯æ—¶è¿”å›é”™è¯¯ç 
+    -- ´íÎóÊ±·µ»Ø´íÎóÂë
     if err > 0 then
         Debug("SetD Error, error code: " .. err)
         return
@@ -789,7 +789,7 @@ function SetD(sceneid, id, i, v)
     return lib.SetD(sceneid, id, i, v)
 end
 
--- è·å–æ–‡ä»¶é•¿åº¦
+-- »ñÈ¡ÎÄ¼ş³¤¶È
 function FileLength(filename)
     local inp = io.open(filename, "rb")
     local l = inp:seek("end")
@@ -798,7 +798,7 @@ function FileLength(filename)
     return l
 end
 
--- åˆ¤å®šæ–‡ä»¶æ˜¯å¦å­˜åœ¨
+-- ÅĞ¶¨ÎÄ¼şÊÇ·ñ´æÔÚ
 function PD_ExistFile(filename)
     local f = io.open(filename)
     if f == nil then
@@ -809,7 +809,7 @@ function PD_ExistFile(filename)
     return true
 end
 
--- é™åˆ¶xçš„èŒƒå›´
+-- ÏŞÖÆxµÄ·¶Î§
 function LimitX(x, min, max)
     if x < min then
         x = min
@@ -821,18 +821,18 @@ function LimitX(x, min, max)
     return x
 end
 
--- ç­‰å¾…é”®ç›˜è¾“å…¥
+-- µÈ´ı¼üÅÌÊäÈë
 function WaitKey()
-    -- ktypeï¼š1 é”®ç›˜ï¼Œ2 é¼ æ ‡ç§»åŠ¨ï¼Œ3 é¼ æ ‡å·¦é”®ï¼Œ4 é¼ æ ‡å³é”®ï¼Œ5 é¼ æ ‡ä¸­é”®ï¼Œ6 æ»šåŠ¨ä¸Šï¼Œ7 æ»šåŠ¨ä¸‹
+    -- ktype£º1 ¼üÅÌ£¬2 Êó±êÒÆ¶¯£¬3 Êó±ê×ó¼ü£¬4 Êó±êÓÒ¼ü£¬5 Êó±êÖĞ¼ü£¬6 ¹ö¶¯ÉÏ£¬7 ¹ö¶¯ÏÂ
     local key, ktype, mx, my = -1, -1, -1, -1
     key, ktype, mx, my = lib.GetKey()
 
     return key, ktype, mx, my
 end
 
--- å»¶æ—¶tæ¯«ç§’
+-- ÑÓÊ±tºÁÃë
 function Delay(t)
-    -- å‚æ•°æ ¡éªŒ
+    -- ²ÎÊıĞ£Ñé
     if t <= 0 then
         return
     end
@@ -840,9 +840,9 @@ function Delay(t)
     lib.Delay(t)
 end
 
--- åœ¨ä¸»ç¨‹åºç›®å½•ä¸‹çš„debug.txtæ–‡ä»¶ä¸­è¾“å‡ºè°ƒè¯•å­—ç¬¦ä¸²
+-- ÔÚÖ÷³ÌĞòÄ¿Â¼ÏÂµÄdebug.txtÎÄ¼şÖĞÊä³öµ÷ÊÔ×Ö·û´®
 function Debug(str)
-    -- å‚æ•°æ ¡éªŒ
+    -- ²ÎÊıĞ£Ñé
     if str == nil then
         return
     end
@@ -850,21 +850,21 @@ function Debug(str)
     lib.Debug(str)
 end
 
--- æ¸…å±
+-- ÇåÆÁ
 function instruct_0()
     Gra_Cls()
 end
 
--- å¯¹è¯
--- talkid: ä¸ºæ•°å­—ï¼Œåˆ™ä¸ºå¯¹è¯ç¼–å·ï¼›ä¸ºå­—ç¬¦ä¸²ï¼Œåˆ™ä¸ºå¯¹è¯æœ¬èº«ã€‚
--- headid: å¤´åƒid
--- flagï¼šå¯¹è¯æ¡†ä½ç½®
---      =0ï¼šå±å¹•ä¸Šæ–¹æ˜¾ç¤º, å·¦è¾¹å¤´åƒï¼Œå³è¾¹å¯¹è¯
---      =1ï¼šå±å¹•ä¸‹æ–¹æ˜¾ç¤º, å·¦è¾¹å¯¹è¯ï¼Œå³è¾¹å¤´åƒ
---      =2ï¼šå±å¹•ä¸Šæ–¹æ˜¾ç¤º, å·¦è¾¹ç©ºï¼Œå³è¾¹å¯¹è¯
---      =3ï¼šå±å¹•ä¸‹æ–¹æ˜¾ç¤º, å·¦è¾¹å¯¹è¯ï¼Œå³è¾¹ç©º
---      =4ï¼šå±å¹•ä¸Šæ–¹æ˜¾ç¤º, å·¦è¾¹å¯¹è¯ï¼Œå³è¾¹å¤´åƒ
---      =5ï¼šå±å¹•ä¸‹æ–¹æ˜¾ç¤º, å·¦è¾¹å¤´åƒï¼Œå³è¾¹å¯¹è¯
+-- ¶Ô»°
+-- talkid: ÎªÊı×Ö£¬ÔòÎª¶Ô»°±àºÅ£»Îª×Ö·û´®£¬ÔòÎª¶Ô»°±¾Éí¡£
+-- headid: Í·Ïñid
+-- flag£º¶Ô»°¿òÎ»ÖÃ
+--      =0£ºÆÁÄ»ÉÏ·½ÏÔÊ¾, ×ó±ßÍ·Ïñ£¬ÓÒ±ß¶Ô»°
+--      =1£ºÆÁÄ»ÏÂ·½ÏÔÊ¾, ×ó±ß¶Ô»°£¬ÓÒ±ßÍ·Ïñ
+--      =2£ºÆÁÄ»ÉÏ·½ÏÔÊ¾, ×ó±ß¿Õ£¬ÓÒ±ß¶Ô»°
+--      =3£ºÆÁÄ»ÏÂ·½ÏÔÊ¾, ×ó±ß¶Ô»°£¬ÓÒ±ß¿Õ
+--      =4£ºÆÁÄ»ÉÏ·½ÏÔÊ¾, ×ó±ß¶Ô»°£¬ÓÒ±ßÍ·Ïñ
+--      =5£ºÆÁÄ»ÏÂ·½ÏÔÊ¾, ×ó±ßÍ·Ïñ£¬ÓÒ±ß¶Ô»°
 function instruct_1(talkid, headid, flag)
     local s = ReadTalk(talkid)
     if s == nil then 
@@ -873,20 +873,20 @@ function instruct_1(talkid, headid, flag)
     TalkEx(s, headid, flag)
 end
 
--- å¾—åˆ°ç‰©å“
+-- µÃµ½ÎïÆ·
 function instruct_2(thingid, num)
     if jy.thing[thingid] == nil then
         return 
     end
     instruct_32(thingid, num)
     if num > 0 then
-        Gra_DrawStrBoxWaitKey(string.format("å¾—åˆ°ç‰©å“%sX%d", "ã€ï¼§"..jy.thing[thingid]["åç§°"].."ï¼¯ã€‘", num), C_ORANGE, cc.default_font, 1)
+        Gra_DrawStrBoxWaitKey(string.format("µÃµ½ÎïÆ·%sX%d", "¡¾£Ç"..jy.thing[thingid]["Ãû³Æ"].."£Ï¡¿", num), C_ORANGE, cc.default_font, 1)
     else
-        Gra_DrawStrBoxWaitKey(string.format("å¤±å»ç‰©å“%sX%d", "ã€ï¼§"..jy.thing[thingid]["åç§°"].."ï¼¯ã€‘", -num), C_ORANGE, cc.default_font, 1)
+        Gra_DrawStrBoxWaitKey(string.format("Ê§È¥ÎïÆ·%sX%d", "¡¾£Ç"..jy.thing[thingid]["Ãû³Æ"].."£Ï¡¿", -num), C_ORANGE, cc.default_font, 1)
     end
 end
 
--- ä¿®æ”¹æŒ‡å®šåœºæ™¯åæ ‡çš„äº‹ä»¶
+-- ĞŞ¸ÄÖ¸¶¨³¡¾°×ø±êµÄÊÂ¼ş
 function instruct_3(sceneid, id, v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10)
     if jy.restart == 1 then
         return
@@ -933,7 +933,7 @@ function instruct_3(sceneid, id, v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10)
     end
 end
 
--- åˆ¤å®šå½“å‰é€‰æ‹©ç‰©å“
+-- ÅĞ¶¨µ±Ç°Ñ¡ÔñÎïÆ·
 function instruct_4(thingid)
     if jy.current_thing == thingid then
         return true
@@ -944,81 +944,81 @@ end
 
 ----------------------------------------
 --
--- orionidsï¼šä»¥ä¸‹å‡½æ•°éƒ½æ˜¯ä¸»ç¨‹åºå¼•æ“æä¾›çš„å¯ä»¥åœ¨luaä¸­è°ƒç”¨çš„å‡½æ•°
--- æ³¨æ„ï¼Œå¯¹è¿™äº›APIæ²¡æœ‰åšæ›´å¤šçš„å‚æ•°çš„æ£€æŸ¥å·¥ä½œï¼Œå› æ­¤è¦ç¡®ä¿è¾“å…¥çš„å‚æ•°æ˜¯åˆç†çš„
--- å¦åˆ™ç¨‹åºå¯èƒ½ä¼šå‡ºé”™ï¼Œä¹Ÿå¯èƒ½ä»€ä¹ˆéƒ½ä¸åš
+-- orionids£ºÒÔÏÂº¯Êı¶¼ÊÇÖ÷³ÌĞòÒıÇæÌá¹©µÄ¿ÉÒÔÔÚluaÖĞµ÷ÓÃµÄº¯Êı
+-- ×¢Òâ£¬¶ÔÕâĞ©APIÃ»ÓĞ×ö¸ü¶àµÄ²ÎÊıµÄ¼ì²é¹¤×÷£¬Òò´ËÒªÈ·±£ÊäÈëµÄ²ÎÊıÊÇºÏÀíµÄ
+-- ·ñÔò³ÌĞò¿ÉÄÜ»á³ö´í£¬Ò²¿ÉÄÜÊ²Ã´¶¼²»×ö
 --
 ----------------------------------------
 
 -- Byte.create(size)
--- åˆ›å»ºä¸€ä¸ªäºŒè¿›åˆ¶å­—èŠ‚æ•°ç»„ï¼Œsizeä¸ºæ•°ç»„å¤§å°
+-- ´´½¨Ò»¸ö¶ş½øÖÆ×Ö½ÚÊı×é£¬sizeÎªÊı×é´óĞ¡
 
 -- Byte.get16(b, start)
--- ä»æ•°ç»„bä¸­è¯»å–ä¸€ä¸ªæœ‰ç¬¦å·16ä½æ•´æ•°
--- startï¼šæ•°ç»„ä¸­çš„è¯»å–ä½ç½®ï¼Œä»0å¼€å§‹
+-- ´ÓÊı×ébÖĞ¶ÁÈ¡Ò»¸öÓĞ·ûºÅ16Î»ÕûÊı
+-- start£ºÊı×éÖĞµÄ¶ÁÈ¡Î»ÖÃ£¬´Ó0¿ªÊ¼
 
 -- Byte.get32(b, start)
--- ä»æ•°ç»„bä¸­è¯»å–ä¸€ä¸ªæœ‰ç¬¦å·32ä½æ•´æ•°
+-- ´ÓÊı×ébÖĞ¶ÁÈ¡Ò»¸öÓĞ·ûºÅ32Î»ÕûÊı
 
 -- Byte.getstr(b, start, length)
--- ä»æ•°ç»„bä¸­è¯»å–ä¸€ä¸ªå­—ç¬¦ä¸²ï¼Œé•¿åº¦ä¸ºlength
+-- ´ÓÊı×ébÖĞ¶ÁÈ¡Ò»¸ö×Ö·û´®£¬³¤¶ÈÎªlength
 
 -- Byte.getu16(b, start)
--- ä»æ•°ç»„bä¸­è¯»å–ä¸€ä¸ªæ— ç¬¦å·16ä½æ•´æ•°ï¼Œä¸»è¦ç”¨äºè®¿é—®äººç‰©ç»éªŒ
+-- ´ÓÊı×ébÖĞ¶ÁÈ¡Ò»¸öÎŞ·ûºÅ16Î»ÕûÊı£¬Ö÷ÒªÓÃÓÚ·ÃÎÊÈËÎï¾­Ñé
 
 -- Byte.loadfile(b, filename, start, length)
--- ä»æ–‡ä»¶filenameä¸­åŠ è½½æ•°æ®åˆ°å­—èŠ‚æ•°ç»„bä¸­
--- startï¼šè¯»å–ä½ç½®ï¼Œä»æ–‡ä»¶å¼€å§‹å¤„çš„å­—èŠ‚æ•°ï¼Œä»0å¼€å§‹
--- lengthï¼šè¦è¯»çš„å­—èŠ‚æ•°
+-- ´ÓÎÄ¼şfilenameÖĞ¼ÓÔØÊı¾İµ½×Ö½ÚÊı×ébÖĞ
+-- start£º¶ÁÈ¡Î»ÖÃ£¬´ÓÎÄ¼ş¿ªÊ¼´¦µÄ×Ö½ÚÊı£¬´Ó0¿ªÊ¼
+-- length£ºÒª¶ÁµÄ×Ö½ÚÊı
 
 -- Byte.savefile(b, filename, start, length)
--- æŠŠå­—èŠ‚æ•°ç»„bçš„å†…å®¹å†™åˆ°æ–‡ä»¶filenameä¸­
--- startï¼šè¯»å–ä½ç½®ï¼Œä»æ–‡ä»¶å¼€å§‹å¤„çš„å­—èŠ‚æ•°ï¼Œä»0å¼€å§‹
--- lengthï¼šè¦è¯»çš„å­—èŠ‚æ•°
+-- °Ñ×Ö½ÚÊı×ébµÄÄÚÈİĞ´µ½ÎÄ¼şfilenameÖĞ
+-- start£º¶ÁÈ¡Î»ÖÃ£¬´ÓÎÄ¼ş¿ªÊ¼´¦µÄ×Ö½ÚÊı£¬´Ó0¿ªÊ¼
+-- length£ºÒª¶ÁµÄ×Ö½ÚÊı
 
 -- Byte.set16(b, start, v)
--- æŠŠæœ‰ç¬¦å·16ä½æ•´æ•°å†™å…¥æ•°ç»„bä¸­
--- startï¼šæ•°ç»„ä¸­çš„å†™ä½ç½®ï¼Œä»0å¼€å§‹
+-- °ÑÓĞ·ûºÅ16Î»ÕûÊıĞ´ÈëÊı×ébÖĞ
+-- start£ºÊı×éÖĞµÄĞ´Î»ÖÃ£¬´Ó0¿ªÊ¼
 
 -- Byte.set32(b, start, v)
--- æŠŠæœ‰ç¬¦å·32ä½æ•´æ•°å†™å…¥æ•°ç»„bä¸­
+-- °ÑÓĞ·ûºÅ32Î»ÕûÊıĞ´ÈëÊı×ébÖĞ
 
 -- Byte.setstr(b, start, length, str)
--- æŠŠå­—ç¬¦ä¸²strå†™å…¥åˆ°æ•°ç»„bä¸­ï¼Œæœ€é•¿å†™å…¥é•¿åº¦ä¸ºlength
+-- °Ñ×Ö·û´®strĞ´Èëµ½Êı×ébÖĞ£¬×î³¤Ğ´Èë³¤¶ÈÎªlength
 
 -- Byte.setu16(b, start, v)
--- æŠŠæ— ç¬¦å·16ä½æ•´æ•°å†™å…¥æ•°ç»„bä¸­
+-- °ÑÎŞ·ûºÅ16Î»ÕûÊıĞ´ÈëÊı×ébÖĞ
 
 -- lib.CharSet(str, flag)
--- è¿”å›æŠŠstrè½¬æ¢åçš„å­—ç¬¦ä¸²
--- flag = 0ï¼ŒBig5 -> GBK   
---      = 1ï¼ŒGBK -> Big5
---      = 2ï¼ŒBig5 -> Unicode
---      = 3ï¼ŒGBK -> Unicode
+-- ·µ»Ø°Ñstr×ª»»ºóµÄ×Ö·û´®
+-- flag = 0£¬Big5 -> GBK   
+--      = 1£¬GBK -> Big5
+--      = 2£¬Big5 -> Unicode
+--      = 3£¬GBK -> Unicode
 
 -- lib.CleanWarMap(level, v)
--- ç»™levelå±‚æˆ˜æ–—æ•°æ®å…¨éƒ¨èµ‹å€¼v
+-- ¸ølevel²ãÕ½¶·Êı¾İÈ«²¿¸³Öµv
 
 -- lib.EnableKeyRepeat(delay, interval)
--- è®¾ç½®é”®ç›˜é‡å¤ç‡
--- delayä¸ºç¬¬ä¸€ä¸ªé‡å¤çš„å»¶è¿Ÿæ¯«ç§’æ•°ï¼Œintervalä¸ºå¤šå°‘æ¯«ç§’é‡å¤ä¸€æ¬¡
--- ESC, RETURN å’ŒSPACEé”®å·²ç»å–æ¶ˆé‡å¤ï¼Œä¸€ç›´æŒ‰ä¸‹ä¹Ÿåªè®¤ä¸ºæ˜¯æŒ‰ä¸‹ä¸€æ¬¡
+-- ÉèÖÃ¼üÅÌÖØ¸´ÂÊ
+-- delayÎªµÚÒ»¸öÖØ¸´µÄÑÓ³ÙºÁÃëÊı£¬intervalÎª¶àÉÙºÁÃëÖØ¸´Ò»´Î
+-- ESC, RETURN ºÍSPACE¼üÒÑ¾­È¡ÏûÖØ¸´£¬Ò»Ö±°´ÏÂÒ²Ö»ÈÏÎªÊÇ°´ÏÂÒ»´Î
 
 
 
 -- lib.GetKey()
--- å¾—åˆ°å½“å‰æŒ‰é”®é”®ç ï¼Œé”®ç å®šä¹‰å‚è§SDLæ–‡æ¡£
--- æ­¤å‡½æ•°å¤„ç†é”®ç›˜ç¼“å†²åŒºå’Œé”®ç›˜é‡å¤ç‡ï¼Œè¿”å›çš„æ˜¯ä»ä¸Šæ¬¡è°ƒç”¨ä»¥æ¥æ›¾ç»æŒ‰ä¸‹çš„é”®
--- å¹¶ä¸”åªå¤„ç†æŒ‰ä¸‹ä¸€ä¸ªé”®çš„æƒ…å†µã€‚å› æ­¤å¦‚æœéœ€è¦æ¸…é™¤é”®ç›˜ç¼“å†²åŒºï¼Œéœ€è¦å…ˆè°ƒç”¨ä¸€æ¬¡æ­¤å‡½æ•°
+-- µÃµ½µ±Ç°°´¼ü¼üÂë£¬¼üÂë¶¨Òå²Î¼ûSDLÎÄµµ
+-- ´Ëº¯Êı´¦Àí¼üÅÌ»º³åÇøºÍ¼üÅÌÖØ¸´ÂÊ£¬·µ»ØµÄÊÇ´ÓÉÏ´Îµ÷ÓÃÒÔÀ´Ôø¾­°´ÏÂµÄ¼ü
+-- ²¢ÇÒÖ»´¦Àí°´ÏÂÒ»¸ö¼üµÄÇé¿ö¡£Òò´ËÈç¹ûĞèÒªÇå³ı¼üÅÌ»º³åÇø£¬ĞèÒªÏÈµ÷ÓÃÒ»´Î´Ëº¯Êı
 
 -- lib.GetTime()
--- è¿”å›å¼€æœºåˆ°å½“å‰çš„æ¯«ç§’æ•°
+-- ·µ»Ø¿ª»úµ½µ±Ç°µÄºÁÃëÊı
 
 -- lib.PlayMIDI(filename)
--- é‡å¤æ’­æ”¾MIDæ–‡ä»¶filenameï¼Œè‹¥filenameä¸ºç©ºå­—ç¬¦ä¸²ï¼Œåˆ™åœæ­¢æ’­æ”¾å½“å‰æ­£åœ¨æ’­æ”¾çš„midi
+-- ÖØ¸´²¥·ÅMIDÎÄ¼şfilename£¬ÈôfilenameÎª¿Õ×Ö·û´®£¬ÔòÍ£Ö¹²¥·Åµ±Ç°ÕıÔÚ²¥·ÅµÄmidi
 
 -- lib.PlayWAV(filename) 
--- æ’­æ”¾éŸ³æ•ˆAVIæ–‡ä»¶filename
+-- ²¥·ÅÒôĞ§AVIÎÄ¼şfilename
 
 -- lib.UnloadMMap()
--- é‡Šæ”¾ä¸»åœ°å›¾å ç”¨å†…å­˜
+-- ÊÍ·ÅÖ÷µØÍ¼Õ¼ÓÃÄÚ´æ

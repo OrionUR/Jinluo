@@ -1,50 +1,50 @@
--- è®¾ç½®æˆ˜æ–—å…¨å±€å˜é‡
+-- ÉèÖÃÕ½¶·È«¾Ö±äÁ¿
 function WarSetGlobal()
-    war.person = {}         -- æˆ˜æ–—äººç‰©æ•°æ®
-    war.person_num = -1     -- æˆ˜æ–—äººç‰©æ•°é‡
-    war.cur_id = -1         -- å½“å‰è¡ŒåŠ¨äººç‰©id
-    war.show_head = -1      -- æ˜¾ç¤ºå¤´åƒ
-    war.show_hp = -1        -- æ˜¾ç¤ºç”Ÿå‘½
+    war.person = {}         -- Õ½¶·ÈËÎïÊý¾Ý
+    war.person_num = -1     -- Õ½¶·ÈËÎïÊýÁ¿
+    war.cur_id = -1         -- µ±Ç°ÐÐ¶¯ÈËÎïid
+    war.show_head = -1      -- ÏÔÊ¾Í·Ïñ
+    war.show_hp = -1        -- ÏÔÊ¾ÉúÃü
 end
 
--- ç‰¹è‰²æŒ‡ä»¤
+-- ÌØÉ«Ö¸Áî
 function War_SpecialMenu() 
 end
 
--- æˆ˜æ–—æ­¦åŠŸé€‰æ‹©èœå•
--- sbã€starä¸ºæ— æ„ä¹‰å‚æ•°ï¼Œä»…ä¸ºé˜²æ­¢ä»£ç è¯­æ³•é”™è¯¯è·³å‡º
+-- Õ½¶·Îä¹¦Ñ¡Ôñ²Ëµ¥
+-- sb¡¢starÎªÎÞÒâÒå²ÎÊý£¬½öÎª·ÀÖ¹´úÂëÓï·¨´íÎóÌø³ö
 function War_FightMenu(sb, star, wgnum, ...)
-    local pid = war.person[war.cur_id]["äººç‰©ç¼–å·"]
+    local pid = war.person[war.cur_id]["ÈËÎï±àºÅ"]
     local wugong_num = 0
     local menu = {}
     local canuse = {}
     local c = 0
     local zs = 0
     local zswz = 0
-    local tmp = jy.person[pid]["ä¼˜å…ˆä½¿ç”¨"]
+    local tmp = jy.person[pid]["ÓÅÏÈÊ¹ÓÃ"]
     local arg = select(1, ...)
 
     if (SkillInfo[tmp] ~= nil) then
         local zs = SkillInfo.tmp
         for i = 1, #zs do
-            for j = 1, jy.base["æ­¦åŠŸæ•°é‡"] do
-                if (jy.person[pid]["æ­¦åŠŸ" .. j] == jy.person[pid]["ä¼˜å…ˆä½¿ç”¨"]) then
+            for j = 1, jy.base["Îä¹¦ÊýÁ¿"] do
+                if (jy.person[pid]["Îä¹¦" .. j] == jy.person[pid]["ÓÅÏÈÊ¹ÓÃ"]) then
                     zs = cc.wugong_zs[j][i]
                     if (arg > 0) or (i < 3) then
-                        jy.person[pid]["æ­¦åŠŸæ‹›å¼" .. zs] = 1
+                        jy.person[pid]["Îä¹¦ÕÐÊ½" .. zs] = 1
                     end
                     zswz = SkillInfo[tmp][i]
                 end
             end
             menu[i] = {SkillInfo[tmp][i][1], nil, 1}
             
-            -- å†…åŠ›å°‘ä¸æ˜¾ç¤º
-            if (jy.person[pid]["å†…åŠ›"] < jy.wugong[tmp]["æ¶ˆè€—å†…åŠ›ç‚¹æ•°"]) then
+            -- ÄÚÁ¦ÉÙ²»ÏÔÊ¾
+            if (jy.person[pid]["ÄÚÁ¦"] < jy.wugong[tmp]["ÏûºÄÄÚÁ¦µãÊý"]) then
                 menu[i][3] = 0
             end
 
-            -- ä½“åŠ›ä½ŽäºŽ10ä¸æ˜¾ç¤º
-            if (jy.person[pid]["ä½“åŠ›"] < 10) then
+            -- ÌåÁ¦µÍÓÚ10²»ÏÔÊ¾
+            if (jy.person[pid]["ÌåÁ¦"] < 10) then
                 menu[i][3] = 0
             end
 
@@ -63,18 +63,18 @@ function War_FightMenu(sb, star, wgnum, ...)
 
     if (wgnum == nil) then
         local r = nil
-        r = Cat("èœå•", menu, wugong_num, 0, cc.main_menu_x, cc.main_menu_y, 0, 0, 1, 1, cc.default_font, C_ORANGE, C_WHITE)
+        r = Cat("²Ëµ¥", menu, wugong_num, 0, cc.main_menu_x, cc.main_menu_y, 0, 0, 1, 1, cc.default_font, C_ORANGE, C_WHITE)
         if (r == 0) then
             return 0
         end
     end
 end
 
--- è¿åŠŸé€‰æ‹©èœå•
+-- ÔË¹¦Ñ¡Ôñ²Ëµ¥
 function War_YunGongMenu()
 end
 
--- æˆ˜æœ¯èœå•
+-- Õ½Êõ²Ëµ¥
 function War_TacticsMenu()
 end
 

@@ -1,8 +1,8 @@
--- è®¾ç½®å…¨å±€å˜é‡CCï¼Œä¿å­˜æ¸¸æˆä¸­ä½¿ç”¨çš„å¸¸æ•°
+-- ÉèÖÃÈ«¾Ö±äÁ¿CC£¬±£´æÓÎÏ·ÖĞÊ¹ÓÃµÄ³£Êı
 function SetGlobalConst()
-    -- åŸºæœ¬å®Œæ•´çš„SDL2é”®ç ï¼Œä¾¿äºè®¾ç½®å¿«æ·é”®
+    -- »ù±¾ÍêÕûµÄSDL2¼üÂë£¬±ãÓÚÉèÖÃ¿ì½İ¼ü
     VK_ESCAPE = 27
-    VK_SPACE = 32           -- æ³¨æ„è¿™é‡Œçš„ç©ºæ ¼å®é™…ä¸Šä¸éœ€è¦å®šä¹‰ï¼Œå› ä¸ºåº•å±‚ä¼šè‡ªåŠ¨æŠŠç©ºæ ¼è½¬æ¢æˆå›è½¦
+    VK_SPACE = 32           -- ×¢ÒâÕâÀïµÄ¿Õ¸ñÊµ¼ÊÉÏ²»ĞèÒª¶¨Òå£¬ÒòÎªµ×²ã»á×Ô¶¯°Ñ¿Õ¸ñ×ª»»³É»Ø³µ
     VK_RETURN = 13
     VK_F1 = 1073741882
     VK_F2 = 1073741883
@@ -42,127 +42,127 @@ function SetGlobalConst()
     VK_PGUP = 1073741899
     VK_PGDN = 1073741902
 
-    -- æ¸¸æˆä¸­é¢œè‰²å®šä¹‰
+    -- ÓÎÏ·ÖĞÑÕÉ«¶¨Òå
     C_GRAY22 = Gra_RGB(68, 68, 68)
     C_BLUE = Gra_RGB(7, 99, 219)
-    C_WSTM = Gra_RGB(0, 0, 0)                   -- å±æ€§é¢æ¿ç”¨
-    C_CYGOLD = Gra_RGB(216, 214, 175)           -- å±æ€§é¢æ¿ç”¨
+    C_WSTM = Gra_RGB(0, 0, 0)                   -- ÊôĞÔÃæ°åÓÃ
+    C_CYGOLD = Gra_RGB(216, 214, 175)           -- ÊôĞÔÃæ°åÓÃ
     C_STARTMENU = Gra_RGB(132, 0, 4)
-    C_RED = Gra_RGB(216, 20, 24)                -- çº¢
-    C_WHITE = Gra_RGB(236, 236, 236)            -- ç™½
-    C_ORANGE = Gra_RGB(252, 148, 16)            -- æ©˜è‰²
-    C_GOLD = Gra_RGB(236, 200, 40)              -- é‡‘
-    C_BLACK = Gra_RGB(0, 0, 0)                  -- é»‘è‰²
-    M_Black = Gra_RGB(0, 0, 0)                  -- é»‘è‰²
-    M_Sienna = Gra_RGB(160, 82, 45)             -- è¤è‰²
-    M_DarkOliveGreen = Gra_RGB(85, 107, 47)     -- æ·±ç»¿ 
-    M_DarkGreen = Gra_RGB(0, 100, 0)            -- æ·±ç»¿
-    M_DarkSlateBlue = Gra_RGB(72, 61, 139)      -- æ¿å²©æš—è“ç°è‰²
-    M_Navy = Gra_RGB(0, 0, 128)                 -- æµ·å†›è“
-    M_Indigo = Gra_RGB(75, 0, 130)              -- é“è“è‰²
-    M_DarkSlateGray = Gra_RGB(47, 79, 79)       -- æ·±é’è‰²
-    M_DarkRed = Gra_RGB(139, 0, 0)              -- æ·±çº¢
-    M_DarkOrange = Gra_RGB(255, 140, 0)         -- æ·±æ©˜è‰²
-    M_Olive = Gra_RGB(128, 128, 0)              -- æ©„æ¦„è‰²
-    M_Green = Gra_RGB(0, 128, 0)                -- ç»¿
-    M_Teal = Gra_RGB(0, 128, 128)               -- æ°´ç»¿
-    M_Blue = Gra_RGB(0, 0, 255)                 -- è“
-    M_SlateGray = Gra_RGB(112, 128, 144)        -- ç°çŸ³
-    M_DimGray = Gra_RGB(105, 105, 105)          -- æš—ç°
-    M_Red = Gra_RGB(255, 0, 0)                  -- çº¢
-    M_SandyBrown = Gra_RGB(244, 164, 96)        -- é»„è¤è‰²
-    M_YellowGreen = Gra_RGB(154, 205, 50)       -- é»„ç»¿
-    M_SeaGreen = Gra_RGB(46, 139, 87)           -- æµ· ç»¿
-    M_MediumTurquoise = Gra_RGB(72, 209, 204)   -- å®çŸ³ç»¿
-    M_RoyalBlue = Gra_RGB(65, 105, 225)         -- å®è“è‰²
-    M_Purple = Gra_RGB(128, 0, 128)             -- ç´«
-    M_Gray = Gra_RGB(128, 128, 128)             -- ç°
-    M_Magenta = Gra_RGB(255, 0, 255)            -- æ´‹çº¢
-    M_Orange = Gra_RGB(255, 165, 0)             -- æ©˜è‰²
-    M_Yellow = Gra_RGB(255, 255, 0)             -- é»„
-    M_Lime = Gra_RGB(0, 255, 0)                 -- çŸ³ç°
-    M_Cyan = Gra_RGB(0, 255, 255)               -- é’è‰²/è“ç»¿
-    M_DeepSkyBlue = Gra_RGB(0, 191, 255)        -- æ·±å¤©è“
-    M_DarkOrchid = Gra_RGB(153, 50, 204)        -- æ·±å…°èŠ±ç´« 
-    M_Silver = Gra_RGB(192, 192, 192)           -- é“¶è‰²
-    M_Pink = Gra_RGB(255, 192, 203)             -- ç²‰
-    M_Wheat = Gra_RGB(245, 222, 179)            -- å°éº¦è‰²
-    M_Wheat2 = Gra_RGB(205, 182, 139)           -- å°éº¦è‰²
-    M_LemonChiffon = Gra_RGB(255, 250, 205)     -- æŸ æª¬è‰²
-    M_PaleGreen = Gra_RGB(152, 251, 152)        -- è‹ç»¿
-    M_PaleTurquoise = Gra_RGB(175, 238, 238)    -- å®çŸ³ç»¿
-    M_LightBlue = Gra_RGB(173, 216, 230)        -- æµ…è“
-    M_Plum = Gra_RGB(221, 160, 221)             -- ç´«çº¢è‘¡è„
-    M_White = Gra_RGB(255, 255, 255)            -- ç™½
-    MilkWhite =Gra_RGB(255, 255, 204)           -- å¥¶ç™½
-    LimeGreen = Gra_RGB(100,200, 90)            -- ç°ç°ç»¿
-    Lime = Gra_RGB(0,255,0)                     -- çŸ³ç°
-    LightGreen = Gra_RGB(144,238,144)           -- æµ…ç»¿
-    LightSkyBlue = Gra_RGB(135,206,250)         -- æ·±ç©ºè“
-    green1 = Gra_RGB(145, 235, 45)              -- ç»¿è‰²1
-    OliveDrab = Gra_RGB(107, 142, 35)           -- ç»¿è¤è‰²
-    Snow3 = Gra_RGB(205, 201, 201)              -- é›ªé“¶
-    grey21 = Gra_RGB(54, 54, 54)                -- ç°
-    LightSlateBlue = Gra_RGB(132, 112, 255)     -- æµ…çŸ³è“
-    Violet = Gra_RGB(208, 152, 208)             -- ç´«ç½—å…°
-    PinkRed = Gra_RGB(255, 102, 102)            -- ç²‰çº¢
-    LightPurple = Gra_RGB(165, 28, 218)         -- æ·±ç´«
-    Color_Hurt1 = Gra_RGB(255, 215, 0)          -- é‡‘
-    TG_Red = Gra_RGB(216, 20, 24)               -- çº¢è‰²
-    TG_Red_Bright = Gra_RGB(248, 40, 44)        -- äº®çº¢
-    Dark_Gold = Gra_RGB(216, 180, 20)           -- é»‘é‡‘
-    S_Yellow = Gra_RGB(245, 215, 15)            -- æ·±é»„
-    LightYellow = Gra_RGB(255, 242, 204)        -- æµ…é»„
-    LightYellow2 = Gra_RGB(255, 229, 153)       -- æµ…é»„
-    LightYellow3 = Gra_RGB(255, 217, 102)       -- æµ…é»„2
+    C_RED = Gra_RGB(216, 20, 24)                -- ºì
+    C_WHITE = Gra_RGB(236, 236, 236)            -- °×
+    C_ORANGE = Gra_RGB(252, 148, 16)            -- éÙÉ«
+    C_GOLD = Gra_RGB(236, 200, 40)              -- ½ğ
+    C_BLACK = Gra_RGB(0, 0, 0)                  -- ºÚÉ«
+    M_Black = Gra_RGB(0, 0, 0)                  -- ºÚÉ«
+    M_Sienna = Gra_RGB(160, 82, 45)             -- ºÖÉ«
+    M_DarkOliveGreen = Gra_RGB(85, 107, 47)     -- ÉîÂÌ 
+    M_DarkGreen = Gra_RGB(0, 100, 0)            -- ÉîÂÌ
+    M_DarkSlateBlue = Gra_RGB(72, 61, 139)      -- °åÑÒ°µÀ¶»ÒÉ«
+    M_Navy = Gra_RGB(0, 0, 128)                 -- º£¾üÀ¶
+    M_Indigo = Gra_RGB(75, 0, 130)              -- ö¦À¶É«
+    M_DarkSlateGray = Gra_RGB(47, 79, 79)       -- ÉîÇàÉ«
+    M_DarkRed = Gra_RGB(139, 0, 0)              -- Éîºì
+    M_DarkOrange = Gra_RGB(255, 140, 0)         -- ÉîéÙÉ«
+    M_Olive = Gra_RGB(128, 128, 0)              -- éÏé­É«
+    M_Green = Gra_RGB(0, 128, 0)                -- ÂÌ
+    M_Teal = Gra_RGB(0, 128, 128)               -- Ë®ÂÌ
+    M_Blue = Gra_RGB(0, 0, 255)                 -- À¶
+    M_SlateGray = Gra_RGB(112, 128, 144)        -- »ÒÊ¯
+    M_DimGray = Gra_RGB(105, 105, 105)          -- °µ»Ò
+    M_Red = Gra_RGB(255, 0, 0)                  -- ºì
+    M_SandyBrown = Gra_RGB(244, 164, 96)        -- »ÆºÖÉ«
+    M_YellowGreen = Gra_RGB(154, 205, 50)       -- »ÆÂÌ
+    M_SeaGreen = Gra_RGB(46, 139, 87)           -- º£ ÂÌ
+    M_MediumTurquoise = Gra_RGB(72, 209, 204)   -- ±¦Ê¯ÂÌ
+    M_RoyalBlue = Gra_RGB(65, 105, 225)         -- ±¦À¶É«
+    M_Purple = Gra_RGB(128, 0, 128)             -- ×Ï
+    M_Gray = Gra_RGB(128, 128, 128)             -- »Ò
+    M_Magenta = Gra_RGB(255, 0, 255)            -- Ñóºì
+    M_Orange = Gra_RGB(255, 165, 0)             -- éÙÉ«
+    M_Yellow = Gra_RGB(255, 255, 0)             -- »Æ
+    M_Lime = Gra_RGB(0, 255, 0)                 -- Ê¯»Ò
+    M_Cyan = Gra_RGB(0, 255, 255)               -- ÇàÉ«/À¶ÂÌ
+    M_DeepSkyBlue = Gra_RGB(0, 191, 255)        -- ÉîÌìÀ¶
+    M_DarkOrchid = Gra_RGB(153, 50, 204)        -- ÉîÀ¼»¨×Ï 
+    M_Silver = Gra_RGB(192, 192, 192)           -- ÒøÉ«
+    M_Pink = Gra_RGB(255, 192, 203)             -- ·Û
+    M_Wheat = Gra_RGB(245, 222, 179)            -- Ğ¡ÂóÉ«
+    M_Wheat2 = Gra_RGB(205, 182, 139)           -- Ğ¡ÂóÉ«
+    M_LemonChiffon = Gra_RGB(255, 250, 205)     -- ÄûÃÊÉ«
+    M_PaleGreen = Gra_RGB(152, 251, 152)        -- ²ÔÂÌ
+    M_PaleTurquoise = Gra_RGB(175, 238, 238)    -- ±¦Ê¯ÂÌ
+    M_LightBlue = Gra_RGB(173, 216, 230)        -- Ç³À¶
+    M_Plum = Gra_RGB(221, 160, 221)             -- ×ÏºìÆÏÌÑ
+    M_White = Gra_RGB(255, 255, 255)            -- °×
+    MilkWhite =Gra_RGB(255, 255, 204)           -- ÄÌ°×
+    LimeGreen = Gra_RGB(100,200, 90)            -- »Ò»ÒÂÌ
+    Lime = Gra_RGB(0,255,0)                     -- Ê¯»Ò
+    LightGreen = Gra_RGB(144,238,144)           -- Ç³ÂÌ
+    LightSkyBlue = Gra_RGB(135,206,250)         -- Éî¿ÕÀ¶
+    green1 = Gra_RGB(145, 235, 45)              -- ÂÌÉ«1
+    OliveDrab = Gra_RGB(107, 142, 35)           -- ÂÌºÖÉ«
+    Snow3 = Gra_RGB(205, 201, 201)              -- Ñ©Òø
+    grey21 = Gra_RGB(54, 54, 54)                -- »Ò
+    LightSlateBlue = Gra_RGB(132, 112, 255)     -- Ç³Ê¯À¶
+    Violet = Gra_RGB(208, 152, 208)             -- ×ÏÂŞÀ¼
+    PinkRed = Gra_RGB(255, 102, 102)            -- ·Ûºì
+    LightPurple = Gra_RGB(165, 28, 218)         -- Éî×Ï
+    Color_Hurt1 = Gra_RGB(255, 215, 0)          -- ½ğ
+    TG_Red = Gra_RGB(216, 20, 24)               -- ºìÉ«
+    TG_Red_Bright = Gra_RGB(248, 40, 44)        -- ÁÁºì
+    Dark_Gold = Gra_RGB(216, 180, 20)           -- ºÚ½ğ
+    S_Yellow = Gra_RGB(245, 215, 15)            -- Éî»Æ
+    LightYellow = Gra_RGB(255, 242, 204)        -- Ç³»Æ
+    LightYellow2 = Gra_RGB(255, 229, 153)       -- Ç³»Æ
+    LightYellow3 = Gra_RGB(255, 217, 102)       -- Ç³»Æ2
 
-    -- æ¸¸æˆçŠ¶æ€å®šä¹‰
-    GAME_START = 0          -- å¼€å§‹ç”»é¢
-    GAME_FIRSTMMAP = 1      -- ç¬¬ä¸€æ¬¡æ˜¾ç¤ºå¤§åœ°å›¾
-    GAME_MMAP = 2           -- ä¸»åœ°å›¾
-    GAME_FIRSTSMAP = 3      -- ç¬¬ä¸€æ¬¡æ˜¾ç¤ºåœºæ™¯åœ°å›¾
-    GAME_SMAP = 4           -- åœºæ™¯åœ°å›¾
-    GAME_WMAP = 5           -- æˆ˜æ–—åœ°å›¾
-    GAME_DEAD = 6           -- æ­»äº¡ç”»é¢
-    GAME_END  = 7           -- ç»“æŸ
-    GAME_NEWNAME = 8        -- å¼€å¯æ–°æ¸¸æˆ
+    -- ÓÎÏ·×´Ì¬¶¨Òå
+    GAME_START = 0          -- ¿ªÊ¼»­Ãæ
+    GAME_FIRSTMMAP = 1      -- µÚÒ»´ÎÏÔÊ¾´óµØÍ¼
+    GAME_MMAP = 2           -- Ö÷µØÍ¼
+    GAME_FIRSTSMAP = 3      -- µÚÒ»´ÎÏÔÊ¾³¡¾°µØÍ¼
+    GAME_SMAP = 4           -- ³¡¾°µØÍ¼
+    GAME_WMAP = 5           -- Õ½¶·µØÍ¼
+    GAME_DEAD = 6           -- ËÀÍö»­Ãæ
+    GAME_END  = 7           -- ½áÊø
+    GAME_NEWNAME = 8        -- ¿ªÆôĞÂÓÎÏ·
 
-    -- æ¸¸æˆæ•°æ®å…¨å±€å˜é‡
-    cc = {}                 -- å®šä¹‰æ¸¸æˆä¸­ä½¿ç”¨çš„å¸¸é‡ï¼Œè¿™äº›å¯ä»¥åœ¨ä¿®æ”¹æ¸¸æˆæ—¶ä¿®æ”¹ä¹‹
+    -- ÓÎÏ·Êı¾İÈ«¾Ö±äÁ¿
+    cc = {}                 -- ¶¨ÒåÓÎÏ·ÖĞÊ¹ÓÃµÄ³£Á¿£¬ÕâĞ©¿ÉÒÔÔÚĞŞ¸ÄÓÎÏ·Ê±ĞŞ¸ÄÖ®
 
-    -- å®é™…çš„å±å¹•å®½åº¦ä¸é«˜åº¦
-    cc.screen_w = lib.GetScreenW()          -- çª—å£è®¾å®šçš„æœ€å¤§å®½åº¦
-    cc.screen_h = lib.GetScreenH()          -- çª—å£è®¾å®šçš„æœ€å¤§é«˜åº¦
-    cc.fit_width = cc.screen_w / 1360       -- æœ€ä½³æ¯”ä¾‹å®½åº¦
-    cc.fit_high = cc.screen_h / 768         -- æœ€ä½³æ¯”ä¾‹é«˜åº¦
-    cc.src_char_set = 0                     -- æºä»£ç çš„å­—ç¬¦é›†ï¼Œ0 BGKï¼Œ1 Big5ï¼Œç”¨äºè½¬æ¢RÃ—
-    cc.os_char_set = CONFIG.CharSet         -- OSå­—ç¬¦é›†ï¼Œ0 ç®€ä½“, 1 ç¹ä½“
-    cc.font_name = CONFIG.FontName          -- æ˜¾ç¤ºå­—ä½“
+    -- Êµ¼ÊµÄÆÁÄ»¿í¶ÈÓë¸ß¶È
+    cc.screen_w = lib.GetScreenW()          -- ´°¿ÚÉè¶¨µÄ×î´ó¿í¶È
+    cc.screen_h = lib.GetScreenH()          -- ´°¿ÚÉè¶¨µÄ×î´ó¸ß¶È
+    cc.fit_width = cc.screen_w / 1360       -- ×î¼Ñ±ÈÀı¿í¶È
+    cc.fit_high = cc.screen_h / 768         -- ×î¼Ñ±ÈÀı¸ß¶È
+    cc.src_char_set = 0                     -- Ô´´úÂëµÄ×Ö·û¼¯£¬0 BGK£¬1 Big5£¬ÓÃÓÚ×ª»»R¡Á
+    cc.os_char_set = CONFIG.CharSet         -- OS×Ö·û¼¯£¬0 ¼òÌå, 1 ·±Ìå
+    cc.font_name = CONFIG.FontName          -- ÏÔÊ¾×ÖÌå
 
-    -- å®šä¹‰è®°å½•æ–‡ä»¶åã€‚Så’ŒDç”±äºæ˜¯å›ºå®šå¤§å°ï¼Œå› æ­¤ä¸å†å®šä¹‰idxäº†
-    -- è¿›åº¦æ–‡ä»¶(å¯¹è¯äº‹ä»¶æˆ˜æ–—ç­‰ç¼–è¾‘å™¨ç¼ºçœè¯»å–çš„è¿›åº¦æ–‡ä»¶)
+    -- ¶¨Òå¼ÇÂ¼ÎÄ¼şÃû¡£SºÍDÓÉÓÚÊÇ¹Ì¶¨´óĞ¡£¬Òò´Ë²»ÔÙ¶¨ÒåidxÁË
+    -- ½ø¶ÈÎÄ¼ş(¶Ô»°ÊÂ¼şÕ½¶·µÈ±à¼­Æ÷È±Ê¡¶ÁÈ¡µÄ½ø¶ÈÎÄ¼ş)
     cc.r_idx_filename = {[0] = CONFIG.DataPath .. "ranger.idx"}
     cc.r_grp_filename = {[0] = CONFIG.DataPath .. "ranger.grp"}
-    -- æˆ˜æ–—åœ°å›¾ç»“æ„æ–‡ä»¶
+    -- Õ½¶·µØÍ¼½á¹¹ÎÄ¼ş
     cc.s_filename = {[0] = CONFIG.DataPath .. "allsin.grp"}
     cc.d_filename = {[0] = CONFIG.DataPath .. "alldef.grp"}
-    -- å­˜æ¡£è·¯åŠ²
+    -- ´æµµÂ·¾¢
     cc.save_path = CONFIG.DataPath .. "save/"
     cc.r_grp = cc.save_path.."r%d.grp"
     cc.s_grp = cc.save_path.."s%d.grp"
     cc.d_grp = cc.save_path.."d%d.grp"
     cc.cs = cc.save_path.."tjm"
-    cc.save_num = 10         -- å­˜æ¡£æ•°é‡ä¸º10
+    cc.save_num = 10         -- ´æµµÊıÁ¿Îª10
     cc.temp_s_filename = CONFIG.DataPath .. "allsinbk.grp"
-    cc.palette_file = CONFIG.DataPath .. "mmap.col"              -- 256è°ƒè‰²æ¿
-    cc.title_image = CONFIG.PicturePath .. "title.png"          -- æ¸¸æˆå¼€å§‹ç”»é¢1
-    cc.game_start_file = CONFIG.PicturePath .. "GAMESTAR.png"     -- æ¸¸æˆå¼€å§‹ç”»é¢2
-    cc.bg01_file = CONFIG.PicturePath .. "bg01.png"              -- æ¸¸æˆå¼€å§‹ç”»é¢3
-    cc.say_box_nm_file = CONFIG.PicturePath .. "sayboxnm.png"      -- å¯¹è¯æ¡†1
-    cc.say_box_file = CONFIG.PicturePath .. "saybox.png"          -- å¯¹è¯æ¡†2
-    cc.dead_image = CONFIG.PicturePath .. "dead.png"              -- æˆ˜è´¥ç”»é¢
-    cc.jy_xx_file = CONFIG.PicturePath .. "jyxx.png"              -- æˆ˜åœºç»„ä»¶
-    cc.mmap_file = {                                             -- å¤§åœ°å›¾
+    cc.palette_file = CONFIG.DataPath .. "mmap.col"              -- 256µ÷É«°å
+    cc.title_image = CONFIG.PicturePath .. "title.png"          -- ÓÎÏ·¿ªÊ¼»­Ãæ1
+    cc.game_start_file = CONFIG.PicturePath .. "GAMESTAR.png"     -- ÓÎÏ·¿ªÊ¼»­Ãæ2
+    cc.bg01_file = CONFIG.PicturePath .. "bg01.png"              -- ÓÎÏ·¿ªÊ¼»­Ãæ3
+    cc.say_box_nm_file = CONFIG.PicturePath .. "sayboxnm.png"      -- ¶Ô»°¿ò1
+    cc.say_box_file = CONFIG.PicturePath .. "saybox.png"          -- ¶Ô»°¿ò2
+    cc.dead_image = CONFIG.PicturePath .. "dead.png"              -- Õ½°Ü»­Ãæ
+    cc.jy_xx_file = CONFIG.PicturePath .. "jyxx.png"              -- Õ½³¡×é¼ş
+    cc.mmap_file = {                                             -- ´óµØÍ¼
         CONFIG.DataPath .. "earth.002",
         CONFIG.DataPath .. "surface.002",
         CONFIG.DataPath .. "building.002",
@@ -170,36 +170,36 @@ function SetGlobalConst()
         CONFIG.DataPath .. "buildy.002"
     }
 
-    -- å„ç§è´´å›¾æ–‡ä»¶åï¼Œæ‰©å±•åå¿…é¡»ä¸ºidx/grp
-    cc.mmap_pic_file = {CONFIG.DataPath .. "mmap.idx", CONFIG.DataPath .. "mmap.grp"}         -- ä¸»åœ°å›¾è´´å›¾
-    cc.smap_pic_file = {CONFIG.DataPath .. "smap.idx", CONFIG.DataPath .. "smap.grp"}         -- åœºæ™¯è´´å›¾
-    cc.wmap_pic_file = {CONFIG.DataPath .. "wmap.idx", CONFIG.DataPath .. "wmap.grp"}         -- æˆ˜åœºè´´å›¾
-    cc.eft_file = {CONFIG.DataPath .. "eft.idx", CONFIG.DataPath .. "eft.grp"}               -- ç‰¹æ•ˆè´´å›¾
-    cc.eft_path = CONFIG.DataPath .. "eft/"             -- ç‰¹æ•ˆè´´å›¾
+    -- ¸÷ÖÖÌùÍ¼ÎÄ¼şÃû£¬À©Õ¹Ãû±ØĞëÎªidx/grp
+    cc.mmap_pic_file = {CONFIG.DataPath .. "mmap.idx", CONFIG.DataPath .. "mmap.grp"}         -- Ö÷µØÍ¼ÌùÍ¼
+    cc.smap_pic_file = {CONFIG.DataPath .. "smap.idx", CONFIG.DataPath .. "smap.grp"}         -- ³¡¾°ÌùÍ¼
+    cc.wmap_pic_file = {CONFIG.DataPath .. "wmap.idx", CONFIG.DataPath .. "wmap.grp"}         -- Õ½³¡ÌùÍ¼
+    cc.eft_file = {CONFIG.DataPath .. "eft.idx", CONFIG.DataPath .. "eft.grp"}               -- ÌØĞ§ÌùÍ¼
+    cc.eft_path = CONFIG.DataPath .. "eft/"             -- ÌØĞ§ÌùÍ¼
     cc.eft_num = 6000
     cc.bj = {CONFIG.DataPath .. "bj.idx", CONFIG.DataPath .. "bj.grp"}
-    cc.fight_pic_file = {CONFIG.DataPath .. "fight/fight%03d.idx", CONFIG.DataPath .. "fight/fight%03d.grp"}          -- æˆ˜æ–—è´´å›¾
-    cc.body_path = CONFIG.DataPath .. "body/"        -- äººç‰©èº«ä½“å›¾æ¡ˆ
+    cc.fight_pic_file = {CONFIG.DataPath .. "fight/fight%03d.idx", CONFIG.DataPath .. "fight/fight%03d.grp"}          -- Õ½¶·ÌùÍ¼
+    cc.body_path = CONFIG.DataPath .. "body/"        -- ÈËÎïÉíÌåÍ¼°¸
     cc.body_num = 1110
-    cc.head_path = CONFIG.DataPath .. "head/"        -- äººç‰©å¤´åƒå›¾æ¡ˆ
+    cc.head_path = CONFIG.DataPath .. "head/"        -- ÈËÎïÍ·ÏñÍ¼°¸
     cc.head_num = 1110
-    cc.thing_pic_file = {CONFIG.DataPath .. "thing.idx", CONFIG.DataPath .. "thing.grp"}      -- ç‰©å“è´´å›¾
-    cc.thing_path = CONFIG.DataPath .. "thing/"         -- ç‰©å“è´´å›¾
+    cc.thing_pic_file = {CONFIG.DataPath .. "thing.idx", CONFIG.DataPath .. "thing.grp"}      -- ÎïÆ·ÌùÍ¼
+    cc.thing_path = CONFIG.DataPath .. "thing/"         -- ÎïÆ·ÌùÍ¼
     cc.thing_num = 1110
-    cc.icon_path = CONFIG.DataPath .. "icons/"       -- å›¾æ ‡å›¾æ¡ˆ
+    cc.icon_path = CONFIG.DataPath .. "icons/"       -- Í¼±êÍ¼°¸
     cc.icon_num = 1010;
-    cc.xt_path = CONFIG.DataPath .. "xt/"            -- å…¶ä»–å›¾æ¡ˆ
+    cc.xt_path = CONFIG.DataPath .. "xt/"            -- ÆäËûÍ¼°¸
     cc.xt_num = 1100;    
-    cc.ui_path = CONFIG.PicturePath .. "ui/"            -- UIå›¾æ¡ˆ
+    cc.ui_path = CONFIG.PicturePath .. "ui/"            -- UIÍ¼°¸
     cc.ui_num = 1100;
-    cc.thing_path = CONFIG.DataPath .. "thing/"      -- ç‰©å“å›¾æ¡ˆ
+    cc.thing_path = CONFIG.DataPath .. "thing/"      -- ÎïÆ·Í¼°¸
     cc.thing_num = 1100;
     cc.pt_path = CONFIG.DataPath .. "portrait/"
     cc.pt_num = 1100;
-    cc.bj_path = CONFIG.DataPath .. "bj/"            -- å…¶ä»–UIå›¾æ¡ˆ
+    cc.bj_path = CONFIG.DataPath .. "bj/"            -- ÆäËûUIÍ¼°¸
     cc.bj_num = 1100;
-    CONFIG.help_path = CONFIG.DataPath .. "gl/"      -- å¸®åŠ©æ–‡æ¡£
-    -- cc.EFTPath = CONFIG.DataPath .. "eft/"       -- ç‰¹æ•ˆå›¾æ¡ˆ
+    CONFIG.help_path = CONFIG.DataPath .. "gl/"      -- °ïÖúÎÄµµ
+    -- cc.EFTPath = CONFIG.DataPath .. "eft/"       -- ÌØĞ§Í¼°¸
     -- cc.EFTNum = 5500
 
     if CONFIG.MP3 == 1 then
@@ -210,360 +210,360 @@ function SetGlobalConst()
     cc.ogg_file = CONFIG.SoundPath .. "game%02d.ogg"
     cc.atk_file = CONFIG.SoundPath .. "atk%02d.wav"
     cc.e_file = CONFIG.SoundPath .. "e%02d.wav"
-    -- æˆ˜æ–—
+    -- Õ½¶·
     cc.war_file = CONFIG.DataPath .. "war.sta"
     cc.war_map_file = {CONFIG.DataPath .. "warfld.idx",
                     CONFIG.DataPath .. "warfld.grp"}
-    -- å¯¹è¯
+    -- ¶Ô»°
     cc.trp = CONFIG.DataPath.."talk.grp"
     cc.tdx = CONFIG.DataPath.."talk.idx"
-    cc.acvmts = CONFIG.DataPath .. "achievements"               -- æˆå°±
+    cc.acvmts = CONFIG.DataPath .. "achievements"               -- ³É¾Í
 
-    -- å®šä¹‰è®°å½•æ–‡ä»¶RÃ—ç»“æ„
-    -- luaä¸æ”¯æŒç»“æ„ï¼Œæ— æ³•ç›´æ¥ä»äºŒè¿›åˆ¶æ–‡ä»¶ä¸­è¯»å–ï¼Œå› æ­¤éœ€è¦è¿™äº›å®šä¹‰ï¼Œç”¨tableä¸­ä¸åŒçš„åå­—æ¥ä»¿çœŸç»“æ„
-    cc.per_num = 1000                -- äººç‰©æ€»æ•°é‡
-    cc.team_num = 15                 -- é˜Ÿä¼äººæ•°
-    cc.my_thing_num = 950             -- ä¸»è§’ç‰©å“æ•°é‡
-    cc.week = 1                     -- å‘¨ç›®
-    cc.version = "v2000"                 -- ç‰ˆæœ¬å·
-    cc.timer = {                    -- åŠ¨æ€æ˜¾ç¤ºæç¤º
+    -- ¶¨Òå¼ÇÂ¼ÎÄ¼şR¡Á½á¹¹
+    -- lua²»Ö§³Ö½á¹¹£¬ÎŞ·¨Ö±½Ó´Ó¶ş½øÖÆÎÄ¼şÖĞ¶ÁÈ¡£¬Òò´ËĞèÒªÕâĞ©¶¨Òå£¬ÓÃtableÖĞ²»Í¬µÄÃû×ÖÀ´·ÂÕæ½á¹¹
+    cc.per_num = 1000                -- ÈËÎï×ÜÊıÁ¿
+    cc.team_num = 15                 -- ¶ÓÎéÈËÊı
+    cc.my_thing_num = 950             -- Ö÷½ÇÎïÆ·ÊıÁ¿
+    cc.week = 1                     -- ÖÜÄ¿
+    cc.version = "v2000"                 -- °æ±¾ºÅ
+    cc.timer = {                    -- ¶¯Ì¬ÏÔÊ¾ÌáÊ¾
         stime = 0,
         status = 0,
         str = "",
         len = 0,
         fun = demostr,
     }
-    cc.run_str = {                   -- åŠ¨æ€æ˜¾ç¤ºçš„å†…å®¹
-        'å¿«æ·é”® F1-é©¬è½¦ F3-é˜Ÿåˆ— F4-æ•´ç†ç‰©å“ H-å›å®¶',
-        'å¤šåŸ¹å…»ä¸€äº›é˜Ÿå‹ï¼Œå¯ä»¥è®©ä½ åé¢çš„æˆ˜æ–—æ›´è½»æ¾',
-        'åƒå¹´çµèŠæ˜¯èƒ½å¢åŠ ä½“è´¨çš„è¯å“ï¼Œäººç‰©ä½“è´¨è·Ÿä¸»è¿å†…åŠŸå†³å®šäººç‰©ç”Ÿå‘½æœ€å¤§å€¼ï¼Œä½“è´¨æœ€å¤šå¯ä»¥æå‡åˆ°15ç‚¹',
-        'æ›´æ–°ä¸‹è½½é—®é¢˜åé¦ˆè¯·åŠ  QQç¾¤å·ï¼š865420131',
-        'æœ¬æ¸¸æˆéƒ¨åˆ†ç´ æå–è‡ªé“è¡€ä¸¹å¿ƒè®ºå›/æ¸¸ä¾ ç½‘/äººåœ¨æ±Ÿæ¹–/é‡‘ä¹¦çº¢é¢œå½•/é»‘å±±ç¾¤ä¾ ä¼ /é‡‘ä¹¦ç¾¤ä¾ ä¼ ',
-        'å°æ‘çš„å¨ç¶å’Œç‚¼ä¸¹ç‚‰å¯ä»¥åˆ¶ä½œè¯å“',
+    cc.run_str = {                   -- ¶¯Ì¬ÏÔÊ¾µÄÄÚÈİ
+        '¿ì½İ¼ü F1-Âí³µ F3-¶ÓÁĞ F4-ÕûÀíÎïÆ· H-»Ø¼Ò',
+        '¶àÅàÑøÒ»Ğ©¶ÓÓÑ£¬¿ÉÒÔÈÃÄãºóÃæµÄÕ½¶·¸üÇáËÉ',
+        'Ç§ÄêÁéÖ¥ÊÇÄÜÔö¼ÓÌåÖÊµÄÒ©Æ·£¬ÈËÎïÌåÖÊ¸úÖ÷ÔËÄÚ¹¦¾ö¶¨ÈËÎïÉúÃü×î´óÖµ£¬ÌåÖÊ×î¶à¿ÉÒÔÌáÉıµ½15µã',
+        '¸üĞÂÏÂÔØÎÊÌâ·´À¡Çë¼Ó QQÈººÅ£º865420131',
+        '±¾ÓÎÏ·²¿·ÖËØ²ÄÈ¡×ÔÌúÑªµ¤ĞÄÂÛÌ³/ÓÎÏÀÍø/ÈËÔÚ½­ºş/½ğÊéºìÑÕÂ¼/ºÚÉ½ÈºÏÀ´«/½ğÊéÈºÏÀ´«',
+        'Ğ¡´åµÄ³øÔîºÍÁ¶µ¤Â¯¿ÉÒÔÖÆ×÷Ò©Æ·',
     }
     cc.tjmsj = {}
     cc.tjm = 0
     cc.hslj = {}
     cc.hslj2 = {}
-	cc.tg = {}								-- å¤©å…³
-	cc.tgjl = {}							-- å¤©å…³å¥–åŠ±
+	cc.tg = {}								-- Ìì¹Ø
+	cc.tgjl = {}							-- Ìì¹Ø½±Àø
 	cc.commodity = {
-		{343, 600, 0, 'å¯é‡æ–°é€‰æ‹©å¤©èµ‹å†…åŠŸ', 0},
-		{344, 600, 0, 'å¯é‡æ–°é€‰æ‹©å¤©èµ‹è½»åŠŸ', 0},
-		{345, 600, 0, 'å¯é‡æ–°é€‰æ‹©å¤©èµ‹å¤–åŠŸ', 0},
-		{346, 600, 0, 'å¯ä½¿ç”¨å››å¤§å±±æˆ˜æ–—é­”æ€§', 0},
-		{281, 600, 0, 'å¯åœ¨å°æ‘å•†äººå¤„æ¢é“¶å­', 0},
+		{343, 600, 0, '¿ÉÖØĞÂÑ¡ÔñÌì¸³ÄÚ¹¦', 0},
+		{344, 600, 0, '¿ÉÖØĞÂÑ¡ÔñÌì¸³Çá¹¦', 0},
+		{345, 600, 0, '¿ÉÖØĞÂÑ¡ÔñÌì¸³Íâ¹¦', 0},
+		{346, 600, 0, '¿ÉÊ¹ÓÃËÄ´óÉ½Õ½¶·Ä§ĞÔ', 0},
+		{281, 600, 0, '¿ÉÔÚĞ¡´åÉÌÈË´¦»»Òø×Ó', 0},
 	}
 
-    cc.base_s = {}                          -- ä¿å­˜åŸºæœ¬æ•°æ®çš„ç»“æ„
-    -- èµ·å§‹ä½ç½®ï¼ˆä»0å¼€å§‹ï¼‰ï¼Œæ•°æ®ç±»å‹ï¼ˆ0æœ‰ç¬¦å·ï¼Œ1æ— ç¬¦å·ï¼Œ2å­—ç¬¦ä¸²ï¼‰ï¼Œé•¿åº¦
-    cc.base_s["ä¹˜èˆ¹"] = {0, 0, 2}
-    cc.base_s["æ— ç”¨"] = {2, 0, 2}
-    cc.base_s["äººX"] = {4, 0, 2}
-    cc.base_s["äººY"] = {6, 0, 2}
-    cc.base_s["äººX1"] = {8, 0, 2}
-    cc.base_s["äººY1"] = {10, 0, 2}
-    cc.base_s["äººæ–¹å‘"] = {12, 0, 2}
-    cc.base_s["èˆ¹X"] = {14, 0, 2}
-    cc.base_s["èˆ¹Y"] = {16, 0, 2}
-    cc.base_s["èˆ¹X1"] = {18, 0, 2}
-    cc.base_s["èˆ¹Y1"] = {20, 0, 2}
-    cc.base_s["èˆ¹æ–¹å‘"] = {22, 0, 2}
-    cc.base_s["éš¾åº¦"] = {24, 0, 2}
-    cc.base_s["æ ‡å‡†"] = {26, 0, 2}
-    cc.base_s["ç•…æƒ³"] = {28, 0, 2}
-    cc.base_s["ç‰¹æ®Š"] = {30, 0, 2}
-    cc.base_s["å•é€š"] = {32, 0, 2}
-    cc.base_s["å‘¨ç›®"] = {34, 0, 2}
-    cc.base_s["å¤©ä¹¦æ•°é‡"] = {36, 0, 2}
-    cc.base_s["æ­¦åŠŸæ•°é‡"] = {38, 0, 2}
-    cc.base_s["ç¢ç‰‡"] = {40, 0, 2}
-    cc.base_s["å¤‡ç”¨5"] = {42, 0, 2}
-    cc.base_s["å¤‡ç”¨4"] = {44, 0, 2}
-    cc.base_s["å¤‡ç”¨3"] = {46, 0, 2}
-    cc.base_s["å¤‡ç”¨2"] = {48, 0, 2}
-    cc.base_s["å¤‡ç”¨1"] = {50, 0, 2}
+    cc.base_s = {}                          -- ±£´æ»ù±¾Êı¾İµÄ½á¹¹
+    -- ÆğÊ¼Î»ÖÃ£¨´Ó0¿ªÊ¼£©£¬Êı¾İÀàĞÍ£¨0ÓĞ·ûºÅ£¬1ÎŞ·ûºÅ£¬2×Ö·û´®£©£¬³¤¶È
+    cc.base_s["³Ë´¬"] = {0, 0, 2}
+    cc.base_s["ÎŞÓÃ"] = {2, 0, 2}
+    cc.base_s["ÈËX"] = {4, 0, 2}
+    cc.base_s["ÈËY"] = {6, 0, 2}
+    cc.base_s["ÈËX1"] = {8, 0, 2}
+    cc.base_s["ÈËY1"] = {10, 0, 2}
+    cc.base_s["ÈË·½Ïò"] = {12, 0, 2}
+    cc.base_s["´¬X"] = {14, 0, 2}
+    cc.base_s["´¬Y"] = {16, 0, 2}
+    cc.base_s["´¬X1"] = {18, 0, 2}
+    cc.base_s["´¬Y1"] = {20, 0, 2}
+    cc.base_s["´¬·½Ïò"] = {22, 0, 2}
+    cc.base_s["ÄÑ¶È"] = {24, 0, 2}
+    cc.base_s["±ê×¼"] = {26, 0, 2}
+    cc.base_s["³©Ïë"] = {28, 0, 2}
+    cc.base_s["ÌØÊâ"] = {30, 0, 2}
+    cc.base_s["µ¥Í¨"] = {32, 0, 2}
+    cc.base_s["ÖÜÄ¿"] = {34, 0, 2}
+    cc.base_s["ÌìÊéÊıÁ¿"] = {36, 0, 2}
+    cc.base_s["Îä¹¦ÊıÁ¿"] = {38, 0, 2}
+    cc.base_s["ËéÆ¬"] = {40, 0, 2}
+    cc.base_s["±¸ÓÃ5"] = {42, 0, 2}
+    cc.base_s["±¸ÓÃ4"] = {44, 0, 2}
+    cc.base_s["±¸ÓÃ3"] = {46, 0, 2}
+    cc.base_s["±¸ÓÃ2"] = {48, 0, 2}
+    cc.base_s["±¸ÓÃ1"] = {50, 0, 2}
     for i = 1, cc.team_num do
-        cc.base_s["é˜Ÿä¼" .. i] = {52 + 2 * (i - 1), 0, 2}
+        cc.base_s["¶ÓÎé" .. i] = {52 + 2 * (i - 1), 0, 2}
     end
     for i = 1, cc.my_thing_num do
-        cc.base_s["ç‰©å“" .. i] = {82 + 4 * (i - 1), 0, 2}
-        cc.base_s["ç‰©å“æ•°é‡" .. i] = {82 + 4 * (i - 1) + 2, 0, 2}
+        cc.base_s["ÎïÆ·" .. i] = {82 + 4 * (i - 1), 0, 2}
+        cc.base_s["ÎïÆ·ÊıÁ¿" .. i] = {82 + 4 * (i - 1) + 2, 0, 2}
     end
 
-    cc.person_size = 602                     -- æ¯ä¸ªäººç‰©æ•°æ®å ç”¨å­—èŠ‚
-    cc.person_s = {}                        -- ä¿å­˜äººç‰©æ•°æ®çš„ç»“æ„
-    cc.person_s["ä»£å·"] = {0, 0, 2}
-    cc.person_s["å¤´åƒä»£å·"] = {2, 0, 2}
-    cc.person_s["ç”Ÿå‘½å¢é•¿"] = {4, 0, 2}
-    cc.person_s["æ— ç”¨"] = {6, 0, 2}
-    cc.person_s["å§“å"] = {8, 2, 10}
-    cc.person_s["å¤–å·"] = {18, 2, 10}
-    cc.person_s["æ€§åˆ«"] = {28, 0, 2}
-    cc.person_s["ç­‰çº§"] = {30, 0, 2}
-    cc.person_s["ç»éªŒ"] = {32, 1, 2}
-    cc.person_s["ç”Ÿå‘½"] = {34, 0, 2}
-    cc.person_s["ç”Ÿå‘½æœ€å¤§å€¼"] = {36, 0, 2}
-    cc.person_s["å—ä¼¤ç¨‹åº¦"] = {38, 0, 2}
-    cc.person_s["ä¸­æ¯’ç¨‹åº¦"] = {40, 0, 2}
-    cc.person_s["ä½“åŠ›"] = {42, 0, 2}
-    cc.person_s["ç‰©å“ä¿®ç‚¼ç‚¹æ•°"] = {44, 0, 2}
-    cc.person_s["æ­¦å™¨"] = {46, 0, 2}
-    cc.person_s["é˜²å…·"] = {48, 0, 2}
+    cc.person_size = 602                     -- Ã¿¸öÈËÎïÊı¾İÕ¼ÓÃ×Ö½Ú
+    cc.person_s = {}                        -- ±£´æÈËÎïÊı¾İµÄ½á¹¹
+    cc.person_s["´úºÅ"] = {0, 0, 2}
+    cc.person_s["Í·Ïñ´úºÅ"] = {2, 0, 2}
+    cc.person_s["ÉúÃüÔö³¤"] = {4, 0, 2}
+    cc.person_s["ÎŞÓÃ"] = {6, 0, 2}
+    cc.person_s["ĞÕÃû"] = {8, 2, 10}
+    cc.person_s["ÍâºÅ"] = {18, 2, 10}
+    cc.person_s["ĞÔ±ğ"] = {28, 0, 2}
+    cc.person_s["µÈ¼¶"] = {30, 0, 2}
+    cc.person_s["¾­Ñé"] = {32, 1, 2}
+    cc.person_s["ÉúÃü"] = {34, 0, 2}
+    cc.person_s["ÉúÃü×î´óÖµ"] = {36, 0, 2}
+    cc.person_s["ÊÜÉË³Ì¶È"] = {38, 0, 2}
+    cc.person_s["ÖĞ¶¾³Ì¶È"] = {40, 0, 2}
+    cc.person_s["ÌåÁ¦"] = {42, 0, 2}
+    cc.person_s["ÎïÆ·ĞŞÁ¶µãÊı"] = {44, 0, 2}
+    cc.person_s["ÎäÆ÷"] = {46, 0, 2}
+    cc.person_s["·À¾ß"] = {48, 0, 2}
     for i = 1, 5 do
-        cc.person_s["å‡ºæ‹›åŠ¨ç”»å¸§æ•°" .. i] = {50 + 2 * (i - 1), 0, 2}
-        cc.person_s["å‡ºæ‹›åŠ¨ç”»å»¶è¿Ÿ" .. i] = {60 + 2 * (i - 1), 0, 2}
-        cc.person_s["æ­¦åŠŸéŸ³æ•ˆå»¶è¿Ÿ" .. i] = {70 + 2 * (i - 1), 0, 2}
+        cc.person_s["³öÕĞ¶¯»­Ö¡Êı" .. i] = {50 + 2 * (i - 1), 0, 2}
+        cc.person_s["³öÕĞ¶¯»­ÑÓ³Ù" .. i] = {60 + 2 * (i - 1), 0, 2}
+        cc.person_s["Îä¹¦ÒôĞ§ÑÓ³Ù" .. i] = {70 + 2 * (i - 1), 0, 2}
     end
-    cc.person_s["å†…åŠ›æ€§è´¨"] = {80, 0, 2}
-    cc.person_s["å†…åŠ›"] = {82, 0, 2}
-    cc.person_s["å†…åŠ›æœ€å¤§å€¼"] = {84, 0, 2}
-    cc.person_s["æ”»å‡»åŠ›"] = {86, 0, 2}
-    cc.person_s["è½»åŠŸ"] = {88, 0, 2}
-    cc.person_s["é˜²å¾¡åŠ›"] = {90, 0, 2}
-    cc.person_s["åŒ»ç–—"] = {92, 0, 2}
-    cc.person_s["ç”¨æ¯’"] = {94, 0, 2}
-    cc.person_s["è§£æ¯’"] = {96, 0, 2}
-    cc.person_s["æŠ—æ¯’"] = {98, 0, 2}
-    cc.person_s["æ‹³æŒ"] = {100, 0, 2}
-    cc.person_s["æŒ‡æ³•"] = {102, 0, 2}
-    cc.person_s["å¾¡å‰‘"] = {104, 0, 2}
-    cc.person_s["è€åˆ€"] = {106, 0, 2}
-    cc.person_s["å¥‡é—¨"] = {108, 0, 2}
-    cc.person_s["æš—å™¨"] = {110, 0, 2}
-    cc.person_s["æ­¦å­¦å¸¸è¯†"] = {112, 0, 2}
-    cc.person_s["å“å¾·"] = {114, 0, 2}
-    cc.person_s["æ”»å‡»å¸¦æ¯’"] = {116, 0, 2}
-    cc.person_s["å·¦å³äº’åš"] = {118, 0, 2}
-    cc.person_s["å£°æœ›"] = {120, 0, 2}
-    cc.person_s["èµ„è´¨"] = {122, 0, 2}
-    cc.person_s["ä¿®ç‚¼ç‰©å“"] = {124, 0, 2}
-    cc.person_s["ä¿®ç‚¼ç‚¹æ•°"] = {126, 0, 2}
+    cc.person_s["ÄÚÁ¦ĞÔÖÊ"] = {80, 0, 2}
+    cc.person_s["ÄÚÁ¦"] = {82, 0, 2}
+    cc.person_s["ÄÚÁ¦×î´óÖµ"] = {84, 0, 2}
+    cc.person_s["¹¥»÷Á¦"] = {86, 0, 2}
+    cc.person_s["Çá¹¦"] = {88, 0, 2}
+    cc.person_s["·ÀÓùÁ¦"] = {90, 0, 2}
+    cc.person_s["Ò½ÁÆ"] = {92, 0, 2}
+    cc.person_s["ÓÃ¶¾"] = {94, 0, 2}
+    cc.person_s["½â¶¾"] = {96, 0, 2}
+    cc.person_s["¿¹¶¾"] = {98, 0, 2}
+    cc.person_s["È­ÕÆ"] = {100, 0, 2}
+    cc.person_s["Ö¸·¨"] = {102, 0, 2}
+    cc.person_s["Óù½£"] = {104, 0, 2}
+    cc.person_s["Ë£µ¶"] = {106, 0, 2}
+    cc.person_s["ÆæÃÅ"] = {108, 0, 2}
+    cc.person_s["°µÆ÷"] = {110, 0, 2}
+    cc.person_s["ÎäÑ§³£Ê¶"] = {112, 0, 2}
+    cc.person_s["Æ·µÂ"] = {114, 0, 2}
+    cc.person_s["¹¥»÷´ø¶¾"] = {116, 0, 2}
+    cc.person_s["×óÓÒ»¥²©"] = {118, 0, 2}
+    cc.person_s["ÉùÍû"] = {120, 0, 2}
+    cc.person_s["×ÊÖÊ"] = {122, 0, 2}
+    cc.person_s["ĞŞÁ¶ÎïÆ·"] = {124, 0, 2}
+    cc.person_s["ĞŞÁ¶µãÊı"] = {126, 0, 2}
     for i = 1, 15 do
-        cc.person_s["æ‰€ä¼šæ­¦åŠŸ" .. i] = {128 + 2 * (i - 1), 0, 2}
-        cc.person_s["æ‰€ä¼šæ­¦åŠŸç­‰çº§" .. i] = {158 + 2 * (i - 1), 0, 2}
+        cc.person_s["Ëù»áÎä¹¦" .. i] = {128 + 2 * (i - 1), 0, 2}
+        cc.person_s["Ëù»áÎä¹¦µÈ¼¶" .. i] = {158 + 2 * (i - 1), 0, 2}
     end
     for i = 1, 4 do
-        cc.person_s["æºå¸¦ç‰©å“" .. i] = {188 + 2 * (i - 1), 0, 2}
-        cc.person_s["æºå¸¦ç‰©å“æ•°é‡" .. i] = {196 + 2 * (i - 1), 0, 2}
+        cc.person_s["Ğ¯´øÎïÆ·" .. i] = {188 + 2 * (i - 1), 0, 2}
+        cc.person_s["Ğ¯´øÎïÆ·ÊıÁ¿" .. i] = {196 + 2 * (i - 1), 0, 2}
     end
     for i = 1, 2 do
-        cc.person_s["å¤©èµ‹å¤–åŠŸ" .. i] = {204 + 2 * (i - 1), 0, 2}
+        cc.person_s["Ìì¸³Íâ¹¦" .. i] = {204 + 2 * (i - 1), 0, 2}
     end
-    cc.person_s["å±æ€§ç‚¹æ•°"] = {208, 0, 2}
-    cc.person_s["æ­¦å­¦ç‚¹æ•°"] = {210, 0, 2}
-    cc.person_s["å¤©èµ‹å†…åŠŸ"] = {212, 0, 2}
-    cc.person_s["å¤©èµ‹è½»åŠŸ"] = {214, 0, 2}
-    cc.person_s["å®æˆ˜"] = {216, 0, 2}
-    cc.person_s["å‡ºæˆ˜"] = {218, 0, 2}
-    cc.person_s["å‘½ä¸­"] = {220, 0, 2}
-    cc.person_s["ä¸»è¿å†…åŠŸ"] = {222, 0, 2}
-    cc.person_s["ä¸»è¿è½»åŠŸ"] = {224, 0, 2}
-    cc.person_s["å…­å¦‚è§‰é†’"] = {226, 0, 2}
-    cc.person_s["ä¸ªäººè§‰é†’"] = {228, 0, 2}
-    cc.person_s["ç•…æƒ³åˆ†é˜¶"] = {230, 0, 2}
-    cc.person_s["å¤–å·2"] = {232, 2, 10}
-    cc.person_s["ç¼çƒ§ç¨‹åº¦"] = {242, 0, 2}
-    cc.person_s["å†°å°ç¨‹åº¦"] = {244, 0, 2}
-    cc.person_s["è®ºå‰‘å¥–åŠ±"] = {246, 0, 2}
-    cc.person_s["è¡€é‡ç¿»å€"] = {248, 0, 2}
-    cc.person_s["è¡Œä¸ºæ¨¡å¼"] = {250, 0, 2}
-    cc.person_s["ä¼˜å…ˆä½¿ç”¨"] = {252, 0, 2}
-    cc.person_s["æ˜¯å¦åƒè¯"] = {254, 0, 2}
-    cc.person_s["èƒ½é‡"] = {256, 0, 2}
-    cc.person_s["æ ¼æŒ¡"] = {258, 0, 2}
-    cc.person_s["ç‰¹è‰²æŒ‡ä»¤"] = {260, 0, 2}
-    cc.person_s["åéª‘"] = {262, 0, 2}
-    cc.person_s["ä¸­åº¸"] = {264, 0, 2}
-    cc.person_s["åŠèº«åƒ"] = {266, 0, 2}
-    cc.person_s["è¿·è¸ªæ­¥"] = {268, 0, 2}
-    cc.person_s["é—¨æ´¾"] = {270, 0, 2}
-    cc.person_s["å¿ƒé­”"] = {272, 0, 2}
+    cc.person_s["ÊôĞÔµãÊı"] = {208, 0, 2}
+    cc.person_s["ÎäÑ§µãÊı"] = {210, 0, 2}
+    cc.person_s["Ìì¸³ÄÚ¹¦"] = {212, 0, 2}
+    cc.person_s["Ìì¸³Çá¹¦"] = {214, 0, 2}
+    cc.person_s["ÊµÕ½"] = {216, 0, 2}
+    cc.person_s["³öÕ½"] = {218, 0, 2}
+    cc.person_s["ÃüÖĞ"] = {220, 0, 2}
+    cc.person_s["Ö÷ÔËÄÚ¹¦"] = {222, 0, 2}
+    cc.person_s["Ö÷ÔËÇá¹¦"] = {224, 0, 2}
+    cc.person_s["ÁùÈç¾õĞÑ"] = {226, 0, 2}
+    cc.person_s["¸öÈË¾õĞÑ"] = {228, 0, 2}
+    cc.person_s["³©Ïë·Ö½×"] = {230, 0, 2}
+    cc.person_s["ÍâºÅ2"] = {232, 2, 10}
+    cc.person_s["×ÆÉÕ³Ì¶È"] = {242, 0, 2}
+    cc.person_s["±ù·â³Ì¶È"] = {244, 0, 2}
+    cc.person_s["ÂÛ½£½±Àø"] = {246, 0, 2}
+    cc.person_s["ÑªÁ¿·­±¶"] = {248, 0, 2}
+    cc.person_s["ĞĞÎªÄ£Ê½"] = {250, 0, 2}
+    cc.person_s["ÓÅÏÈÊ¹ÓÃ"] = {252, 0, 2}
+    cc.person_s["ÊÇ·ñ³ÔÒ©"] = {254, 0, 2}
+    cc.person_s["ÄÜÁ¿"] = {256, 0, 2}
+    cc.person_s["¸ñµ²"] = {258, 0, 2}
+    cc.person_s["ÌØÉ«Ö¸Áî"] = {260, 0, 2}
+    cc.person_s["×øÆï"] = {262, 0, 2}
+    cc.person_s["ÖĞÓ¹"] = {264, 0, 2}
+    cc.person_s["°ëÉíÏñ"] = {266, 0, 2}
+    cc.person_s["ÃÔ×Ù²½"] = {268, 0, 2}
+    cc.person_s["ÃÅÅÉ"] = {270, 0, 2}
+    cc.person_s["ĞÄÄ§"] = {272, 0, 2}
     for i = 1, 25 do
-        cc.person_s["æ‹³æŒå¥‡ç©´ç­‰çº§" .. i] = {274 + 2 * (i - 1), 0, 2}
-        cc.person_s["æŒ‡æ³•å¥‡ç©´ç­‰çº§" .. i] = {324 + 2 * (i - 1), 0, 2}
-        cc.person_s["å¾¡å‰‘å¥‡ç©´ç­‰çº§" .. i] = {374 + 2 * (i - 1), 0, 2}
-        cc.person_s["è€åˆ€å¥‡ç©´ç­‰çº§" .. i] = {424 + 2 * (i - 1), 0, 2}
-        cc.person_s["å¥‡é—¨å¥‡ç©´ç­‰çº§" .. i] = {474 + 2 * (i - 1), 0, 2}
-        cc.person_s["å†…åŠŸå¥‡ç©´ç­‰çº§" .. i] = {524 + 2 * (i - 1), 0, 2}
+        cc.person_s["È­ÕÆÆæÑ¨µÈ¼¶" .. i] = {274 + 2 * (i - 1), 0, 2}
+        cc.person_s["Ö¸·¨ÆæÑ¨µÈ¼¶" .. i] = {324 + 2 * (i - 1), 0, 2}
+        cc.person_s["Óù½£ÆæÑ¨µÈ¼¶" .. i] = {374 + 2 * (i - 1), 0, 2}
+        cc.person_s["Ë£µ¶ÆæÑ¨µÈ¼¶" .. i] = {424 + 2 * (i - 1), 0, 2}
+        cc.person_s["ÆæÃÅÆæÑ¨µÈ¼¶" .. i] = {474 + 2 * (i - 1), 0, 2}
+        cc.person_s["ÄÚ¹¦ÆæÑ¨µÈ¼¶" .. i] = {524 + 2 * (i - 1), 0, 2}
     end
     for i = 1, 150 do
-        cc.person_s["æ­¦åŠŸæ‹›å¼" .. i] = {574 + 2 * (i - 1), 0, 2}
+        cc.person_s["Îä¹¦ÕĞÊ½" .. i] = {574 + 2 * (i - 1), 0, 2}
     end
-    cc.person_s["é—¨æ´¾ä½é˜¶"] = {874, 0, 2}
+    cc.person_s["ÃÅÅÉÎ»½×"] = {874, 0, 2}
     for i = 1, 8 do
-        cc.person_s["é—¨æ´¾æŠ€èƒ½" .. i] = {876 + 2 * (i - 1), 0, 2}
+        cc.person_s["ÃÅÅÉ¼¼ÄÜ" .. i] = {876 + 2 * (i - 1), 0, 2}
     end
-    cc.person_s["æµè¡€ç¨‹åº¦"] = {892, 0, 2}
-    cc.person_s["å°ç©´ç¨‹åº¦"] = {894, 0, 2}
+    cc.person_s["Á÷Ñª³Ì¶È"] = {892, 0, 2}
+    cc.person_s["·âÑ¨³Ì¶È"] = {894, 0, 2}
 
-    cc.thing_size = 202                      -- æ¯ä¸ªç‰©å“æ•°æ®å ç”¨å­—èŠ‚
-    cc.thing_s = {}                         -- ä¿å­˜ç‰©å“æ•°æ®çš„ç»“æ„
-    cc.thing_s["ä»£å·"] = {0, 0, 2}
-    cc.thing_s["åç§°"] = {2, 2, 20}
-    cc.thing_s["åç§°2"] = {22, 2, 20}
-    cc.thing_s["ç‰©å“è¯´æ˜"] = {42, 2, 30}
-    cc.thing_s["ç»ƒå‡ºæ­¦åŠŸ"] = {72, 0, 2}
-    cc.thing_s["æš—å™¨åŠ¨ç”»ç¼–å·"] = {74, 0, 2}
-    cc.thing_s["ä½¿ç”¨äºº"] = {76, 0, 2}
-    cc.thing_s["è£…å¤‡ç±»å‹"] = {78, 0, 2}
-    cc.thing_s["æ˜¾ç¤ºç‰©å“è¯´æ˜"] = {80, 0, 2}
-    cc.thing_s["ç±»å‹"] = {82, 0, 2}
-    cc.thing_s["æœªçŸ¥5"] = {84, 0, 2}
-    cc.thing_s["æœªçŸ¥6"] = {86, 0, 2}
-    cc.thing_s["æœªçŸ¥7"] = {88, 0, 2}
-    cc.thing_s["åŠ ç”Ÿå‘½"] = {90, 0, 2}
-    cc.thing_s["åŠ ç”Ÿå‘½æœ€å¤§å€¼"] = {92, 0, 2}
-    cc.thing_s["åŠ ä¸­æ¯’è§£æ¯’"] = {94, 0, 2}
-    cc.thing_s["åŠ ä½“åŠ›"] = {96, 0, 2}
-    cc.thing_s["æ”¹å˜å†…åŠ›æ€§è´¨"] = {98, 0, 2}
-    cc.thing_s["åŠ å†…åŠ›"] = {100, 0, 2}
-    cc.thing_s["åŠ å†…åŠ›æœ€å¤§å€¼"] = {102, 0, 2}
-    cc.thing_s["åŠ æ”»å‡»åŠ›"] = {104, 0, 2}
-    cc.thing_s["åŠ è½»åŠŸ"] = {106, 0, 2}
-    cc.thing_s["åŠ é˜²å¾¡åŠ›"] = {108, 0, 2}
-    cc.thing_s["åŠ åŒ»ç–—"] = {110, 0, 2}
-    cc.thing_s["åŠ ä½¿æ¯’"] = {112, 0, 2}
-    cc.thing_s["åŠ è§£æ¯’"] = {114, 0, 2}
-    cc.thing_s["åŠ æŠ—æ¯’"] = {116, 0, 2}
-    cc.thing_s["åŠ æ‹³æŒ"] = {118, 0, 2}
-    cc.thing_s["åŠ æŒ‡æ³•"] = {120, 0, 2}
-    cc.thing_s["åŠ å¾¡å‰‘"] = {122, 0, 2}
-    cc.thing_s["åŠ è€åˆ€"] = {124, 0, 2}
-    cc.thing_s["åŠ å¥‡é—¨"] = {126, 0, 2}
-    cc.thing_s["åŠ æš—å™¨"] = {128, 0, 2}
-    cc.thing_s["åŠ æ­¦å­¦å¸¸è¯†"] = {130, 0, 2}
-    cc.thing_s["åŠ å“å¾·"] = {132, 0, 2}
-    cc.thing_s["åŠ æ”»å‡»æ¬¡æ•°"] = {134, 0, 2}
-    cc.thing_s["åŠ åŠŸå¤«å¸¦æ¯’"] = {136, 0, 2}
-    cc.thing_s["ä»…ä¿®ç‚¼äººç‰©"] = {138, 0, 2}
-    cc.thing_s["éœ€å†…åŠ›æ€§è´¨"] = {140, 0, 2}
-    cc.thing_s["éœ€å†…åŠ›"] = {142, 0, 2}
-    cc.thing_s["éœ€æ”»å‡»åŠ›"] = {144, 0, 2}
-    cc.thing_s["éœ€è½»åŠŸ"] = {146, 0, 2}
-    cc.thing_s["éœ€ç”¨æ¯’"] = {148, 0, 2}
-    cc.thing_s["éœ€åŒ»ç–—"] = {150, 0, 2}
-    cc.thing_s["åŠ å‘½ä¸­"] = {152, 0, 2}
-    cc.thing_s["éœ€æ‹³æŒ"] = {154, 0, 2}
-    cc.thing_s["éœ€æŒ‡æ³•"] = {156, 0, 2}
-    cc.thing_s["éœ€å¾¡å‰‘"] = {158, 0, 2}
-    cc.thing_s["éœ€è€åˆ€"] = {160, 0, 2}
-    cc.thing_s["éœ€å¥‡é—¨"] = {162, 0, 2}
-    cc.thing_s["éœ€æš—å™¨"] = {164, 0, 2}
-    cc.thing_s["éœ€èµ„è´¨"] = {166, 0, 2}
-    cc.thing_s["éœ€ç»éªŒ"] = {168, 0, 2}
-    cc.thing_s["ç»ƒå‡ºç‰©å“éœ€ç»éªŒ"] = {170, 0, 2}
-    cc.thing_s["éœ€ææ–™"] = {172, 0, 2}
+    cc.thing_size = 202                      -- Ã¿¸öÎïÆ·Êı¾İÕ¼ÓÃ×Ö½Ú
+    cc.thing_s = {}                         -- ±£´æÎïÆ·Êı¾İµÄ½á¹¹
+    cc.thing_s["´úºÅ"] = {0, 0, 2}
+    cc.thing_s["Ãû³Æ"] = {2, 2, 20}
+    cc.thing_s["Ãû³Æ2"] = {22, 2, 20}
+    cc.thing_s["ÎïÆ·ËµÃ÷"] = {42, 2, 30}
+    cc.thing_s["Á·³öÎä¹¦"] = {72, 0, 2}
+    cc.thing_s["°µÆ÷¶¯»­±àºÅ"] = {74, 0, 2}
+    cc.thing_s["Ê¹ÓÃÈË"] = {76, 0, 2}
+    cc.thing_s["×°±¸ÀàĞÍ"] = {78, 0, 2}
+    cc.thing_s["ÏÔÊ¾ÎïÆ·ËµÃ÷"] = {80, 0, 2}
+    cc.thing_s["ÀàĞÍ"] = {82, 0, 2}
+    cc.thing_s["Î´Öª5"] = {84, 0, 2}
+    cc.thing_s["Î´Öª6"] = {86, 0, 2}
+    cc.thing_s["Î´Öª7"] = {88, 0, 2}
+    cc.thing_s["¼ÓÉúÃü"] = {90, 0, 2}
+    cc.thing_s["¼ÓÉúÃü×î´óÖµ"] = {92, 0, 2}
+    cc.thing_s["¼ÓÖĞ¶¾½â¶¾"] = {94, 0, 2}
+    cc.thing_s["¼ÓÌåÁ¦"] = {96, 0, 2}
+    cc.thing_s["¸Ä±äÄÚÁ¦ĞÔÖÊ"] = {98, 0, 2}
+    cc.thing_s["¼ÓÄÚÁ¦"] = {100, 0, 2}
+    cc.thing_s["¼ÓÄÚÁ¦×î´óÖµ"] = {102, 0, 2}
+    cc.thing_s["¼Ó¹¥»÷Á¦"] = {104, 0, 2}
+    cc.thing_s["¼ÓÇá¹¦"] = {106, 0, 2}
+    cc.thing_s["¼Ó·ÀÓùÁ¦"] = {108, 0, 2}
+    cc.thing_s["¼ÓÒ½ÁÆ"] = {110, 0, 2}
+    cc.thing_s["¼ÓÊ¹¶¾"] = {112, 0, 2}
+    cc.thing_s["¼Ó½â¶¾"] = {114, 0, 2}
+    cc.thing_s["¼Ó¿¹¶¾"] = {116, 0, 2}
+    cc.thing_s["¼ÓÈ­ÕÆ"] = {118, 0, 2}
+    cc.thing_s["¼ÓÖ¸·¨"] = {120, 0, 2}
+    cc.thing_s["¼ÓÓù½£"] = {122, 0, 2}
+    cc.thing_s["¼ÓË£µ¶"] = {124, 0, 2}
+    cc.thing_s["¼ÓÆæÃÅ"] = {126, 0, 2}
+    cc.thing_s["¼Ó°µÆ÷"] = {128, 0, 2}
+    cc.thing_s["¼ÓÎäÑ§³£Ê¶"] = {130, 0, 2}
+    cc.thing_s["¼ÓÆ·µÂ"] = {132, 0, 2}
+    cc.thing_s["¼Ó¹¥»÷´ÎÊı"] = {134, 0, 2}
+    cc.thing_s["¼Ó¹¦·ò´ø¶¾"] = {136, 0, 2}
+    cc.thing_s["½öĞŞÁ¶ÈËÎï"] = {138, 0, 2}
+    cc.thing_s["ĞèÄÚÁ¦ĞÔÖÊ"] = {140, 0, 2}
+    cc.thing_s["ĞèÄÚÁ¦"] = {142, 0, 2}
+    cc.thing_s["Ğè¹¥»÷Á¦"] = {144, 0, 2}
+    cc.thing_s["ĞèÇá¹¦"] = {146, 0, 2}
+    cc.thing_s["ĞèÓÃ¶¾"] = {148, 0, 2}
+    cc.thing_s["ĞèÒ½ÁÆ"] = {150, 0, 2}
+    cc.thing_s["¼ÓÃüÖĞ"] = {152, 0, 2}
+    cc.thing_s["ĞèÈ­ÕÆ"] = {154, 0, 2}
+    cc.thing_s["ĞèÖ¸·¨"] = {156, 0, 2}
+    cc.thing_s["ĞèÓù½£"] = {158, 0, 2}
+    cc.thing_s["ĞèË£µ¶"] = {160, 0, 2}
+    cc.thing_s["ĞèÆæÃÅ"] = {162, 0, 2}
+    cc.thing_s["Ğè°µÆ÷"] = {164, 0, 2}
+    cc.thing_s["Ğè×ÊÖÊ"] = {166, 0, 2}
+    cc.thing_s["Ğè¾­Ñé"] = {168, 0, 2}
+    cc.thing_s["Á·³öÎïÆ·Ğè¾­Ñé"] = {170, 0, 2}
+    cc.thing_s["Ğè²ÄÁÏ"] = {172, 0, 2}
     for i = 1, 5 do
-        cc.thing_s["ç»ƒå‡ºç‰©å“" .. i] = {174 + 2 * (i - 1), 0, 2}
-        cc.thing_s["éœ€è¦ç‰©å“æ•°é‡" .. i] = {184 + 2 * (i - 1), 0, 2}
+        cc.thing_s["Á·³öÎïÆ·" .. i] = {174 + 2 * (i - 1), 0, 2}
+        cc.thing_s["ĞèÒªÎïÆ·ÊıÁ¿" .. i] = {184 + 2 * (i - 1), 0, 2}
     end
-    cc.thing_s["æ˜¯å¦ç‰¹æ•ˆ"] = {194, 0, 2}
-    cc.thing_s["è£…å¤‡ç»éªŒ"] = {196, 0, 2}
-    cc.thing_s["è£…å¤‡ç­‰çº§"] = {198, 0, 2}
-    cc.thing_s["è£…å¤‡ç³»åˆ«"] = {200, 0, 2}
-    cc.thing_s["åŠ æ‹›æ¶"] = {202, 0, 2}
+    cc.thing_s["ÊÇ·ñÌØĞ§"] = {194, 0, 2}
+    cc.thing_s["×°±¸¾­Ñé"] = {196, 0, 2}
+    cc.thing_s["×°±¸µÈ¼¶"] = {198, 0, 2}
+    cc.thing_s["×°±¸Ïµ±ğ"] = {200, 0, 2}
+    cc.thing_s["¼ÓÕĞ¼Ü"] = {202, 0, 2}
 
-    cc.scene_size = 54                       -- æ¯ä¸ªåœºæ™¯æ•°æ®å ç”¨å­—èŠ‚
-    cc.scene_s = {}                         -- ä¿å­˜åœºæ™¯æ•°æ®çš„ç»“æ„
-    cc.scene_s["ä»£å·"] = {0, 0, 2}
-    cc.scene_s["åç§°"] = {2, 2, 10}
-    cc.scene_s["å‡ºé—¨éŸ³ä¹"] = {12, 0, 2}
-    cc.scene_s["è¿›é—¨éŸ³ä¹"] = {14, 0, 2}
-    cc.scene_s["è·³è½¬åœºæ™¯"] = {16, 0, 2}
-    cc.scene_s["è¿›å…¥æ¡ä»¶"] = {18, 0, 2}
-    cc.scene_s["å¤–æ™¯å…¥å£X1"] = {20, 0, 2}
-    cc.scene_s["å¤–æ™¯å…¥å£Y1"] = {22, 0, 2}
-    cc.scene_s["å¤–æ™¯å…¥å£X2"] = {24, 0, 2}
-    cc.scene_s["å¤–æ™¯å…¥å£Y2"] = {26, 0, 2}
-    cc.scene_s["å…¥å£X"] = {28, 0, 2}
-    cc.scene_s["å…¥å£Y"] = {30, 0, 2}
-    cc.scene_s["å‡ºå£X1"] = {32, 0, 2}
-    cc.scene_s["å‡ºå£X2"] = {34, 0, 2}
-    cc.scene_s["å‡ºå£X3"] = {36, 0, 2}
-    cc.scene_s["å‡ºå£Y1"] = {38, 0, 2}
-    cc.scene_s["å‡ºå£Y2"] = {40, 0, 2}
-    cc.scene_s["å‡ºå£Y3"] = {42, 0, 2}
-    cc.scene_s["è·³è½¬å£X1"] = {44, 0, 2}
-    cc.scene_s["è·³è½¬å£Y1"] = {46, 0, 2}
-    cc.scene_s["è·³è½¬å£X2"] = {48, 0, 2}
-    cc.scene_s["è·³è½¬å£Y2"] = {50, 0, 2}
-    cc.scene_s["åœºæ™¯ç±»å‹"] = {52, 0, 2}
+    cc.scene_size = 54                       -- Ã¿¸ö³¡¾°Êı¾İÕ¼ÓÃ×Ö½Ú
+    cc.scene_s = {}                         -- ±£´æ³¡¾°Êı¾İµÄ½á¹¹
+    cc.scene_s["´úºÅ"] = {0, 0, 2}
+    cc.scene_s["Ãû³Æ"] = {2, 2, 10}
+    cc.scene_s["³öÃÅÒôÀÖ"] = {12, 0, 2}
+    cc.scene_s["½øÃÅÒôÀÖ"] = {14, 0, 2}
+    cc.scene_s["Ìø×ª³¡¾°"] = {16, 0, 2}
+    cc.scene_s["½øÈëÌõ¼ş"] = {18, 0, 2}
+    cc.scene_s["Íâ¾°Èë¿ÚX1"] = {20, 0, 2}
+    cc.scene_s["Íâ¾°Èë¿ÚY1"] = {22, 0, 2}
+    cc.scene_s["Íâ¾°Èë¿ÚX2"] = {24, 0, 2}
+    cc.scene_s["Íâ¾°Èë¿ÚY2"] = {26, 0, 2}
+    cc.scene_s["Èë¿ÚX"] = {28, 0, 2}
+    cc.scene_s["Èë¿ÚY"] = {30, 0, 2}
+    cc.scene_s["³ö¿ÚX1"] = {32, 0, 2}
+    cc.scene_s["³ö¿ÚX2"] = {34, 0, 2}
+    cc.scene_s["³ö¿ÚX3"] = {36, 0, 2}
+    cc.scene_s["³ö¿ÚY1"] = {38, 0, 2}
+    cc.scene_s["³ö¿ÚY2"] = {40, 0, 2}
+    cc.scene_s["³ö¿ÚY3"] = {42, 0, 2}
+    cc.scene_s["Ìø×ª¿ÚX1"] = {44, 0, 2}
+    cc.scene_s["Ìø×ª¿ÚY1"] = {46, 0, 2}
+    cc.scene_s["Ìø×ª¿ÚX2"] = {48, 0, 2}
+    cc.scene_s["Ìø×ª¿ÚY2"] = {50, 0, 2}
+    cc.scene_s["³¡¾°ÀàĞÍ"] = {52, 0, 2}
 
-    cc.wugong_size = 148                     -- æ¯ä¸ªæ­¦åŠŸæ•°æ®å ç”¨å­—èŠ‚
-    cc.wugong_s = {}                        -- ä¿å­˜æ­¦åŠŸæ•°æ®çš„ç»“æ„
-    cc.wugong_s["ä»£å·"] = {0, 0, 2}
-    cc.wugong_s["åç§°"] = {2, 2, 10}
+    cc.wugong_size = 148                     -- Ã¿¸öÎä¹¦Êı¾İÕ¼ÓÃ×Ö½Ú
+    cc.wugong_s = {}                        -- ±£´æÎä¹¦Êı¾İµÄ½á¹¹
+    cc.wugong_s["´úºÅ"] = {0, 0, 2}
+    cc.wugong_s["Ãû³Æ"] = {2, 2, 10}
     for i = 1, 5 do
-        cc.wugong_s["æœªçŸ¥" .. i] = {12 + 2 * (i - 1), 0, 2}
+        cc.wugong_s["Î´Öª" .. i] = {12 + 2 * (i - 1), 0, 2}
     end
-    cc.wugong_s["å‡ºæ‹›éŸ³æ•ˆ"] = {22, 0, 2}
-    cc.wugong_s["æ­¦åŠŸç±»å‹"] = {24, 0, 2}
-    cc.wugong_s["æ­¦åŠŸåŠ¨ç”»&éŸ³æ•ˆ"] = {26, 0, 2}
-    cc.wugong_s["ä¼¤å®³ç±»å‹"] = {28, 0, 2}
-    cc.wugong_s["æ”»å‡»èŒƒå›´"] = {30, 0, 2}
-    cc.wugong_s["æ¶ˆè€—å†…åŠ›ç‚¹æ•°"] = {32, 0, 2}
-    cc.wugong_s["æ•Œäººä¸­æ¯’ç‚¹æ•°"] = {34, 0, 2}
+    cc.wugong_s["³öÕĞÒôĞ§"] = {22, 0, 2}
+    cc.wugong_s["Îä¹¦ÀàĞÍ"] = {24, 0, 2}
+    cc.wugong_s["Îä¹¦¶¯»­&ÒôĞ§"] = {26, 0, 2}
+    cc.wugong_s["ÉËº¦ÀàĞÍ"] = {28, 0, 2}
+    cc.wugong_s["¹¥»÷·¶Î§"] = {30, 0, 2}
+    cc.wugong_s["ÏûºÄÄÚÁ¦µãÊı"] = {32, 0, 2}
+    cc.wugong_s["µĞÈËÖĞ¶¾µãÊı"] = {34, 0, 2}
     for i = 1, 10 do
-        cc.wugong_s["æ”»å‡»åŠ›" .. i] = {36 + 2 * (i - 1), 0, 2}
-        cc.wugong_s["ç§»åŠ¨èŒƒå›´" .. i] = {56 + 2 * (i - 1), 0, 2}
-        cc.wugong_s["æ€ä¼¤èŒƒå›´" .. i] = {76 + 2 * (i - 1), 0, 2}
-        cc.wugong_s["åŠ å†…åŠ›" .. i] = {96 + 2 * (i - 1), 0, 2}
-        cc.wugong_s["æ€å†…åŠ›" .. i] = {116 + 2 * (i - 1), 0, 2}
+        cc.wugong_s["¹¥»÷Á¦" .. i] = {36 + 2 * (i - 1), 0, 2}
+        cc.wugong_s["ÒÆ¶¯·¶Î§" .. i] = {56 + 2 * (i - 1), 0, 2}
+        cc.wugong_s["É±ÉË·¶Î§" .. i] = {76 + 2 * (i - 1), 0, 2}
+        cc.wugong_s["¼ÓÄÚÁ¦" .. i] = {96 + 2 * (i - 1), 0, 2}
+        cc.wugong_s["É±ÄÚÁ¦" .. i] = {116 + 2 * (i - 1), 0, 2}
     end
-    cc.wugong_s["å†°å°ç³»æ•°"] = {136, 0, 2}
-    cc.wugong_s["ç¼çƒ§ç³»æ•°"] = {138, 0, 2}
-    cc.wugong_s["é—¨æ´¾"] = {140, 2, 10}
-    cc.wugong_s["æ ¼æ¡£"] = {150, 0, 2}
-    cc.wugong_s["çµå·§ç³»æ•°"] = {152, 0, 2}
-    cc.wugong_s["æš‚æ—¶æ— ç”¨"] = {154, 0, 2}
-    cc.wugong_s["å±‚çº§"] = {156, 0, 2}
+    cc.wugong_s["±ù·âÏµÊı"] = {136, 0, 2}
+    cc.wugong_s["×ÆÉÕÏµÊı"] = {138, 0, 2}
+    cc.wugong_s["ÃÅÅÉ"] = {140, 2, 10}
+    cc.wugong_s["¸ñµµ"] = {150, 0, 2}
+    cc.wugong_s["ÁéÇÉÏµÊı"] = {152, 0, 2}
+    cc.wugong_s["ÔİÊ±ÎŞÓÃ"] = {154, 0, 2}
+    cc.wugong_s["²ã¼¶"] = {156, 0, 2}
     for i = 1, 4 do
-        cc.wugong_s["ç‰¹æ•ˆ" .. i] = {158 + 2 * (i - 1), 0, 2}
+        cc.wugong_s["ÌØĞ§" .. i] = {158 + 2 * (i - 1), 0, 2}
     end
     for i = 1, 10 do
-        cc.wugong_s["æ‹›å¼"] = {166 + 2 * (i - 1), 0, 2}
+        cc.wugong_s["ÕĞÊ½"] = {166 + 2 * (i - 1), 0, 2}
     end
     
-    cc.shop_size = 36                           -- æ¯ä¸ªå•†åº—æ•°æ®å ç”¨å­—èŠ‚
-    cc.shop_s = {}                              -- ä¿å­˜å•†åº—æ•°æ®çš„ç»“æ„
+    cc.shop_size = 36                           -- Ã¿¸öÉÌµêÊı¾İÕ¼ÓÃ×Ö½Ú
+    cc.shop_s = {}                              -- ±£´æÉÌµêÊı¾İµÄ½á¹¹
     for i = 1, 6 do
-        cc.shop_s["ç‰©å“" .. i] = {0 + 2 * (i - 1), 0, 2}
-        cc.shop_s["ç‰©å“æ•°é‡" .. i] = {12 + 2 * (i - 1), 0, 2}
-        cc.shop_s["ç‰©å“ä»·æ ¼" .. i] = {24 + 2 * (i - 1), 0, 2}
+        cc.shop_s["ÎïÆ·" .. i] = {0 + 2 * (i - 1), 0, 2}
+        cc.shop_s["ÎïÆ·ÊıÁ¿" .. i] = {12 + 2 * (i - 1), 0, 2}
+        cc.shop_s["ÎïÆ·¼Û¸ñ" .. i] = {24 + 2 * (i - 1), 0, 2}
     end
 
-    cc.shop_scene = {}                       -- å°å®å•†åº—åœºæ™¯æ•°æ®
-    -- sceneidï¼šåœºæ™¯idï¼Œd_shopï¼šå°å®ä½ç½®D*, d_leaveï¼šå°å®ç¦»å¼€D*ï¼Œä¸€èˆ¬åœ¨åœºæ™¯å‡ºå£ï¼Œè·¯è¿‡è§¦å‘
+    cc.shop_scene = {}                       -- Ğ¡±¦ÉÌµê³¡¾°Êı¾İ
+    -- sceneid£º³¡¾°id£¬d_shop£ºĞ¡±¦Î»ÖÃD*, d_leave£ºĞ¡±¦Àë¿ªD*£¬Ò»°ãÔÚ³¡¾°³ö¿Ú£¬Â·¹ı´¥·¢
     cc.shop_scene[0] = {sceneid = 153, d_shop = 16, d_leave = {17, 18}, }
     cc.shop_scene[1] = {sceneid = 3, d_shop = 14, d_leave = {15, 16}, }
     cc.shop_scene[2] = {sceneid = 40, d_shop = 20, d_leave = {21, 22}, }
     cc.shop_scene[3] = {sceneid = 60, d_shop = 16, d_leave = {17, 18}, }
     cc.shop_scene[4] = {sceneid = 159, d_shop = 9, d_leave = {10, 11, 12}, }
 
-    -- å…¶ä»–å¸¸é‡
-    cc.m_width = 480                             -- å¤§åœ°å›¾å®½
-    cc.m_height = 480                            -- å¤§åœ°å›¾é«˜
-    cc.s_width = 64                              -- åœºæ™¯åœ°å›¾é«˜
-    cc.s_height = 64                             -- åœºæ™¯åœ°å›¾å®½
-    cc.d_num = 200                               -- D * æ¯ä¸ªåœºæ™¯çš„äº‹ä»¶æ•°
-    cc.x_scale = CONFIG.XScale                   -- è´´å›¾ä¸€åŠçš„å®½
-    cc.y_scale = CONFIG.YScale                   -- è´´å›¾ä¸€åŠçš„é«˜
-    cc.frame = CONFIG.FrameRate                 -- æ¯å¸§æ¯«ç§’æ•°
-    cc.battle_delay = CONFIG.BattleDelay         -- æˆ˜æ–—å»¶è¿Ÿ
+    -- ÆäËû³£Á¿
+    cc.m_width = 480                             -- ´óµØÍ¼¿í
+    cc.m_height = 480                            -- ´óµØÍ¼¸ß
+    cc.s_width = 64                              -- ³¡¾°µØÍ¼¸ß
+    cc.s_height = 64                             -- ³¡¾°µØÍ¼¿í
+    cc.d_num = 200                               -- D * Ã¿¸ö³¡¾°µÄÊÂ¼şÊı
+    cc.x_scale = CONFIG.XScale                   -- ÌùÍ¼Ò»°ëµÄ¿í
+    cc.y_scale = CONFIG.YScale                   -- ÌùÍ¼Ò»°ëµÄ¸ß
+    cc.frame = CONFIG.FrameRate                 -- Ã¿Ö¡ºÁÃëÊı
+    cc.battle_delay = CONFIG.BattleDelay         -- Õ½¶·ÑÓ³Ù
     cc.bj = CONFIG.Bj
-    cc.scene_move_frame = 100                     -- åœºæ™¯ç§»åŠ¨å¸§é€Ÿï¼Œç”¨äºåœºæ™¯ç§»åŠ¨äº‹ä»¶
-    cc.person_move_frame = 100                    -- ä¸»è§’ç§»åŠ¨é€Ÿåº¦ï¼Œç”¨äºä¸»è§’ç§»åŠ¨äº‹ä»¶
-    cc.animation_frame = 150                     -- åŠ¨ç”»æ˜¾ç¤ºå¸§é€Ÿï¼Œç”¨äºæ˜¾ç¤ºåŠ¨ç”»äº‹ä»¶
-    cc.war_auto_delay = 300                       -- è‡ªåŠ¨æˆ˜æ–—æ—¶æ˜¾ç¤ºå¤´åƒçš„å»¶æ—¶
-    cc.direct_x = {0, 1, -1, 0}                  -- ä¸åŒæ–¹å‘xçš„åŠ å‡å€¼ï¼Œç”¨äºèµ°è·¯æ”¹å˜åæ ‡å€¼
-    cc.direct_y = {-1, 0, 0, 1}                  -- ä¸åŒæ–¹å‘yçš„åŠ å‡å€¼ï¼Œç”¨äºèµ°è·¯æ”¹å˜åæ ‡å€¼
-    cc.my_start_pic_m = 2501                       -- ç”·ä¸»è§’èµ°è·¯èµ·å§‹è´´å›¾
-    cc.my_start_pic_f = 5001                       -- å¥³ä¸»è§’èµ°è·¯èµ·å§‹è´´å›¾
-    cc.my_start_pic_na = 5201                      -- å¤‡ç”¨äººç‰©èµ°è·¯èµ·å§‹è´´å›¾
-    cc.boat_start_pic = 3715                      -- èˆ¹èµ·å§‹è´´å›¾
-    -- cc.Level = 30                               -- äººç‰©ç­‰çº§
-    -- cc.Exp = {                                  -- æ¯ç­‰çº§ç»éªŒ
+    cc.scene_move_frame = 100                     -- ³¡¾°ÒÆ¶¯Ö¡ËÙ£¬ÓÃÓÚ³¡¾°ÒÆ¶¯ÊÂ¼ş
+    cc.person_move_frame = 100                    -- Ö÷½ÇÒÆ¶¯ËÙ¶È£¬ÓÃÓÚÖ÷½ÇÒÆ¶¯ÊÂ¼ş
+    cc.animation_frame = 150                     -- ¶¯»­ÏÔÊ¾Ö¡ËÙ£¬ÓÃÓÚÏÔÊ¾¶¯»­ÊÂ¼ş
+    cc.war_auto_delay = 300                       -- ×Ô¶¯Õ½¶·Ê±ÏÔÊ¾Í·ÏñµÄÑÓÊ±
+    cc.direct_x = {0, 1, -1, 0}                  -- ²»Í¬·½ÏòxµÄ¼Ó¼õÖµ£¬ÓÃÓÚ×ßÂ·¸Ä±ä×ø±êÖµ
+    cc.direct_y = {-1, 0, 0, 1}                  -- ²»Í¬·½ÏòyµÄ¼Ó¼õÖµ£¬ÓÃÓÚ×ßÂ·¸Ä±ä×ø±êÖµ
+    cc.my_start_pic_m = 2501                       -- ÄĞÖ÷½Ç×ßÂ·ÆğÊ¼ÌùÍ¼
+    cc.my_start_pic_f = 5001                       -- Å®Ö÷½Ç×ßÂ·ÆğÊ¼ÌùÍ¼
+    cc.my_start_pic_na = 5201                      -- ±¸ÓÃÈËÎï×ßÂ·ÆğÊ¼ÌùÍ¼
+    cc.boat_start_pic = 3715                      -- ´¬ÆğÊ¼ÌùÍ¼
+    -- cc.Level = 30                               -- ÈËÎïµÈ¼¶
+    -- cc.Exp = {                                  -- Ã¿µÈ¼¶¾­Ñé
     --     50, 150, 300, 500, 750, 
     --     1050, 1400, 1800, 2250, 2750, 
     --     3850, 5050, 6350, 7750, 9250, 
@@ -571,14 +571,14 @@ function SetGlobalConst()
     --     21400, 24700, 28150, 31750, 35500, 
     --     39400, 43450, 47650, 52000, 60000, [0] = 0
     -- }
-    cc.mmap_boat = {}                            -- å¤§åœ°å›¾èˆ¹å¯ä»¥è¿›å…¥çš„è´´å›¾
+    cc.mmap_boat = {}                            -- ´óµØÍ¼´¬¿ÉÒÔ½øÈëµÄÌùÍ¼
     local tmpBoat = {{0x166, 0x16a}, {0x176, 0x17c}, {0x1ca, 0x1d0}, {0x1fa, 0x262}, {0x3f8, 0x3fe}}
-    for i, v in ipairs(tmpBoat) do              -- æŠŠè¿™äº›æ•°æ®å˜æ¢æˆæ•°ç»„ï¼Œå…¶ä¸­æœ‰å€¼å°±æ˜¯å¯ä»¥è¿›å…¥
+    for i, v in ipairs(tmpBoat) do              -- °ÑÕâĞ©Êı¾İ±ä»»³ÉÊı×é£¬ÆäÖĞÓĞÖµ¾ÍÊÇ¿ÉÒÔ½øÈë
         for j = v[1], v[2], 2 do
             cc.mmap_boat[j] = 1
         end
     end
-    -- Alungkyï¼šè§£å†³èˆ¹å¼€åˆ°æ·±æµ·åŒºæ—¶ï¼Œæ˜¾ç¤ºä¸ºäººçš„é—®é¢˜
+    -- Alungky£º½â¾ö´¬¿ªµ½Éîº£ÇøÊ±£¬ÏÔÊ¾ÎªÈËµÄÎÊÌâ
     local tmpForbid = {{0x264, 0x29E}}
     for i, v in ipairs(tmpForbid) do
         for j = v[1], v[2], 2 do
@@ -586,29 +586,29 @@ function SetGlobalConst()
         end
     end
 
-    cc.scene_water = {}                          -- åœºæ™¯äººä¸èƒ½è¿›å…¥çš„è´´å›¾
+    cc.scene_water = {}                          -- ³¡¾°ÈË²»ÄÜ½øÈëµÄÌùÍ¼
     local tmpWater = {{0x166, 0x16a}, {0x176, 0x17c}, {0x1ca, 0x1d0}, 
                     {0x1fa, 0x262}, {0x332, 0x338}, {0x346, 0x346}, 
                     {0x3a6, 0x3a8}, {0x3f8, 0x3fe}, {0x52c, 0x544}
                 }
-    for i, v in ipairs(tmpWater) do              -- æŠŠè¿™äº›æ•°æ®å˜æ¢æˆæ•°ç»„ï¼Œå…¶ä¸­ç©ºé¡¹å°±æ˜¯å¯ä»¥è¿›å…¥çš„è´´å›¾
+    for i, v in ipairs(tmpWater) do              -- °ÑÕâĞ©Êı¾İ±ä»»³ÉÊı×é£¬ÆäÖĞ¿ÕÏî¾ÍÊÇ¿ÉÒÔ½øÈëµÄÌùÍ¼
         for j = v[1], v[2], 2 do
             cc.scene_water[j] = 1
         end
     end
 
-    cc.war_water = {}                            -- æˆ˜æ–—åœ°å›¾äººä¸èƒ½è¿›å…¥çš„è´´å›¾
+    cc.war_water = {}                            -- Õ½¶·µØÍ¼ÈË²»ÄÜ½øÈëµÄÌùÍ¼
     local tmpWater = {{0x166, 0x16a}, {0x176, 0x17c}, {0x1ca, 0x1d0}, 
                     {0x1fa, 0x262}, {0x332, 0x338}, {0x346, 0x346}, 
                     {0x3a6, 0x3a8}, {0x3f8, 0x3fe}, {0x52c, 0x544}
                 }
-    for i, v in ipairs(tmpWater) do             -- æŠŠè¿™äº›æ•°æ®å˜æ¢æˆæ•°ç»„ï¼Œå…¶ä¸­ç©ºé¡¹å°±æ˜¯å¯ä»¥è¿›å…¥çš„è´´å›¾
+    for i, v in ipairs(tmpWater) do             -- °ÑÕâĞ©Êı¾İ±ä»»³ÉÊı×é£¬ÆäÖĞ¿ÕÏî¾ÍÊÇ¿ÉÒÔ½øÈëµÄÌùÍ¼
         for j = v[1], v[2], 2 do
             cc.war_water[j] = 1
         end
     end
 
-    cc.wugong_zs = {}                            -- æ­¦åŠŸæ‹›å¼
+    cc.wugong_zs = {}                            -- Îä¹¦ÕĞÊ½
     for i = 1, 15 do
         cc.wugong_zs[i] = {1 + 10 * (i - 1), 2 + 10 * (i - 1), 3 + 10 * (i - 1), 
                          4 + 10 * (i - 1), 5 + 10 * (i - 1), 6 + 10 * (i - 1), 
@@ -618,16 +618,16 @@ function SetGlobalConst()
     end
 
     cc.weekday = {}
-    cc.weekday["Monday"] = {"æ˜ŸæœŸä¸€"}
-    cc.weekday["Tuesday"] = {"æ˜ŸæœŸäºŒ"}
-    cc.weekday["Wednesday"] = {"æ˜ŸæœŸä¸‰"}
-    cc.weekday["Thursday"] = {"æ˜ŸæœŸå››"}
-    cc.weekday["Friday"] = {"æ˜ŸæœŸäº”"}
-    cc.weekday["Saturday"] = {"æ˜ŸæœŸå…­"}
-    cc.weekday["Sunday"] = {"æ˜ŸæœŸæ—¥"}
+    cc.weekday["Monday"] = {"ĞÇÆÚÒ»"}
+    cc.weekday["Tuesday"] = {"ĞÇÆÚ¶ş"}
+    cc.weekday["Wednesday"] = {"ĞÇÆÚÈı"}
+    cc.weekday["Thursday"] = {"ĞÇÆÚËÄ"}
+    cc.weekday["Friday"] = {"ĞÇÆÚÎå"}
+    cc.weekday["Saturday"] = {"ĞÇÆÚÁù"}
+    cc.weekday["Sunday"] = {"ĞÇÆÚÈÕ"}
 
-    -- ç¦»é˜Ÿäººå‘˜åˆ—è¡¨: {äººå‘˜idï¼Œç¦»é˜Ÿè°ƒç”¨å‡½æ•°}
-    -- å¦‚æœæœ‰æ–°çš„ç¦»é˜Ÿäººå‘˜åŠ å…¥ï¼Œç›´æ¥åœ¨è¿™é‡Œå¢åŠ 
+    -- Àë¶ÓÈËÔ±ÁĞ±í: {ÈËÔ±id£¬Àë¶Óµ÷ÓÃº¯Êı}
+    -- Èç¹ûÓĞĞÂµÄÀë¶ÓÈËÔ±¼ÓÈë£¬Ö±½ÓÔÚÕâÀïÔö¼Ó
     cc.person_exit = {
         [1]=100,
         [2]=102,
@@ -690,21 +690,21 @@ function SetGlobalConst()
         [566]=11006,
         [569]=11003,
         [574]=11005,
-        [587]=11007,    --ç´«è¡£
-        [738]=11008,    --èƒ¡å¤«äºº
-        [589]=8005,     --æ°´ç¬™
+        [587]=11007,    --×ÏÒÂ
+        [738]=11008,    --ºú·òÈË
+        [589]=8005,     --Ë®óÏ
         [590]=8650,
         [601]=4138,
         [604]=11001,
-        [607]=4202,     --ç„¦ä¸‡å°”
-        [609]=4250,     --èµµæ•
-        [626]=4184,     --éƒ­è¥„
-        [629]=4200,     --é˜¿ä¹
-        [631]=4209,     --å‘¨èŠ·è‹¥
-        [646]=4249,     --æ®·ç¦»
+        [607]=4202,     --½¹Íò¶û
+        [609]=4250,     --ÕÔÃô
+        [626]=4184,     --¹ùÏå
+        [629]=4200,     --°¢¾Å
+        [631]=4209,     --ÖÜÜÆÈô
+        [646]=4249,     --ÒóÀë
     }
 
-    -- æ‰€æœ‰å¯åŠ å…¥äººå‘˜ç¦»é˜Ÿéœ€è¦æ¸…é™¤çš„D*äº‹ä»¶ï¼Œæ¸…é™¤åè¿™äº›äººå°±æ‰¾ä¸åˆ°äº†ã€‚å¾—åˆ°ç¥æ–æ—¶ä½¿ç”¨
+    -- ËùÓĞ¿É¼ÓÈëÈËÔ±Àë¶ÓĞèÒªÇå³ıµÄD*ÊÂ¼ş£¬Çå³ıºóÕâĞ©ÈË¾ÍÕÒ²»µ½ÁË¡£µÃµ½ÉñÕÈÊ±Ê¹ÓÃ
     cc.all_person_exit = {
         {1, 5}, 
         {2, 6}, 
@@ -761,498 +761,498 @@ function SetGlobalConst()
         {581, 51}, 
         {582, 51}, 
         {92, 1},
-        {151, 115},     --æ–‡æ³°æ¥
-        {154, 112},     --éª†å†°
-        {161, 99},      --æè«æ„
-        {566, 117},     --è¢å† å—
-        {569, 113},     --ææ²…èŠ·
-        {574, 110},     --ææ¸…éœ²
-        {587, 124},     --è¢ç´«è¡£
-        {589, 80},      --æ°´ç¬™
-        {590, 86},      --ææ–‡ç§€
-        {601, 48},      --éŸ¦å°å®
-        {604, 100},     --é˜¿é’
-        {609, 105},     --èµµæ•
-        {626, 120},     --éƒ­è¥„
-        {629, 51},      --é˜¿ä¹
-        {631, 105},     --èŠ·è‹¥            
-        {646, 106},     --æ®·ç¦»
+        {151, 115},     --ÎÄÌ©À´
+        {154, 112},     --Âæ±ù
+        {161, 99},      --ÀîÄª³î
+        {566, 117},     --Ô¬¹ÚÄÏ
+        {569, 113},     --ÀîãäÜÆ
+        {574, 110},     --ÀîÇåÂ¶
+        {587, 124},     --Ô¬×ÏÒÂ
+        {589, 80},      --Ë®óÏ
+        {590, 86},      --ÀîÎÄĞã
+        {601, 48},      --Î¤Ğ¡±¦
+        {604, 100},     --°¢Çà
+        {609, 105},     --ÕÔÃô
+        {626, 120},     --¹ùÏå
+        {629, 51},      --°¢¾Å
+        {631, 105},     --ÜÆÈô            
+        {646, 106},     --ÒóÀë
     }
 
-    cc.book_num = 14                -- å¤©ä¹¦ä¸ªæ•°
-    cc.book_start = 144             -- 14å¤©ä¹¦èµ·å§‹id
-    cc.money_id = 174               -- é“¶ä¸¤id
-    cc.mjcv_id = 550                -- ç§˜ç±æ®‹ç« id
-    cc.she_ma_le = {[93] = 1}       -- ï¼Ÿ
-    cc.she_ma_le2 = {[370] = 1}     -- ï¼Ÿ
+    cc.book_num = 14                -- ÌìÊé¸öÊı
+    cc.book_start = 144             -- 14ÌìÊéÆğÊ¼id
+    cc.money_id = 174               -- ÒøÁ½id
+    cc.mjcv_id = 550                -- ÃØ¼®²ĞÕÂid
+    cc.she_ma_le = {[93] = 1}       -- £¿
+    cc.she_ma_le2 = {[370] = 1}     -- £¿
 
-    cc.effect = {                   -- ç‰¹æ•ˆå¸§æ•°
-        14,   --ç‰¹æ•ˆ1--(10 -- 23)
-        17,   --ç‰¹æ•ˆ2--(24 -- 40)
-        9,   --ç‰¹æ•ˆ3--(41 -- 49)
-        13,   --ç‰¹æ•ˆ4--(50 -- 62)
-        17,   --ç‰¹æ•ˆ5--(63 -- 79)
-        17,   --ç‰¹æ•ˆ6--(80 -- 96)
-        17,   --ç‰¹æ•ˆ7--(97 -- 113)
-        18,   --ç‰¹æ•ˆ8--(114 -- 131)
-        19,   --ç‰¹æ•ˆ9--(132 -- 150)
-        19,   --ç‰¹æ•ˆ10--(151 -- 169)
-        15,   --ç‰¹æ•ˆ11--(170 -- 184)
-        13,   --ç‰¹æ•ˆ12--(185 -- 197)
-        10,   --ç‰¹æ•ˆ13--(198 -- 207)
-        10,   --ç‰¹æ•ˆ14--(208 -- 217)
-        15,   --ç‰¹æ•ˆ15--(218 -- 232)
-        21,   --ç‰¹æ•ˆ16--(233 -- 253)
-        16,   --ç‰¹æ•ˆ17--(254 -- 269)
-        9,   --ç‰¹æ•ˆ18--(270 -- 278)
-        11,   --ç‰¹æ•ˆ19--(279 -- 289)
-        8,   --ç‰¹æ•ˆ20--(290 -- 297)
-        9,   --ç‰¹æ•ˆ21--(298 -- 306)
-        8,   --ç‰¹æ•ˆ22--(307 -- 314)
-        8,   --ç‰¹æ•ˆ23--(315 -- 322)
-        7,   --ç‰¹æ•ˆ24--(323 -- 329)
-        8,   --ç‰¹æ•ˆ25--(330 -- 337)
-        8,   --ç‰¹æ•ˆ26--(338 -- 345)
-        9,   --ç‰¹æ•ˆ27--(346 -- 354)
-        12,   --ç‰¹æ•ˆ28--(355 -- 366)
-        19,   --ç‰¹æ•ˆ29--(367 -- 385)
-        11,   --ç‰¹æ•ˆ30--(386 -- 396)
-        14,   --ç‰¹æ•ˆ31--(397 -- 410)
-        12,   --ç‰¹æ•ˆ32--(411 -- 422)
-        17,   --ç‰¹æ•ˆ33--(423 -- 439)
-        8,   --ç‰¹æ•ˆ34--(440 -- 447)
-        11,   --ç‰¹æ•ˆ35--(448 -- 458)
-        10,   --ç‰¹æ•ˆ36--(459 -- 468)
-        13,   --ç‰¹æ•ˆ37--(469 -- 481)
-        10,   --ç‰¹æ•ˆ38--(482 -- 491)
-        19,   --ç‰¹æ•ˆ39--(492 -- 510)
-        14,   --ç‰¹æ•ˆ40--(511 -- 524)
-        17,   --ç‰¹æ•ˆ41--(525 -- 541)
-        19,   --ç‰¹æ•ˆ42--(542 -- 560)
-        14,   --ç‰¹æ•ˆ43--(561 -- 574)
-        21,   --ç‰¹æ•ˆ44--(575 -- 595)
-        16,   --ç‰¹æ•ˆ45--(596 -- 611)
-        13,   --ç‰¹æ•ˆ46--(612 -- 624)
-        18,   --ç‰¹æ•ˆ47--(625 -- 642)
-        14,   --ç‰¹æ•ˆ48--(643 -- 656)
-        17,   --ç‰¹æ•ˆ49--(657 -- 673)
-        17,   --ç‰¹æ•ˆ50--(674 -- 690)
-        16,   --ç‰¹æ•ˆ51--(691 -- 706)
-        7,   --ç‰¹æ•ˆ52--(707 -- 713)
-        12,   --ç‰¹æ•ˆ53--(714 -- 725)
-        40,   --ç‰¹æ•ˆ54--(726 -- 765)
-        16,   --ç‰¹æ•ˆ55--(766 -- 781)
-        9,   --ç‰¹æ•ˆ56--(782 -- 790)
-        15,   --ç‰¹æ•ˆ57--(791 -- 805)
-        15,   --ç‰¹æ•ˆ58--(806 -- 820)
-        31,   --ç‰¹æ•ˆ59--(821 -- 851)
-        38,   --ç‰¹æ•ˆ60--(852 -- 889)
-        24,   --ç‰¹æ•ˆ61--(890 -- 913)
-        26,   --ç‰¹æ•ˆ62--(914 -- 939)
-        24,   --ç‰¹æ•ˆ63--(940 -- 963)
-        20,   --ç‰¹æ•ˆ64--(964 -- 983)
-        12,   --ç‰¹æ•ˆ65--(984 -- 995)
-        17,   --ç‰¹æ•ˆ66--(996 -- 1012)
-        14,   --ç‰¹æ•ˆ67--(1013 -- 1026)
-        14,   --ç‰¹æ•ˆ68--(1027 -- 1040)
-        10,   --ç‰¹æ•ˆ69--(1041 -- 1050)
-        10,   --ç‰¹æ•ˆ70--(1051 -- 1060)
-        18,   --ç‰¹æ•ˆ71--(1061 -- 1078)
-        31,   --ç‰¹æ•ˆ72--(1079 -- 1109)
-        12,   --ç‰¹æ•ˆ73--(1110 -- 1121)
-        7,   --ç‰¹æ•ˆ74--(1122 -- 1128)
-        6,   --ç‰¹æ•ˆ75--(1129 -- 1134)
-        7,   --ç‰¹æ•ˆ76--(1135 -- 1141)
-        28,   --ç‰¹æ•ˆ77--(1142 -- 1169)
-        16,   --ç‰¹æ•ˆ78--(1170 -- 1185)
-        7,   --ç‰¹æ•ˆ79--(1186 -- 1192)
-        16,   --ç‰¹æ•ˆ80--(1193 -- 1208)
-        20,   --ç‰¹æ•ˆ81--(1209 -- 1228)
-        15,   --ç‰¹æ•ˆ82--(1229 -- 1243)
-        13,   --ç‰¹æ•ˆ83--(1244 -- 1256)
-        15,   --ç‰¹æ•ˆ84--(1257 -- 1271)
-        11,   --ç‰¹æ•ˆ85--(1272 -- 1282)
-        11,   --ç‰¹æ•ˆ86--(1283 -- 1293)
-        11,   --ç‰¹æ•ˆ87--(1294 -- 1304)
-        20,   --ç‰¹æ•ˆ88--(1305 -- 1324)
-        20,   --ç‰¹æ•ˆ89--(1325 -- 1344)
-        20,   --ç‰¹æ•ˆ90--(1345 -- 1364)
-        17,   --ç‰¹æ•ˆ91--(1365 -- 1381)
-        17,   --ç‰¹æ•ˆ92--(1382 -- 1398)
-        17,   --ç‰¹æ•ˆ93--(1399 -- 1415)
-        9,   --ç‰¹æ•ˆ94--(1416 -- 1424)
-        8,   --ç‰¹æ•ˆ95--(1425 -- 1432)
-        8,   --ç‰¹æ•ˆ96--(1433 -- 1440)
-        17,   --ç‰¹æ•ˆ97--(1441 -- 1457)
-        10,   --ç‰¹æ•ˆ98--(1458 -- 1467)
-        11,   --ç‰¹æ•ˆ99--(1468 -- 1478)
-        8,   --ç‰¹æ•ˆ100--(1479 -- 1486)
-        29,   --ç‰¹æ•ˆ101--(1487 -- 1515)
-        6,   --ç‰¹æ•ˆ102--(1516 -- 1521)
-        13,   --ç‰¹æ•ˆ103--(1522 -- 1534)
-        31,   --ç‰¹æ•ˆ104--(1535 -- 1565)
-        14,   --ç‰¹æ•ˆ105--(1566 -- 1579)
-        4,   --ç‰¹æ•ˆ106--(1580 -- 1583)
-        13,   --ç‰¹æ•ˆ107--(1584 -- 1596)
-        13,   --ç‰¹æ•ˆ108--(1597 -- 1609)
-        15,   --ç‰¹æ•ˆ109--(1610 -- 1624)
-        24,   --ç‰¹æ•ˆ110--(1625 -- 1648)
-        20,   --ç‰¹æ•ˆ111--(1649 -- 1668)
-        12,   --ç‰¹æ•ˆ112--(1669 -- 1680)
-        16,   --ç‰¹æ•ˆ113--(1681 -- 1696)
-        18,   --ç‰¹æ•ˆ114--(1697 -- 1714)
-        17,   --ç‰¹æ•ˆ115--(1715 -- 1731)
-        14,   --ç‰¹æ•ˆ116--(1732 -- 1745)
-        12,   --ç‰¹æ•ˆ117--(1746 -- 1757)
-        19,   --ç‰¹æ•ˆ118--(1758 -- 1776)
-        16,   --ç‰¹æ•ˆ119--(1777 -- 1792)
-        12,   --ç‰¹æ•ˆ120--(1793 -- 1804)
-        14,   --ç‰¹æ•ˆ121--(1805 -- 1818)
-        14,   --ç‰¹æ•ˆ122--(1819 -- 1832)
-        6,   --ç‰¹æ•ˆ123--(1833 -- 1838)
-        8,   --ç‰¹æ•ˆ124--(1839 -- 1846)
-        24,   --ç‰¹æ•ˆ125--(1847 -- 1870)
-        19,   --ç‰¹æ•ˆ126--(1871 -- 1889)
-        16,   --ç‰¹æ•ˆ127--(1890 -- 1905)
-        14,   --ç‰¹æ•ˆ128--(1906 -- 1919)
-        20,   --ç‰¹æ•ˆ129--(1920 -- 1939)
-        18,   --ç‰¹æ•ˆ130--(1940 -- 1957)
-        16,   --ç‰¹æ•ˆ131--(1958 -- 1973)
-        13,   --ç‰¹æ•ˆ132--(1974 -- 1986)
-        25,   --ç‰¹æ•ˆ133--(1987 -- 2011)
-        20,   --ç‰¹æ•ˆ134--(2012 -- 2031)
-        13,   --ç‰¹æ•ˆ135--(2032 -- 2044)
-        22,   --ç‰¹æ•ˆ136--(2045 -- 2066)
-        35,   --ç‰¹æ•ˆ137--(2067 -- 2101)
-        11,   --ç‰¹æ•ˆ138--(2102 -- 2112)
-        17,   --ç‰¹æ•ˆ139--(2113 -- 2129)
-        25,   --ç‰¹æ•ˆ140--(2130 -- 2154)
-        23,   --ç‰¹æ•ˆ141--(2155 -- 2177)
-        16,   --ç‰¹æ•ˆ142--(2178 -- 2193)
-        11,   --ç‰¹æ•ˆ143--(2194 -- 2204)
-        13,   --ç‰¹æ•ˆ144--(2205 -- 2217)
-        7,   --ç‰¹æ•ˆ145--(2218 -- 2224)
-        14,   --ç‰¹æ•ˆ146--(2225 -- 2238)
-        27,   --ç‰¹æ•ˆ147--(2239 -- 2265)
-        16,   --ç‰¹æ•ˆ148--(2266 -- 2281)
-        14,   --ç‰¹æ•ˆ149--(2282 -- 2295)
-        44,   --ç‰¹æ•ˆ150--(2296 -- 2339)
-        12,   --ç‰¹æ•ˆ151--(2340 -- 2351)
-        16,   --ç‰¹æ•ˆ152--(2352 -- 2367)
-        14,   --ç‰¹æ•ˆ153--(2368 -- 2381)
-        18,   --ç‰¹æ•ˆ154--(2382 -- 2399)
-        11,   --ç‰¹æ•ˆ155--(2400 -- 2410)
-        17,   --ç‰¹æ•ˆ156--(2411 -- 2427)
-        12,   --ç‰¹æ•ˆ157--(2428 -- 2439)
-        12,   --ç‰¹æ•ˆ158--(2440 -- 2451)
-        17,   --ç‰¹æ•ˆ159--(2452 -- 2468)
-        14,   --ç‰¹æ•ˆ160--(2469 -- 2482)
-        11,   --ç‰¹æ•ˆ161--(2483 -- 2493)
-        12,   --ç‰¹æ•ˆ162--(2494 -- 2505)
-        17,   --ç‰¹æ•ˆ163--(2506 -- 2522)
-        11,   --ç‰¹æ•ˆ164--(2523 -- 2533)
-        9,   --ç‰¹æ•ˆ165--(2534 -- 2542)
-        24,   --ç‰¹æ•ˆ166--(2543 -- 2566)
-        3,   --ç‰¹æ•ˆ167--(2567 -- 2569)
-        19,   --ç‰¹æ•ˆ168--(2570 -- 2588)
-        28,   --ç‰¹æ•ˆ169--(2589 -- 2616)
-        9,   --ç‰¹æ•ˆ170--(2617 -- 2625)
-        15,   --ç‰¹æ•ˆ171--(2626 -- 2640)
-        18,   --ç‰¹æ•ˆ172--(2641 -- 2658)
-        22,   --ç‰¹æ•ˆ173--(2659 -- 2680)
-        17,   --ç‰¹æ•ˆ174--(2681 -- 2697)
-        19,   --ç‰¹æ•ˆ175--(2698 -- 2716)
-        19,   --ç‰¹æ•ˆ176--(2717 -- 2735)
-        6,   --ç‰¹æ•ˆ177--(2736 -- 2741)
-        10,   --ç‰¹æ•ˆ178--(2742 -- 2751)
-        9,   --ç‰¹æ•ˆ179--(2752 -- 2760)
-        19,   --ç‰¹æ•ˆ180--(2761 -- 2779)
-        8,   --ç‰¹æ•ˆ181--(2780 -- 2787)
-        41,   --ç‰¹æ•ˆ182--(2788 -- 2828)
-        10,   --ç‰¹æ•ˆ183--(2829 -- 2838)
-        11,   --ç‰¹æ•ˆ184--(2839 -- 2849)
-        10,   --ç‰¹æ•ˆ185--(2850 -- 2859)
-        10,   --ç‰¹æ•ˆ186--(2860 -- 2869)
-        7,   --ç‰¹æ•ˆ187--(2870 -- 2876)
-        6,   --ç‰¹æ•ˆ188--(2877 -- 2882)
-        12,   --ç‰¹æ•ˆ189--(2883 -- 2894)
-        17,   --ç‰¹æ•ˆ190--(2895 -- 2911)
-        30,   --ç‰¹æ•ˆ191--(2912 -- 2941)
-        27,   --ç‰¹æ•ˆ192--(2942 -- 2968)
-        10,   --ç‰¹æ•ˆ193--(2969 -- 2978)
-        10,   --ç‰¹æ•ˆ194--(2979 -- 2988)
-        18,   --ç‰¹æ•ˆ195--(2989 -- 3006)
-        10,   --ç‰¹æ•ˆ196--(3007 -- 3016)
-        19,   --ç‰¹æ•ˆ197--(3017 -- 3035)
-        20,   --ç‰¹æ•ˆ198--(3036 -- 3055)
-        20,   --ç‰¹æ•ˆ199--(3056 -- 3075)
-        22,   --ç‰¹æ•ˆ200--(3076 -- 3097)
-        20,   --ç‰¹æ•ˆ201--(3098 -- 3117)
-        18,   --ç‰¹æ•ˆ202--(3118 -- 3135)
-        4,   --ç‰¹æ•ˆ203--(3136 -- 3139)
-        25,   --ç‰¹æ•ˆ204--(3140 -- 3164)
-        18,   --ç‰¹æ•ˆ205--(3165 -- 3182)
-        17,   --ç‰¹æ•ˆ206--(3183 -- 3199)
-        14,   --ç‰¹æ•ˆ207--(3200 -- 3213)
-        18,   --ç‰¹æ•ˆ208--(3214 -- 3231)
-        15,   --ç‰¹æ•ˆ209--(3232 -- 3246)
-        14,   --ç‰¹æ•ˆ210--(3247 -- 3260)
-        32,   --ç‰¹æ•ˆ211--(3261 -- 3292)
-        11,   --ç‰¹æ•ˆ212--(3293 -- 3303)
-        15,   --ç‰¹æ•ˆ213--(3304 -- 3318)
-        20,   --ç‰¹æ•ˆ214--(3319 -- 3338)
-        16,   --ç‰¹æ•ˆ215--(3339 -- 3354)
-        23,   --ç‰¹æ•ˆ216--(3355 -- 3377)
-        20,   --ç‰¹æ•ˆ217--(3378 -- 3397)
-        15,   --ç‰¹æ•ˆ218--(3398 -- 3412)
-        31,   --ç‰¹æ•ˆ219--(3413 -- 3443)
-        8,   --ç‰¹æ•ˆ220--(3444 -- 3451)
-        13,   --ç‰¹æ•ˆ221--(3452 -- 3464)
-        21,   --ç‰¹æ•ˆ222--(3465 -- 3485)
-        13,   --ç‰¹æ•ˆ223--(3486 -- 3498)
-        29,   --ç‰¹æ•ˆ224--(3499 -- 3527)
-        20,   --ç‰¹æ•ˆ225--(3528 -- 3547)
-        15,   --ç‰¹æ•ˆ226--(3548 -- 3562)
-        20,   --ç‰¹æ•ˆ227--(3563 -- 3582)
-        16,   --ç‰¹æ•ˆ228--(3583 -- 3598)
-        15,   --ç‰¹æ•ˆ229--(3599 -- 3613)
-        30,   --ç‰¹æ•ˆ230--(3614 -- 3643)
-        15,   --ç‰¹æ•ˆ231--(3644 -- 3658)
-        26,   --ç‰¹æ•ˆ232--(3659 -- 3684)
-        22,   --ç‰¹æ•ˆ233--(3685 -- 3706)
-        27,   --ç‰¹æ•ˆ234--(3707 -- 3733)
-        21,   --ç‰¹æ•ˆ235--(3734 -- 3754)
-        29,   --ç‰¹æ•ˆ236--(3755 -- 3783)
-        21,   --ç‰¹æ•ˆ237--(3784 -- 3804)
-        20,   --ç‰¹æ•ˆ238--(3805 -- 3824)
-        12,   --ç‰¹æ•ˆ239--(3825 -- 3836)
-        20,   --ç‰¹æ•ˆ240--(3837 -- 3856)
-        30,   --ç‰¹æ•ˆ241--(3857 -- 3886)
-        21,   --ç‰¹æ•ˆ242--(3887 -- 3907)
-        12,   --ç‰¹æ•ˆ243--(3908 -- 3919)
-        19,   --ç‰¹æ•ˆ244--(3920 -- 3938)
-        34,   --ç‰¹æ•ˆ245--(3939 -- 3972)
-        18,   --ç‰¹æ•ˆ246--(3973 -- 3990)
-        21,   --ç‰¹æ•ˆ247--(3991 -- 4011)
-        11,   --ç‰¹æ•ˆ248--(4012 -- 4022)
-        21,   --ç‰¹æ•ˆ249--(4023 -- 4043)
-        11,   --ç‰¹æ•ˆ250--(4044 -- 4054)
-        12,   --ç‰¹æ•ˆ251--(4055 -- 4066)
-        26,   --ç‰¹æ•ˆ252--(4067 -- 4092)
-        14,   --ç‰¹æ•ˆ253--(4093 -- 4106)
-        15,   --ç‰¹æ•ˆ254--(4107 -- 4121)
-        5,   --ç‰¹æ•ˆ255--(4122 -- 4126)
-        5,   --ç‰¹æ•ˆ256--(4127 -- 4131)
-        3,   --ç‰¹æ•ˆ257--(4132 -- 4134)
-        7,   --ç‰¹æ•ˆ258--(4135 -- 4141)
-        4,   --ç‰¹æ•ˆ259--(4142 -- 4145)
-        3,   --ç‰¹æ•ˆ260--(4146 -- 4148)
-        2,   --ç‰¹æ•ˆ261--(4149 -- 4150)
-        2,   --ç‰¹æ•ˆ262--(4151 -- 4152)
-        2,   --ç‰¹æ•ˆ263--(4153 -- 4154)
-        7,   --ç‰¹æ•ˆ264--(4155 -- 4161)
-        2,   --ç‰¹æ•ˆ265--(4162 -- 4163)
-        2,   --ç‰¹æ•ˆ266--(4164 -- 4165)
-        5,   --ç‰¹æ•ˆ267--(4166 -- 4170)
-        6,   --ç‰¹æ•ˆ268--(4171 -- 4176)
-        8,   --ç‰¹æ•ˆ269--(4177 -- 4184)
-        3,   --ç‰¹æ•ˆ270--(4185 -- 4187)
-        3,   --ç‰¹æ•ˆ271--(4188 -- 4190)
-        13,   --ç‰¹æ•ˆ272--(4191 -- 4203)
-        10,   --ç‰¹æ•ˆ273--(4204 -- 4213)
-        6,   --ç‰¹æ•ˆ274--(4214 -- 4219)
-        4,   --ç‰¹æ•ˆ275--(4220 -- 4223)
-        8,   --ç‰¹æ•ˆ276--(4224 -- 4231)
-        3,   --ç‰¹æ•ˆ277--(4232 -- 4234)
-        10,   --ç‰¹æ•ˆ278--(4235 -- 4244)
-        2,   --ç‰¹æ•ˆ279--(4245 -- 4246)
-        7,   --ç‰¹æ•ˆ280--(4247 -- 4253)
-        4,   --ç‰¹æ•ˆ281--(4254 -- 4257)
-        5,   --ç‰¹æ•ˆ282--(4258 -- 4262)
-        7,   --ç‰¹æ•ˆ283--(4263 -- 4269)
-        6,   --ç‰¹æ•ˆ284--(4270 -- 4275)
-        6,   --ç‰¹æ•ˆ285--(4276 -- 4281)
-        6,   --ç‰¹æ•ˆ286--(4282 -- 4287)
-        4,   --ç‰¹æ•ˆ287--(4288 -- 4291)
-        2,   --ç‰¹æ•ˆ288--(4292 -- 4293)
-        3,   --ç‰¹æ•ˆ289--(4294 -- 4296)
-        5,   --ç‰¹æ•ˆ290--(4297 -- 4301)
-        3,   --ç‰¹æ•ˆ291--(4302 -- 4304)
-        22,   --ç‰¹æ•ˆ292--(4305 -- 4326)
-        3,   --ç‰¹æ•ˆ293--(4327 -- 4329)
-        6,   --ç‰¹æ•ˆ294--(4330 -- 4335)
-        10,   --ç‰¹æ•ˆ295--(4336 -- 4345)
-        5,   --ç‰¹æ•ˆ296--(4346 -- 4350)
-        5,   --ç‰¹æ•ˆ297--(4351 -- 4355)
-        2,   --ç‰¹æ•ˆ298--(4356 -- 4357)
-        3,   --ç‰¹æ•ˆ299--(4358 -- 4360)
-        3,   --ç‰¹æ•ˆ300--(4361 -- 4363)
-        14,   --ç‰¹æ•ˆ301--(4364 -- 4377)
-        8,   --ç‰¹æ•ˆ302--(4378 -- 4385)
-        15,   --ç‰¹æ•ˆ303--(4386 -- 4400)
-        15,   --ç‰¹æ•ˆ304--(4401 -- 4415)
-        16,   --ç‰¹æ•ˆ305--(4416 -- 4431)
-        30,   --ç‰¹æ•ˆ306--(4432 -- 4461)
-        14,   --ç‰¹æ•ˆ307--(4462 -- 4475)
-        30,   --ç‰¹æ•ˆ308--(4476 -- 4505)
-        98,   --ç‰¹æ•ˆ309--(4506 -- 4603)
-        70,   --ç‰¹æ•ˆ310--(4604 -- 4673)
-        6,   --ç‰¹æ•ˆ311--(4674 -- 4679)
-        4,   --ç‰¹æ•ˆ312--(4680 -- 4683)
-        9,   --ç‰¹æ•ˆ313--(4684 -- 4692)
-        9,   --ç‰¹æ•ˆ314--(4693 -- 4701)
-        16,   --ç‰¹æ•ˆ315--(4702 -- 4717)
-        6,   --ç‰¹æ•ˆ316--(4718 -- 4723)
-        7,   --ç‰¹æ•ˆ317--(4724 -- 4730)
-        7,   --ç‰¹æ•ˆ318--(4731 -- 4737)
-        10,   --ç‰¹æ•ˆ319--(4738 -- 4747)
-        6,   --ç‰¹æ•ˆ320--(4748 -- 4753)
-        6,   --ç‰¹æ•ˆ321--(4754 -- 4759)
-        6,   --ç‰¹æ•ˆ322--(4760 -- 4765)
-        8,   --ç‰¹æ•ˆ323--(4766 -- 4773)
-        6,   --ç‰¹æ•ˆ324--(4774 -- 4779)
-        8,   --ç‰¹æ•ˆ325--(4780 -- 4787)
-        5,   --ç‰¹æ•ˆ326--(4788 -- 4792)
-        7,   --ç‰¹æ•ˆ327--(4793 -- 4799)
-        6,   --ç‰¹æ•ˆ328--(4800 -- 4805)
-        7,   --ç‰¹æ•ˆ329--(4806 -- 4812)
-        7,   --ç‰¹æ•ˆ330--(4813 -- 4819)
-        7,   --ç‰¹æ•ˆ331--(4820 -- 4826)
-        6,   --ç‰¹æ•ˆ332--(4827 -- 4832)
-        7,   --ç‰¹æ•ˆ333--(4833 -- 4839)
-        10,   --ç‰¹æ•ˆ334--(4840 -- 4849)
-        4,   --ç‰¹æ•ˆ335--(4850 -- 4853)
-        4,   --ç‰¹æ•ˆ336--(4854 -- 4857)
-        6,   --ç‰¹æ•ˆ337--(4858 -- 4863)
-        4,   --ç‰¹æ•ˆ338--(4864 -- 4867)
-        6,   --ç‰¹æ•ˆ339--(4868 -- 4873)
-        8,   --ç‰¹æ•ˆ340--(4874 -- 4881)
-        10,   --ç‰¹æ•ˆ341--(4882 -- 4891)
-        7,   --ç‰¹æ•ˆ342--(4892 -- 4898)
-        8,   --ç‰¹æ•ˆ343--(4899 -- 4906)
-        6,   --ç‰¹æ•ˆ344--(4907 -- 4912)
-        15,   --ç‰¹æ•ˆ345--(4913 -- 4927)
-        11,   --ç‰¹æ•ˆ346--(4928 -- 4938)
-        10,   --ç‰¹æ•ˆ347--(4939 -- 4948)
-        14,   --ç‰¹æ•ˆ348--(4949 -- 4962)
-        18,   --ç‰¹æ•ˆ349--(4963 -- 4980)
-        12,   --ç‰¹æ•ˆ350--(4981 -- 4992)
-        12,   --ç‰¹æ•ˆ351--(4993 -- 5004)
-        8,   --ç‰¹æ•ˆ352--(5005 -- 5012)
-        8,   --ç‰¹æ•ˆ353--(5013 -- 5020)
-        8,   --ç‰¹æ•ˆ354--(5021 -- 5028)
-        8,   --ç‰¹æ•ˆ355--(5029 -- 5036)
-        8,   --ç‰¹æ•ˆ356--(5037 -- 5044)
-        8,   --ç‰¹æ•ˆ357--(5045 -- 5052)
-        8,   --ç‰¹æ•ˆ358--(5053 -- 5060)
-        8,   --ç‰¹æ•ˆ359--(5061 -- 5068)
-        8,   --ç‰¹æ•ˆ360--(5069 -- 5076)
-        8,   --ç‰¹æ•ˆ361--(5077 -- 5084)
-        8,   --ç‰¹æ•ˆ362--(5085 -- 5092)
-        8,   --ç‰¹æ•ˆ363--(5093 -- 5100)
-        8,   --ç‰¹æ•ˆ364--(5101 -- 5108)
-        8,   --ç‰¹æ•ˆ365--(5109 -- 5116)
-        8,   --ç‰¹æ•ˆ366--(5117 -- 5124)
-        8,   --ç‰¹æ•ˆ367--(5125 -- 5132)
-        8,   --ç‰¹æ•ˆ368--(5133 -- 5140)
-        8,   --ç‰¹æ•ˆ369--(5141 -- 5148)
-        8,   --ç‰¹æ•ˆ370--(5149 -- 5156)
-        8,   --ç‰¹æ•ˆ371--(5157 -- 5164)
+    cc.effect = {                   -- ÌØĞ§Ö¡Êı
+        14,   --ÌØĞ§1--(10 -- 23)
+        17,   --ÌØĞ§2--(24 -- 40)
+        9,   --ÌØĞ§3--(41 -- 49)
+        13,   --ÌØĞ§4--(50 -- 62)
+        17,   --ÌØĞ§5--(63 -- 79)
+        17,   --ÌØĞ§6--(80 -- 96)
+        17,   --ÌØĞ§7--(97 -- 113)
+        18,   --ÌØĞ§8--(114 -- 131)
+        19,   --ÌØĞ§9--(132 -- 150)
+        19,   --ÌØĞ§10--(151 -- 169)
+        15,   --ÌØĞ§11--(170 -- 184)
+        13,   --ÌØĞ§12--(185 -- 197)
+        10,   --ÌØĞ§13--(198 -- 207)
+        10,   --ÌØĞ§14--(208 -- 217)
+        15,   --ÌØĞ§15--(218 -- 232)
+        21,   --ÌØĞ§16--(233 -- 253)
+        16,   --ÌØĞ§17--(254 -- 269)
+        9,   --ÌØĞ§18--(270 -- 278)
+        11,   --ÌØĞ§19--(279 -- 289)
+        8,   --ÌØĞ§20--(290 -- 297)
+        9,   --ÌØĞ§21--(298 -- 306)
+        8,   --ÌØĞ§22--(307 -- 314)
+        8,   --ÌØĞ§23--(315 -- 322)
+        7,   --ÌØĞ§24--(323 -- 329)
+        8,   --ÌØĞ§25--(330 -- 337)
+        8,   --ÌØĞ§26--(338 -- 345)
+        9,   --ÌØĞ§27--(346 -- 354)
+        12,   --ÌØĞ§28--(355 -- 366)
+        19,   --ÌØĞ§29--(367 -- 385)
+        11,   --ÌØĞ§30--(386 -- 396)
+        14,   --ÌØĞ§31--(397 -- 410)
+        12,   --ÌØĞ§32--(411 -- 422)
+        17,   --ÌØĞ§33--(423 -- 439)
+        8,   --ÌØĞ§34--(440 -- 447)
+        11,   --ÌØĞ§35--(448 -- 458)
+        10,   --ÌØĞ§36--(459 -- 468)
+        13,   --ÌØĞ§37--(469 -- 481)
+        10,   --ÌØĞ§38--(482 -- 491)
+        19,   --ÌØĞ§39--(492 -- 510)
+        14,   --ÌØĞ§40--(511 -- 524)
+        17,   --ÌØĞ§41--(525 -- 541)
+        19,   --ÌØĞ§42--(542 -- 560)
+        14,   --ÌØĞ§43--(561 -- 574)
+        21,   --ÌØĞ§44--(575 -- 595)
+        16,   --ÌØĞ§45--(596 -- 611)
+        13,   --ÌØĞ§46--(612 -- 624)
+        18,   --ÌØĞ§47--(625 -- 642)
+        14,   --ÌØĞ§48--(643 -- 656)
+        17,   --ÌØĞ§49--(657 -- 673)
+        17,   --ÌØĞ§50--(674 -- 690)
+        16,   --ÌØĞ§51--(691 -- 706)
+        7,   --ÌØĞ§52--(707 -- 713)
+        12,   --ÌØĞ§53--(714 -- 725)
+        40,   --ÌØĞ§54--(726 -- 765)
+        16,   --ÌØĞ§55--(766 -- 781)
+        9,   --ÌØĞ§56--(782 -- 790)
+        15,   --ÌØĞ§57--(791 -- 805)
+        15,   --ÌØĞ§58--(806 -- 820)
+        31,   --ÌØĞ§59--(821 -- 851)
+        38,   --ÌØĞ§60--(852 -- 889)
+        24,   --ÌØĞ§61--(890 -- 913)
+        26,   --ÌØĞ§62--(914 -- 939)
+        24,   --ÌØĞ§63--(940 -- 963)
+        20,   --ÌØĞ§64--(964 -- 983)
+        12,   --ÌØĞ§65--(984 -- 995)
+        17,   --ÌØĞ§66--(996 -- 1012)
+        14,   --ÌØĞ§67--(1013 -- 1026)
+        14,   --ÌØĞ§68--(1027 -- 1040)
+        10,   --ÌØĞ§69--(1041 -- 1050)
+        10,   --ÌØĞ§70--(1051 -- 1060)
+        18,   --ÌØĞ§71--(1061 -- 1078)
+        31,   --ÌØĞ§72--(1079 -- 1109)
+        12,   --ÌØĞ§73--(1110 -- 1121)
+        7,   --ÌØĞ§74--(1122 -- 1128)
+        6,   --ÌØĞ§75--(1129 -- 1134)
+        7,   --ÌØĞ§76--(1135 -- 1141)
+        28,   --ÌØĞ§77--(1142 -- 1169)
+        16,   --ÌØĞ§78--(1170 -- 1185)
+        7,   --ÌØĞ§79--(1186 -- 1192)
+        16,   --ÌØĞ§80--(1193 -- 1208)
+        20,   --ÌØĞ§81--(1209 -- 1228)
+        15,   --ÌØĞ§82--(1229 -- 1243)
+        13,   --ÌØĞ§83--(1244 -- 1256)
+        15,   --ÌØĞ§84--(1257 -- 1271)
+        11,   --ÌØĞ§85--(1272 -- 1282)
+        11,   --ÌØĞ§86--(1283 -- 1293)
+        11,   --ÌØĞ§87--(1294 -- 1304)
+        20,   --ÌØĞ§88--(1305 -- 1324)
+        20,   --ÌØĞ§89--(1325 -- 1344)
+        20,   --ÌØĞ§90--(1345 -- 1364)
+        17,   --ÌØĞ§91--(1365 -- 1381)
+        17,   --ÌØĞ§92--(1382 -- 1398)
+        17,   --ÌØĞ§93--(1399 -- 1415)
+        9,   --ÌØĞ§94--(1416 -- 1424)
+        8,   --ÌØĞ§95--(1425 -- 1432)
+        8,   --ÌØĞ§96--(1433 -- 1440)
+        17,   --ÌØĞ§97--(1441 -- 1457)
+        10,   --ÌØĞ§98--(1458 -- 1467)
+        11,   --ÌØĞ§99--(1468 -- 1478)
+        8,   --ÌØĞ§100--(1479 -- 1486)
+        29,   --ÌØĞ§101--(1487 -- 1515)
+        6,   --ÌØĞ§102--(1516 -- 1521)
+        13,   --ÌØĞ§103--(1522 -- 1534)
+        31,   --ÌØĞ§104--(1535 -- 1565)
+        14,   --ÌØĞ§105--(1566 -- 1579)
+        4,   --ÌØĞ§106--(1580 -- 1583)
+        13,   --ÌØĞ§107--(1584 -- 1596)
+        13,   --ÌØĞ§108--(1597 -- 1609)
+        15,   --ÌØĞ§109--(1610 -- 1624)
+        24,   --ÌØĞ§110--(1625 -- 1648)
+        20,   --ÌØĞ§111--(1649 -- 1668)
+        12,   --ÌØĞ§112--(1669 -- 1680)
+        16,   --ÌØĞ§113--(1681 -- 1696)
+        18,   --ÌØĞ§114--(1697 -- 1714)
+        17,   --ÌØĞ§115--(1715 -- 1731)
+        14,   --ÌØĞ§116--(1732 -- 1745)
+        12,   --ÌØĞ§117--(1746 -- 1757)
+        19,   --ÌØĞ§118--(1758 -- 1776)
+        16,   --ÌØĞ§119--(1777 -- 1792)
+        12,   --ÌØĞ§120--(1793 -- 1804)
+        14,   --ÌØĞ§121--(1805 -- 1818)
+        14,   --ÌØĞ§122--(1819 -- 1832)
+        6,   --ÌØĞ§123--(1833 -- 1838)
+        8,   --ÌØĞ§124--(1839 -- 1846)
+        24,   --ÌØĞ§125--(1847 -- 1870)
+        19,   --ÌØĞ§126--(1871 -- 1889)
+        16,   --ÌØĞ§127--(1890 -- 1905)
+        14,   --ÌØĞ§128--(1906 -- 1919)
+        20,   --ÌØĞ§129--(1920 -- 1939)
+        18,   --ÌØĞ§130--(1940 -- 1957)
+        16,   --ÌØĞ§131--(1958 -- 1973)
+        13,   --ÌØĞ§132--(1974 -- 1986)
+        25,   --ÌØĞ§133--(1987 -- 2011)
+        20,   --ÌØĞ§134--(2012 -- 2031)
+        13,   --ÌØĞ§135--(2032 -- 2044)
+        22,   --ÌØĞ§136--(2045 -- 2066)
+        35,   --ÌØĞ§137--(2067 -- 2101)
+        11,   --ÌØĞ§138--(2102 -- 2112)
+        17,   --ÌØĞ§139--(2113 -- 2129)
+        25,   --ÌØĞ§140--(2130 -- 2154)
+        23,   --ÌØĞ§141--(2155 -- 2177)
+        16,   --ÌØĞ§142--(2178 -- 2193)
+        11,   --ÌØĞ§143--(2194 -- 2204)
+        13,   --ÌØĞ§144--(2205 -- 2217)
+        7,   --ÌØĞ§145--(2218 -- 2224)
+        14,   --ÌØĞ§146--(2225 -- 2238)
+        27,   --ÌØĞ§147--(2239 -- 2265)
+        16,   --ÌØĞ§148--(2266 -- 2281)
+        14,   --ÌØĞ§149--(2282 -- 2295)
+        44,   --ÌØĞ§150--(2296 -- 2339)
+        12,   --ÌØĞ§151--(2340 -- 2351)
+        16,   --ÌØĞ§152--(2352 -- 2367)
+        14,   --ÌØĞ§153--(2368 -- 2381)
+        18,   --ÌØĞ§154--(2382 -- 2399)
+        11,   --ÌØĞ§155--(2400 -- 2410)
+        17,   --ÌØĞ§156--(2411 -- 2427)
+        12,   --ÌØĞ§157--(2428 -- 2439)
+        12,   --ÌØĞ§158--(2440 -- 2451)
+        17,   --ÌØĞ§159--(2452 -- 2468)
+        14,   --ÌØĞ§160--(2469 -- 2482)
+        11,   --ÌØĞ§161--(2483 -- 2493)
+        12,   --ÌØĞ§162--(2494 -- 2505)
+        17,   --ÌØĞ§163--(2506 -- 2522)
+        11,   --ÌØĞ§164--(2523 -- 2533)
+        9,   --ÌØĞ§165--(2534 -- 2542)
+        24,   --ÌØĞ§166--(2543 -- 2566)
+        3,   --ÌØĞ§167--(2567 -- 2569)
+        19,   --ÌØĞ§168--(2570 -- 2588)
+        28,   --ÌØĞ§169--(2589 -- 2616)
+        9,   --ÌØĞ§170--(2617 -- 2625)
+        15,   --ÌØĞ§171--(2626 -- 2640)
+        18,   --ÌØĞ§172--(2641 -- 2658)
+        22,   --ÌØĞ§173--(2659 -- 2680)
+        17,   --ÌØĞ§174--(2681 -- 2697)
+        19,   --ÌØĞ§175--(2698 -- 2716)
+        19,   --ÌØĞ§176--(2717 -- 2735)
+        6,   --ÌØĞ§177--(2736 -- 2741)
+        10,   --ÌØĞ§178--(2742 -- 2751)
+        9,   --ÌØĞ§179--(2752 -- 2760)
+        19,   --ÌØĞ§180--(2761 -- 2779)
+        8,   --ÌØĞ§181--(2780 -- 2787)
+        41,   --ÌØĞ§182--(2788 -- 2828)
+        10,   --ÌØĞ§183--(2829 -- 2838)
+        11,   --ÌØĞ§184--(2839 -- 2849)
+        10,   --ÌØĞ§185--(2850 -- 2859)
+        10,   --ÌØĞ§186--(2860 -- 2869)
+        7,   --ÌØĞ§187--(2870 -- 2876)
+        6,   --ÌØĞ§188--(2877 -- 2882)
+        12,   --ÌØĞ§189--(2883 -- 2894)
+        17,   --ÌØĞ§190--(2895 -- 2911)
+        30,   --ÌØĞ§191--(2912 -- 2941)
+        27,   --ÌØĞ§192--(2942 -- 2968)
+        10,   --ÌØĞ§193--(2969 -- 2978)
+        10,   --ÌØĞ§194--(2979 -- 2988)
+        18,   --ÌØĞ§195--(2989 -- 3006)
+        10,   --ÌØĞ§196--(3007 -- 3016)
+        19,   --ÌØĞ§197--(3017 -- 3035)
+        20,   --ÌØĞ§198--(3036 -- 3055)
+        20,   --ÌØĞ§199--(3056 -- 3075)
+        22,   --ÌØĞ§200--(3076 -- 3097)
+        20,   --ÌØĞ§201--(3098 -- 3117)
+        18,   --ÌØĞ§202--(3118 -- 3135)
+        4,   --ÌØĞ§203--(3136 -- 3139)
+        25,   --ÌØĞ§204--(3140 -- 3164)
+        18,   --ÌØĞ§205--(3165 -- 3182)
+        17,   --ÌØĞ§206--(3183 -- 3199)
+        14,   --ÌØĞ§207--(3200 -- 3213)
+        18,   --ÌØĞ§208--(3214 -- 3231)
+        15,   --ÌØĞ§209--(3232 -- 3246)
+        14,   --ÌØĞ§210--(3247 -- 3260)
+        32,   --ÌØĞ§211--(3261 -- 3292)
+        11,   --ÌØĞ§212--(3293 -- 3303)
+        15,   --ÌØĞ§213--(3304 -- 3318)
+        20,   --ÌØĞ§214--(3319 -- 3338)
+        16,   --ÌØĞ§215--(3339 -- 3354)
+        23,   --ÌØĞ§216--(3355 -- 3377)
+        20,   --ÌØĞ§217--(3378 -- 3397)
+        15,   --ÌØĞ§218--(3398 -- 3412)
+        31,   --ÌØĞ§219--(3413 -- 3443)
+        8,   --ÌØĞ§220--(3444 -- 3451)
+        13,   --ÌØĞ§221--(3452 -- 3464)
+        21,   --ÌØĞ§222--(3465 -- 3485)
+        13,   --ÌØĞ§223--(3486 -- 3498)
+        29,   --ÌØĞ§224--(3499 -- 3527)
+        20,   --ÌØĞ§225--(3528 -- 3547)
+        15,   --ÌØĞ§226--(3548 -- 3562)
+        20,   --ÌØĞ§227--(3563 -- 3582)
+        16,   --ÌØĞ§228--(3583 -- 3598)
+        15,   --ÌØĞ§229--(3599 -- 3613)
+        30,   --ÌØĞ§230--(3614 -- 3643)
+        15,   --ÌØĞ§231--(3644 -- 3658)
+        26,   --ÌØĞ§232--(3659 -- 3684)
+        22,   --ÌØĞ§233--(3685 -- 3706)
+        27,   --ÌØĞ§234--(3707 -- 3733)
+        21,   --ÌØĞ§235--(3734 -- 3754)
+        29,   --ÌØĞ§236--(3755 -- 3783)
+        21,   --ÌØĞ§237--(3784 -- 3804)
+        20,   --ÌØĞ§238--(3805 -- 3824)
+        12,   --ÌØĞ§239--(3825 -- 3836)
+        20,   --ÌØĞ§240--(3837 -- 3856)
+        30,   --ÌØĞ§241--(3857 -- 3886)
+        21,   --ÌØĞ§242--(3887 -- 3907)
+        12,   --ÌØĞ§243--(3908 -- 3919)
+        19,   --ÌØĞ§244--(3920 -- 3938)
+        34,   --ÌØĞ§245--(3939 -- 3972)
+        18,   --ÌØĞ§246--(3973 -- 3990)
+        21,   --ÌØĞ§247--(3991 -- 4011)
+        11,   --ÌØĞ§248--(4012 -- 4022)
+        21,   --ÌØĞ§249--(4023 -- 4043)
+        11,   --ÌØĞ§250--(4044 -- 4054)
+        12,   --ÌØĞ§251--(4055 -- 4066)
+        26,   --ÌØĞ§252--(4067 -- 4092)
+        14,   --ÌØĞ§253--(4093 -- 4106)
+        15,   --ÌØĞ§254--(4107 -- 4121)
+        5,   --ÌØĞ§255--(4122 -- 4126)
+        5,   --ÌØĞ§256--(4127 -- 4131)
+        3,   --ÌØĞ§257--(4132 -- 4134)
+        7,   --ÌØĞ§258--(4135 -- 4141)
+        4,   --ÌØĞ§259--(4142 -- 4145)
+        3,   --ÌØĞ§260--(4146 -- 4148)
+        2,   --ÌØĞ§261--(4149 -- 4150)
+        2,   --ÌØĞ§262--(4151 -- 4152)
+        2,   --ÌØĞ§263--(4153 -- 4154)
+        7,   --ÌØĞ§264--(4155 -- 4161)
+        2,   --ÌØĞ§265--(4162 -- 4163)
+        2,   --ÌØĞ§266--(4164 -- 4165)
+        5,   --ÌØĞ§267--(4166 -- 4170)
+        6,   --ÌØĞ§268--(4171 -- 4176)
+        8,   --ÌØĞ§269--(4177 -- 4184)
+        3,   --ÌØĞ§270--(4185 -- 4187)
+        3,   --ÌØĞ§271--(4188 -- 4190)
+        13,   --ÌØĞ§272--(4191 -- 4203)
+        10,   --ÌØĞ§273--(4204 -- 4213)
+        6,   --ÌØĞ§274--(4214 -- 4219)
+        4,   --ÌØĞ§275--(4220 -- 4223)
+        8,   --ÌØĞ§276--(4224 -- 4231)
+        3,   --ÌØĞ§277--(4232 -- 4234)
+        10,   --ÌØĞ§278--(4235 -- 4244)
+        2,   --ÌØĞ§279--(4245 -- 4246)
+        7,   --ÌØĞ§280--(4247 -- 4253)
+        4,   --ÌØĞ§281--(4254 -- 4257)
+        5,   --ÌØĞ§282--(4258 -- 4262)
+        7,   --ÌØĞ§283--(4263 -- 4269)
+        6,   --ÌØĞ§284--(4270 -- 4275)
+        6,   --ÌØĞ§285--(4276 -- 4281)
+        6,   --ÌØĞ§286--(4282 -- 4287)
+        4,   --ÌØĞ§287--(4288 -- 4291)
+        2,   --ÌØĞ§288--(4292 -- 4293)
+        3,   --ÌØĞ§289--(4294 -- 4296)
+        5,   --ÌØĞ§290--(4297 -- 4301)
+        3,   --ÌØĞ§291--(4302 -- 4304)
+        22,   --ÌØĞ§292--(4305 -- 4326)
+        3,   --ÌØĞ§293--(4327 -- 4329)
+        6,   --ÌØĞ§294--(4330 -- 4335)
+        10,   --ÌØĞ§295--(4336 -- 4345)
+        5,   --ÌØĞ§296--(4346 -- 4350)
+        5,   --ÌØĞ§297--(4351 -- 4355)
+        2,   --ÌØĞ§298--(4356 -- 4357)
+        3,   --ÌØĞ§299--(4358 -- 4360)
+        3,   --ÌØĞ§300--(4361 -- 4363)
+        14,   --ÌØĞ§301--(4364 -- 4377)
+        8,   --ÌØĞ§302--(4378 -- 4385)
+        15,   --ÌØĞ§303--(4386 -- 4400)
+        15,   --ÌØĞ§304--(4401 -- 4415)
+        16,   --ÌØĞ§305--(4416 -- 4431)
+        30,   --ÌØĞ§306--(4432 -- 4461)
+        14,   --ÌØĞ§307--(4462 -- 4475)
+        30,   --ÌØĞ§308--(4476 -- 4505)
+        98,   --ÌØĞ§309--(4506 -- 4603)
+        70,   --ÌØĞ§310--(4604 -- 4673)
+        6,   --ÌØĞ§311--(4674 -- 4679)
+        4,   --ÌØĞ§312--(4680 -- 4683)
+        9,   --ÌØĞ§313--(4684 -- 4692)
+        9,   --ÌØĞ§314--(4693 -- 4701)
+        16,   --ÌØĞ§315--(4702 -- 4717)
+        6,   --ÌØĞ§316--(4718 -- 4723)
+        7,   --ÌØĞ§317--(4724 -- 4730)
+        7,   --ÌØĞ§318--(4731 -- 4737)
+        10,   --ÌØĞ§319--(4738 -- 4747)
+        6,   --ÌØĞ§320--(4748 -- 4753)
+        6,   --ÌØĞ§321--(4754 -- 4759)
+        6,   --ÌØĞ§322--(4760 -- 4765)
+        8,   --ÌØĞ§323--(4766 -- 4773)
+        6,   --ÌØĞ§324--(4774 -- 4779)
+        8,   --ÌØĞ§325--(4780 -- 4787)
+        5,   --ÌØĞ§326--(4788 -- 4792)
+        7,   --ÌØĞ§327--(4793 -- 4799)
+        6,   --ÌØĞ§328--(4800 -- 4805)
+        7,   --ÌØĞ§329--(4806 -- 4812)
+        7,   --ÌØĞ§330--(4813 -- 4819)
+        7,   --ÌØĞ§331--(4820 -- 4826)
+        6,   --ÌØĞ§332--(4827 -- 4832)
+        7,   --ÌØĞ§333--(4833 -- 4839)
+        10,   --ÌØĞ§334--(4840 -- 4849)
+        4,   --ÌØĞ§335--(4850 -- 4853)
+        4,   --ÌØĞ§336--(4854 -- 4857)
+        6,   --ÌØĞ§337--(4858 -- 4863)
+        4,   --ÌØĞ§338--(4864 -- 4867)
+        6,   --ÌØĞ§339--(4868 -- 4873)
+        8,   --ÌØĞ§340--(4874 -- 4881)
+        10,   --ÌØĞ§341--(4882 -- 4891)
+        7,   --ÌØĞ§342--(4892 -- 4898)
+        8,   --ÌØĞ§343--(4899 -- 4906)
+        6,   --ÌØĞ§344--(4907 -- 4912)
+        15,   --ÌØĞ§345--(4913 -- 4927)
+        11,   --ÌØĞ§346--(4928 -- 4938)
+        10,   --ÌØĞ§347--(4939 -- 4948)
+        14,   --ÌØĞ§348--(4949 -- 4962)
+        18,   --ÌØĞ§349--(4963 -- 4980)
+        12,   --ÌØĞ§350--(4981 -- 4992)
+        12,   --ÌØĞ§351--(4993 -- 5004)
+        8,   --ÌØĞ§352--(5005 -- 5012)
+        8,   --ÌØĞ§353--(5013 -- 5020)
+        8,   --ÌØĞ§354--(5021 -- 5028)
+        8,   --ÌØĞ§355--(5029 -- 5036)
+        8,   --ÌØĞ§356--(5037 -- 5044)
+        8,   --ÌØĞ§357--(5045 -- 5052)
+        8,   --ÌØĞ§358--(5053 -- 5060)
+        8,   --ÌØĞ§359--(5061 -- 5068)
+        8,   --ÌØĞ§360--(5069 -- 5076)
+        8,   --ÌØĞ§361--(5077 -- 5084)
+        8,   --ÌØĞ§362--(5085 -- 5092)
+        8,   --ÌØĞ§363--(5093 -- 5100)
+        8,   --ÌØĞ§364--(5101 -- 5108)
+        8,   --ÌØĞ§365--(5109 -- 5116)
+        8,   --ÌØĞ§366--(5117 -- 5124)
+        8,   --ÌØĞ§367--(5125 -- 5132)
+        8,   --ÌØĞ§368--(5133 -- 5140)
+        8,   --ÌØĞ§369--(5141 -- 5148)
+        8,   --ÌØĞ§370--(5149 -- 5156)
+        8,   --ÌØĞ§371--(5157 -- 5164)
         
-        [0] = 9        --ç‰¹æ•ˆ0        Tiny heart(when heal)
+        [0] = 9        --ÌØĞ§0        Tiny heart(when heal)
     }
 
-    cc.extra_offense = {                 -- è£…å¤‡å¯¹å¨åŠ›çš„åŠ æˆ
-        {52, 75, 100},          --é³„å˜´å‰ª+å¤§å‰ªåˆ€
-        {45, 67, 100},          --å†·æœˆå®åˆ€+èƒ¡åˆ€
-        {43, 349, 500},         --å± é¾™åˆ€+å± é¾™åˆ€æ³•
-        {202, 67, 100},         --é—¯ç‹å†›åˆ€+èƒ¡åˆ€
-        {37, 41, 100},          --å€šå¤©å‰‘+ç­å‰‘
-        {49, 80, 200},          --æ‰“ç‹—æ£’+æ‰“ç‹—æ£’æ³•
-        {44, 63, 200},          --è¡€åˆ€+è¡€åˆ€
-        {40, 40, 200},          --é‡‘è›‡å‰‘+é‡‘è›‡
-        {36, 45, 100},          --ç„é“å‰‘+ç„é“
-        {276, 155, 3000},       --ç«æª+ç«æª
-        {51, 78, 200},          --é‡‘é¾™é­+é»„æ²™ä¸‡é‡Œé­æ³•
-        {50, 86, 100},          --ä¼é­”æµ+ä¼é­”æ–æ³•
-        {241, 39, 100},         --å›å­å‰‘+å…¨çœŸå‰‘æ³•
-        {242, 42, 100},         --æ·‘å¥³å‰‘+ç‰å¥³å‰‘æ³•
-        {244, 81, 200},         --è¥¿æ¯’è›‡æ–+çµè›‡æ–æ³•
-        {55, 110, 100},         --ç¥å±±å‰‘+ç¥å±±å‰‘æ³•
-        {56, 111, 100},         --ç„é“èœåˆ€+è¥¿ç“œåˆ€æ³•
-        {57, 112, 100},         --çŠ½æœˆ+çŠ½æœˆæµç©º
-        {243, 77, 200},         --é‡‘åˆ€é»‘å‰‘+é˜´é˜³å€’ä¹±åˆƒ
-        {39, 44, 100},          --ç™½é¾™å‰‘+è‹—å®¶å‰‘æ³•
-        {236, 46, 100},         --çœŸæ­¦å‰‘+å¤ªæå‰‘æ³•
+    cc.extra_offense = {                 -- ×°±¸¶ÔÍşÁ¦µÄ¼Ó³É
+        {52, 75, 100},          --öù×ì¼ô+´ó¼ôµ¶
+        {45, 67, 100},          --ÀäÔÂ±¦µ¶+ºúµ¶
+        {43, 349, 500},         --ÍÀÁúµ¶+ÍÀÁúµ¶·¨
+        {202, 67, 100},         --´³Íõ¾üµ¶+ºúµ¶
+        {37, 41, 100},          --ÒĞÌì½£+Ãğ½£
+        {49, 80, 200},          --´ò¹·°ô+´ò¹·°ô·¨
+        {44, 63, 200},          --Ñªµ¶+Ñªµ¶
+        {40, 40, 200},          --½ğÉß½£+½ğÉß
+        {36, 45, 100},          --ĞşÌú½£+ĞşÌú
+        {276, 155, 3000},       --»ğÇ¹+»ğÇ¹
+        {51, 78, 200},          --½ğÁú±Ş+»ÆÉ³ÍòÀï±Ş·¨
+        {50, 86, 100},          --·üÄ§èÆ+·üÄ§ÕÈ·¨
+        {241, 39, 100},         --¾ı×Ó½£+È«Õæ½£·¨
+        {242, 42, 100},         --ÊçÅ®½£+ÓñÅ®½£·¨
+        {244, 81, 200},         --Î÷¶¾ÉßÕÈ+ÁéÉßÕÈ·¨
+        {55, 110, 100},         --ÉñÉ½½£+ÉñÉ½½£·¨
+        {56, 111, 100},         --ĞşÌú²Ëµ¶+Î÷¹Ïµ¶·¨
+        {57, 112, 100},         -- ëÔÂ+ ëÔÂÁ÷¿Õ
+        {243, 77, 200},         --½ğµ¶ºÚ½£+ÒõÑôµ¹ÂÒÈĞ
+        {39, 44, 100},          --°×Áú½£+Ãç¼Ò½£·¨
+        {236, 46, 100},         --ÕæÎä½£+Ì«¼«½£·¨
         {326,156,200},
         {326,188,200}
     }
 
-    cc.new_person_name = CONFIG.PlayName      -- æ–°æ¸¸æˆçš„æ•°æ®
+    cc.new_person_name = CONFIG.PlayName      -- ĞÂÓÎÏ·µÄÊı¾İ
     cc.new_game_scene_id = 70
     cc.new_game_scene_x = 16
     cc.new_game_scene_y = 31
     cc.new_game_event = 691
     cc.new_person_pic_m = 2515
     cc.new_person_pic_f = 5015
-    cc.person_attrib_max = {}                 -- å±æ€§æœ€å¤§å€¼
-    cc.person_attrib_max["ç»éªŒ"] = 60000
-    cc.person_attrib_max["ç‰©å“ä¿®ç‚¼ç‚¹æ•°"] = 60000
-    cc.person_attrib_max["ä¿®ç‚¼ç‚¹æ•°"] = 30000
-    cc.person_attrib_max["ç”Ÿå‘½æœ€å¤§å€¼"] = 9999
-    cc.person_attrib_max["å—ä¼¤ç¨‹åº¦"] = 100
-    cc.person_attrib_max["ä¸­æ¯’ç¨‹åº¦"] = 250
-    cc.person_attrib_max["å†…åŠ›æœ€å¤§å€¼"] = 9999
-    cc.person_attrib_max["ç”Ÿå‘½å¢é•¿"] = 15
-    cc.person_attrib_max["ä½“åŠ›"] = 100
-    cc.person_attrib_max["æ”»å‡»åŠ›"] = 9999
-    cc.person_attrib_max["é˜²å¾¡åŠ›"] = 9999
-    cc.person_attrib_max["è½»åŠŸ"] = 9999
-    cc.person_attrib_max["åŒ»ç–—èƒ½åŠ›"] = 300
-    cc.person_attrib_max["ç”¨æ¯’èƒ½åŠ›"] = 300
-    cc.person_attrib_max["è§£æ¯’èƒ½åŠ›"] = 300
-    cc.person_attrib_max["æŠ—æ¯’èƒ½åŠ›"] = 300
-    cc.person_attrib_max["æ‹³æŒåŠŸå¤«"] = 999
-    cc.person_attrib_max["æŒ‡æ³•æŠ€å·§"] = 999
-    cc.person_attrib_max["å¾¡å‰‘èƒ½åŠ›"] = 999
-    cc.person_attrib_max["è€åˆ€æŠ€å·§"] = 999
-    cc.person_attrib_max["ç‰¹æ®Šå…µå™¨"] = 999
-    cc.person_attrib_max["æš—å™¨æŠ€å·§"] = 999
-    cc.person_attrib_max["æ­¦å­¦å¸¸è¯†"] = 999
-    cc.person_attrib_max["å“å¾·"] = 200
-    cc.person_attrib_max["èµ„è´¨"] = 100
-    cc.person_attrib_max["æ”»å‡»å¸¦æ¯’"] = 500
-    cc.person_attrib_max["å†°å°ç¨‹åº¦"] = 100
-    cc.person_attrib_max["ç¼çƒ§ç¨‹åº¦"] = 100
-    cc.person_attrib_max["å®æˆ˜"] = 500
+    cc.person_attrib_max = {}                 -- ÊôĞÔ×î´óÖµ
+    cc.person_attrib_max["¾­Ñé"] = 60000
+    cc.person_attrib_max["ÎïÆ·ĞŞÁ¶µãÊı"] = 60000
+    cc.person_attrib_max["ĞŞÁ¶µãÊı"] = 30000
+    cc.person_attrib_max["ÉúÃü×î´óÖµ"] = 9999
+    cc.person_attrib_max["ÊÜÉË³Ì¶È"] = 100
+    cc.person_attrib_max["ÖĞ¶¾³Ì¶È"] = 250
+    cc.person_attrib_max["ÄÚÁ¦×î´óÖµ"] = 9999
+    cc.person_attrib_max["ÉúÃüÔö³¤"] = 15
+    cc.person_attrib_max["ÌåÁ¦"] = 100
+    cc.person_attrib_max["¹¥»÷Á¦"] = 9999
+    cc.person_attrib_max["·ÀÓùÁ¦"] = 9999
+    cc.person_attrib_max["Çá¹¦"] = 9999
+    cc.person_attrib_max["Ò½ÁÆÄÜÁ¦"] = 300
+    cc.person_attrib_max["ÓÃ¶¾ÄÜÁ¦"] = 300
+    cc.person_attrib_max["½â¶¾ÄÜÁ¦"] = 300
+    cc.person_attrib_max["¿¹¶¾ÄÜÁ¦"] = 300
+    cc.person_attrib_max["È­ÕÆ¹¦·ò"] = 999
+    cc.person_attrib_max["Ö¸·¨¼¼ÇÉ"] = 999
+    cc.person_attrib_max["Óù½£ÄÜÁ¦"] = 999
+    cc.person_attrib_max["Ë£µ¶¼¼ÇÉ"] = 999
+    cc.person_attrib_max["ÌØÊâ±øÆ÷"] = 999
+    cc.person_attrib_max["°µÆ÷¼¼ÇÉ"] = 999
+    cc.person_attrib_max["ÎäÑ§³£Ê¶"] = 999
+    cc.person_attrib_max["Æ·µÂ"] = 200
+    cc.person_attrib_max["×ÊÖÊ"] = 100
+    cc.person_attrib_max["¹¥»÷´ø¶¾"] = 500
+    cc.person_attrib_max["±ù·â³Ì¶È"] = 100
+    cc.person_attrib_max["×ÆÉÕ³Ì¶È"] = 100
+    cc.person_attrib_max["ÊµÕ½"] = 500
 
-    cc.war_data_size = 186                -- æˆ˜æ–—æ•°æ®å¤§å°ï¼Œwar.staæ•°æ®ç»“æ„
-    cc.war_data_s = {}                   -- æˆ˜æ–—æ•°æ®ç»“æ„
-    cc.war_data_s["ä»£å·"] = {0, 0, 2}
-    cc.war_data_s["åç§°"] = {2, 2, 10}
-    cc.war_data_s["åœ°å›¾"] = {12, 0, 2}
-    cc.war_data_s["ç»éªŒ"] = {14, 0, 2}
-    cc.war_data_s["éŸ³ä¹"] = {16, 0,2 }
+    cc.war_data_size = 186                -- Õ½¶·Êı¾İ´óĞ¡£¬war.staÊı¾İ½á¹¹
+    cc.war_data_s = {}                   -- Õ½¶·Êı¾İ½á¹¹
+    cc.war_data_s["´úºÅ"] = {0, 0, 2}
+    cc.war_data_s["Ãû³Æ"] = {2, 2, 10}
+    cc.war_data_s["µØÍ¼"] = {12, 0, 2}
+    cc.war_data_s["¾­Ñé"] = {14, 0, 2}
+    cc.war_data_s["ÒôÀÖ"] = {16, 0,2 }
     for i = 1, 6 do
-        cc.war_data_s["æ‰‹åŠ¨é€‰æ‹©å‚æˆ˜äºº" .. i] = {18 + 2 * (i - 1), 0, 2}
-        cc.war_data_s["è‡ªåŠ¨é€‰æ‹©å‚æˆ˜äºº" .. i] = {30 + 2 * (i - 1), 0, 2}
-        cc.war_data_s["æˆ‘æ–¹X" .. i] = {42 + 2 * (i - 1), 0, 2}
-        cc.war_data_s["æˆ‘æ–¹Y" .. i] = {54 + 2 * (i - 1), 0, 2}
+        cc.war_data_s["ÊÖ¶¯Ñ¡Ôñ²ÎÕ½ÈË" .. i] = {18 + 2 * (i - 1), 0, 2}
+        cc.war_data_s["×Ô¶¯Ñ¡Ôñ²ÎÕ½ÈË" .. i] = {30 + 2 * (i - 1), 0, 2}
+        cc.war_data_s["ÎÒ·½X" .. i] = {42 + 2 * (i - 1), 0, 2}
+        cc.war_data_s["ÎÒ·½Y" .. i] = {54 + 2 * (i - 1), 0, 2}
     end
     for i = 1, 20 do
-        cc.war_data_s["æ•Œäºº" .. i] = {66 + 2 * (i - 1), 0, 2}
-        cc.war_data_s["æ•Œæ–¹X" .. i] = {106 + 2 * (i - 1), 0, 2}
-        cc.war_data_s["æ•Œæ–¹Y" .. i] = {146 + 2 * (i - 1), 0, 2}
+        cc.war_data_s["µĞÈË" .. i] = {66 + 2 * (i - 1), 0, 2}
+        cc.war_data_s["µĞ·½X" .. i] = {106 + 2 * (i - 1), 0, 2}
+        cc.war_data_s["µĞ·½Y" .. i] = {146 + 2 * (i - 1), 0, 2}
     end
-    cc.war_width = 64                    -- æˆ˜æ–—åœ°å›¾å¤§å°
+    cc.war_width = 64                    -- Õ½¶·µØÍ¼´óĞ¡
     cc.war_height = 64
 
-    -- æ˜¾ç¤ºä¸»åœ°å›¾å’Œåœºæ™¯åœ°å›¾åæ ‡
-    -- å¦‚æœæ˜¾ç¤ºåæ ‡ï¼Œåˆ™ä¼šå¢åŠ cpuå ç”¨ã€‚æœºå™¨é€Ÿåº¦æ…¢çš„è¯å¯èƒ½ä¼šå¡ã€‚è¿™ä¸ªåœ¨è°ƒè¯•æ—¶æœ‰ç”¨ã€‚
-    cc.show_xy = 1                       -- 0 ä¸æ˜¾ç¤ºï¼Œ1 æ˜¾ç¤º
+    -- ÏÔÊ¾Ö÷µØÍ¼ºÍ³¡¾°µØÍ¼×ø±ê
+    -- Èç¹ûÏÔÊ¾×ø±ê£¬Ôò»áÔö¼ÓcpuÕ¼ÓÃ¡£»úÆ÷ËÙ¶ÈÂıµÄ»°¿ÉÄÜ»á¿¨¡£Õâ¸öÔÚµ÷ÊÔÊ±ÓĞÓÃ¡£
+    cc.show_xy = 1                       -- 0 ²»ÏÔÊ¾£¬1 ÏÔÊ¾
 
-    -- ä»¥ä¸‹ä¸ºæ§åˆ¶æ˜¾ç¤ºæ–¹å¼çš„å‚æ•°
-    cc.menu_border_pixel = 5              -- èœå•å››å‘¨è¾¹æ¡†ç•™çš„åƒç´ æ•°ï¼Œä¹Ÿç”¨äºç»˜åˆ¶å­—ç¬¦ä¸²çš„boxå››å‘¨ç•™çš„åƒç´ 
+    -- ÒÔÏÂÎª¿ØÖÆÏÔÊ¾·½Ê½µÄ²ÎÊı
+    cc.menu_border_pixel = 5              -- ²Ëµ¥ËÄÖÜ±ß¿òÁôµÄÏñËØÊı£¬Ò²ÓÃÓÚ»æÖÆ×Ö·û´®µÄboxËÄÖÜÁôµÄÏñËØ
     cc.default_font = math.modf(math.min(cc.screen_w, cc.screen_h) / 320 * 14)
     cc.small_font = cc.default_font * 3 / 4
     cc.font_big1 = math.modf(cc.default_font * 1.45)
@@ -1267,67 +1267,67 @@ function SetGlobalConst()
     cc.font_small7 = math.modf(cc.default_font * 0.55)
     cc.row_pixel = math.modf(math.min(cc.screen_w, cc.screen_h) / 100)
 
-    -- cc.start_menu_y = 160                  -- å¼€å§‹èœå•Yåæ ‡
-    cc.start_menu_font_size = cc.default_font   -- å¼€å§‹èœå•å­—å·
-    -- cc.new_game_y= 160                     -- æ–°æ¸¸æˆå±æ€§æ˜¾ç¤ºYåæ ‡
-    cc.new_game_font_size = cc.default_font     -- æ–°æ¸¸æˆå±æ€§é€‰æ‹©å­—å·
-    cc.main_menu_x = 10                       -- ä¸»èœå•å¼€å§‹åæ ‡
+    -- cc.start_menu_y = 160                  -- ¿ªÊ¼²Ëµ¥Y×ø±ê
+    cc.start_menu_font_size = cc.default_font   -- ¿ªÊ¼²Ëµ¥×ÖºÅ
+    -- cc.new_game_y= 160                     -- ĞÂÓÎÏ·ÊôĞÔÏÔÊ¾Y×ø±ê
+    cc.new_game_font_size = cc.default_font     -- ĞÂÓÎÏ·ÊôĞÔÑ¡Ôñ×ÖºÅ
+    cc.main_menu_x = 10                       -- Ö÷²Ëµ¥¿ªÊ¼×ø±ê
     cc.main_menu_y = 10
-    cc.game_over_x = 90                       -- æˆ˜è´¥èœå•å¼€å§‹åæ ‡
+    cc.game_over_x = 90                       -- Õ½°Ü²Ëµ¥¿ªÊ¼×ø±ê
     cc.game_over_y = 65
-    cc.person_state_row_pixel = 5              -- æ˜¾ç¤ºäººç‰©çŠ¶æ€è¡Œé—´è·åƒç´ 
-    cc.thing_font_size = cc.font_small1         -- ç‰©å“æ˜¾ç¤ºå®šä¹‰
-    -- cc.thing_pic_width=math.modf(100 * CONFIG.Zoom / 100)          -- ç‰©å“å›¾ç‰‡å®½é«˜
-    cc.thing_pic_width = 100                  -- ç‰©å“å›¾ç‰‡å›ºå®šå°ºå¯¸
-    cc.thing_pic_height = cc.thing_pic_width    -- åŒå®½åŒé«˜
-    local n = math.modf(cc.screen_w / cc.thing_pic_width - 2)          -- ä¸€è¡Œæ˜¾ç¤ºå‡ ä¸ªç‰©å“
+    cc.person_state_row_pixel = 5              -- ÏÔÊ¾ÈËÎï×´Ì¬ĞĞ¼ä¾àÏñËØ
+    cc.thing_font_size = cc.font_small1         -- ÎïÆ·ÏÔÊ¾¶¨Òå
+    -- cc.thing_pic_width=math.modf(100 * CONFIG.Zoom / 100)          -- ÎïÆ·Í¼Æ¬¿í¸ß
+    cc.thing_pic_width = 100                  -- ÎïÆ·Í¼Æ¬¹Ì¶¨³ß´ç
+    cc.thing_pic_height = cc.thing_pic_width    -- Í¬¿íÍ¬¸ß
+    local n = math.modf(cc.screen_w / cc.thing_pic_width - 2)          -- Ò»ĞĞÏÔÊ¾¼¸¸öÎïÆ·
     if n < 10 then
         cc.menu_thing_x_num = 9
     else
         cc.menu_thing_x_num = 9
     end
-    -- å‘¨ç›®å•†åº—ä¸€è¡Œæ˜¾ç¤ºç‰©å“
+    -- ÖÜÄ¿ÉÌµêÒ»ĞĞÏÔÊ¾ÎïÆ·
     if n < 6 then 
         cc.mxzm = 5
     else
         cc.mxzm = 5
     end
-    local m = math.modf(cc.screen_h / cc.thing_pic_height - 2)         -- ç‰©å“æ˜¾ç¤ºå‡ åˆ—
+    local m = math.modf(cc.screen_h / cc.thing_pic_height - 2)         -- ÎïÆ·ÏÔÊ¾¼¸ÁĞ
     if m < 5 then
         cc.menu_thing_num = 5
     else
         cc.menu_thing_num = 5
     end
 
-    cc.thing_gap_out = 4                      -- ç‰©å“å›¾åƒæ˜¾ç¤ºå››å‘¨ç•™ç™½
-    cc.thing_gap_in = 4                       -- ç‰©å“å›¾åƒæ˜¾ç¤ºä¸­é—´é—´éš”
+    cc.thing_gap_out = 4                      -- ÎïÆ·Í¼ÏñÏÔÊ¾ËÄÖÜÁô°×
+    cc.thing_gap_in = 4                       -- ÎïÆ·Í¼ÏñÏÔÊ¾ÖĞ¼ä¼ä¸ô
     cc.start_menu_y = cc.screen_h - 3 * (cc.start_menu_font_size + cc.row_pixel) - 20
     cc.new_game_y = cc.screen_h - 4 * (cc.new_game_font_size + cc.row_pixel) - 10
-    -- å­èœå•çš„å¼€å§‹åæ ‡
-    cc.main_sub_menu_x = cc.main_menu_x + 2 * cc.menu_border_pixel + 2 * cc.default_font + 5            -- ä¸»èœå•ä¸ºä¸¤ä¸ªæ±‰å­—
+    -- ×Ó²Ëµ¥µÄ¿ªÊ¼×ø±ê
+    cc.main_sub_menu_x = cc.main_menu_x + 2 * cc.menu_border_pixel + 2 * cc.default_font + 5            -- Ö÷²Ëµ¥ÎªÁ½¸öºº×Ö
     cc.main_sub_menu_y = cc.main_menu_y
-    -- äºŒçº§å­èœå•å¼€å§‹åæ ‡
-    cc.main_sub_menu_x2 = cc.main_sub_menu_x + 2 * cc.menu_border_pixel + 4 * cc.default_font + 5        -- å­èœå•ä¸ºå››ä¸ªå­—ç¬¦
-    cc.single_line_height = cc.default_font + 2 * cc.menu_border_pixel + 5                           -- å¸¦æ¡†çš„å•è¡Œå­—ç¬¦é«˜
+    -- ¶ş¼¶×Ó²Ëµ¥¿ªÊ¼×ø±ê
+    cc.main_sub_menu_x2 = cc.main_sub_menu_x + 2 * cc.menu_border_pixel + 4 * cc.default_font + 5        -- ×Ó²Ëµ¥ÎªËÄ¸ö×Ö·û
+    cc.single_line_height = cc.default_font + 2 * cc.menu_border_pixel + 5                           -- ´ø¿òµÄµ¥ĞĞ×Ö·û¸ß
     cc.start_thing_pic = 0
-    cc.auto_move_event = {[0] = 0}            -- é¼ æ ‡æ“ä½œæ—¶æ˜¯å¦è§¦å‘äº‹ä»¶ï¼Œç¬¬ä¸€ä¸ªä½ç½®0æœªè§¦å‘ï¼Œ1è§¦å‘ï¼Œ2è§¦å‘å¹¶ä¸”èƒ½å¤Ÿèµ°åˆ°é¢å‰ï¼Œç¬¬äºŒå’Œç¬¬ä¸‰ä¸ªä½ç½®ä¸ºXYåæ ‡
-    cc.mmap_address = {}                      -- å¤§åœ°å›¾åœ°å€
+    cc.auto_move_event = {[0] = 0}            -- Êó±ê²Ù×÷Ê±ÊÇ·ñ´¥·¢ÊÂ¼ş£¬µÚÒ»¸öÎ»ÖÃ0Î´´¥·¢£¬1´¥·¢£¬2´¥·¢²¢ÇÒÄÜ¹»×ßµ½ÃæÇ°£¬µÚ¶şºÍµÚÈı¸öÎ»ÖÃÎªXY×ø±ê
+    cc.mmap_address = {}                      -- ´óµØÍ¼µØÖ·
 
-    --LMSJ = {"å°‘å•†å‰‘", "å•†é˜³å‰‘", "ä¸­å†²å‰‘", "å…³å†²å‰‘", "å°‘å†²å‰‘", "å°‘æ³½å‰‘"}
-    --XL18 = {"äº¢é¾™æœ‰æ‚”", "è§é¾™åœ¨ç”°", "é£é¾™åœ¨å¤©", "åŒé¾™å‡ºæ°´", "ç¥é¾™æ‘†å°¾", "æ½œé¾™å‹¿ç”¨"}
-    xl18jy = {"ææ„--äº¢é¾™Â·é¸¿æ¸æ–¼é™†", "ææ„--é£é¾™Â·æˆ–è·ƒåœ¨æ¸Š", "ææ„--æ½œé¾™Â·å¯†é›¨ä¸äº‘", "ææ„--ç¥é¾™Â·éœ‡æƒŠç™¾é‡Œ", "ææ„--è§é¾™Â·åˆ©æ¶‰å¤§å·", "ææ„--åŒé¾™Â·çªå¦‚å…¶æ¥", "ææ„--å…­é¾™Â·å±¥éœœå†°è‡³", "ææ„--é¾™æˆ˜Â·æŸåˆ™æœ‰å­š"}
-    tfssj = {"Â·ã€å¤©é“æƒŠé›·æ†¾ã€", "Â·ã€ç‚¹å¢¨å±±æ²³ã€", "Â·ã€ä¸€å‰‘é•‡ç¥æ´²ã€", "Â·ã€ç¾½è‘¬ç…Œç‚æ–©ã€", "Â·ã€åƒæœºé¾™ç»é—ªã€", "Â·ã€åŒ–æ°”å¾¡ä¹å¤©ã€", "Â·ã€ä»è€…æ— æ•Œã€", "Â·ã€å…«é—¨èšä¸‡è±¡ã€", "Â·ã€å¤©äººäº”è¡°ã€", "Â·ã€é‚ªé­…å¤©ä¸‹ã€"}
-    zjtf = {"ç›–ä¸–ç¥æ‹³", "çµçŠ€ä¸€æŒ‡", "å‰‘ç¥ä¸€ç¬‘", "å‚²ä¸–ç‹‚åˆ€", "å¥‡é—¨æ— åŒ", "ç»ä¸–å¤©ç½¡", "ä»è€…æ— æ•Œ", "å›å¤©åœ£æ‰‹", "æ¬²å¤©æ‘©ç½—", "ç©·å‡¶ææ¶"}
-    tfe = {"æ‹³", "æŒ‡", "å‰‘", "åˆ€", "ç‰¹", "ç½¡", "ä»", "åŒ»", "æ¯’", "é‚ª"}
-    --YLJFZS = {"æ¸…é¥®å°é…Œ", "æµªè¿¹å¤©æ¶¯", "ä¸¾æ¡ˆé½çœ‰", "çš“è…•ç‰é•¯", "å†·æœˆçª¥äºº", "ç«¹å¸˜ä¸´æ± "}
-    --QZJFZS = {"å¤§æ±Ÿä¼¼ç»ƒ", "æ–œé£ç»†é›¨", "æ˜Ÿæ²³æ¬²è½¬", "æ¡ƒèŠ±æµæ°´"}
-    sjhbjfzs = {"åŒå‰‘åˆç’§--æ¸…é¥®å°é…Œ", "åŒå‰‘åˆç’§--æµªè¿¹å¤©æ¶¯", "åŒå‰‘åˆç’§--ä¸¾æ¡ˆé½çœ‰", "åŒå‰‘åˆç’§--çš“è…•ç‰é•¯", "åŒå‰‘åˆç’§--å†·æœˆçª¥äºº", 
-    "åŒå‰‘åˆç’§--ç«¹å¸˜ä¸´æ± ","åŒå‰‘åˆç’§--å¤§æ±Ÿä¼¼ç»ƒ", "åŒå‰‘åˆç’§--æ–œé£ç»†é›¨", "åŒå‰‘åˆç’§--æ˜Ÿæ²³æ¬²è½¬", "åŒå‰‘åˆç’§--æ¡ƒèŠ±æµæ°´"}
-    --SHSGZS = {"çŸ³ç«ç”µå…‰", "ç«ä¸­å–æ —", "æ˜ç«æ‰§ä»—", "å¼•ç«çƒ§èº«", "çƒ½ç«è¿å¤©", "åˆ€å±±ç«æµ·"}
-    tstf = {nil, "å½±å¸"}
-    mptf = {"å°‘æ—å¼Ÿå­"}
+    --LMSJ = {"ÉÙÉÌ½£", "ÉÌÑô½£", "ÖĞ³å½£", "¹Ø³å½£", "ÉÙ³å½£", "ÉÙÔó½£"}
+    --XL18 = {"¿ºÁúÓĞ»Ú", "¼ûÁúÔÚÌï", "·ÉÁúÔÚÌì", "Ë«Áú³öË®", "ÉñÁú°ÚÎ²", "Ç±ÁúÎğÓÃ"}
+    xl18jy = {"¼«Òâ--¿ºÁú¡¤ºè½¥ì¶Â½", "¼«Òâ--·ÉÁú¡¤»òÔ¾ÔÚÔ¨", "¼«Òâ--Ç±Áú¡¤ÃÜÓê²»ÔÆ", "¼«Òâ--ÉñÁú¡¤Õğ¾ª°ÙÀï", "¼«Òâ--¼ûÁú¡¤ÀûÉæ´ó´¨", "¼«Òâ--Ë«Áú¡¤Í»ÈçÆäÀ´", "¼«Òâ--ÁùÁú¡¤ÂÄËª±ùÖÁ", "¼«Òâ--ÁúÕ½¡¤ËğÔòÓĞæÚ"}
+    tfssj = {"¡¤¡ºÌìµÀ¾ªÀ×º¶¡»", "¡¤¡ºµãÄ«É½ºÓ¡»", "¡¤¡ºÒ»½£ÕòÉñÖŞ¡»", "¡¤¡ºÓğÔá»ÍÑ×Õ¶¡»", "¡¤¡ºÇ§»úÁú¾øÉÁ¡»", "¡¤¡º»¯ÆøÓù¾ÅÌì¡»", "¡¤¡ºÈÊÕßÎŞµĞ¡»", "¡¤¡º°ËÃÅ¾ÛÍòÏó¡»", "¡¤¡ºÌìÈËÎåË¥¡»", "¡¤¡ºĞ°÷ÈÌìÏÂ¡»"}
+    zjtf = {"¸ÇÊÀÉñÈ­", "ÁéÏ¬Ò»Ö¸", "½£ÉñÒ»Ğ¦", "°ÁÊÀ¿ñµ¶", "ÆæÃÅÎŞË«", "¾øÊÀÌìî¸", "ÈÊÕßÎŞµĞ", "»ØÌìÊ¥ÊÖ", "ÓûÌìÄ¦ÂŞ", "ÇîĞ×¼«¶ñ"}
+    tfe = {"È­", "Ö¸", "½£", "µ¶", "ÌØ", "î¸", "ÈÊ", "Ò½", "¶¾", "Ğ°"}
+    --YLJFZS = {"ÇåÒûĞ¡×Ã", "ÀË¼£ÌìÑÄ", "¾Ù°¸ÆëÃ¼", "ğ©ÍóÓñïí", "ÀäÔÂ¿úÈË", "ÖñÁ±ÁÙ³Ø"}
+    --QZJFZS = {"´ó½­ËÆÁ·", "Ğ±·çÏ¸Óê", "ĞÇºÓÓû×ª", "ÌÒ»¨Á÷Ë®"}
+    sjhbjfzs = {"Ë«½£ºÏèµ--ÇåÒûĞ¡×Ã", "Ë«½£ºÏèµ--ÀË¼£ÌìÑÄ", "Ë«½£ºÏèµ--¾Ù°¸ÆëÃ¼", "Ë«½£ºÏèµ--ğ©ÍóÓñïí", "Ë«½£ºÏèµ--ÀäÔÂ¿úÈË", 
+    "Ë«½£ºÏèµ--ÖñÁ±ÁÙ³Ø","Ë«½£ºÏèµ--´ó½­ËÆÁ·", "Ë«½£ºÏèµ--Ğ±·çÏ¸Óê", "Ë«½£ºÏèµ--ĞÇºÓÓû×ª", "Ë«½£ºÏèµ--ÌÒ»¨Á÷Ë®"}
+    --SHSGZS = {"Ê¯»ğµç¹â", "»ğÖĞÈ¡Àõ", "Ã÷»ğÖ´ÕÌ", "Òı»ğÉÕÉí", "·é»ğÁ¬Ìì", "µ¶É½»ğº£"}
+    tstf = {nil, "Ó°µÛ"}
+    mptf = {"ÉÙÁÖµÜ×Ó"}
 
-    -- å®æˆ˜ç»éªŒ
+    -- ÊµÕ½¾­Ñé
     war_szjy = {
         3, 2, 5, 2, 20, 15, 5, 5, 5, 5, 5, 5, 5, 5, 3, 2, 2,
         10, 5, 4, 4, 5, 4, 2, 2, 10, 20, 2, 3, 3, 3, 3, 3, 3, 5, 3, 4, 4,
@@ -1340,361 +1340,361 @@ function SetGlobalConst()
         3, 3, 3, 3, 3, 4, 3, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 3, 7, 7, 4, 3, 5, 5, 3
     }
 
-    -- ç§°å·
+    -- ³ÆºÅ
     rwwh = {}
-    rwwh[1] = "é›ªå±±é£ç‹"
-	rwwh[2] = "çµæ¢ç´ é—®"
-	rwwh[3] = "é‡‘é¢ä½›"
-	rwwh[4] = "é›è¿‡æ‹¨æ¯›"
-	rwwh[5] = "å¤ªæå®—å¸ˆ"
-	rwwh[6] = "ç­ç»å¸ˆå¤ª"
-	rwwh[7] = "é“ç´å…ˆç”Ÿ"	--ä½•å¤ªå†²
-	rwwh[8] = "å´†å³’æŒé—¨"	--å”æ–‡äº®
-	rwwh[9] = "ä¹é˜³æ˜å°Š"
-	rwwh[10] = "å…‰æ˜å³ä½¿"
-	rwwh[11] = "å…‰æ˜å·¦ä½¿"
-	rwwh[12] = "ç™½çœ‰é¹°ç‹"
-	rwwh[13] = "é‡‘æ¯›ç‹®ç‹"
-	rwwh[14] = "é’ç¿¼è ç‹"
-	rwwh[15] = "ç´«è¡«é¾™ç‹"
-	rwwh[16] = "è¶è°·åŒ»ä»™"
-	rwwh[17] = "è¶è°·æ¯’ä»™"
-	rwwh[18] = "æ··å…ƒéœ¹é›³æ‰‹"
-	rwwh[19] = "å›å­å‰‘"
-	rwwh[20] = "æ½‡æ¹˜å¤œé›¨"
-	rwwh[21] = "æ’å±±æŒé—¨"
-	rwwh[22] = "åµ©å±±æŒé—¨"
-	rwwh[23] = "æ³°å±±æŒé—¨"
-	rwwh[24] = "é’åŸæŒé—¨"
-	rwwh[25] = "äº”æ¯’æ•™ä¸»"
-	rwwh[26] = "æ—¥æœˆé­”å¸"
-	rwwh[27] = "é£äº‘å†èµ·"
-	rwwh[28] = "æ€äººååŒ»"
-	rwwh[29] = "ä¸‡é‡Œç‹¬è¡Œ"
-	rwwh[30] = "å‚»å°å­"
-	rwwh[31] = "æ¢…åº„å››å‹"
-	rwwh[32] = "æ¢…åº„å››å‹"
-	rwwh[33] = "æ¢…åº„å››å‹"
-	rwwh[34] = "æ¢…åº„å››å‹"
-	rwwh[35] = "ä¹å‰‘ä¼ äºº"
-	rwwh["35"] = "å‰‘é­”å†ä¸´"
-	rwwh[36] = "è¾Ÿé‚ªå‰‘å®¢"
-	rwwh[37] = "çœŸåç¥ç…§"
-	rwwh["38"] = "æ··æ²¦å¤ªç„"
-	rwwh[39] = "ä¾ å®¢å²›ä¸»"
-	rwwh[40] = "ä¾ å®¢å²›ä¸»"
-	rwwh[41] = "èµå–„ä½¿è€…"
-	rwwh[42] = "ç½šæ¶ä½¿è€…"
-	rwwh[43] = "é›ªå±±æŒé—¨"
-	rwwh[44] = "å‡¶ç¥æ¶ç…"
-	rwwh[45] = "é˜ç‹æ•Œ"
-	rwwh[46] = "æ˜Ÿå®¿è€æ€ª"
-	rwwh[47] = "æ›¼ç æ²™å"
-	rwwh[48] = "å†°æ¯’æ€ªå®¢"
-	rwwh[49] = "å°å’Œå°š"
-	rwwh["49"] = "é€é¥æŒé—¨"
-	rwwh[50] = "ç‹‚é¾™å¤©å¾"
-	rwwh[539] = "ç‹‚é¾™å¤©å¾"
-	rwwh[51] = "å§‘è‹æ…•å®¹"
-	rwwh[52] = "ä¸­å¹³ç¥æª"
-	rwwh[53] = "å…­è„‰çœŸä¼ "
-	rwwh[54] = "ç¢§è¡€é•¿é£"
-	rwwh[55] = "ä¾ ä¹‹å¤§è€…"
-	rwwh[56] = "å…°è´¨è•™å¿ƒ"
-	rwwh[57] = "æ¡ƒèŠ±å²›ä¸»"
-	rwwh[58] = "è¥¿ç‹‚"
-	rwwh[59] = "å†·è‹¥å¤©ä»™"
-	rwwh[60] = "è¥¿æ¯’"
-	rwwh[62] = "å…ƒè’™å¸å¸ˆ"
-	rwwh[63] = "é’ç®«è½ç‘›"
-	rwwh[64] = "é¡½ç«¥æ­¦ç—´"
-	rwwh[65] = "å—åƒ§"
-	rwwh[66] = "æ³¢æ–¯åœ£å¥³"
-	rwwh[67] = "é“æŒå¸®ä¸»"
-	rwwh[68] = "é•¿æ˜¥å­"
-	rwwh[69] = "åŒ—ä¸"
-	rwwh[71] = "ç¥é¾™æ•™ä¸»"
-	rwwh[72] = "å¤©é¾™æŒé—¨"
-	rwwh[73] = "æ—¥æœˆåœ£å§‘"
-	rwwh[74] = "ç¿ ç¾½é»„è¡«"
- 	rwwh[75] = "å¤©æ± çº¢èŠ±"
-	rwwh[76] = "ç…å¬›ä»™å­"
-	rwwh[77] = "ç§€å¤–æ…§ä¸­"
-	rwwh[78] = "é“å°¸é­”ç…"
-	rwwh[79] = "æ…§ä¸­çµå‰‘"
-	rwwh[80] = "ç«æ‰‹åˆ¤å®˜"
-	rwwh[81] = "é›ªå²­åŒå§"
-	rwwh[82] = "ç‰é¢å­Ÿå°"
-	rwwh[83] = "äº”æ¯’æ•™ä¸»"
-	rwwh[84] = "å°ç‹çˆ·"
-	rwwh[85] = "è€è°‹æ·±ç®—"
-	rwwh[86] = "é‡‘æç‰å¶"
-	rwwh[87] = "åªšçœ¼å¦‚ä¸"
-	rwwh[88] = "é…’ç¥"
-	rwwh[89] = "é£Ÿç¥"
-	rwwh[90] = "æ¯“ç§€çµå§"	
-	rwwh[91] = "é’é’å­è¡¿"
-	rwwh[92] = "æ‰‘æœ”è¿·ç¦»"
-	rwwh[94] = "ä»ä¹‰åˆ€"
-	rwwh[95] = "æŸ”äº‘å‰‘"
-	rwwh[96] = "å†·æœˆå‰‘"
-	rwwh[97] = "è¡€åˆ€è€ç¥–"
-	rwwh[98] = "æ¶è´¯æ»¡ç›ˆ"
-	rwwh[101] = "ç¬”ç šç”Ÿ"
-	rwwh[102] = "å¤©é¾™ç¦…å¸ˆ"
-	rwwh[103] = "å¤§è½®æ˜ç‹"
-	rwwh[104] = "ç è½ç‰ç›˜"
-	rwwh[105] = "å´ä¾¬è½¯è¯­"
-	rwwh[106] = "é‡‘åˆ€æ— æ•Œ"
-	rwwh[112] = "éœ‡å¤©é­”ç‹¼"
-	rwwh[113] = "å‚åˆæ½œé¾™"
-	rwwh[114] = "è¾¾æ‘©å†ä¸–"
-	rwwh[115] = "èªè¾©å…ˆç”Ÿ"
-	rwwh[116] = "é£æœˆæ— é—´"
-	rwwh[117] = "ä¸è€é•¿æ˜¥"
-	rwwh[118] = "ç§‹æ°´æ— å°˜"
-	rwwh[129] = "ä¸­ç¥é€š"
-	rwwh[131] = "å¦™æ‰‹ä¹¦ç”Ÿ"
-	rwwh[138] = "ä¸€æŒ‡éœ‡æ±Ÿå—"	--ç“¦å°”æ‹‰é½
-	rwwh[140] = "å‰‘æœ¯é€šç¥"		--é£æ¸…æ‰¬
-	rwwh[142] = "ç‹‚é£å¿«å‰‘"
-	rwwh[149] = "å°‘æ—æŒé—¨"
-	rwwh[153] = "æš—å™¨ä¹‹ç‹"
-	rwwh[154] = "é¸³é¸¯åˆ€"
-	rwwh[157] = "æ¹˜è¥¿å°¸ç‹"
-	rwwh[158] = "æ³¢æ–¯å¤§è´¾"
-	rwwh[159] = "ç‘œä¼½é¬¼ç‹"
-	rwwh[160] = "å°Šå¸ˆé‡é“"		--è¾¾å°”å·´
-	rwwh[161] = "èµ¤ç»ƒä»™å­"
-	rwwh[164] = "æ‘©å¤©å±…å£«"
-	rwwh[171] = "æ­¦å½“å„’ä¾ "
-	rwwh[185] = "ç¥å‰‘ä»™çŒ¿"
-	rwwh[186] = "ç¥æ‹³æ— æ•Œ"
-	rwwh[311] = "å¤©å±±åŒé¹°"
-    rwwh[510] = 'æ›²å¤•çƒŸéš™'
-	rwwh[511] = 'ç›—åœ£'
-	rwwh[517] = 'å¤§å¨å¤©é¾™'
-	rwwh[532] = 'æ­¦å½“ä¸ƒä¾ '
-	rwwh[533] = 'æ­¦å½“ä¸ƒä¾ '
-	rwwh[534] = 'æ­¦å½“ä¸ƒä¾ '
-	rwwh[535] = 'æ­¦å½“ä¸ƒä¾ '
-	rwwh[536] = 'æ­¦å½“ä¸ƒä¾ '
-	rwwh[537] = 'æ­¦å½“ä¸ƒä¾ '
-	rwwh[538] = 'æ­¦å½“ä¸ƒä¾ '
-	rwwh[553] = "çœŸç”°ä¸€ä¹‹å…µ"
-	rwwh[589] = "é“ƒå‰‘ä¾ å¥³"		--æ°´ç¬™
-	rwwh[590] = "å¤é“è¥¿é£"		--ææ–‡ç§€
-	rwwh[592] = "æ— æˆ‘æ— å‰‘"		--ç‹¬å­¤æ±‚è´¥
-	rwwh[597] = "é‡‘åˆšä¼é­”"		--æ¸¡å„
-	rwwh[598] = "é‡‘åˆšä¼é­”"		--æ¸¡åŠ«
-	rwwh[599] = "é‡‘åˆšä¼é­”"		--æ¸¡éš¾
-	rwwh[594] = "é“ç´¢æ¨ªæ±Ÿ"		--æˆšé•¿å‘
-	rwwh[601] = "å¤©é­åœ°å®"		--éŸ¦å°å®
-	rwwh[602] = "é˜´é˜³æ€ªæ°”"		--æµ·å¤§å¯Œ
-	rwwh[603] = "æ»¡æ´²å‹‡å£«"		--é³Œæ‹œ
-	rwwh[604] = "è¶Šå¥³å‰‘ä»™"		--é˜¿é’
-	rwwh[605] = "å§‘å°„ä»™å§¿"		--æ—æœè‹±
-	rwwh[606] = "è¥¿åŸŸæˆ˜ç¥"		--é˜¿å‡¡æ
-	rwwh[607] = "ä¹±ä¸–æµ®è"		--ç„¦å®›å„¿
-	rwwh[609] = "ç»æ•éƒ¡ä¸»"		--èµµæ•
-	rwwh[616] = "ç»æƒ…è°·ä¸»"		--å…¬å­™æ­¢
-	rwwh[617] = "é“æŒè²èŠ±"		--è£˜åƒå°º
-	rwwh[626] = "å°ä¸œé‚ª"		--éƒ­è¥„
-	rwwh["626"] = "å³¨çœ‰ç¥–å¸ˆ"
-	rwwh[627] = "ç‹éœ¸ä¹‹æ°”"		--è’™å“¥
-	rwwh[628] = "é›•å…„"			--ç¥é›•
-	rwwh[629] = "é•¿å¹³å…¬ä¸»"		--é˜¿ä¹
-	rwwh[631] = "è°ä¸äº‰é”‹"		--å‘¨èŠ·è‹¥
-	rwwh[642] = "ç²¾å¿ƒæ‰“ç£¨"		--å››å¤§å±±
-	rwwh[646] = "ç»è‰²ä½³äºº"		--æ®·ç¦»
-	rwwh[647] = "ç„å†¥äºŒè€"		--é¹¤ç¬”ç¿
-	rwwh[648] = "ç„å†¥äºŒè€"		--é¹¿æ–å®¢
-	rwwh[649] = "åå±±ç‰å¥³"		--å®ä¸­åˆ™
-	rwwh[650] = "å°ç‹çˆ·"		--æ¨åº·
-	rwwh[651] = "å½±å¸"			--å¼ å®¶è¾‰
-	rwwh[636] = "é’è²å‰‘ä»™"	    --æç™½
-	rwwh[652] = "ç¥å·å¤§ä¾ "	    --è§ç§‹æ°´
-	rwwh[635] = "è¥¿æ˜†ä»‘"	    --æ¢è§
-	rwwh[497] = "é‡‘åˆšé—¨äºº"	    --é™†æ¸
-	rwwh[498] = "å°ææ¢èŠ±"	    --æå¯»æ¬¢
-	rwwh[638] = "ä¹é˜³è‡³å°Š"	    --æ–—é…’åƒ§
-	rwwh[640] = "å¤å¢“åäºº"	    --é»„è¡«å¥³
-	rwwh[189] = "æ™‹é˜³å¤§ä¾ "	    --è§åŠå’Œ
-	rwwh[633] = "è¾½ä¸œå¤§ä¾ "	    --èƒ¡ä¸€åˆ€
-	rwwh[500] = "å‰‘ç¥"	    --è¥¿é—¨å¹é›ª	
-	rwwh[588] = "å²›ä¸»å¤«äºº"	--å†¯è˜…	
-	rwwh[587] = "ç´«è¡£é“¶é­"	--è¢ç´«è¡£		
-	rwwh[586] = "æ˜†ä»‘ä¸‰åœ£"	    --ä½•è¶³é“
-	rwwh[584] = "ä¸å“­æ­»ç¥"	    --
-	rwwh[583] = "å°å°¼å§‘"		--
-	rwwh[582] = "å†°å·å¤©å¥³"		--	
-	rwwh[581] = "ä¸ä¸å½“å½“"		--
-	rwwh[580] = "é“¶å¼§åˆ€"		--	
-	rwwh[579] = "ç›—ç‹ä¹‹ç‹"	  --å¸ç©ºæ‘˜æ˜Ÿ	
-	rwwh[637] = "ä¹é˜´è‡³å°Š"	  --é»„èµ
-	rwwh[578] = "å¤§å”åŒé¾™"	  --å¯‡ä»²
-	rwwh[634] = "é€é¥ç¥–å¸ˆ"	  --	é€é¥å­
-	rwwh[577] = "ç¦…å®—å§‹ç¥–"	  --	è¾¾æ‘©
-	rwwh[569] = "å°é­”å¥³"	  --	ææ²…èŠ·
-	rwwh[151] = "å¥”é›·æ‰‹"	  --	æ–‡æ³°æ¥
-	rwwh[574] = "å¯’éœ²æ¸…æ¢¦"	  --è§ç²
-	rwwh[613] = "é“æŒç¥é­"	  
-	rwwh[612] = "é“é­éœ‡å…«æ–¹"
-	rwwh[614] = "è’é‡æ¸¸é¾™"	
-	rwwh[615] = "ç‰å ‚é£ç‡•"	
-	rwwh[566] = "ç™½è¡£ä¹¦ç”Ÿ"	
-	rwwh[639] = "é‡‘è›‡éƒå›"	--	
-	rwwh[499] = "å¤§ç†å¤ªç¥–"	--
-	rwwh[313] = "å¤©ä½›é™ä¸–"	--	
-	rwwh[658] = "å¤©æ± æ€ªä¾ "
-	rwwh[657] = "æ‚²å¤©ä½›æ€œ"	
-	rwwh[656] = "å¤©æ€’çº¢é¢œ"
-	rwwh[655] = "çº¢ç²‰éª·é«…"
-	rwwh[567] = "åƒç§‹ä¾ çƒˆ"	
-	rwwh[570] = "æ£‰é‡Œé’ˆ"	
-	rwwh[571] = "æ€»èˆµä¸»"	
-	rwwh[573] = "ä»é˜³ä½›å…‰"	
-	rwwh[575] = "ç¥å‰‘ä»™çŒ¿"	
-	rwwh[576] = "ä½›é—¨æ— åŒ"	
-	rwwh[641] = "åœ£ç«æ˜å°Š"		
-	rwwh[568] = "ç²¾å¿ æŠ¥å›½"	
-	rwwh[567] = "åƒç§‹ä¾ çƒˆ"	
-	rwwh[650] = "å°ç‹çˆ·"	
-	rwwh[505] = "å¤§å”åŒé¾™"
-	rwwh[504] = "å¤ªè™šå‰‘ä¸»"
-	rwwh[507] = "ç…çŠå…¬å­"
-    rwwh[508] = "ç…çŠå…¬å­"	
-    rwwh[513] = "é•¿é£ä¸‡é‡Œ"	
-	rwwh[721] = "é»„æ²³è€ç¥–"	
-	rwwh[546] = "é£ä¸­ä¹‹ç¥"
-	rwwh[610] = "å¦™æ‰‹ä»å¿ƒ"
-	rwwh[545] = "æœ›é›ªé¢¦æ„"
-	rwwh[722] = "å…«å¦é«˜æ‰‹"
-	rwwh[737] = "å…«å¦é«˜æ‰‹"
-	rwwh[724] = "ä¸å¸®å¸®ä¸»"
-	rwwh[731] = "æ±¤å¤§ä¾ "		--æ ‡è®°ä¿®æ”¹
-	rwwh[737] = "å…«å¦é«˜æ‰‹"
-	rwwh[738] = "å†°è‚Œç‰éª¨"
-	rwwh[739] = "å•†å®¶å ¡ä¸»"		--æ ‡è®°ä¿®æ”¹
-	rwwh[740] = "éš”å£å¤§ç‹"		--æ ‡è®°ä¿®æ”¹
-	rwwh[741] = "éš”å£äºŒç‹"		--æ ‡è®°ä¿®æ”¹
-	rwwh[752] = "è¿äº‘ä¸ƒç•¥"
-	rwwh[514] = "æœ€å¼ºå‘å‹å¸ˆ"	--æ ‡è®°ä¿®æ”¹
-	rwwh[757] = "æ€¡çº¢å…¬å­"
-	rwwh[516] = "é›ªç¾½å®—ä¸»"			 
-	rwwh[518] = "å¯ºç»¯æ–‹"
-	rwwh[758] = "å¯†ä¸é€é£"		 
+    rwwh[1] = "Ñ©É½·Éºü"
+	rwwh[2] = "ÁéÊàËØÎÊ"
+	rwwh[3] = "½ğÃæ·ğ"
+	rwwh[4] = "Ñã¹ı²¦Ã«"
+	rwwh[5] = "Ì«¼«×ÚÊ¦"
+	rwwh[6] = "Ãğ¾øÊ¦Ì«"
+	rwwh[7] = "ÌúÇÙÏÈÉú"	--ºÎÌ«³å
+	rwwh[8] = "áÇá¼ÕÆÃÅ"	--ÌÆÎÄÁÁ
+	rwwh[9] = "¾ÅÑôÃ÷×ğ"
+	rwwh[10] = "¹âÃ÷ÓÒÊ¹"
+	rwwh[11] = "¹âÃ÷×óÊ¹"
+	rwwh[12] = "°×Ã¼Ó¥Íõ"
+	rwwh[13] = "½ğÃ«Ê¨Íõ"
+	rwwh[14] = "ÇàÒíòğÍõ"
+	rwwh[15] = "×ÏÉÀÁúÍõ"
+	rwwh[16] = "µû¹ÈÒ½ÏÉ"
+	rwwh[17] = "µû¹È¶¾ÏÉ"
+	rwwh[18] = "»ìÔªÅùö¨ÊÖ"
+	rwwh[19] = "¾ı×Ó½£"
+	rwwh[20] = "äìÏæÒ¹Óê"
+	rwwh[21] = "ºãÉ½ÕÆÃÅ"
+	rwwh[22] = "áÔÉ½ÕÆÃÅ"
+	rwwh[23] = "Ì©É½ÕÆÃÅ"
+	rwwh[24] = "Çà³ÇÕÆÃÅ"
+	rwwh[25] = "Îå¶¾½ÌÖ÷"
+	rwwh[26] = "ÈÕÔÂÄ§µÛ"
+	rwwh[27] = "·çÔÆÔÙÆğ"
+	rwwh[28] = "É±ÈËÃûÒ½"
+	rwwh[29] = "ÍòÀï¶ÀĞĞ"
+	rwwh[30] = "ÉµĞ¡×Ó"
+	rwwh[31] = "Ã·×¯ËÄÓÑ"
+	rwwh[32] = "Ã·×¯ËÄÓÑ"
+	rwwh[33] = "Ã·×¯ËÄÓÑ"
+	rwwh[34] = "Ã·×¯ËÄÓÑ"
+	rwwh[35] = "¾Å½£´«ÈË"
+	rwwh["35"] = "½£Ä§ÔÙÁÙ"
+	rwwh[36] = "±ÙĞ°½£¿Í"
+	rwwh[37] = "ÕæÃûÉñÕÕ"
+	rwwh["38"] = "»ìÂÙÌ«Ğş"
+	rwwh[39] = "ÏÀ¿ÍµºÖ÷"
+	rwwh[40] = "ÏÀ¿ÍµºÖ÷"
+	rwwh[41] = "ÉÍÉÆÊ¹Õß"
+	rwwh[42] = "·£¶ñÊ¹Õß"
+	rwwh[43] = "Ñ©É½ÕÆÃÅ"
+	rwwh[44] = "Ğ×Éñ¶ñÉ·"
+	rwwh[45] = "ÑÖÍõµĞ"
+	rwwh[46] = "ĞÇËŞÀÏ¹Ö"
+	rwwh[47] = "ÂüÖéÉ³»ª"
+	rwwh[48] = "±ù¶¾¹Ö¿Í"
+	rwwh[49] = "Ğ¡ºÍÉĞ"
+	rwwh["49"] = "åĞÒ£ÕÆÃÅ"
+	rwwh[50] = "¿ñÁúÌìÕ÷"
+	rwwh[539] = "¿ñÁúÌìÕ÷"
+	rwwh[51] = "¹ÃËÕÄ½Èİ"
+	rwwh[52] = "ÖĞÆ½ÉñÇ¹"
+	rwwh[53] = "ÁùÂöÕæ´«"
+	rwwh[54] = "±ÌÑª³¤·ç"
+	rwwh[55] = "ÏÀÖ®´óÕß"
+	rwwh[56] = "À¼ÖÊŞ¥ĞÄ"
+	rwwh[57] = "ÌÒ»¨µºÖ÷"
+	rwwh[58] = "Î÷¿ñ"
+	rwwh[59] = "ÀäÈôÌìÏÉ"
+	rwwh[60] = "Î÷¶¾"
+	rwwh[62] = "ÔªÃÉµÛÊ¦"
+	rwwh[63] = "ÇàóïÂäçø"
+	rwwh[64] = "ÍçÍ¯Îä³Õ"
+	rwwh[65] = "ÄÏÉ®"
+	rwwh[66] = "²¨Ë¹Ê¥Å®"
+	rwwh[67] = "ÌúÕÆ°ïÖ÷"
+	rwwh[68] = "³¤´º×Ó"
+	rwwh[69] = "±±Ø¤"
+	rwwh[71] = "ÉñÁú½ÌÖ÷"
+	rwwh[72] = "ÌìÁúÕÆÃÅ"
+	rwwh[73] = "ÈÕÔÂÊ¥¹Ã"
+	rwwh[74] = "´äÓğ»ÆÉÀ"
+ 	rwwh[75] = "Ìì³Øºì»¨"
+	rwwh[76] = "ÀÅ‹ÖÏÉ×Ó"
+	rwwh[77] = "ĞãÍâ»ÛÖĞ"
+	rwwh[78] = "ÌúÊ¬Ä§É·"
+	rwwh[79] = "»ÛÖĞÁé½£"
+	rwwh[80] = "»ğÊÖÅĞ¹Ù"
+	rwwh[81] = "Ñ©ÁëË«æ­"
+	rwwh[82] = "ÓñÃæÃÏ³¢"
+	rwwh[83] = "Îå¶¾½ÌÖ÷"
+	rwwh[84] = "Ğ¡ÍõÒ¯"
+	rwwh[85] = "ÀÏÄ±ÉîËã"
+	rwwh[86] = "½ğÖ¦ÓñÒ¶"
+	rwwh[87] = "ÃÄÑÛÈçË¿"
+	rwwh[88] = "¾ÆÉñ"
+	rwwh[89] = "Ê³Éñ"
+	rwwh[90] = "Ø¹ĞãÁéæ­"	
+	rwwh[91] = "ÇàÇà×ÓñÆ"
+	rwwh[92] = "ÆËË·ÃÔÀë"
+	rwwh[94] = "ÈÊÒåµ¶"
+	rwwh[95] = "ÈáÔÆ½£"
+	rwwh[96] = "ÀäÔÂ½£"
+	rwwh[97] = "Ñªµ¶ÀÏ×æ"
+	rwwh[98] = "¶ñ¹áÂúÓ¯"
+	rwwh[101] = "±ÊÑâÉú"
+	rwwh[102] = "ÌìÁúìøÊ¦"
+	rwwh[103] = "´óÂÖÃ÷Íõ"
+	rwwh[104] = "ÖéÂäÓñÅÌ"
+	rwwh[105] = "ÎâÙ¯ÈíÓï"
+	rwwh[106] = "½ğµ¶ÎŞµĞ"
+	rwwh[112] = "ÕğÌìÄ§ÀÇ"
+	rwwh[113] = "²ÎºÏÇ±Áú"
+	rwwh[114] = "´ïÄ¦ÔÙÊÀ"
+	rwwh[115] = "´Ï±çÏÈÉú"
+	rwwh[116] = "·çÔÂÎŞ¼ä"
+	rwwh[117] = "²»ÀÏ³¤´º"
+	rwwh[118] = "ÇïË®ÎŞ³¾"
+	rwwh[129] = "ÖĞÉñÍ¨"
+	rwwh[131] = "ÃîÊÖÊéÉú"
+	rwwh[138] = "Ò»Ö¸Õğ½­ÄÏ"	--Íß¶ûÀ­Æë
+	rwwh[140] = "½£ÊõÍ¨Éñ"		--·çÇåÑï
+	rwwh[142] = "¿ñ·ç¿ì½£"
+	rwwh[149] = "ÉÙÁÖÕÆÃÅ"
+	rwwh[153] = "°µÆ÷Ö®Íõ"
+	rwwh[154] = "Ô§Ñìµ¶"
+	rwwh[157] = "ÏæÎ÷Ê¬Íõ"
+	rwwh[158] = "²¨Ë¹´ó¼Ö"
+	rwwh[159] = "è¤Ù¤¹íÍõ"
+	rwwh[160] = "×ğÊ¦ÖØµÀ"		--´ï¶û°Í
+	rwwh[161] = "³àÁ·ÏÉ×Ó"
+	rwwh[164] = "Ä¦Ìì¾ÓÊ¿"
+	rwwh[171] = "Îäµ±ÈåÏÀ"
+	rwwh[185] = "Éñ½£ÏÉÔ³"
+	rwwh[186] = "ÉñÈ­ÎŞµĞ"
+	rwwh[311] = "ÌìÉ½Ë«Ó¥"
+    rwwh[510] = 'ÇúÏ¦ÑÌÏ¶'
+	rwwh[511] = 'µÁÊ¥'
+	rwwh[517] = '´óÍşÌìÁú'
+	rwwh[532] = 'Îäµ±ÆßÏÀ'
+	rwwh[533] = 'Îäµ±ÆßÏÀ'
+	rwwh[534] = 'Îäµ±ÆßÏÀ'
+	rwwh[535] = 'Îäµ±ÆßÏÀ'
+	rwwh[536] = 'Îäµ±ÆßÏÀ'
+	rwwh[537] = 'Îäµ±ÆßÏÀ'
+	rwwh[538] = 'Îäµ±ÆßÏÀ'
+	rwwh[553] = "ÕæÌïÒ»Ö®±ø"
+	rwwh[589] = "Áå½£ÏÀÅ®"		--Ë®óÏ
+	rwwh[590] = "¹ÅµÀÎ÷·ç"		--ÀîÎÄĞã
+	rwwh[592] = "ÎŞÎÒÎŞ½£"		--¶À¹ÂÇó°Ü
+	rwwh[597] = "½ğ¸Õ·üÄ§"		--¶É¶ò
+	rwwh[598] = "½ğ¸Õ·üÄ§"		--¶É½Ù
+	rwwh[599] = "½ğ¸Õ·üÄ§"		--¶ÉÄÑ
+	rwwh[594] = "ÌúË÷ºá½­"		--Æİ³¤·¢
+	rwwh[601] = "Ìì¿ıµØ±¦"		--Î¤Ğ¡±¦
+	rwwh[602] = "ÒõÑô¹ÖÆø"		--º£´ó¸»
+	rwwh[603] = "ÂúÖŞÓÂÊ¿"		--÷¡°İ
+	rwwh[604] = "Ô½Å®½£ÏÉ"		--°¢Çà
+	rwwh[605] = "¹ÃÉäÏÉ×Ë"		--ÁÖ³¯Ó¢
+	rwwh[606] = "Î÷ÓòÕ½Éñ"		--°¢·²Ìá
+	rwwh[607] = "ÂÒÊÀ¸¡Æ¼"		--½¹Íğ¶ù
+	rwwh[609] = "ÉÜÃô¿¤Ö÷"		--ÕÔÃô
+	rwwh[616] = "¾øÇé¹ÈÖ÷"		--¹«ËïÖ¹
+	rwwh[617] = "ÌúÕÆÁ«»¨"		--ôÃÇ§³ß
+	rwwh[626] = "Ğ¡¶«Ğ°"		--¹ùÏå
+	rwwh["626"] = "¶ëÃ¼×æÊ¦"
+	rwwh[627] = "Íõ°ÔÖ®Æø"		--ÃÉ¸ç
+	rwwh[628] = "µñĞÖ"			--Éñµñ
+	rwwh[629] = "³¤Æ½¹«Ö÷"		--°¢¾Å
+	rwwh[631] = "Ë­ÓëÕù·æ"		--ÖÜÜÆÈô
+	rwwh[642] = "¾«ĞÄ´òÄ¥"		--ËÄ´óÉ½
+	rwwh[646] = "¾øÉ«¼ÑÈË"		--ÒóÀë
+	rwwh[647] = "ĞşÚ¤¶şÀÏ"		--º×±ÊÎÌ
+	rwwh[648] = "ĞşÚ¤¶şÀÏ"		--Â¹ÕÈ¿Í
+	rwwh[649] = "»ªÉ½ÓñÅ®"		--ÄşÖĞÔò
+	rwwh[650] = "Ğ¡ÍõÒ¯"		--Ñî¿µ
+	rwwh[651] = "Ó°µÛ"			--ÕÅ¼Ò»Ô
+	rwwh[636] = "ÇàÁ«½£ÏÉ"	    --Àî°×
+	rwwh[652] = "ÉñÖİ´óÏÀ"	    --ÏôÇïË®
+	rwwh[635] = "Î÷À¥ÂØ"	    --ÁºÏô
+	rwwh[497] = "½ğ¸ÕÃÅÈË"	    --Â½½¥
+	rwwh[498] = "Ğ¡ÀîÌ½»¨"	    --ÀîÑ°»¶
+	rwwh[638] = "¾ÅÑôÖÁ×ğ"	    --¶·¾ÆÉ®
+	rwwh[640] = "¹ÅÄ¹ºóÈË"	    --»ÆÉÀÅ®
+	rwwh[189] = "½úÑô´óÏÀ"	    --Ïô°ëºÍ
+	rwwh[633] = "ÁÉ¶«´óÏÀ"	    --ºúÒ»µ¶
+	rwwh[500] = "½£Éñ"	    --Î÷ÃÅ´µÑ©	
+	rwwh[588] = "µºÖ÷·òÈË"	--·ëŞ¿	
+	rwwh[587] = "×ÏÒÂÒø±Ş"	--Ô¬×ÏÒÂ		
+	rwwh[586] = "À¥ÂØÈıÊ¥"	    --ºÎ×ãµÀ
+	rwwh[584] = "²»¿ŞËÀÉñ"	    --
+	rwwh[583] = "Ğ¡Äá¹Ã"		--
+	rwwh[582] = "±ù´¨ÌìÅ®"		--	
+	rwwh[581] = "¶¡¶¡µ±µ±"		--
+	rwwh[580] = "Òø»¡µ¶"		--	
+	rwwh[579] = "µÁÍõÖ®Íõ"	  --Ë¾¿ÕÕªĞÇ	
+	rwwh[637] = "¾ÅÒõÖÁ×ğ"	  --»ÆÉÍ
+	rwwh[578] = "´óÌÆË«Áú"	  --¿ÜÖÙ
+	rwwh[634] = "åĞÒ£×æÊ¦"	  --	åĞÒ£×Ó
+	rwwh[577] = "ìø×ÚÊ¼×æ"	  --	´ïÄ¦
+	rwwh[569] = "Ğ¡Ä§Å®"	  --	ÀîãäÜÆ
+	rwwh[151] = "±¼À×ÊÖ"	  --	ÎÄÌ©À´
+	rwwh[574] = "º®Â¶ÇåÃÎ"	  --ÏôÁá
+	rwwh[613] = "ÌúÕÆÉñ±Ş"	  
+	rwwh[612] = "Ìú±ŞÕğ°Ë·½"
+	rwwh[614] = "»ÄÒ°ÓÎÁú"	
+	rwwh[615] = "ÓñÌÃ·ÉÑà"	
+	rwwh[566] = "°×ÒÂÊéÉú"	
+	rwwh[639] = "½ğÉßÀÉ¾ı"	--	
+	rwwh[499] = "´óÀíÌ«×æ"	--
+	rwwh[313] = "Ìì·ğ½µÊÀ"	--	
+	rwwh[658] = "Ìì³Ø¹ÖÏÀ"
+	rwwh[657] = "±¯Ìì·ğÁ¯"	
+	rwwh[656] = "ÌìÅ­ºìÑÕ"
+	rwwh[655] = "ºì·Û÷¼÷Ã"
+	rwwh[567] = "Ç§ÇïÏÀÁÒ"	
+	rwwh[570] = "ÃŞÀïÕë"	
+	rwwh[571] = "×Ü¶æÖ÷"	
+	rwwh[573] = "ÈÊÑô·ğ¹â"	
+	rwwh[575] = "Éñ½£ÏÉÔ³"	
+	rwwh[576] = "·ğÃÅÎŞË«"	
+	rwwh[641] = "Ê¥»ğÃ÷×ğ"		
+	rwwh[568] = "¾«ÖÒ±¨¹ú"	
+	rwwh[567] = "Ç§ÇïÏÀÁÒ"	
+	rwwh[650] = "Ğ¡ÍõÒ¯"	
+	rwwh[505] = "´óÌÆË«Áú"
+	rwwh[504] = "Ì«Ğé½£Ö÷"
+	rwwh[507] = "ÀÅçğ¹«×Ó"
+    rwwh[508] = "ÀÅçğ¹«×Ó"	
+    rwwh[513] = "³¤·çÍòÀï"	
+	rwwh[721] = "»ÆºÓÀÏ×æ"	
+	rwwh[546] = "·çÖĞÖ®Éñ"
+	rwwh[610] = "ÃîÊÖÈÊĞÄ"
+	rwwh[545] = "ÍûÑ©ò­³î"
+	rwwh[722] = "°ËØÔ¸ßÊÖ"
+	rwwh[737] = "°ËØÔ¸ßÊÖ"
+	rwwh[724] = "Ø¤°ï°ïÖ÷"
+	rwwh[731] = "ÌÀ´óÏÀ"		--±ê¼ÇĞŞ¸Ä
+	rwwh[737] = "°ËØÔ¸ßÊÖ"
+	rwwh[738] = "±ù¼¡Óñ¹Ç"
+	rwwh[739] = "ÉÌ¼Ò±¤Ö÷"		--±ê¼ÇĞŞ¸Ä
+	rwwh[740] = "¸ô±Ú´óÍõ"		--±ê¼ÇĞŞ¸Ä
+	rwwh[741] = "¸ô±Ú¶şÍõ"		--±ê¼ÇĞŞ¸Ä
+	rwwh[752] = "Á¬ÔÆÆßÂÔ"
+	rwwh[514] = "×îÇ¿·¢ĞÍÊ¦"	--±ê¼ÇĞŞ¸Ä
+	rwwh[757] = "âùºì¹«×Ó"
+	rwwh[516] = "Ñ©Óğ×ÚÖ÷"			 
+	rwwh[518] = "ËÂç³Õ«"
+	rwwh[758] = "ÃÜ²»Í¸·ç"		 
 							
-	-- å¤©èµ‹
+	-- Ìì¸³
 	rwtflb = {}
-	rwtflb[758] = "å¥‡å¼‚ç»è„‰"
-	rwtflb[516] = "ä¸å½’ä¸‰å¢ƒ"
-	rwtflb[518] = "å››æ–‹è’¸é¹…å¿ƒ"
-	rwtflb[757] = "æ˜¥å“¥çš„è‡ªä¿¡"
-	rwtflb[752] = "é€†æ°´å¯’"
-	rwtflb[311] = "ç§ƒé¹°"
-	rwtflb[610] = "æµäº‘é£è¢–"	
-	rwtflb[546] = "å…¥é­”"
-	rwtflb[508] = "äº˜å¤©èµ¤ç„°"	
-	rwtflb[507] = "æ±Ÿå·¦æ¢…éƒ"		
-	rwtflb[505] = "ä¹å­—çœŸè¨€"	
-	rwtflb[517] = "ç»ä¸–æ·«åƒ§"	
-	rwtflb[650] = "æ— å¦„æ— æˆ‘"	
-	rwtflb[567] = "å‚²ä¸–ç¥ç½¡"	
-	rwtflb[568] = "å†³èƒœåƒé‡Œ"		
-	rwtflb[641] = "é­”é“å¤©è¡Œ"		
-	rwtflb[576] = "æ— é‡ç¦…éœ‡"	
-	rwtflb[575] = "é—ªç”µæƒŠé¸¿"			
-	rwtflb[573] = "å¤©åŸŸå¹»éŸ³"		
-	rwtflb[657] = "è¯¸æ³•æ— æˆ‘"		
-	rwtflb[658] = "åšé€šç™¾å®¶"	
-	rwtflb[313] = "è¯¸è¡Œæ— å¸¸"		
-	rwtflb[140] = "æ— æˆ‘æ— å‰‘"		
-	rwtflb[499] = "æ–‡éŸ¬æ­¦ç•¥"	
-	rwtflb[27] = "åŒ–å‡°ä¸ºå‡¤"	  --è§ç²		
-	rwtflb[574] = "å¤©ä»™é”é­‚"	  --è§ç²		
-	rwtflb[151] = "å¦ææ³°æ¥"	  --æ–‡æ³°æ¥	
-	rwtflb[68] = "ä¸€è¨€æ­¢æ€"	  --ä¸˜å¤„æœº	
-	rwtflb[5] = "é€šå¾®æ˜¾åŒ–"	  --å¼ ä¸‰ä¸°
-	rwtflb[577] = "ä¸€è‹‡æ¸¡æ±Ÿ"	  --è¾¾æ‘©	
-	rwtflb[634] = "é•¿æ˜¥ä¸è€"	  --é€é¥å­
-	rwtflb[578] = "å…µæ³•å…¥åˆ€"	  --å¯‡ä»²	
-	rwtflb[637] = "å¤§é“å½’è—"		 --é»„èµ
-	rwtflb[579] = "åƒå˜ä¸‡å¹»"		 --å¸ç©ºæ‘˜æ˜Ÿ
-	rwtflb[629] = "æµ´ç«å‡¤å‡°"		--
-	rwtflb[580] = "å¤å¢“æ— åŒ"		--
-	rwtflb[581] = "æœºçµå¤æ€ª"		--
-	rwtflb[649] = "å¨‡ç¾äººå¦»"		--å®ä¸­åˆ™
-	rwtflb[583] = "æ™®å–„åœ£å¿ƒ"		--ä»ªç³
-	rwtflb[582] = "é›ªèŠ±ç¥å‰‘"		--ç™½ç»£		
-	rwtflb[1] = "é­‚ç³»ä¸€åˆ€"
-	rwtflb[4] = "è·Œæ‰“åŒ»ç”Ÿ"
-	rwtflb[9] = "è¿è½¬ä¹¾å¤"
-    rwtflb[20] = "ä¸ƒå¼¦æ— å½¢å‰‘"
-	rwtflb[35] = "çµå¥‡æ´’è„±"
-	rwtflb[37] = "èµ¤å¿ƒè¿åŸ"
-	rwtflb[38] = "åç›¸çš†æ— "	
-	rwtflb[48] = "å¿ƒæ— æ‰€ä½"
-	rwtflb[49] = "ç¦ç¼˜æ·±åš"
-	rwtflb[50] = "å¥‹è‹±é›„æ€’"
-	rwtflb[539] = "å¥‹è‹±é›„æ€’"
-	rwtflb[51] = "ç¦»åˆå‚å•†"
-	rwtflb[53] = "ç£Šè½ä»å¿ƒ"
-	rwtflb[54] = "å¿—å‚æ—¥æœˆ"
-	rwtflb[55] = "å¤§å™¨æ™šæˆ"
-	rwtflb[56] = "å¥‡é—¨éç”²"
-	rwtflb[58] = "é€†æµå‹‡è¿›"
-	rwtflb[59] = "ä¸€ç‰‡å†°å¿ƒ"
-	rwtflb[60] = "å€’è¡Œé€†æ–½"
-	rwtflb[63] = "å¤–å’Œå†…åˆš"
-	rwtflb[64] = "è¿”ç’å½’çœŸ"
-	rwtflb[73] = "ç´é“®ç›ˆç›ˆ"
-	rwtflb[74] = "å·¾å¸¼ä¹‹æ‰"
-	rwtflb[76] = "æ­¦ä¸­æ— ç›¸"
-	rwtflb[77] = "ç è”ç’§åˆ"
-	rwtflb[80] = "å‹‡çŒ›ç²¾è¿›"
-	rwtflb[83] = "çº¤çº¤é“æ‰‹"
-	rwtflb[84] = "é¾™è±¡ä¹‹å§¿"
-	rwtflb[92] = "æŒ‡æŒ¥è‹¥å®š"
-	rwtflb[97] = "å€Ÿåˆ€æ€äºº"
-	rwtflb[102] = "åŒæ ‘æ¯è£"
-	rwtflb[112] = "å¤©å¨å¥‹çƒˆ"
-	rwtflb[116] = "åŒ—å†¥ææ¸Š"
-	rwtflb[117] = "è½¬ç¬çº¢é¢œ"
-	rwtflb[118] = "æ— ç›¸è½¬èº«"
-	rwtflb[129] = "ä»™é£é“éª¨"	
-	rwtflb[153] = "åƒè‡‚å¦‚æ¥"
-	rwtflb[458] = "å…¥æœ¨ä¸‰åˆ†"
-	rwtflb[553] = "èµ¤èƒ†å¿ é­‚"
-	rwtflb[565] = "åé‡Œå¡å‰‘ç¥"	--å“ä¸å‡¡
-	rwtflb[589] = "ä¼¼æ°´æŸ”æƒ…"	--æ°´ç¬™
-	rwtflb[590] = "å¿ƒç§€å¤©é“ƒ"		--ææ–‡ç§€
-	rwtflb[592] = "æ–™æ•Œå…ˆæœº"	--ç‹¬å­¤æ±‚è´¥
-	rwtflb[595] = "ä¸€é¾™ä¸€è±¡"	--å®è±¡
-	rwtflb[601] = "æœºæ•æ— åŒ"	--éŸ¦å°å®
-	rwtflb[605] = "æƒŠæ‰ç»è‰³"	--æ—æœè‹±
-	rwtflb[606] = "è¸æ²™æ— ç—•"	--é˜¿å‡¡æ
-	rwtflb[609] = "æœºæ™ºå¤šè°‹"	--èµµæ•
-	rwtflb[631] = "ç§€è‹¥èŠå…°"	--å‘¨èŠ·è‹¥
-	rwtflb[642] = "äº¿ä¸‡å°æ—¶"	--å››å¤§å±±
-	rwtflb[636] = "ä¾ å®¢è¡Œ"	--æç™½	
-	rwtflb[652] = "æƒŠå¤©ä¸€å‰‘"	--è§ç§‹æ°´
-	rwtflb[635] = "å¤©æœºç¥ç®—"	--æ¢è§
-	rwtflb[497] = "è¡¥å¤©åŠ«å¥´"	--é™†æ¸
-	rwtflb[498] = "æƒŠæ‰ç»è‰³"	--æå¯»æ¬¢	
-	rwtflb[638] = "æ°¤æ°²ç´«æ°”"	--æ–—é…’åƒ§
-	rwtflb[640] = "ç¿©è‹¥æƒŠé¸¿"	--é»„è¡«å¥³		
-	rwtflb[189] = "ä»è€…æ— æ•Œ"	--è§åŠå’Œ	
-	rwtflb[633] = "åˆ€å‰‘å½’çœŸ"	--èƒ¡ä¸€åˆ€	
-	rwtflb[500] = "å‰‘é“åŒ–èº«"	--è¥¿é—¨å¹é›ª	
-	rwtflb[588] = "è¿‡ç›®ä¸å¿˜"	--å†¯è˜…
-	rwtflb[586] = "ä½•è¶³é“å“‰"	--ä½•è¶³é“	
-	rwtflb[584] = "éº’éºŸè‡‚"	    --
-	rwtflb[569] = "æ²…èŠ·æ¾§å…°"	--
-	rwtflb[639] = "æ„å‡æƒ…çœŸ"	--	
-	rwtflb[700] = "é‚ªé­…å¤©ä¸‹"	
-	rwtflb[701] = "ç©·å‡¶ææ¶"
+	rwtflb[758] = "ÆæÒì¾­Âö"
+	rwtflb[516] = "²»¹éÈı¾³"
+	rwtflb[518] = "ËÄÕ«Õô¶ìĞÄ"
+	rwtflb[757] = "´º¸çµÄ×ÔĞÅ"
+	rwtflb[752] = "ÄæË®º®"
+	rwtflb[311] = "ÍºÓ¥"
+	rwtflb[610] = "Á÷ÔÆ·ÉĞä"	
+	rwtflb[546] = "ÈëÄ§"
+	rwtflb[508] = "Ø¨Ìì³àÑæ"	
+	rwtflb[507] = "½­×óÃ·ÀÉ"		
+	rwtflb[505] = "¾Å×ÖÕæÑÔ"	
+	rwtflb[517] = "¾øÊÀÒùÉ®"	
+	rwtflb[650] = "ÎŞÍıÎŞÎÒ"	
+	rwtflb[567] = "°ÁÊÀÉñî¸"	
+	rwtflb[568] = "¾öÊ¤Ç§Àï"		
+	rwtflb[641] = "Ä§µÀÌìĞĞ"		
+	rwtflb[576] = "ÎŞÁ¿ìøÕğ"	
+	rwtflb[575] = "ÉÁµç¾ªºè"			
+	rwtflb[573] = "ÌìÓò»ÃÒô"		
+	rwtflb[657] = "Öî·¨ÎŞÎÒ"		
+	rwtflb[658] = "²©Í¨°Ù¼Ò"	
+	rwtflb[313] = "ÖîĞĞÎŞ³£"		
+	rwtflb[140] = "ÎŞÎÒÎŞ½£"		
+	rwtflb[499] = "ÎÄèºÎäÂÔ"	
+	rwtflb[27] = "»¯»ËÎª·ï"	  --ÏôÁá		
+	rwtflb[574] = "ÌìÏÉËø»ê"	  --ÏôÁá		
+	rwtflb[151] = "·ñ¼«Ì©À´"	  --ÎÄÌ©À´	
+	rwtflb[68] = "Ò»ÑÔÖ¹É±"	  --Çğ´¦»ú	
+	rwtflb[5] = "Í¨Î¢ÏÔ»¯"	  --ÕÅÈı·á
+	rwtflb[577] = "Ò»Î­¶É½­"	  --´ïÄ¦	
+	rwtflb[634] = "³¤´º²»ÀÏ"	  --åĞÒ£×Ó
+	rwtflb[578] = "±ø·¨Èëµ¶"	  --¿ÜÖÙ	
+	rwtflb[637] = "´óµÀ¹é²Ø"		 --»ÆÉÍ
+	rwtflb[579] = "Ç§±äÍò»Ã"		 --Ë¾¿ÕÕªĞÇ
+	rwtflb[629] = "Ô¡»ğ·ï»Ë"		--
+	rwtflb[580] = "¹ÅÄ¹ÎŞË«"		--
+	rwtflb[581] = "»úÁé¹Å¹Ö"		--
+	rwtflb[649] = "½¿ÃÀÈËÆŞ"		--ÄşÖĞÔò
+	rwtflb[583] = "ÆÕÉÆÊ¥ĞÄ"		--ÒÇÁÕ
+	rwtflb[582] = "Ñ©»¨Éñ½£"		--°×Ğå		
+	rwtflb[1] = "»êÏµÒ»µ¶"
+	rwtflb[4] = "µø´òÒ½Éú"
+	rwtflb[9] = "ÔË×ªÇ¬À¤"
+    rwtflb[20] = "ÆßÏÒÎŞĞÎ½£"
+	rwtflb[35] = "ÁéÆæÈ÷ÍÑ"
+	rwtflb[37] = "³àĞÄÁ¬³Ç"
+	rwtflb[38] = "ÃûÏà½ÔÎŞ"	
+	rwtflb[48] = "ĞÄÎŞËù×¡"
+	rwtflb[49] = "¸£ÔµÉîºñ"
+	rwtflb[50] = "·ÜÓ¢ĞÛÅ­"
+	rwtflb[539] = "·ÜÓ¢ĞÛÅ­"
+	rwtflb[51] = "ÀëºÏ²ÎÉÌ"
+	rwtflb[53] = "ÀÚÂäÈÊĞÄ"
+	rwtflb[54] = "Ö¾´¹ÈÕÔÂ"
+	rwtflb[55] = "´óÆ÷Íí³É"
+	rwtflb[56] = "ÆæÃÅ¶İ¼×"
+	rwtflb[58] = "ÄæÁ÷ÓÂ½ø"
+	rwtflb[59] = "Ò»Æ¬±ùĞÄ"
+	rwtflb[60] = "µ¹ĞĞÄæÊ©"
+	rwtflb[63] = "ÍâºÍÄÚ¸Õ"
+	rwtflb[64] = "·µè±¹éÕæ"
+	rwtflb[73] = "ÇÙï£Ó¯Ó¯"
+	rwtflb[74] = "½íàşÖ®²Å"
+	rwtflb[76] = "ÎäÖĞÎŞÏà"
+	rwtflb[77] = "ÖéÁªèµºÏ"
+	rwtflb[80] = "ÓÂÃÍ¾«½ø"
+	rwtflb[83] = "ÏËÏËÌúÊÖ"
+	rwtflb[84] = "ÁúÏóÖ®×Ë"
+	rwtflb[92] = "Ö¸»ÓÈô¶¨"
+	rwtflb[97] = "½èµ¶É±ÈË"
+	rwtflb[102] = "Ë«Ê÷¿İÈÙ"
+	rwtflb[112] = "ÌìÍş·ÜÁÒ"
+	rwtflb[116] = "±±Ú¤¼«Ô¨"
+	rwtflb[117] = "×ªË²ºìÑÕ"
+	rwtflb[118] = "ÎŞÏà×ªÉí"
+	rwtflb[129] = "ÏÉ·çµÀ¹Ç"	
+	rwtflb[153] = "Ç§±ÛÈçÀ´"
+	rwtflb[458] = "ÈëÄ¾Èı·Ö"
+	rwtflb[553] = "³àµ¨ÖÒ»ê"
+	rwtflb[565] = "Ê®ÀïÆÂ½£Éñ"	--×¿²»·²
+	rwtflb[589] = "ËÆË®ÈáÇé"	--Ë®óÏ
+	rwtflb[590] = "ĞÄĞãÌìÁå"		--ÀîÎÄĞã
+	rwtflb[592] = "ÁÏµĞÏÈ»ú"	--¶À¹ÂÇó°Ü
+	rwtflb[595] = "Ò»ÁúÒ»Ïó"	--±¦Ïó
+	rwtflb[601] = "»úÃôÎŞË«"	--Î¤Ğ¡±¦
+	rwtflb[605] = "¾ª²Å¾øÑŞ"	--ÁÖ³¯Ó¢
+	rwtflb[606] = "Ì¤É³ÎŞºÛ"	--°¢·²Ìá
+	rwtflb[609] = "»úÖÇ¶àÄ±"	--ÕÔÃô
+	rwtflb[631] = "ĞãÈôÖ¥À¼"	--ÖÜÜÆÈô
+	rwtflb[642] = "ÒÚÍòĞ¡Ê±"	--ËÄ´óÉ½
+	rwtflb[636] = "ÏÀ¿ÍĞĞ"	--Àî°×	
+	rwtflb[652] = "¾ªÌìÒ»½£"	--ÏôÇïË®
+	rwtflb[635] = "Ìì»úÉñËã"	--ÁºÏô
+	rwtflb[497] = "²¹Ìì½ÙÅ«"	--Â½½¥
+	rwtflb[498] = "¾ª²Å¾øÑŞ"	--ÀîÑ°»¶	
+	rwtflb[638] = "ë³ëµ×ÏÆø"	--¶·¾ÆÉ®
+	rwtflb[640] = "ôæÈô¾ªºè"	--»ÆÉÀÅ®		
+	rwtflb[189] = "ÈÊÕßÎŞµĞ"	--Ïô°ëºÍ	
+	rwtflb[633] = "µ¶½£¹éÕæ"	--ºúÒ»µ¶	
+	rwtflb[500] = "½£µÀ»¯Éí"	--Î÷ÃÅ´µÑ©	
+	rwtflb[588] = "¹ıÄ¿²»Íü"	--·ëŞ¿
+	rwtflb[586] = "ºÎ×ãµÀÔÕ"	--ºÎ×ãµÀ	
+	rwtflb[584] = "÷è÷ë±Û"	    --
+	rwtflb[569] = "ãäÜÆå¢À¼"	--
+	rwtflb[639] = "Òâ¼ÙÇéÕæ"	--	
+	rwtflb[700] = "Ğ°÷ÈÌìÏÂ"	
+	rwtflb[701] = "ÇîĞ×¼«¶ñ"
 
-    -- éš¾åº¦æ–‡å­—
-    MODEXZ2 = {"ç®€å•", "æ™®é€š", "å›°éš¾","åœ°ç‹±"}
+    -- ÄÑ¶ÈÎÄ×Ö
+    MODEXZ2 = {"¼òµ¥", "ÆÕÍ¨", "À§ÄÑ","µØÓü"}
 end
