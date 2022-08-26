@@ -27,7 +27,9 @@ function Gra_SetClip(x1, y1, x2, y2)
     if not y1 or not x2 or not y2 then
         err = 1             -- 参数省略错误
     elseif x1 < 0 or y1 < 0 or x2 < 0 or y2 < 0 then
-        err = 2  
+        err = 2             -- xy错误
+    elseif x2 < x1 or y2 < y1 then
+        err = 3             -- xy错误2
     end
 
     -- 错误时返回错误码
@@ -39,7 +41,7 @@ function Gra_SetClip(x1, y1, x2, y2)
     lib.SetClip(x1, y1, x2, y2)
 end
 
--- 用颜色color来填充表面的矩形(x1, y1)-(x2, y2)，color为32位RGB，从高到低字节为0RGB
+-- 用颜色color来填充表面的矩形(x1, y1)-(x2, y2)，color为32位RGB，从高到低字节为RGB
 -- 如果x1, y1, x2, y2均为0，则填充整个表面
 -- 这里的矩形(x1, y1)-(x2, y2)，要在裁剪函数Gra_SetClip范围内，否则无效
 -- 若调用时不带参数，则默认xy均为0，颜色为黑色
@@ -54,8 +56,10 @@ function Gra_FillColor(x1, y1, x2, y2, color)
         err = 1             -- 参数省略错误
     elseif x1 < 0 or y1 < 0 or x2 < 0 or y2 < 0 then
         err = 2             -- xy错误
+    elseif x2 < x1 or y2 < x1 then
+        err = 3             -- xy错误2
     elseif color < 0 then
-        err = 3             -- color错误
+        err = 4             -- color错误
     end
 
     -- 错误时返回错误码
@@ -69,7 +73,7 @@ end
 
 -- 刷新屏幕，若是不调用这个函数，所有改变画面的操作，都不会正确显示出来
 -- flag：=0 or nil 显示全部表面
---       =1 按照SetClip设置的矩形依次显示，如果没有矩形，则不显示
+--       =1 按照SetClip设置的矩形显示，如果没有矩形，则不显示
 function Gra_ShowScreen(flag)
     -- 省略时的默认值
     if not flag then
@@ -90,13 +94,35 @@ function Gra_ShowScreen(flag)
     lib.ShowSurface(flag)
 end
 
+-- 把表面缓慢显示到屏幕
+-- t为亮度每变化一次的间隔毫秒数，为了16/32位兼容，一共有32阶亮度变化
+-- flag: 0从暗到亮，1从亮到暗
+function Gra_ShowSlow(t, flag)
+    local err = -1          -- 错误码
+    if not t or not flag then
+        err = 1             -- 参数省略错误
+    elseif t < 0 or t > 32 then
+        err = 2             -- t错误
+    elseif flag ~= 0 and flag ~= 1 then
+        err = 3             -- flag错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("Gra_ShowSlow Error, error code: " .. err)
+        return
+    end
+
+    lib.ShowSlow(t, flag)
+end
+
 -- 把表面矩形(x1, y1)-(x2, y2)内所有点的亮度降低为bright倍
--- bright取值为0-256，0表示全黑，256表示亮度不变
--- 若调用时不带参数，则默认无效果
+-- bright取值为0-255，0表示全黑，255表示亮度不变
+-- 若调用时不带参数，则默认全黑
 function Gra_Background(x1, y1, x2, y2, bright)
     -- 省略时的默认值
     if not x1 then
-        x1, y1, x2, y2, bright = 0, 0, 0, 0, 256
+        x1, y1, x2, y2, bright = 0, 0, 0, 0, 0
     end
 
     local err = -1          -- 错误码
@@ -104,8 +130,10 @@ function Gra_Background(x1, y1, x2, y2, bright)
         err = 1             -- 参数省略错误
     elseif x1 < 0 or y1 < 0 or x2 < 0 or y2 < 0 then
         err = 2             -- xy错误
-    elseif bright < 0 or bright > 256 then
-        err = 3             -- bright错误
+    elseif x2 < x1 or y2 < x1 then
+        err = 3             -- xy错误2
+    elseif bright < 0 or bright > 255 then
+        err = 4             -- bright错误
     end
 
     -- 错误时返回错误码
@@ -130,8 +158,10 @@ function Gra_DrawRect(x1, y1, x2, y2, color)
         err = 1             -- 参数省略错误
     elseif x1 < 0 or y1 < 0 or x2 < 0 or y2 < 0 then
         err = 2             -- xy错误
+    elseif x2 < x1 or y2 < x1 then
+        err = 3             -- xy错误2
     elseif color < 0 then
-        err = 3             -- color错误
+        err = 4             -- color错误
     end
 
     -- 错误时返回错误码
@@ -146,8 +176,8 @@ end
 -- 在(x, y)位置写字符串
 -- 此函数直接显示阴影字，在lua中不用处理阴影字了，这样可以提高字符串显示速度
 -- str：需要写的字符串
--- color：字体颜色，省略时使用默认值
--- size：字体像素大小，省略时使用默认值
+-- color：字体颜色
+-- size：字体像素大小
 -- fontname：字体名字，省略时使用默认值
 -- charset：字符串字符集，0 GBK, 1 BIG5，省略时使用默认值
 -- OScharset: 0 显示简体，1 显示繁体，省略时使用默认值
@@ -155,16 +185,14 @@ function Gra_DrawStr(x, y, str, color, size, fontname, charset, os_charset)
     -- 省略时的默认值
     if not fontname then
         fontname = cc.font_name
-    elseif not charset then
         charset = cc.src_char_set
-    elseif not os_charset then
         os_charset = cc.os_char_set
     end
 
     local err = -1      -- 错误码
     if not x or not y or not str or not color or not size then
         err = 1         -- 参数省略错误
-    elseif x < -1 or y < -1 then
+    elseif x < 0 or y < 0 then
         err = 2         -- xy错误
     elseif type(str) ~= "string" then
         err = 3         -- str错误
@@ -172,12 +200,6 @@ function Gra_DrawStr(x, y, str, color, size, fontname, charset, os_charset)
         err = 4         -- color错误
     elseif size < 0 then
         err = 5         -- size错误
-    elseif type(fontname) ~= "string" then
-        err = 6         -- fontname错误
-    elseif charset ~= 0 or charset ~= 1 then
-        err = 7         -- charset错误
-    elseif os_charset ~= 0 or os_charset ~= 1 then
-        err = 8         -- os_charset错误
     end
 
     -- 错误时返回错误码
@@ -196,11 +218,88 @@ function Gra_PicInit()
     lib.PicInit(cc.palette_file)
 end
 
+-- 加载贴图文件信息，用于加密图片文件
+-- idxfilename / grpfilename：idx / grp文件名
+-- id：加载编号，0-39，最大可加载40个，如果原来就有，则覆盖原来的
+function Gra_PicLoadFile(idxfilename, grpfilename, id)
+    local err = -1      -- 错误码
+    if not idxfilename or not grpfilename or not id then
+        err = 1         -- 参数省略错误
+    elseif type(idxfilename) ~= "string" then
+        err = 2         -- idxfilename错误
+    elseif type(grpfilename) ~= "string" then
+        err = 3         -- grpfilename错误
+    elseif id < 0 or id > 39 then
+        err = 4         -- id错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("Gra_PicLoadFile Error, error code: " .. err)
+        return
+    end
+    
+    lib.PicLoadFile(idxfilename, grpfilename, id)
+end
+
+-- 加载id所指示的贴图文件中编号为picid / 2（为保持兼容，这里依然除2）的贴图到表面的(x, y)坐标
+-- 用于加密图片文件
+-- fileid为lib.PicLoadFile加载的文件的加载编号
+-- flag，不同bit代表不同含义，缺省均为0
+-- bit0：=0 考虑偏移x和偏移y
+--       =1 不考虑偏移量
+-- 对于贴图文件来说，原有的RLE8编码格式都保存一个偏移量数据，表示绘图时实际的偏移
+-- 现在支持新的PNG格式，由于是直接采用png文件保存进grp文件，没有可以保存偏移量的地方
+-- 因此对不需要偏移的贴图，如物品图像，人物头像，直接按照贴图大小保存，加载时设置此位为1即可
+-- 对于需要考虑偏移量地方，设置此位为0
+-- 而为了处理png中的偏移量，我们假设所有png文件偏移量都在图形正中间
+-- 这样如果要载入新的png贴图，必须放大png文件的大小，使偏移点刚好位于图形中间
+-- bit1：=0 表示透明
+--       =1 需要考虑Alpha混合
+-- 与背景alpla混合显示, value为alpha值(0-256)
+-- 注意目前不支持png文件本身中的单个像素的alpha通道，只考虑透明与不透明，这是是单独进行Alpha混合
+-- bit2：=1 全黑
+-- 该贴图先进行全黑处理，然后再Alpha，只有bit1 = 1时才有意义
+-- bit3：=1 全白
+-- 该贴图先进行全白处理，然后再Alpha，只有bit1 = 1时才有意义
+-- value，当flag设置alpha时，为alpha值
+-- 当flag = 0时，flag和value都可以为空，即只需要输入前几个参数即可
+-- 在正常加载贴图到表面时，flag = 0
+-- 在战斗中手工选择移动或者战斗位置和人物被击中时，需要特殊的效果，这是就要使用bit1,bit2,bit3
+-- 由于lua不支持单独的位或操作，只能简单用加法替代
+-- 如：bit1，bit2设为1，flag = 2 + 4；bit1，bit3设为1，flag = 2 + 8
+function Gra_PicLoadCache(fileid, picid, x, y, flag, value, color, w, h)
+    if flag == nil then
+        flag = 0
+    end
+
+    local err = -1      -- 错误码
+    if not fileid or not picid or not x or not y then
+        err = 1         -- 参数省略错误
+    elseif fileid < 0 or fileid > 39 then
+        err = 2         -- fileid错误
+    elseif type(picid) ~= "number" then
+        err = 3         -- picid错误
+    elseif x < 0 or y < 0 then
+        err = 4         -- xy错误
+    elseif flag ~=0 and flag ~= 1 and flag ~= 2 and flag ~= 6 and flag ~= 10 then
+        err = 5         -- flag错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("Gra_PicLoadCache Error, error code: " .. err)
+        return
+    end
+
+    lib.PicLoadCache(fileid, picid, x, y, flag, value, color, w, h)
+end
+
 -- 显示图片文件filename到位置x, y
 -- 支持的文件扩展名为bmp / png / jpg等
 -- 若x = -1, y = -1，则显示在屏幕中间
 -- 函数会在内存中保存上一次加载的图片文件，以加快重复加载的速度
--- 用空文件名调用将会清除占用的内存
+-- 省略参数时清除占用的内存
 function Gra_LoadPicture(filename, x, y)
     -- 省略时的默认值
     if not filename then
@@ -225,32 +324,158 @@ function Gra_LoadPicture(filename, x, y)
     lib.LoadPicture(filename, x, y)
 end
 
--- 得到贴图大小，返回贴图宽、高、x偏移、y偏移
-function Gra_GetPicXY(id, picid)
-    return lib.GetPicXY(id, picid)
+-- 载入png图片路径
+-- path：png图片文件夹路径
+-- fileid：指定id
+-- num：载入图片数量
+-- percent：比例，范围是0 - 100
+function Gra_LoadPNGPath(path, fileid, num, percent)
+    local err = -1      -- 错误码
+    if not path or not fileid or not num or not percent then
+        err = 1         -- 参数省略错误
+    elseif type(path) ~= "string" then
+        err = 2         -- path错误
+    elseif fileid < 0 or fileid >= 100 then
+        err = 3         -- fileid错误
+    elseif num < 0 then
+        err = 4         -- num错误
+    elseif percent < 0 or percent > 100 then
+        err = 5         -- percent错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("Gra_LoadPNGPath Error, error code: " .. err)
+        return
+    end
+
+    lib.LoadPNGPath(path, fileid, num, percent)
 end
 
+-- 载入指定png图片
+-- fileid：指定id，由LoadPNGPath函数指定
+-- picid：指定图片的id乘以2，比如你要载入的png图片叫2.png，那么这里picid要填4，图片名一定要是数字
+-- (xy)：XY坐标
+-- flag：0 越界，1 不越界（也就是设为1的话，图片不会由于xy坐标设置错误而导致显示不全）
+function Gra_LoadPNG(fileid, picid, x, y, flag)
+    local err = -1      -- 错误码
+    if not fileid or not picid or not x or not y or not flag then
+        err = 1         -- 参数省略错误
+    elseif fileid < 0 or fileid >= 100 then
+        err = 2         -- fileid错误
+    elseif type(picid) ~= "number" then
+        err = 3         -- picid错误
+    elseif x < 0 or y < 0 then
+        err = 4         -- xy错误
+    elseif flag ~=0 and flag ~= 1 then
+        err = 5         -- flag错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("Gra_LoadPNG Error, error code: " .. err)
+        return
+    end
+
+    lib.LoadPNG(fileid, picid, x, y, flag)
+end
+
+-- 加载场景地图数据S*和D*
+-- Sfilename，s*文件名
+-- num，场景个数
+-- Dfilename，D*文件名
+function Gra_LoadSMap(Sfilename, num, Dfilename)
+    local tempfilename = cc.temp_s_filename     -- 保存临时S*的文件名
+    local x_max = cc.s_width                    -- 场景宽
+    local y_max = cc.s_height                   -- 场景高
+    local d_num1 = cc.d_num1                    -- 每个场景几个D数据
+    local d_num2 = cc.d_num2                    -- 每个D几个数据
+
+    local err = -1      -- 错误码
+    if not Sfilename or not num or not Dfilename then
+        err = 1         -- 参数省略错误
+    elseif type(Sfilename) ~= "string" then
+        err = 2         -- Sfilename错误
+    elseif num < 0 then
+        err = 3         -- num错误
+    elseif type(Dfilename) ~= "string" then
+        err = 4         -- Dfilename错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("Gra_LoadSMap Error, error code: " .. err)
+        return
+    end
+    
+    lib.LoadSMap(Sfilename, tempfilename, num, x_max, y_max, Dfilename, d_num1, d_num2)
+end
+
+-- 加载战斗地图
+-- mapid：战斗地图编号
+function Gra_LoadWarMap(mapid)
+    local WarIDXfilename = cc.war_map_file[1]       -- 战斗地图文件名idx
+    local WarGRPfilename = cc.war_map_file[2]       -- 战斗地图文件名grp
+    -- 战斗地图数据层数
+    -- num：战斗地图数据层数，
+    --      =0：地面数据，=1：建筑，=2：战斗人战斗编号
+    --      =3：移动时显示可移动的位置，=4：命中效果，=5：战斗人对应的贴图
+    -- 战斗地图只读取两层数据，其余为工作数据区
+    -- 这里固定为12，底层C程序里会乘以2，也就是会传24进去
+    -- 与读取R*.idx文件时，创建Byte.create(6 * 4)的值相等
+    -- 暂时没搞懂是为什么
+    local num = 12
+                                        
+    local x_max = cc.war_width          -- 战斗地图宽
+    local y_max = cc.war_height         -- 战斗地图高
+
+    local err = -1      -- 错误码
+    if not mapid then
+        err = 1         -- 参数省略错误
+    elseif mapid < 0 then
+        err = 2         -- mapid错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("Gra_LoadWarMap Error, error code: " .. err)
+        return
+    end
+
+    lib.LoadWarMap(WarIDXfilename, WarGRPfilename, mapid, num, x_max, y_max)
+end
+
+-- 播放mpeg1视频，key为停止播放按键的键码，一般设为Esc键
+function Gra_PlayMPEG(filename, key)
+    local err = -1      -- 错误码
+    if not filename or not key then
+        err = 1         -- 参数省略错误
+    elseif type(filename) ~= "string" then
+        err = 2         -- filename错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("Gra_PlayMPEG Error, error code: " .. err)
+        return
+    end
+
+    lib.PlayMPEG(filename, key)
+end
 
 -- 设置需要读取所有贴图的fileid
 -- 1 头像，2 物品，3 特效，4 半身像，5 UI
--- 附上需要用到的C函数说明
--- lib.LoadPNGPath(path, fileid, num, percent)
--- 载入png图片路径
--- path：png图片文件夹
--- fileid：该文件夹代号id
--- num：载入图片数量
--- percent：比例，范围是0 - 100
 function Gra_SetAllPNGAddress()
     -- 头像
-    lib.LoadPNGPath(cc.head_path, 1, cc.head_num, LimitX(cc.screen_w / 1360 * 100, 0, 100))
+    Gra_LoadPNGPath(cc.head_path, 1, cc.head_num, LimitX(cc.screen_w / 1360 * 100, 0, 100))
     -- 物品
-    lib.LoadPNGPath(cc.thing_path, 2, cc.thing_num, LimitX(cc.screen_w / 1360 * 100, 0, 100))
+    Gra_LoadPNGPath(cc.thing_path, 2, cc.thing_num, LimitX(cc.screen_w / 1360 * 100, 0, 100))
     -- 特效
-    lib.LoadPNGPath(cc.eft_path, 3, cc.eft_num, LimitX(cc.screen_w / 1360 * 100, 0, 100))
+    Gra_LoadPNGPath(cc.eft_path, 3, cc.eft_num, LimitX(cc.screen_w / 1360 * 100, 0, 100))
     -- 半身像
-    lib.LoadPNGPath(cc.body_path, 4, cc.body_num, LimitX(cc.screen_w / 1360 * 100, 0, 100))
+    Gra_LoadPNGPath(cc.body_path, 4, cc.body_num, LimitX(cc.screen_w / 1360 * 100, 0, 100))
     -- UI
-    lib.LoadPNGPath(cc.ui_path, 5, cc.ui_num, LimitX(cc.screen_w / 1360 * 100, 0, 100))
+    Gra_LoadPNGPath(cc.ui_path, 5, cc.ui_num, LimitX(cc.screen_w / 1360 * 100, 0, 100))
 end
 
 -- 裁剪并清除(x1, y1)-(x2, y2)矩形内的画面，并根据游戏状态显示背景图
@@ -463,7 +688,7 @@ function Gra_ShowMenu(menu_item, num_item, num_show, x1, y1, x2, y2, is_box, is_
         end
 
         Gra_ShowScreen()
-        local key_press, ktype, mx, my = WaitKey()
+        local key_press, ktype, mx, my = GetKey()
         lib.Delay(cc.frame)
         -- ESC或者鼠标右键取消
         if (key_press == VK_ESCAPE) or (ktype == 4) then
@@ -606,6 +831,25 @@ function Gra_DrawMMap(x, y, mypic)
     end
 
     lib.DrawMMap(x, y, mypic)
+end
+
+-- 加载主地图的5个结构文件*.002
+-- 贴图文件依次为earth、surface、building、buildx、buildy
+-- xmax、ymax为主地图宽、高，目前均为480
+-- x, y为主角坐标
+function Gra_LoadMMap(filename1, filename2, filename3, filename4, filename5, xmax, ymax, x, y)
+    local err = -1      -- 错误码
+    if not filename1 or not filename2 or not filename3 or not filename4 or not filename5 or not xmax or not ymax or not x or not y then
+        err = 1         -- 参数省略错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("Gra_LoadMMap Error, error code: " .. err)
+        return
+    end
+
+    lib.LoadMMap(filename1, filename2, filename3, filename4, filename5, xmax, ymax, x, y)
 end
 
 -- 绘制场景地图
@@ -865,7 +1109,7 @@ function Gra_DrawStrBoxYesNo(x, y, str, color, size, boxcolor)
         return
     end
 
-    WaitKey()
+    GetKey()
     -- 字符长度
     local len = #str
     -- 对话框宽度
@@ -909,7 +1153,7 @@ function Gra_DrawStrBoxWaitKey(str, color, size, flag, boxcolor)
         return
     end
 
-    WaitKey()
+    GetKey()
     Gra_Cls()
     -- 分开多种
     if flag == nil then
@@ -922,7 +1166,7 @@ function Gra_DrawStrBoxWaitKey(str, color, size, flag, boxcolor)
         Gra_DrawStrBox3(-1, -1, str, color, size, flag)
     end
     Gra_ShowScreen()
-    WaitKey()
+    GetKey()
 end
 
 -- 显示对话框
@@ -1008,7 +1252,7 @@ function Say(str, pid, flag, name)
         headid = -1
     end
 
-    WaitKey()
+    GetKey()
 
     local function ReadStr(str)
         local T1 = {}
@@ -1024,7 +1268,7 @@ function Say(str, pid, flag, name)
     local font = cc.font_name
 
     while string.len(s) >= 1 do
-        WaitKey()
+        GetKey()
         if jy.restart == 1 then
             break
         end
@@ -1075,7 +1319,7 @@ function Say(str, pid, flag, name)
             Delay(50)
         elseif strsub == "ｗ" then
             Gra_ShowScreen()
-            WaitKey()
+            GetKey()
         elseif strsub == "Ｎ" then
             str = jy.person[pid]["姓名"] .. str
         elseif strsub == "ｎ" then
@@ -1279,102 +1523,3 @@ function Gra_DrawBoxTitleSub(x1, y1, x2, y2, tx1, ty1, tx2, ty2, color)
     lib.DrawRect(x1 + s, y1 + s, x1 + s, y1, color)
     Gra_DrawBox1(tx1, ty1, tx2, ty2, color)
 end
-
-----------------------------------------
---
--- orionids：以下函数都是主程序引擎提供的可以在lua中调用的函数
--- 注意，对这些API没有做更多的参数的检查工作，因此要确保输入的参数是合理的
--- 否则程序可能会出错，也可能什么都不做
---
-----------------------------------------
-
--- lib.GetMMap(x, y, flag)
--- 取主地图结构相应坐标的值
--- flag = 0 earth, 1 surface, 2 building, 3 buildx, 4 buildy
-
--- lib.GetPNGXY(fileid, picid)
--- 得到PNG图片的XY值
-
--- lib.GetWarMap(x, y, level)
--- 取战斗地图数据
-
--- lib.LoadMMap(filename1, filename2, filename3, filename4, filename5, xmax, ymax, x, y)
--- 加载主地图的5个结构文件*.002
--- 贴图文件依次为earth、surface、building、buildx、buildy
--- xmax、ymax为主地图宽、高，目前均为480
--- x, y为主角坐标
-
--- lib.LoadPNG(fileid, picid, x, y, flag)
--- 载入指定png图片
--- fileid：指定id，由LoadPNGPath函数指定
--- picid：指定图片的id乘以2，比如你要载入的png图片叫2.png，那么这里picid要填4，图片名一定要是数字
--- x，y：XY坐标
--- flag：0 越界，1 不越界（也就是设为1的话，图片不会由于xy坐标设置错误而导致显示不全）
-
--- lib.LoadSMap(Sfilename, tempfilename, num, x_max, y_max, Dfilename, d_num1, d_num2)
--- 加载场景地图数据S*和D*
--- Sfilename，s*文件名
--- tempfilename，保存临时S*的文件名
--- num，场景个数
--- x_max、y_max，场景宽高
--- Dfilename，D*文件名
--- d_num1，每个场景几个D数据，应为200
--- d_num1，每个D几个数据，应为11
-
--- lib.LoadWarMap(WarIDXfilename, WarGRPfilename, mapid, num, x_max, y_max)
--- 加载战斗地图
--- WarIDXfilename / WarGrpfilename: 战斗地图文件名idx / grp
--- mapid：战斗地图编号
--- num：战斗地图数据层数，
---      =0：地面数据，=1：建筑，=2：战斗人战斗编号
---      =3：移动时显示可移动的位置，=4：命中效果，=5：战斗人对应的贴图
--- x_max、x_max：地图大小
--- 战斗地图只读取两层数据，其余为工作数据区
-
-
-
--- lib.PicLoadCache(id, picid, x, y, flag, value)
--- 加载id所指示的贴图文件中编号为picid / 2（为保持兼容，这里依然除2）的贴图到表面的(x, y)坐标
--- id为lib.PicLoadFile加载的文件的加载编号
--- flag，不同bit代表不同含义，缺省均为0
--- bit0 = 0，考虑偏移x和偏移y
---      = 1，不考虑偏移量
--- 对于贴图文件来说，原有的RLE8编码格式都保存一个偏移量数据，表示绘图时实际的偏移
--- 现在支持新的PNG格式，由于是直接采用png文件保存进grp文件，没有可以保存偏移量的地方
--- 因此对不需要偏移的贴图，如物品图像，人物头像，直接按照贴图大小保存，加载时设置此位为1即可
--- 对于需要考虑偏移量地方，设置此位为0
--- 而为了处理png中的偏移量，我们假设所有png文件偏移量都在图形正中间
--- 这样如果要载入新的png贴图，必须放大png文件的大小，使偏移点刚好位于图形中间
--- bit1 = 0，表示透明
---      = 1，需要考虑Alpha混合
--- 与背景alpla混合显示, value为alpha值(0-256)
--- 注意目前不支持png文件本身中的单个像素的alpha通道，只考虑透明与不透明，这是是单独进行Alpha混合
--- bit2 = 1，全黑
--- 该贴图先进行全黑处理，然后再Alpha，只有bit1 = 1时才有意义
--- bit3 = 1，全白
--- 该贴图先进行全白处理，然后再Alpha，只有bit1 = 1时才有意义
--- value，当flag设置alpha时，为alpha值
--- 当flag = 0时，flag和value都可以为空，即只需要输入前几个参数即可
--- 在正常加载贴图到表面时，flag = 0
--- 在战斗中手工选择移动或者战斗位置和人物被击中时，需要特殊的效果，这是就要使用bit1,bit2,bit3
--- 由于lua不支持单独的位或操作，只能简单用加法替代
--- 如：bit1，bit2设为1，flag = 2 + 4；bit1，bit3设为1，flag = 2 + 8
-
--- lib.PicLoadFile(idxfilename, grpfilename, id)
--- 加载贴图文件信息
--- idxfilename / grpfilename：idx / grp文件名
--- id：加载编号，0-39，最大可加载40个，如果原来就有，则覆盖原来的
-
--- lib.PlayMPEG(filename, key)
--- 播放mpeg1视频，key为停止播放按键的键码，一般设为Esc键
-
--- lib.SaveSMap(Sfilename, Dfilename)
--- 保存S*和D*
-
--- lib.ShowSlow(t, flag)
--- 把表面缓慢显示到屏幕
--- t为亮度每变化一次的间隔毫秒数，为了16/32位兼容，一共有32阶亮度变化
--- flag: 0从暗到亮，1从亮到暗
-
--- lib.SetWarMap(x, y, level, v)
--- 存战斗地图数据

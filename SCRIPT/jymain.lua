@@ -65,7 +65,6 @@ function SetGlobal()
                                         -- 这里占个位置，因为程序后面不允许全局变量了
                                         -- 具体内容在WarSetGlobal函数中
 
-    auto_move_tab = {[0] = 0}
     jy.restart = 0                      -- 返回游戏初始界面
     jy.walk_count = 0                   -- 走路计步
 end
@@ -119,9 +118,12 @@ function JY_Main_Sub()
 
         PlayMidi(75)                    -- 播放音乐
         Gra_Cls()                       -- 清屏
-        lib.ShowSlow(20, 0)             -- 缓慢显示画面
-        local x, y, xoff, yoff = lib.GetPicXY(5, 2)
-        Debug("x = "..x..", y = "..y..", xoff = "..xoff..", yoff = "..yoff)
+        Gra_ShowSlow(20, 0)             -- 缓慢显示画面
+        Gra_FillColor()
+        -- Gra_DrawRect(-1, -1, 800, 500, C_ORANGE)
+        -- Gra_DrawStr(0,0,"文字测试",C_RED,cc.default_font)
+        Gra_ShowScreen()
+        Delay(2000)
         return
 
         -- local r = StartMenu()           -- 显示游戏开始菜单画面
@@ -311,7 +313,7 @@ function TitleSelection()
             return
         end
         -- local keypress, ktype, mx, my = lib.GetKey()
-        local keypress, ktype, mx, my = WaitKey()
+        local keypress, ktype, mx, my = GetKey()
         -- 按键「下」和「右」效果一致，都是跳向下一个选项
         if keypress == VK_DOWN or keypress == VK_RIGHT then
             PlayWav(77)
@@ -380,10 +382,12 @@ end
 -- id：要播放的音乐id
 function PlayMidi(id)
     jy.current_midi = id
-    if jy.enable_music == 0 then                -- 如果游戏内设置为不播放音乐，则返回
+    -- 如果游戏内设置为不播放音乐，则返回
+    if jy.enable_music == 0 then
         return
     end
-    if id >= 0 then                             -- 调用C函数播放设定的音乐路径的音乐，音乐为id + 1
+    -- 播放设定的音乐路径的音乐，音乐为id + 1
+    if id >= 0 then                             
         lib.PlayMIDI(string.format(cc.midi_file, id + 1))
     end
 end
@@ -391,9 +395,11 @@ end
 -- 播放音效
 -- id：要播放的音效id
 function PlayWav(id)
+    -- 如果游戏内设置为不播放音效，则返回
     if jy.enable_sound == 0 then
         return
     end
+    -- 播放设定的音效路径的音效，音效为id
     if id >= 0 then
         lib.PlayWAV(string.format(cc.e_file, id))
     end
@@ -688,7 +694,9 @@ end
 -- 读S*
 -- id：场景编号
 -- xy：坐标
--- level：层数
+-- level：场景地图数据层数
+--      =0 地面数据，=1 建筑，=2 战斗人战斗编号
+--      =3 移动时显示可移动的位置，=4 命中效果，=5 战斗人对应的贴图
 function GetS(id, x, y, level)
     local err = -1      -- 错误码
     if not id or not x or not y or not level then
@@ -713,7 +721,9 @@ end
 -- 写S*
 -- id：场景编号
 -- xy：坐标
--- level：层数
+-- level：场景地图数据层数
+--      =0 地面数据，=1 建筑，=2 战斗人战斗编号
+--      =3 移动时显示可移动的位置，=4 命中效果，=5 战斗人对应的贴图
 -- v：写入的值
 function SetS(id, x, y, level, v)
     local err = -1      -- 错误码
@@ -791,6 +801,106 @@ function SetD(sceneid, id, i, v)
     return lib.SetD(sceneid, id, i, v)
 end
 
+-- 取大地图结构相应坐标的值
+-- flag： =0 earth, =1 surface, =2 building, =3 buildx, =4 buildy
+-- 返回一个值，为flag层的大地图坐标数据
+function GetMMap(x, y, flag)
+    local err = -1      -- 错误码
+    if not x or not y or not flag then
+        err = 1         -- 参数省略错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("GetMMap Error, error code: " .. err)
+        return
+    end
+
+    return lib.GetMMap(x, y, flag)
+end
+
+-- 取战斗地图数据
+-- xy：坐标
+-- level：战斗地图数据层数
+--      =0 地面数据，=1 建筑，=2 战斗人战斗编号
+--      =3 移动时显示可移动的位置，=4 命中效果，=5 战斗人对应的贴图
+-- 返回一个值，为该层的战斗地图坐标数据
+function GetWarMap(x, y, level)
+    local err = -1      -- 错误码
+    if not x or not y or not level then
+        err = 1         -- 参数省略错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("GetWarMap Error, error code: " .. err)
+        return
+    end
+
+    return lib.GetWarMap(x, y, level)
+end
+
+-- lib.SetWarMap(x, y, level, v)
+-- 存战斗地图数据
+-- xy：坐标
+-- level：战斗地图数据层数
+--      =0 地面数据，=1 建筑，=2 战斗人战斗编号
+--      =3 移动时显示可移动的位置，=4 命中效果，=5 战斗人对应的贴图
+-- v：写入的值
+function SetWarMap(x, y, level, v)
+    local err = -1      -- 错误码
+    if not x or not y or not level or not v then
+        err = 1         -- 参数省略错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("SetWarMap Error, error code: " .. err)
+        return
+    end
+
+    lib.SetWarMap(x, y, level, v)
+end
+
+-- 保存S*和D*
+function SaveSMap(Sfilename, Dfilename)
+    local err = -1      -- 错误码
+    if not Sfilename or not Dfilename then
+        err = 1         -- 参数省略错误
+    elseif type(Sfilename) ~= "string" then
+        err = 2         -- Sfilename错误
+    elseif type(Dfilename) ~= "string" then
+        err = 3         -- Dfilename错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("SaveSMap Error, error code: " .. err)
+        return
+    end
+
+    lib.SaveSMap(Sfilename, Dfilename)
+end
+
+-- 得到PNG图片的XY值
+-- fileid：指定id，由Gra_LoadPNGPath函数指定
+-- picid：picid：指定图片的id乘以2，比如你要载入的png图片叫2.png，那么这里picid要填4，图片名一定要是数字
+-- 返回两个值，分别为x和y，表示查询图片的宽和高
+function GetPNGXY(fileid, picid)
+    local err = -1      -- 错误码
+    if not fileid or not picid then
+        err = 1         -- 参数省略错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("GetPNGXY Error, error code: " .. err)
+        return
+    end
+
+    return lib.GetPNGXY(fileid, picid)
+end
+
 -- 获取文件长度
 function FileLength(filename)
     local inp = io.open(filename, "rb")
@@ -823,13 +933,37 @@ function LimitX(x, min, max)
     return x
 end
 
--- 等待键盘输入
-function WaitKey()
-    -- ktype：1 键盘，2 鼠标移动，3 鼠标左键，4 鼠标右键，5 鼠标中键，6 滚动上，7 滚动下
-    local key, ktype, mx, my = -1, -1, -1, -1
-    key, ktype, mx, my = lib.GetKey()
+-- 得到当前按键键码，键码定义参见SDL文档
+-- 此函数处理键盘缓冲区和键盘重复率，返回的是从上次调用以来曾经按下的键
+-- 并且只处理按下一个键的情况。因此如果需要清除键盘缓冲区，需要先调用一次此函数
+-- 返回key、ktype、mx、my四个值
+-- key：按下的按键
+-- ktype：1 键盘，2 鼠标移动，3 鼠标左键，4 鼠标右键，5 鼠标中键，6 滚动上，7 滚动下
+-- mx、my：鼠标xy轴
+function GetKey()
+    return lib.GetKey()
+end
 
-    return key, ktype, mx, my
+-- 设置键盘重复率
+-- delay为第一个重复的延迟毫秒数，interval为多少毫秒重复一次
+-- ESC, RETURN 和SPACE键已经取消重复，一直按下也只认为是按下一次
+function EnableKeyRepeat(delay, interval)
+    local err = -1      -- 错误码
+    if not delay or not interval then
+        err = 1         -- 参数省略错误
+    elseif delay < 0 then
+        err = 2         -- delay错误
+    elseif interval < 0 then
+        err = 3         -- interval错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("EnableKeyRepeat Error, error code: " .. err)
+        return
+    end
+
+    lib.EnableKeyRepeat(delay, interval)
 end
 
 -- 延时t毫秒
@@ -850,6 +984,234 @@ function Debug(str)
     end
 
     lib.Debug(str)
+end
+
+-- lib.CharSet(str, flag)
+-- 返回把str转换后的字符串
+-- flag：=0 Big5 -> GBK   
+--       =1 GBK -> Big5
+--       =2 Big5 -> Unicode
+--       =3 GBK -> Unicode
+function CharSet(str, flag)
+    local err = -1      -- 错误码
+    if not str or not flag then
+        err = 1         -- 参数省略错误
+    elseif type(str) ~= "string" then
+        err = 2         -- str错误
+    elseif flag < 0 or flag > 3 then
+        err = 3         -- flag错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("CharSet Error, error code: " .. err)
+        return
+    end
+
+    return lib.CharSet(str, flag)
+end
+
+-- 返回开机到当前的毫秒数
+function GetTime()
+    return lib.GetTime()
+end
+
+-- 释放主地图占用内存
+function UnloadMMap()
+    lib.UnloadMMap()
+end
+
+-- 创建一个二进制字节数组，size为数组大小
+function ByteCreate(size)
+    local err = -1      -- 错误码
+    if not size then
+        err = 1         -- 参数省略错误
+    elseif size < 0 then
+        err = 2         -- size错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("ByteCreate Error, error code: " .. err)
+        return
+    end
+
+    return Byte.create(size)
+end
+
+-- 从数组b中读取一个有符号16位整数
+-- start：数组中的读取位置，从0开始
+function ByteGet16(b, start)
+    local err = -1      -- 错误码
+    if not b or not start then
+        err = 1         -- 参数省略错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("ByteGet16 Error, error code: " .. err)
+        return
+    end
+
+    return Byte.get16(b, start)
+end
+
+-- 从数组b中读取一个有符号32位整数
+-- start：数组中的读取位置，从0开始
+function ByteGet32(b, start)
+    local err = -1      -- 错误码
+    if not b or not start then
+        err = 1         -- 参数省略错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("ByteGet32 Error, error code: " .. err)
+        return
+    end
+
+    return Byte.get32(b, start)
+end
+
+-- 从数组b中读取一个无符号16位整数，主要用于访问人物经验
+-- start：数组中的读取位置，从0开始
+function ByteGetu16(b, start)
+    local err = -1      -- 错误码
+    if not b or not start then
+        err = 1         -- 参数省略错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("ByteGetu16 Error, error code: " .. err)
+        return
+    end
+
+    return Byte.getu16(b, start)
+end
+
+-- 从数组b中读取一个字符串，长度为length
+-- start：数组中的读取位置，从0开始
+function ByteGetStr(b, start, length)
+    local err = -1      -- 错误码
+    if not b or not start or not length then
+        err = 1         -- 参数省略错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("ByteGetStr Error, error code: " .. err)
+        return
+    end
+
+    return Byte.getstr(b, start, length)
+end
+
+-- 从文件filename中加载数据到字节数组b中
+-- start：读取位置，从文件开始处的字节数，从0开始
+-- length：要读的字节数
+function ByteLoadFile(b, filename, start, length)
+    local err = -1      -- 错误码
+    if not b or not filename or not start or not length then
+        err = 1         -- 参数省略错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("ByteLoadFile Error, error code: " .. err)
+        return
+    end
+
+    Byte.loadfile(b, filename, start, length)
+end
+
+-- 把字节数组b的内容写到文件filename中
+-- start：写的位置，从文件开始处的字节数，从0开始
+-- length：要写的字节数
+function ByteSaveFile(b, filename, start, length)
+    local err = -1      -- 错误码
+    if not b or not filename or not start or not length then
+        err = 1         -- 参数省略错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("ByteSaveFile Error, error code: " .. err)
+        return
+    end
+
+    Byte.savefile(b, filename, start, length)
+end
+
+-- 把有符号16位整数写入数组b中
+-- start：数组中的写位置，从0开始
+-- v：写入的值
+function ByteSet16(b, start, v)
+    local err = -1      -- 错误码
+    if not b or not start or not v then
+        err = 1         -- 参数省略错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("ByteSet16 Error, error code: " .. err)
+        return
+    end
+
+    Byte.set16(b, start, v)
+end
+
+-- 把有符号32位整数写入数组b中
+-- start：数组中的写位置，从0开始
+-- v：写入的值
+function ByteSet32(b, start, v)
+    local err = -1      -- 错误码
+    if not b or not start or not v then
+        err = 1         -- 参数省略错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("ByteSet32 Error, error code: " .. err)
+        return
+    end
+
+    Byte.set32(b, start, v)
+end
+
+-- 把无符号16位整数写入数组b中
+-- start：数组中的写位置，从0开始
+-- v：写入的值
+function ByteSetu16(b, start, v)
+    local err = -1      -- 错误码
+    if not b or not start or not v then
+        err = 1         -- 参数省略错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("ByteSetu16 Error, error code: " .. err)
+        return
+    end
+
+    Byte.setu16(b, start, v)
+end
+
+-- 把字符串str写入到数组b中，最长写入长度为length
+-- start：数组中的写位置，从0开始
+function ByteSetStr(b, start, length, str)
+    local err = -1      -- 错误码
+    if not b or not start or not length or not str then
+        err = 1         -- 参数省略错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("ByteSetStr Error, error code: " .. err)
+        return
+    end
+
+    Byte.setstr(b, start, length, str)
 end
 
 -- 清屏
@@ -943,84 +1305,3 @@ function instruct_4(thingid)
         return false
     end
 end
-
-----------------------------------------
---
--- orionids：以下函数都是主程序引擎提供的可以在lua中调用的函数
--- 注意，对这些API没有做更多的参数的检查工作，因此要确保输入的参数是合理的
--- 否则程序可能会出错，也可能什么都不做
---
-----------------------------------------
-
--- Byte.create(size)
--- 创建一个二进制字节数组，size为数组大小
-
--- Byte.get16(b, start)
--- 从数组b中读取一个有符号16位整数
--- start：数组中的读取位置，从0开始
-
--- Byte.get32(b, start)
--- 从数组b中读取一个有符号32位整数
-
--- Byte.getstr(b, start, length)
--- 从数组b中读取一个字符串，长度为length
-
--- Byte.getu16(b, start)
--- 从数组b中读取一个无符号16位整数，主要用于访问人物经验
-
--- Byte.loadfile(b, filename, start, length)
--- 从文件filename中加载数据到字节数组b中
--- start：读取位置，从文件开始处的字节数，从0开始
--- length：要读的字节数
-
--- Byte.savefile(b, filename, start, length)
--- 把字节数组b的内容写到文件filename中
--- start：读取位置，从文件开始处的字节数，从0开始
--- length：要读的字节数
-
--- Byte.set16(b, start, v)
--- 把有符号16位整数写入数组b中
--- start：数组中的写位置，从0开始
-
--- Byte.set32(b, start, v)
--- 把有符号32位整数写入数组b中
-
--- Byte.setstr(b, start, length, str)
--- 把字符串str写入到数组b中，最长写入长度为length
-
--- Byte.setu16(b, start, v)
--- 把无符号16位整数写入数组b中
-
--- lib.CharSet(str, flag)
--- 返回把str转换后的字符串
--- flag = 0，Big5 -> GBK   
---      = 1，GBK -> Big5
---      = 2，Big5 -> Unicode
---      = 3，GBK -> Unicode
-
--- lib.CleanWarMap(level, v)
--- 给level层战斗数据全部赋值v
-
--- lib.EnableKeyRepeat(delay, interval)
--- 设置键盘重复率
--- delay为第一个重复的延迟毫秒数，interval为多少毫秒重复一次
--- ESC, RETURN 和SPACE键已经取消重复，一直按下也只认为是按下一次
-
-
-
--- lib.GetKey()
--- 得到当前按键键码，键码定义参见SDL文档
--- 此函数处理键盘缓冲区和键盘重复率，返回的是从上次调用以来曾经按下的键
--- 并且只处理按下一个键的情况。因此如果需要清除键盘缓冲区，需要先调用一次此函数
-
--- lib.GetTime()
--- 返回开机到当前的毫秒数
-
--- lib.PlayMIDI(filename)
--- 重复播放MID文件filename，若filename为空字符串，则停止播放当前正在播放的midi
-
--- lib.PlayWAV(filename) 
--- 播放音效AVI文件filename
-
--- lib.UnloadMMap()
--- 释放主地图占用内存

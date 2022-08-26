@@ -80,3 +80,23 @@ end
 
 function War_OtherMenu()
 end
+
+-- 给level层战斗数据全部赋值v
+function War_CleanWarMap(level, v)
+    local err = -1      -- 错误码
+    if not level or not v then
+        err = 1         -- 参数省略错误
+    elseif level < 0 or level > 5 then
+        err = 2         -- level错误
+    elseif type(v) ~= "number" then
+        err = 3         -- v错误
+    end
+
+    -- 错误时返回错误码
+    if err > 0 then
+        Debug("War_CleanWarMap Error, error code: " .. err)
+        return
+    end
+
+    lib.CleanWarMap(level, v)
+end

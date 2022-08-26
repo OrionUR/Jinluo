@@ -128,7 +128,7 @@ function SetGlobalConst()
     GAME_NEWNAME = 8        -- 开启新游戏
 
     -- 游戏数据全局变量
-    cc = {}                 -- 定义游戏中使用的常量，这些可以在修改游戏时修改之
+    cc = {}                 -- 定义游戏中使用的常量
 
     -- 实际的屏幕宽度与高度
     cc.screen_w = lib.GetScreenW()          -- 窗口设定的最大宽度
@@ -146,29 +146,37 @@ function SetGlobalConst()
     -- 战斗地图结构文件
     cc.s_filename = {[0] = CONFIG.DataPath .. "allsin.grp"}
     cc.d_filename = {[0] = CONFIG.DataPath .. "alldef.grp"}
-    -- 存档路劲
-    cc.save_path = CONFIG.DataPath .. "save/"
+    -- 临时S*的文件名
+    cc.temp_s_filename = CONFIG.DataPath .. "allsinbk.grp"
+    -- 存档路径
+    cc.save_path = CONFIG.CurrentPath .. "SAVE/"
     cc.r_grp = cc.save_path.."r%d.grp"
     cc.s_grp = cc.save_path.."s%d.grp"
     cc.d_grp = cc.save_path.."d%d.grp"
-    cc.cs = cc.save_path.."tjm"
-    cc.save_num = 10         -- 存档数量为10
-    cc.temp_s_filename = CONFIG.DataPath .. "allsinbk.grp"
-    cc.palette_file = CONFIG.DataPath .. "mmap.col"              -- 256调色板
+    cc.save_num = 10                        -- 存档数量为10
+    cc.palette_file = CONFIG.DataPath .. "mmap.col"             -- 256调色板
     cc.title_image = CONFIG.PicturePath .. "title.png"          -- 游戏开始画面1
-    cc.game_start_file = CONFIG.PicturePath .. "GAMESTAR.png"     -- 游戏开始画面2
-    cc.bg01_file = CONFIG.PicturePath .. "bg01.png"              -- 游戏开始画面3
-    cc.say_box_nm_file = CONFIG.PicturePath .. "sayboxnm.png"      -- 对话框1
-    cc.say_box_file = CONFIG.PicturePath .. "saybox.png"          -- 对话框2
-    cc.dead_image = CONFIG.PicturePath .. "dead.png"              -- 战败画面
-    cc.jy_xx_file = CONFIG.PicturePath .. "jyxx.png"              -- 战场组件
-    cc.mmap_file = {                                             -- 大地图
+    cc.game_start_file = CONFIG.PicturePath .. "GAMESTAR.png"   -- 游戏开始画面2
+    cc.bg01_file = CONFIG.PicturePath .. "bg01.png"             -- 游戏开始画面3
+    cc.say_box_nm_file = CONFIG.PicturePath .. "sayboxnm.png"   -- 对话框1
+    cc.say_box_file = CONFIG.PicturePath .. "saybox.png"        -- 对话框2
+    cc.dead_image = CONFIG.PicturePath .. "dead.png"            -- 战败画面
+    cc.jy_xx_file = CONFIG.PicturePath .. "jyxx.png"            -- 战场组件
+    cc.mmap_file = {                                            -- 大地图5个结构文件
         CONFIG.DataPath .. "earth.002",
         CONFIG.DataPath .. "surface.002",
         CONFIG.DataPath .. "building.002",
         CONFIG.DataPath .. "buildx.002",
         CONFIG.DataPath .. "buildy.002"
     }
+    cc.m_width = 480                -- 大地图宽
+    cc.m_height = 480               -- 大地图高
+    cc.s_width = 64                 -- 场景地图宽
+    cc.s_height = 64                -- 场景地图高
+    cc.d_num1 = 200                 -- 每个场景几个D数据，应为200
+    cc.d_num2 = 11                  -- 每个D几个数据，应为11
+    cc.war_width = 64               -- 战斗地图宽
+    cc.war_height = 64              -- 战斗地图高
 
     -- 各种贴图文件名，扩展名必须为idx/grp
     cc.mmap_pic_file = {CONFIG.DataPath .. "mmap.idx", CONFIG.DataPath .. "mmap.grp"}         -- 主地图贴图
@@ -212,8 +220,7 @@ function SetGlobalConst()
     cc.e_file = CONFIG.SoundPath .. "e%02d.wav"
     -- 战斗
     cc.war_file = CONFIG.DataPath .. "war.sta"
-    cc.war_map_file = {CONFIG.DataPath .. "warfld.idx",
-                    CONFIG.DataPath .. "warfld.grp"}
+    cc.war_map_file = {CONFIG.DataPath .. "warfld.idx", CONFIG.DataPath .. "warfld.grp"}
     -- 对话
     cc.trp = CONFIG.DataPath.."talk.grp"
     cc.tdx = CONFIG.DataPath.."talk.idx"
@@ -542,11 +549,6 @@ function SetGlobalConst()
     cc.shop_scene[4] = {sceneid = 159, d_shop = 9, d_leave = {10, 11, 12}, }
 
     -- 其他常量
-    cc.m_width = 480                             -- 大地图宽
-    cc.m_height = 480                            -- 大地图高
-    cc.s_width = 64                              -- 场景地图高
-    cc.s_height = 64                             -- 场景地图宽
-    cc.d_num = 200                               -- D * 每个场景的事件数
     cc.x_scale = CONFIG.XScale                   -- 贴图一半的宽
     cc.y_scale = CONFIG.YScale                   -- 贴图一半的高
     cc.frame = CONFIG.FrameRate                 -- 每帧毫秒数
@@ -1244,8 +1246,6 @@ function SetGlobalConst()
         cc.war_data_s["敌方X" .. i] = {106 + 2 * (i - 1), 0, 2}
         cc.war_data_s["敌方Y" .. i] = {146 + 2 * (i - 1), 0, 2}
     end
-    cc.war_width = 64                    -- 战斗地图大小
-    cc.war_height = 64
 
     -- 显示主地图和场景地图坐标
     -- 如果显示坐标，则会增加cpu占用。机器速度慢的话可能会卡。这个在调试时有用。
