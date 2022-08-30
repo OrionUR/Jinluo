@@ -294,7 +294,7 @@ function SetGlobalConst()
     end
     for i = 1, cc.my_thing_num do
         cc.base_s['物品' .. i] = {82 + 4 * (i - 1), 0, 2}
-        cc.base_s['物品数量' .. i] = {82 + 4 * (i - 1) + 2, 0, 2}
+        cc.base_s['物品数量' .. i] = {84 + 4 * (i - 1), 0, 2}
     end
 
     cc.person_size = 602                     -- 每个人物数据占用字节
