@@ -119,15 +119,9 @@ function JY_Main_Sub()
         PlayMidi(75)                    -- 播放音乐
         Gra_Cls()                       -- 清屏
         Gra_ShowSlow(20, 0)             -- 缓慢显示画面
-        Gra_FillColor()
-        -- Gra_DrawRect(-1, -1, 800, 500, C_ORANGE)
-        -- Gra_DrawStr(0,0,"文字测试",C_RED,cc.default_font)
-        Gra_ShowScreen()
-        Delay(2000)
         return
 
         -- local r = StartMenu()           -- 显示游戏开始菜单画面
-        -- local r = TitleSelection()
         -- if r ~= nil then
         --     return
         -- end
@@ -277,43 +271,21 @@ function TitleSelection()
     Debug("TitleSelection")
     local choice = 1            -- 选项，1开始游戏，2载入游戏，3退出游戏，默认在1的位置
     -- 选项
-    -- 未选中时的贴图，选中时的贴图，x轴位置，y轴位置
+    -- 未选中时的ui贴图，选中时的ui贴图，x轴位置，y轴位置
     local buttons = {
         {3, 6, 550, 350},
         {4, 7, 550, 450},
         {5, 8, 550, 550}
     }
-    -- 鼠标位置判定
-    -- x轴起始位置，y轴起始位置，x轴结束位置，y轴结束位置
-    local mouse_detect = {
-        {450, 300, 650, 395},
-        {450, 400, 650, 495},
-        {450, 500, 650, 595}
-    }
     local tmp                   -- 临时变量，用来临时存放数据
     local picid                 -- 图像id
-
-    -- 判断鼠标是否在按钮上
-    -- mx, my：x轴y轴
-    local function OnButton(mx, my)
-        local result = 0        -- 返回值，确定鼠标在的位置
-        
-        for i = 1, #mouse_detect do
-            if mx >= mouse_detect[i][1] and mx <= mouse_detect[i][3] and my >= mouse_detect[i][2] and my <= mouse_detect[i][4] then
-                result = i
-                break
-            end
-        end
-    
-        return result
-    end
 
     while true do
         if jy.restart == 1 then
             return
         end
-        -- local keypress, ktype, mx, my = lib.GetKey()
-        local keypress, ktype, mx, my = GetKey()
+        local keypress = GetKey()
+        -- local keypress, ktype, mx, my = GetKey()
         -- 按键「下」和「右」效果一致，都是跳向下一个选项
         if keypress == VK_DOWN or keypress == VK_RIGHT then
             PlayWav(77)
@@ -328,20 +300,8 @@ function TitleSelection()
             if choice < 1 then
                 choice = #buttons
             end
-        -- 使用鼠标操作
-        else
-            if ktype == 2 or ktype == 3 then
-                -- 鼠标在选项范围内，则选中该选项
-                tmp = OnButton(mx, my)
-                if tmp > 0 then
-                    choice = tmp
-                    PlayWav(77)
-                end
-            end
-            -- 空格或回车或鼠标在左键触发判定
-            if keypress == VK_RETURN or (ktype == 3 and OnButton(mx, my) > 0) then
-                break
-            end
+        elseif keypress == VK_RETURN then
+            break
         end
 
         Gra_Cls()
@@ -354,7 +314,7 @@ function TitleSelection()
             end
             
             -- UI的fileid = 5
-            lib.LoadPNG(5, picid * 2, buttons[i][3], buttons[i][4], 1)
+            Gra_LoadPNG(5, picid * 2, buttons[i][3], buttons[i][4], 1)
         end
 
         -- 显示版本号
@@ -406,68 +366,75 @@ function PlayWav(id)
 end
 
 -- 读取游戏进度
--- id = 0 新进度，= 1/2/3 进度
+-- id： =0 新游戏，=1..10 游戏存档
 -- 这里是先把数据读入Byte数组中，然后定义访问相应表的方法，在访问表时直接从数组访问
 -- 与以前的实现相比，从文件中读取和保存到文件的时间显著加快。而且内存占用少了
 function LoadRecord(id)
-    local zipfile = string.format('data/save/Save_%d', id)
-    if id ~= 0 and (existFile(zipfile) == false) then
-        QZXS("此存档数据不全，不能读取，请选择其他存档或重新开始")
+    local zip_file = string.format('SAVE/Save_%d', id)
+    if id ~= 0 and (existFile(zip_file) == false) then
+        -- QZXS("此存档数据不全，不能读取，请选择其他存档或重新开始")
         return -1
     end
-    Byte.unzip(zipfile, 'r.grp', 'd.grp', 's.grp', 'tjm')
+    -- 解压存档文件，并让里面的文件分别命名为r.grp, d.grp, s.grp, tjm
+    Byte.unzip(zip_file, 'r.grp', 'd.grp', 's.grp', 'tjm')
     
+    -- 游玩时间
     local time = GetTime()
 
     -- 读取R*.idx文件
-    local data = Byte.create(6 * 4)
-    Byte.loadfile(data, cc.r_idx_filename[0], 0, 6 * 4)
+    -- 总共6个分类，分别为基本数据、人物、物品、场景、武功、商店
+    -- 每个分类占用4个字节，因此总共6 * 4 = 24个字节
+    -- 这里的idx文件只是目录，用来记录分类的长度
+    local data = ByteCreate(6 * 4)
+    ByteLoadFile(data, cc.r_idx_filename[1], 0, 6 * 4)
 
+    -- 把分类的长度放到idx里
     local idx = {}
-    idx[0] = 0
     for i = 1, 6 do
-        idx[i] = Byte.get32(data, 4 * (i - 1))
+        idx[i] = ByteGet32(data, 4 * (i - 1))
     end
 
+    -- 若是开新档，则使用初始数据，否则使用存档数据
     local grpFile = 'r.grp'
     local sFile = 's.grp'
     local dFile = 'd.grp'
     if id == 0 then
-        grpFile = cc.r_grp_filename[id]
-        sFile = cc.s_filename[id]
-        dFile = cc.d_filename[id]
+        grpFile = cc.r_grp_filename[1]
+        sFile = cc.s_filename[1]
+        dFile = cc.d_filename[1]
     end
 
     -- 读取R*.grp文件
-    -- 基本数据
-    jy.data_base = Byte.create(idx[1] - idx[0])
-    Byte.loadfile(jy.data_base, grpFile, idx[0], idx[1] - idx[0])
+    -- 基本二进制数据
+    jy.raw_base_data = Byte.create(idx[1])
+    ByteLoadFile(jy.raw_base_data, grpFile, 0, idx[1])
     -- 设置访问基本数据的方法，这样就可以用访问表的方式访问了
     -- 而不用把二进制数据转化为表，节约加载时间和空间
     local meta_t = {
         __index = function(t, k)
-            return GetDataFromStruct(jy.data_base, 0, cc.base_s, k)
+            return GetDataFromStruct(jy.raw_base_data, 0, cc.base_s, k)
         end,
 
         __newindex = function(t, k, v)
-            SetDataFromStruct(jy.data_base, 0, cc.base_s, k, v)
+            SetDataFromStruct(jy.raw_base_data, 0, cc.base_s, k, v)
         end
     }
     setmetatable(jy.base, meta_t)
 
     -- 人物数据
     jy.person_num = math.floor((idx[2] - idx[1]) / cc.person_size)
-    jy.data_person = Byte.create(cc.person_size * jy.person_num)
-    Byte.loadfile(jy.data_person, grpFile, idx[1], cc.person_size * jy.person_num)
+    -- 人物二进制数据
+    jy.raw_person_data = Byte.create(cc.person_size * jy.person_num)
+    ByteLoadFile(jy.raw_person_data, grpFile, idx[1], cc.person_size * jy.person_num)
     for i = 0, jy.person_num - 1 do
         jy.person[i] = {}
         local meta_t = {
             __index = function(t, k)
-                return GetDataFromStruct(jy.data_person, i * cc.person_size, cc.person_s, k)
+                return GetDataFromStruct(jy.raw_person_data, i * cc.person_size, cc.person_s, k)
             end,
     
             __newindex = function(t, k, v)
-                SetDataFromStruct(jy.data_person, i * cc.person_size, cc.person_s, k, v)
+                SetDataFromStruct(jy.raw_person_data, i * cc.person_size, cc.person_s, k, v)
             end
         }
         setmetatable(jy.person[i], meta_t)
@@ -475,17 +442,18 @@ function LoadRecord(id)
 
     -- 物品数据
     jy.thing_num = math.floor((idx[3] - idx[2]) / cc.thing_size)
-    jy.data_thing = Byte.create(cc.thing_size * jy.thing_num)
-    Byte.loadfile(jy.data_thing, grpFile, dix[2], cc.thing_size * jy.thing_num)
+    -- 物品二进制数据
+    jy.raw_thing_data = Byte.create(cc.thing_size * jy.thing_num)
+    ByteLoadFile(jy.raw_thing_data, grpFile, dix[2], cc.thing_size * jy.thing_num)
     for i = 0, jy.thing_num - 1 do
         jy.thing[i] = {}
         local meta_t = {
             __index = function(t, k)
-                return GetDataFromStruct(jy.data_thing, i * cc.thing_size, cc.thing_s, k)
+                return GetDataFromStruct(jy.raw_thing_data, i * cc.thing_size, cc.thing_s, k)
             end,
     
             __newindex = function(t, k, v)
-                SetDataFromStruct(jy.data_thing, i * cc.thing_size, cc.thing_s, k, v)
+                SetDataFromStruct(jy.raw_thing_data, i * cc.thing_size, cc.thing_s, k, v)
             end
         }
         setmetatable(jy.thing[i], meta_t)
@@ -493,17 +461,18 @@ function LoadRecord(id)
 
     -- 场景数据
     jy.scene_num = math.floor((idx[4] - idx[3]) / cc.scene_size)
-    jy.data_scene = Byte.create(cc.scene_size * jy.scene_num)
-    Byte.loadfile(jy.data_scene, grpFile, dix[3], cc.scene_size * jy.scene_num)
+    -- 场景二进制数据
+    jy.raw_scene_data = Byte.create(cc.scene_size * jy.scene_num)
+    ByteLoadFile(jy.raw_scene_data, grpFile, dix[3], cc.scene_size * jy.scene_num)
     for i = 0, jy.scene_num - 1 do
         jy.scene[i] = {}
         local meta_t = {
             __index = function(t, k)
-                return GetDataFromStruct(jy.data_scene, i * cc.scene_size, cc.scene_s, k)
+                return GetDataFromStruct(jy.raw_scene_data, i * cc.scene_size, cc.scene_s, k)
             end,
     
             __newindex = function(t, k, v)
-                SetDataFromStruct(jy.data_scene, i * cc.scene_size, cc.scene_s, k, v)
+                SetDataFromStruct(jy.raw_scene_data, i * cc.scene_size, cc.scene_s, k, v)
             end
         }
         setmetatable(jy.scene[i], meta_t)
@@ -511,17 +480,18 @@ function LoadRecord(id)
 
     -- 武功数据
     jy.wugong_num = math.floor((idx[5] - idx[4]) / cc.wugong_size)
-    jy.data_wugong = Byte.create(cc.wugong_size * jy.wugong_num)
-    Byte.loadfile(jy.data_wugong, grpFile, dix[4], cc.wugong_size * jy.wugong_num)
+    -- 武功二进制数据
+    jy.raw_wugong_data = Byte.create(cc.wugong_size * jy.wugong_num)
+    ByteLoadFile(jy.raw_wugong_data, grpFile, dix[4], cc.wugong_size * jy.wugong_num)
     for i = 0, jy.wugong_num - 1 do
         jy.wugong[i] = {}
         local meta_t = {
             __index = function(t, k)
-                return GetDataFromStruct(jy.data_wugong, i * cc.wugong_size, cc.wugong_s, k)
+                return GetDataFromStruct(jy.raw_wugong_data, i * cc.wugong_size, cc.wugong_s, k)
             end,
     
             __newindex = function(t, k, v)
-                SetDataFromStruct(jy.data_wugong, i * cc.wugong_size, cc.wugong_s, k, v)
+                SetDataFromStruct(jy.raw_wugong_data, i * cc.wugong_size, cc.wugong_s, k, v)
             end
         }
         setmetatable(jy.wugong[i], meta_t)
@@ -529,36 +499,85 @@ function LoadRecord(id)
 
     -- 商店数据
     jy.shop_num = math.floor((idx[6] - idx[5]) / cc.shop_size)
-    jy.data_shop = Byte.create(cc.shop_size * jy.shop_num)
-    Byte.loadfile(jy.data_shop, grpFile, dix[5], cc.shop_size * jy.shop_num)
+    -- 商店二进制数据
+    jy.raw_shop_data = Byte.create(cc.shop_size * jy.shop_num)
+    ByteLoadFile(jy.raw_shop_data, grpFile, dix[5], cc.shop_size * jy.shop_num)
     for i = 0, jy.shop_num - 1 do
         jy.shop[i] = {}
         local meta_t = {
             __index = function(t, k)
-                return GetDataFromStruct(jy.data_shop, i * cc.shop_size, cc.shop_s, k)
+                return GetDataFromStruct(jy.raw_shop_data, i * cc.shop_size, cc.shop_s, k)
             end,
     
             __newindex = function(t, k, v)
-                SetDataFromStruct(jy.data_shop, i * cc.shop_size, cc.shop_s, k, v)
+                SetDataFromStruct(jy.raw_shop_data, i * cc.shop_size, cc.shop_s, k, v)
             end
         }
         setmetatable(jy.shop[i], meta_t)
     end
 
-    LoadSMap(sFile, cc.temp_s_filename, jy.scene_num, cc.s_width, cc.s_height, dFile, cc.d_num, 11)
+    Gra_LoadSMap(sFile, jy.scene_num, dFile)
+    -- 做一次完整的垃圾收集循环
     collectgarbage()
-    Debug(string.format("Loadrecord time=%d", GetTime() - time))
     jy.load_time = GetTime()
     rest()
 
-    if id > 0 then 
-        tjmload(id)
-    end
+    -- if id > 0 then 
+    --     tjmload(id)
+    -- end
 
+    -- 删除解压文件
     os.remove('r.grp')
     os.remove('d.grp')
     os.remove('s.grp')
     os.remove('tjm')
+end
+
+-- 写游戏进度
+-- id： =0 新游戏，=1..10 游戏存档
+function SaveRecord(id)
+    -- 判断是否在子场景保存
+    if jy.status == GAME_SMAP then
+        jy.base['子场景'] = jy.sub_scene
+    else
+        jy.base['子场景'] = -1
+    end
+
+    -- 游玩时间计算
+    local time = GetTime()
+    jy.save_time = GetTime()
+    jy.game_time = math.modf((jy.save_time - jy.load_time) / 60000)
+    SetS(14, 2, 1, 4, GetS(14, 2, 1, 4) + jy.game_time)
+    jy.load_time = GetTime()
+
+    -- 读取R*.idx文件
+    -- 总共6个分类，分别为基本数据、人物、物品、场景、武功、商店
+    -- 每个分类占用4个字节，因此总共6 * 4 = 24个字节
+    -- 这里的idx文件只是目录，用来记录分类的长度
+    local data = ByteCreate(6 * 4)
+    ByteLoadFile(data, cc.r_idx_filename[1], 0, 6 * 4)
+
+    -- 把分类的长度放到idx里
+    local idx = {}
+    for i = 1, 6 do
+        idx[i] = ByteGet32(data, 4 * (i - 1))
+    end
+
+    -- 写R*.grp文件
+    ByteSaveFile(jy.raw_base_data, 'r.grp', 0, idx[1])
+    ByteSaveFile(jy.raw_person_data, 'r.grp', idx[1], cc.person_size * jy.person_num)
+    ByteSaveFile(jy.raw_thing_data, 'r.grp', idx[2], cc.thing_size * jy.thing_num)
+    ByteSaveFile(jy.raw_scene_data, 'r.grp', idx[3], cc.scene_size * jy.scene_num)
+    ByteSaveFile(jy.raw_wugong_data, 'r.grp', idx[4], cc.wugong_size * jy.wugong_num)
+    ByteSaveFile(jy.raw_shop_data, 'r.grp', idx[5], cc.shop_size * jy.shop_num)
+    SaveSMap('s.grp', 'd.grp')
+
+    -- 打包压缩存档
+    local zip_file = string.format('SAVE/Save_%d', id)
+    Byte.zip(zip_file, 'r.grp', 'd.grp', 's.grp')
+    os.remove('r.grp')
+    os.remove('d.grp')
+    os.remove('s.grp')
 end
 
 -- 存档列表
@@ -648,20 +667,25 @@ end
 -- 从数据的结构中翻译数据，用来取数据
 -- data：二进制数组
 -- offset：data中的偏移
--- t_struct：数据的结构，在jyconst中有很多定义
+-- t_struct：数据结构，在jyconst中有很多定义
 -- key：访问的key
 function GetDataFromStruct(data, offset, t_struct, key)
     local t = t_struct[key]
     local r
+    -- 有符号
     if t[2] == 0 then
-        r = Byte.get16(data, t[1] + offset)
+        r = ByteGet16(data, t[1] + offset)
+    -- 无符号
     elseif t[2] == 1 then
-        r = Byte.getu16(data, t[1] + offset)
+        r = ByteGetu16(data, t[1] + offset)
+    -- 字符串
     elseif t[2] == 2 then
+        -- GBK
         if cc.src_char_set == 0 then
-            r = lib.CharSet(Byte.getstr(data, t[1] + offset, t[3]), 0)
+            r = ByteGetStr(data, t[1] + offset, t[3])
+        -- Big5
         else
-            r = lib.getstr(data, t[1] + offset, t[3])
+            r = CharSet(ByteGetStr(data, t[1] + offset, t[3]), 1)
         end
     end
 
@@ -676,18 +700,23 @@ end
 -- v：写入的值
 function SetDataFromStruct(data, offset, t_struct, key, v)
     local t = t_struct[key]
+    -- 有符号
     if t[2] == 0 then
-        Byte.set16(data, t[1] + offset, v)
+        ByteSet16(data, t[1] + offset, v)
+    -- 无符号
     elseif t[2] == 1 then
-        Byte.setu16(data, t[1] + offset, v)
+        ByteSetu16(data, t[1] + offset, v)
+    -- 字符串
     elseif t[2] == 2 then
         local s
+        -- GBK
         if cc.src_char_set == 0 then
-            s = lib.CharSet(v, 1)
-        else
             s = v
+        -- Big5
+        else
+            s = CharSet(v, 0)
         end
-        Byte.setstr(data, t[1] + offset, t[3], s)
+        ByteSetStr(data, t[1] + offset, t[3], s)
     end
 end
 
