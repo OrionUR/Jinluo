@@ -1077,7 +1077,7 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
--- orionids：以下为graphic通用函数，如无必要，请勿修改
+--------------- orionids：以下为graphic通用函数，如无必要，请勿修改 ---------------
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -1101,19 +1101,13 @@ function Gra_SetClip(x1, y1, x2, y2)
         x1, y1, x2, y2 = 0, 0, 0, 0
     end
 
-    local err = -1          -- 错误码
+    -- 参数检测
     if not y1 or not x2 or not y2 then
-        err = 1             -- 参数省略错误
+        error('参数省略错误')
     elseif x1 < 0 or y1 < 0 or x2 < 0 or y2 < 0 then
-        err = 2             -- xy错误
+        error('xy错误')
     elseif x2 < x1 or y2 < y1 then
-        err = 3             -- xy错误2
-    end
-
-    -- 错误时返回错误码
-    if err > 0 then
-        Debug("Gra_SetClip Error, error code: " .. err)
-        return
+        error('xy错误2')
     end
 
     lib.SetClip(x1, y1, x2, y2)
@@ -1129,21 +1123,15 @@ function Gra_FillColor(x1, y1, x2, y2, color)
         x1, y1, x2, y2, color = 0, 0, 0, 0, 0
     end
 
-    local err = -1          -- 错误码
+    -- 参数检测
     if not y1 or not x2 or not y2 or not color then
-        err = 1             -- 参数省略错误
+        error('参数省略错误')
     elseif x1 < 0 or y1 < 0 or x2 < 0 or y2 < 0 then
-        err = 2             -- xy错误
+        error('xy错误')
     elseif x2 < x1 or y2 < x1 then
-        err = 3             -- xy错误2
+        error('xy错误2')
     elseif color < 0 then
-        err = 4             -- color错误
-    end
-
-    -- 错误时返回错误码
-    if err > 0 then
-        Debug("Gra_FillColor Error, error code: " .. err)
-        return
+        error('color错误')
     end
 
     lib.FillColor(x1, y1, x2, y2, color)
@@ -1158,15 +1146,9 @@ function Gra_ShowScreen(flag)
         flag = 0
     end
 
-    local err = -1          -- 错误码
+    -- 参数检测
     if flag ~= 0 and flag ~= 1 then
-        err = 1             -- flag错误
-    end
-
-    -- 错误时返回错误码
-    if err > 0 then
-        Debug("Gra_ShowScreen Error, error code: " .. err)
-        return
+        error('flag错误')
     end
 
     lib.ShowSurface(flag)
@@ -1176,19 +1158,13 @@ end
 -- t为亮度每变化一次的间隔毫秒数，为了16/32位兼容，一共有32阶亮度变化
 -- flag: 0 从暗到亮，1 从亮到暗
 function Gra_ShowSlow(t, flag)
-    local err = -1          -- 错误码
+    -- 参数检测
     if not t or not flag then
-        err = 1             -- 参数省略错误
+        error('参数省略错误')
     elseif t < 0 or t > 32 then
-        err = 2             -- t错误
+        error('t错误')
     elseif flag ~= 0 and flag ~= 1 then
-        err = 3             -- flag错误
-    end
-
-    -- 错误时返回错误码
-    if err > 0 then
-        Debug("Gra_ShowSlow Error, error code: " .. err)
-        return
+        error('flag错误')
     end
 
     lib.ShowSlow(t, flag)
@@ -1203,21 +1179,15 @@ function Gra_Background(x1, y1, x2, y2, bright)
         x1, y1, x2, y2, bright = 0, 0, 0, 0, 0
     end
 
-    local err = -1          -- 错误码
+    -- 参数检测
     if not y1 or not x2 or not y2 or not bright then
-        err = 1             -- 参数省略错误
+        error('参数省略错误')
     elseif x1 < 0 or y1 < 0 or x2 < 0 or y2 < 0 then
-        err = 2             -- xy错误
+        error('xy错误')
     elseif x2 < x1 or y2 < x1 then
-        err = 3             -- xy错误2
+        error('xy错误2')
     elseif bright < 0 or bright > 255 then
-        err = 4             -- bright错误
-    end
-
-    -- 错误时返回错误码
-    if err > 0 then
-        Debug("Gra_Background Error, error code: " .. err)
-        return
+        error('bright错误')
     end
 
     lib.Background(x1, y1, x2, y2, bright)
@@ -1231,21 +1201,15 @@ function Gra_DrawRect(x1, y1, x2, y2, color)
         x1, y1, x2, y2, color = 0, 0, 0, 0, 0
     end
 
-    local err = -1          -- 错误码
+    -- 参数检测
     if not y1 or not x2 or not y2 or not color then
-        err = 1             -- 参数省略错误
+        error('参数省略错误')
     elseif x1 < 0 or y1 < 0 or x2 < 0 or y2 < 0 then
-        err = 2             -- xy错误
+        error('xy错误')
     elseif x2 < x1 or y2 < x1 then
-        err = 3             -- xy错误2
+        error('xy错误2')
     elseif color < 0 then
-        err = 4             -- color错误
-    end
-
-    -- 错误时返回错误码
-    if err > 0 then
-        Debug("Gra_DrawRect Error, error code: " .. err)
-        return
+        error('color错误')
     end
 
     lib.DrawRect(x1, y1, x2, y2, color)
@@ -1267,23 +1231,17 @@ function Gra_DrawStr(x, y, str, color, size, fontname, charset, os_charset)
         os_charset = cc.os_char_set
     end
 
-    local err = -1      -- 错误码
+    -- 参数检测
     if not x or not y or not str or not color or not size then
-        err = 1         -- 参数省略错误
+        error('参数省略错误')
     elseif x < 0 or y < 0 then
-        err = 2         -- xy错误
+        error('xy错误')
     elseif type(str) ~= "string" then
-        err = 3         -- str错误
+        error('str错误')
     elseif color < 0 then
-        err = 4         -- color错误
+        error('color错误')
     elseif size < 0 then
-        err = 5         -- size错误
-    end
-
-    -- 错误时返回错误码
-    if err > 0 then
-        Debug("Gra_DrawStr Error, error code: " .. err)
-        return
+        error('size错误')
     end
 
     lib.DrawStr(x, y, str, color, size, fontname, charset, os_charset)
@@ -1300,21 +1258,15 @@ end
 -- idxfilename / grpfilename：idx / grp文件名
 -- id：加载编号，0-39，最大可加载40个，如果原来就有，则覆盖原来的
 function Gra_PicLoadFile(idxfilename, grpfilename, id)
-    local err = -1      -- 错误码
+    -- 参数检测
     if not idxfilename or not grpfilename or not id then
-        err = 1         -- 参数省略错误
+        error('参数省略错误')
     elseif type(idxfilename) ~= "string" then
-        err = 2         -- idxfilename错误
+        error('idxfilename错误')
     elseif type(grpfilename) ~= "string" then
-        err = 3         -- grpfilename错误
+        error('grpfilename错误')
     elseif id < 0 or id > 39 then
-        err = 4         -- id错误
-    end
-
-    -- 错误时返回错误码
-    if err > 0 then
-        Debug("Gra_PicLoadFile Error, error code: " .. err)
-        return
+        error('id错误')
     end
     
     lib.PicLoadFile(idxfilename, grpfilename, id)
@@ -1351,23 +1303,17 @@ function Gra_PicLoadCache(fileid, picid, x, y, flag, value, color, w, h)
         flag = 0
     end
 
-    local err = -1      -- 错误码
+    -- 参数检测
     if not fileid or not picid or not x or not y then
-        err = 1         -- 参数省略错误
+        error('参数省略错误')
     elseif fileid < 0 or fileid > 39 then
-        err = 2         -- fileid错误
+        error('fileid错误')
     elseif type(picid) ~= "number" then
-        err = 3         -- picid错误
+        error('picid错误')
     elseif x < 0 or y < 0 then
-        err = 4         -- xy错误
+        error('xy错误')
     elseif flag ~=0 and flag ~= 1 and flag ~= 2 and flag ~= 6 and flag ~= 10 then
-        err = 5         -- flag错误
-    end
-
-    -- 错误时返回错误码
-    if err > 0 then
-        Debug("Gra_PicLoadCache Error, error code: " .. err)
-        return
+        error('flag错误')
     end
 
     lib.PicLoadCache(fileid, picid, x, y, flag, value, color, w, h)
@@ -1384,19 +1330,13 @@ function Gra_LoadPicture(filename, x, y)
         filename, x, y = "", 0, 0
     end
 
-    local err = -1      -- 错误码
+    -- 参数检测
     if not x or not y then
-        err = 1         -- 参数省略错误
+        error('参数省略错误')
     elseif type(filename) ~= "string" then
-        err = 2         -- filename错误
+        error('filename错误')
     elseif x < -1 or y < -1 then
-        err = 3         -- xy错误
-    end
-
-    -- 错误时返回错误码
-    if err > 0 then
-        Debug("Gra_LoadPicture Error, error code: " .. err)
-        return
+        error('xy错误')
     end
 
     lib.LoadPicture(filename, x, y)
@@ -1408,23 +1348,17 @@ end
 -- num：载入图片数量
 -- percent：比例，范围是0 - 100
 function Gra_LoadPNGPath(path, fileid, num, percent)
-    local err = -1      -- 错误码
+    -- 参数检测
     if not path or not fileid or not num or not percent then
-        err = 1         -- 参数省略错误
+        error('参数省略错误')
     elseif type(path) ~= "string" then
-        err = 2         -- path错误
+        error('path错误')
     elseif fileid < 0 or fileid >= 100 then
-        err = 3         -- fileid错误
+        error('fileid错误')
     elseif num < 0 then
-        err = 4         -- num错误
+        error('num错误')
     elseif percent < 0 or percent > 100 then
-        err = 5         -- percent错误
-    end
-
-    -- 错误时返回错误码
-    if err > 0 then
-        Debug("Gra_LoadPNGPath Error, error code: " .. err)
-        return
+        error('percent错误')
     end
 
     lib.LoadPNGPath(path, fileid, num, percent)
@@ -1436,23 +1370,17 @@ end
 -- (xy)：XY坐标
 -- flag：0 越界，1 不越界（也就是设为1的话，图片不会由于xy坐标设置错误而导致显示不全）
 function Gra_LoadPNG(fileid, picid, x, y, flag)
-    local err = -1      -- 错误码
+    -- 参数检测
     if not fileid or not picid or not x or not y or not flag then
-        err = 1         -- 参数省略错误
+        error('参数省略错误')
     elseif fileid < 0 or fileid >= 100 then
-        err = 2         -- fileid错误
+        error('fileid错误')
     elseif type(picid) ~= "number" then
-        err = 3         -- picid错误
+        error('picid错误')
     elseif x < 0 or y < 0 then
-        err = 4         -- xy错误
+        error('xy错误')
     elseif flag ~=0 and flag ~= 1 then
-        err = 5         -- flag错误
-    end
-
-    -- 错误时返回错误码
-    if err > 0 then
-        Debug("Gra_LoadPNG Error, error code: " .. err)
-        return
+        error('flag错误')
     end
 
     lib.LoadPNG(fileid, picid, x, y, flag)
@@ -1469,21 +1397,15 @@ function Gra_LoadSMap(Sfilename, num, Dfilename)
     local d_num1 = cc.d_num1                    -- 每个场景几个D数据
     local d_num2 = cc.d_num2                    -- 每个D几个数据
 
-    local err = -1      -- 错误码
+    -- 参数检测
     if not Sfilename or not num or not Dfilename then
-        err = 1         -- 参数省略错误
+        error('参数省略错误')
     elseif type(Sfilename) ~= "string" then
-        err = 2         -- Sfilename错误
+        error('Sfilename错误')
     elseif num < 0 then
-        err = 3         -- num错误
+        error('num错误')
     elseif type(Dfilename) ~= "string" then
-        err = 4         -- Dfilename错误
-    end
-
-    -- 错误时返回错误码
-    if err > 0 then
-        Debug("Gra_LoadSMap Error, error code: " .. err)
-        return
+        error('Dfilename错误')
     end
     
     lib.LoadSMap(Sfilename, tempfilename, num, x_max, y_max, Dfilename, d_num1, d_num2)
@@ -1507,17 +1429,11 @@ function Gra_LoadWarMap(mapid)
     local x_max = cc.war_width          -- 战斗地图宽
     local y_max = cc.war_height         -- 战斗地图高
 
-    local err = -1      -- 错误码
+    -- 参数检测
     if not mapid then
-        err = 1         -- 参数省略错误
+        error('参数省略错误')
     elseif mapid < 0 then
-        err = 2         -- mapid错误
-    end
-
-    -- 错误时返回错误码
-    if err > 0 then
-        Debug("Gra_LoadWarMap Error, error code: " .. err)
-        return
+        error('mapid错误')
     end
 
     lib.LoadWarMap(WarIDXfilename, WarGRPfilename, mapid, num, x_max, y_max)
@@ -1525,17 +1441,11 @@ end
 
 -- 播放mpeg1视频，key为停止播放按键的键码，一般设为Esc键
 function Gra_PlayMPEG(filename, key)
-    local err = -1      -- 错误码
+    -- 参数检测
     if not filename or not key then
-        err = 1         -- 参数省略错误
+        error('参数省略错误')
     elseif type(filename) ~= "string" then
-        err = 2         -- filename错误
-    end
-
-    -- 错误时返回错误码
-    if err > 0 then
-        Debug("Gra_PlayMPEG Error, error code: " .. err)
-        return
+        error('filename错误')
     end
 
     lib.PlayMPEG(filename, key)
