@@ -141,11 +141,11 @@ function SetGlobalConst()
 
     -- 定义记录文件名。S和D由于是固定大小，因此不再定义idx了
     -- 进度文件(对话事件战斗等编辑器缺省读取的进度文件)
-    cc.r_idx_filename = {[0] = CONFIG.DataPath .. "ranger.idx"}
-    cc.r_grp_filename = {[0] = CONFIG.DataPath .. "ranger.grp"}
+    cc.r_idx_filename = {CONFIG.DataPath .. "ranger.idx"}
+    cc.r_grp_filename = {CONFIG.DataPath .. "ranger.grp"}
     -- 战斗地图结构文件
-    cc.s_filename = {[0] = CONFIG.DataPath .. "allsin.grp"}
-    cc.d_filename = {[0] = CONFIG.DataPath .. "alldef.grp"}
+    cc.s_filename = {CONFIG.DataPath .. "allsin.grp"}
+    cc.d_filename = {CONFIG.DataPath .. "alldef.grp"}
     -- 临时S*的文件名
     cc.temp_s_filename = CONFIG.DataPath .. "allsinbk.grp"
     -- 存档路径
@@ -211,13 +211,13 @@ function SetGlobalConst()
     -- cc.EFTNum = 5500
 
     if CONFIG.MP3 == 1 then
-        cc.midi_file = CONFIG.SoundPath .. "game%02d.mp3"
+        cc.midi_file = CONFIG.SoundPath .. "game%02d.mp3"       -- 播放MP3
     else
-        cc.midi_file = CONFIG.SoundPath .. "game%02d.mid"
+        cc.midi_file = CONFIG.SoundPath .. "game%02d.mid"       -- 播放MID
     end
     cc.ogg_file = CONFIG.SoundPath .. "game%02d.ogg"
     cc.atk_file = CONFIG.SoundPath .. "atk%02d.wav"
-    cc.e_file = CONFIG.SoundPath .. "e%02d.wav"
+    cc.e_file = CONFIG.SoundPath .. "e%02d.wav"                 -- 音效文件
     -- 战斗
     cc.war_file = CONFIG.DataPath .. "war.sta"
     cc.war_map_file = {CONFIG.DataPath .. "warfld.idx", CONFIG.DataPath .. "warfld.grp"}
