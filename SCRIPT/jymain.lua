@@ -1,8 +1,14 @@
-----------------------------------------
---
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
 -- orionids：以下为主程序以及相关函数
--- 
-----------------------------------------
+-- 函数采用大驼峰式命名方法，变量使用小下划线命名方法，常量使用大下划线命名方法
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
 
 
 -- 加载所有lua文件
@@ -71,7 +77,7 @@ end
 
 -- 主程序入口
 function JY_Main()
-    os.remove("debug.txt")              -- 清除以前的debug输出
+    --os.remove("debug.txt")              -- 清除以前的debug输出
     xpcall(JY_Main_Sub, MyErrFun)       -- 捕获调用错误
 end
 
@@ -98,8 +104,6 @@ function JY_Main_Sub()
         end
     })
 
-    Debug("JY_Main start")
-
     -- 初始化随机数发生器
     math.randomseed(tonumber(tostring(os.time()):reverse():sub(1,6)))
     jy.status = GAME_START              -- 改变游戏状态
@@ -119,12 +123,11 @@ function JY_Main_Sub()
         PlayMidi(75)                    -- 播放音乐
         Gra_Cls()                       -- 清屏
         Gra_ShowSlow(20, 0)             -- 缓慢显示画面
-        return
 
-        -- local r = StartMenu()           -- 显示游戏开始菜单画面
-        -- if r ~= nil then
-        --     return
-        -- end
+        local r = StartMenu()           -- 显示游戏开始菜单画面
+        if r ~= nil then
+            return
+        end
 
         -- lib.LoadPicture("", 0, 0)               -- 载入图片
         -- GetKey()                            -- 获取键值
@@ -141,18 +144,85 @@ function CleanMemory()
     end
 end
 
+-- 点击右上角X，或者Alt + F4关闭游戏时执行的函数
+-- 函数名不可改，在底层已写死
+function Menu_Exit()
+    -- 缓存当前屏幕
+    local surid = lib.SaveSur(0, 0, cc.screen_w, cc.screen_h)
+    local choice = 1            -- 选项，1 继续游戏，2 返回初始，3 离开游戏，默认在1的位置
+    
+    -- 保存当前状态
+    local status = jy.status
+    jy.status = GAME_BLACK
+
+    while true do
+        if jy.restart == 1 then
+            return
+        end
+
+        Gra_DrawMenuExit(choice)    -- 绘制菜单
+
+        local key = GetKey()        -- 获取键值
+        -- 按ESC键，效果等同于选择「继续游戏」
+        if key == VK_ESCAPE then
+            PlayWav(77)
+            jy.status = status
+            lib.LoadSur(surid, 0, 0)
+            Gra_ShowScreen()
+            lib.FreeSur(surid)
+            return 0
+        -- 按上、左键
+        elseif key == VK_UP or key == VK_LEFT then
+            PlayWav(77)
+            choice = choice - 1
+            if choice < 1 then
+                choice = 3
+            end
+        -- 按下、右键
+        elseif key == VK_DOWN or key == VK_RIGHT then
+            PlayWav(77)
+            choice = choice + 1
+            if choice > 3 then
+                choice = 1
+            end
+        -- 按空格、回车键
+        elseif key ==VK_SPACE or key == VK_RETURN then
+            PlayWav(77)
+            -- 选择「离开游戏」
+            if choice == 3 then
+                jy.status = GAME_END
+                lib.FreeSur(surid)
+                return 1
+            -- 选择「返回初始」
+            elseif choice == 2 then
+                jy.restart = 1
+                jy.status = GAME_START
+                lib.FreeSur(surid)
+                return 0
+            -- 选择「继续游戏」
+            else
+                jy.status = status
+                lib.LoadSur(surid, 0, 0)
+                Gra_ShowScreen()
+                lib.FreeSur(surid)
+                return 0
+            end
+        end
+    end
+end
+
 -- 游戏开始菜单画面
 function StartMenu()
+    local menu_return = TitleSelection()
     Gra_Cls()
 
-    local menu_return = TitleSelection()
-    if menu_return == 1 then                    -- 新的游戏
-        Gra_Cls()
-        -- NewGame()
-
+    -- 初出茅庐
+    if menu_return == 1 then
         if jy.restart == 1 then
             do return end
         end
+
+        -- NewGame()
 
         -- 畅想杨过初始场景
         if jy.base["畅想"] == 58 then
@@ -215,23 +285,13 @@ function StartMenu()
         instruct_10(104)
         instruct_10(105)
 
-        -- 周目奖励
-        os.remove(CONFIG.DataPath .. 'TgJL')
-        for i = 1, #cc.commodity do
-            if cc.commodity[i][5] > 0 then
-                instruct_2(cc.commodity[i][1], cc.commodity[i][5])
-                cc.commodity[i][5] = 0
-            end
-        end
-        tgsave(1)
-
-        cc.tgjl = {}
-    -- 载入旧的进度
+    -- 再战江湖
     elseif menu_return == 2 then
-        --lib.LoadPNG(5, 501 * 2, -1, -1, 1)
-        --Gra_ShowScreen()
-        Gra_DrawStrBox(-1, cc.screen_h * 1 / 6 - 20, "读取进度", LimeGreen, cc.font_big3, C_GOLD)
-        -- Gra_DrawStrBox(-1, cc.screen_h / 2 - 20, "读取进度", LimeGreen, cc.font_big2, C_GOLD)
+        lib.LoadPNG(5, 501 * 2, -1, -1, 1)
+        Gra_DrawStrBox(-1, cc.screen_h *1 / 6 - 20, '读取进度', C_LIMEGREEN, cc.font_size_40, C_GOLD)
+        Gra_ShowScreen()
+        Delay(5000)
+
         -- local r = SaveList()
         -- -- ESC重新返回选项
         -- if r < 1 then
@@ -240,8 +300,8 @@ function StartMenu()
         -- end
 
         -- Gra_DrawStrBox(-1, cc.start_menu_y, "请稍候...", C_GOLD, cc.default_font)
-        Gra_ShowScreen()
-        Delay(2000)
+        -- Gra_ShowScreen()
+        -- Delay(2000)
         -- local result = Loadrecord(r)
         -- if result ~= nil then
         --     return StartMenu()
@@ -261,66 +321,41 @@ function StartMenu()
         --     jy.sub_scene = -1
         --     jy.status = GAME_FIRSTMMAP
         -- end
-    elseif menu_return == 3 then
+    -- 离开游戏
+    else
         return -1
     end
 end
 
 -- 游戏开始画面选择
+---@return number 选择的项
 function TitleSelection()
-    Debug("TitleSelection")
-    local choice = 1            -- 选项，1开始游戏，2载入游戏，3退出游戏，默认在1的位置
-    -- 选项
-    -- 未选中时的ui贴图，选中时的ui贴图，x轴位置，y轴位置
-    local buttons = {
-        {3, 6, 550, 350},
-        {4, 7, 550, 450},
-        {5, 8, 550, 550}
-    }
-    local tmp                   -- 临时变量，用来临时存放数据
-    local picid                 -- 图像id
+    local choice = 1            -- 选项，1 开始游戏，2 载入游戏，3 退出游戏，默认在1的位置
 
     while true do
         if jy.restart == 1 then
             return
         end
-        local keypress = GetKey()
-        -- local keypress, ktype, mx, my = GetKey()
-        -- 按键「下」和「右」效果一致，都是跳向下一个选项
-        if keypress == VK_DOWN or keypress == VK_RIGHT then
+        local key = GetKey()    -- 获取键值
+        -- 按下、右键
+        if key == VK_DOWN or key == VK_RIGHT then
             PlayWav(77)
             choice = choice + 1
-            if choice > #buttons then
+            if choice > 3 then
                 choice = 1
             end
-        -- 按键「上」和「左」效果一致，都是跳向上一个选项
-        elseif keypress == VK_UP or keypress == VK_LEFT then
+        -- 按上、左键
+        elseif key == VK_UP or key == VK_LEFT then
             PlayWav(77)
             choice = choice - 1
             if choice < 1 then
-                choice = #buttons
+                choice = 3
             end
-        elseif keypress == VK_RETURN then
+        elseif key == VK_RETURN then
             break
         end
 
-        Gra_Cls()
-
-        for i = 1, #buttons do
-            -- -- 选项贴图
-            picid = buttons[i][1]
-            if i == choice then
-                picid = buttons[i][2]
-            end
-            
-            -- UI的fileid = 5
-            Gra_LoadPNG(5, picid * 2, buttons[i][3], buttons[i][4], 1)
-        end
-
-        -- 显示版本号
-        Gra_DrawString(600, 250, cc.version, M_Indigo, cc.font_big3)
-        Gra_ShowScreen()
-        Delay(cc.frame)
+        Gra_DrawTitle(choice)         -- 绘制选项
     end
 
     return choice
@@ -583,13 +618,18 @@ end
 -- 存档列表
 function SaveList()
     -- 读取R*.idx文件
-    local idx_data = Byte.create(24)
-    Byte.loadfile(idx_data, cc.r_idx_filename[0], 0, 24)
+    -- 总共6个分类，分别为基本数据、人物、物品、场景、武功、商店
+    -- 每个分类占用4个字节，因此总共6 * 4 = 24个字节
+    -- 这里的idx文件只是目录，用来记录分类的长度
+    local data = ByteCreate(6 * 4)
+    ByteLoadFile(data, cc.r_idx_filename[1], 0, 6 * 4)
+
+    -- 把分类的长度放到idx里
     local idx = {}
-    idx[0] = 0
     for i = 1, 6 do
-        idx[i] = Byte.get32(idx_data, 4 * (i - 1))
+        idx[i] = ByteGet32(data, 4 * (i - 1))
     end
+
     local table_struct = {}
     table_struct["姓名"] = {idx[1]+8, 2, 10}
     table_struct["资质"] = {idx[1]+122, 0, 2}
@@ -658,7 +698,6 @@ function SaveList()
     local menu_x = (cc.screen_w - 24 * cc.default_font - 2 * cc.menu_border_pixel) / 2
     local menu_y = (cc.screen_h - 9 * (cc.default_font + cc.row_pixel)) / 2
     local r = Gra_ShowMenu(menu, cc.save_num, 10, menu_x, menu_y, 0, 0, 1, 1, cc.default_font, C_WHITE, C_GOLD)
-    Debug("SaveList")
     CleanMemory()
 
     return r
@@ -1022,19 +1061,12 @@ end
 --       =2 Big5 -> Unicode
 --       =3 GBK -> Unicode
 function CharSet(str, flag)
-    local err = -1      -- 错误码
     if not str or not flag then
-        err = 1         -- 参数省略错误
+        error('参数省略错误')
     elseif type(str) ~= "string" then
-        err = 2         -- str错误
+        error('str错误')
     elseif flag < 0 or flag > 3 then
-        err = 3         -- flag错误
-    end
-
-    -- 错误时返回错误码
-    if err > 0 then
-        Debug("CharSet Error, error code: " .. err)
-        return
+        error('flag错误')
     end
 
     return lib.CharSet(str, flag)
@@ -1052,17 +1084,10 @@ end
 
 -- 创建一个二进制字节数组，size为数组大小
 function ByteCreate(size)
-    local err = -1      -- 错误码
     if not size then
-        err = 1         -- 参数省略错误
+        error('参数省略错误')
     elseif size < 0 then
-        err = 2         -- size错误
-    end
-
-    -- 错误时返回错误码
-    if err > 0 then
-        Debug("ByteCreate Error, error code: " .. err)
-        return
+        error('size错误')
     end
 
     return Byte.create(size)
@@ -1071,15 +1096,8 @@ end
 -- 从数组b中读取一个有符号16位整数
 -- start：数组中的读取位置，从0开始
 function ByteGet16(b, start)
-    local err = -1      -- 错误码
     if not b or not start then
-        err = 1         -- 参数省略错误
-    end
-
-    -- 错误时返回错误码
-    if err > 0 then
-        Debug("ByteGet16 Error, error code: " .. err)
-        return
+        error('参数省略错误')
     end
 
     return Byte.get16(b, start)
@@ -1088,15 +1106,8 @@ end
 -- 从数组b中读取一个有符号32位整数
 -- start：数组中的读取位置，从0开始
 function ByteGet32(b, start)
-    local err = -1      -- 错误码
     if not b or not start then
-        err = 1         -- 参数省略错误
-    end
-
-    -- 错误时返回错误码
-    if err > 0 then
-        Debug("ByteGet32 Error, error code: " .. err)
-        return
+        error('参数省略错误')
     end
 
     return Byte.get32(b, start)
@@ -1105,15 +1116,8 @@ end
 -- 从数组b中读取一个无符号16位整数，主要用于访问人物经验
 -- start：数组中的读取位置，从0开始
 function ByteGetu16(b, start)
-    local err = -1      -- 错误码
     if not b or not start then
-        err = 1         -- 参数省略错误
-    end
-
-    -- 错误时返回错误码
-    if err > 0 then
-        Debug("ByteGetu16 Error, error code: " .. err)
-        return
+        error('参数省略错误')
     end
 
     return Byte.getu16(b, start)
@@ -1122,15 +1126,8 @@ end
 -- 从数组b中读取一个字符串，长度为length
 -- start：数组中的读取位置，从0开始
 function ByteGetStr(b, start, length)
-    local err = -1      -- 错误码
     if not b or not start or not length then
-        err = 1         -- 参数省略错误
-    end
-
-    -- 错误时返回错误码
-    if err > 0 then
-        Debug("ByteGetStr Error, error code: " .. err)
-        return
+        error('参数省略错误')
     end
 
     return Byte.getstr(b, start, length)
@@ -1140,15 +1137,8 @@ end
 -- start：读取位置，从文件开始处的字节数，从0开始
 -- length：要读的字节数
 function ByteLoadFile(b, filename, start, length)
-    local err = -1      -- 错误码
     if not b or not filename or not start or not length then
-        err = 1         -- 参数省略错误
-    end
-
-    -- 错误时返回错误码
-    if err > 0 then
-        Debug("ByteLoadFile Error, error code: " .. err)
-        return
+        error('参数省略错误')
     end
 
     Byte.loadfile(b, filename, start, length)
@@ -1158,15 +1148,8 @@ end
 -- start：写的位置，从文件开始处的字节数，从0开始
 -- length：要写的字节数
 function ByteSaveFile(b, filename, start, length)
-    local err = -1      -- 错误码
     if not b or not filename or not start or not length then
-        err = 1         -- 参数省略错误
-    end
-
-    -- 错误时返回错误码
-    if err > 0 then
-        Debug("ByteSaveFile Error, error code: " .. err)
-        return
+        error('参数省略错误')
     end
 
     Byte.savefile(b, filename, start, length)
@@ -1176,15 +1159,8 @@ end
 -- start：数组中的写位置，从0开始
 -- v：写入的值
 function ByteSet16(b, start, v)
-    local err = -1      -- 错误码
     if not b or not start or not v then
-        err = 1         -- 参数省略错误
-    end
-
-    -- 错误时返回错误码
-    if err > 0 then
-        Debug("ByteSet16 Error, error code: " .. err)
-        return
+        error('参数省略错误')
     end
 
     Byte.set16(b, start, v)
@@ -1194,15 +1170,8 @@ end
 -- start：数组中的写位置，从0开始
 -- v：写入的值
 function ByteSet32(b, start, v)
-    local err = -1      -- 错误码
     if not b or not start or not v then
-        err = 1         -- 参数省略错误
-    end
-
-    -- 错误时返回错误码
-    if err > 0 then
-        Debug("ByteSet32 Error, error code: " .. err)
-        return
+        error('参数省略错误')
     end
 
     Byte.set32(b, start, v)
@@ -1212,15 +1181,8 @@ end
 -- start：数组中的写位置，从0开始
 -- v：写入的值
 function ByteSetu16(b, start, v)
-    local err = -1      -- 错误码
     if not b or not start or not v then
-        err = 1         -- 参数省略错误
-    end
-
-    -- 错误时返回错误码
-    if err > 0 then
-        Debug("ByteSetu16 Error, error code: " .. err)
-        return
+        error('参数省略错误')
     end
 
     Byte.setu16(b, start, v)
@@ -1229,15 +1191,8 @@ end
 -- 把字符串str写入到数组b中，最长写入长度为length
 -- start：数组中的写位置，从0开始
 function ByteSetStr(b, start, length, str)
-    local err = -1      -- 错误码
     if not b or not start or not length or not str then
-        err = 1         -- 参数省略错误
-    end
-
-    -- 错误时返回错误码
-    if err > 0 then
-        Debug("ByteSetStr Error, error code: " .. err)
-        return
+        error('参数省略错误')
     end
 
     Byte.setstr(b, start, length, str)

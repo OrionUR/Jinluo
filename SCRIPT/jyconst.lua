@@ -1,3 +1,15 @@
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+-- orionids：以下为常量设置
+-- 函数采用大驼峰式命名方法，变量使用小下划线命名方法
+-- 一般常量使用大下划线命名方法，cc常量使用小下划线命名方法
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
 -- 设置全局变量CC，保存游戏中使用的常数
 function SetGlobalConst()
     -- 基本完整的SDL2键码，便于设置快捷键
@@ -53,6 +65,9 @@ function SetGlobalConst()
     C_GOLD = Gra_RGB(236, 200, 40)              -- 金
     C_MATTEDGOLD = Gra_RGB(216, 214, 175)       -- 哑金
     C_DARKRED = Gra_RGB(132, 0, 4)              -- 暗红
+    C_INDIGO = Gra_RGB(75, 0, 130)              -- 靓蓝色
+    C_SLATEGRAY = Gra_RGB(112, 128, 144)        -- 灰石
+    C_LIMEGREEN = Gra_RGB(100,200, 90)            -- 灰灰绿
     -- M_Sienna = Gra_RGB(160, 82, 45)             -- 褐色
     -- M_DarkOliveGreen = Gra_RGB(85, 107, 47)     -- 深绿 
     -- M_DarkGreen = Gra_RGB(0, 100, 0)            -- 深绿
@@ -124,7 +139,7 @@ function SetGlobalConst()
     GAME_WMAP = 5           -- 战斗地图
     GAME_DEAD = 6           -- 死亡画面
     GAME_END  = 7           -- 结束
-    GAME_NEWNAME = 8        -- 开启新游戏
+    GAME_BLACK = 8          -- 黑屏状态
 
     -- 游戏数据全局变量
     cc = {}                 -- 定义游戏中使用的常量
@@ -247,19 +262,6 @@ function SetGlobalConst()
         '本游戏部分素材取自铁血丹心论坛/游侠网/人在江湖/金书红颜录/黑山群侠传/金书群侠传/金门群侠传',
         '小村的厨灶和炼丹炉可以制作药品',
     }
-    cc.tjmsj = {}
-    cc.tjm = 0
-    cc.hslj = {}
-    cc.hslj2 = {}
-	cc.tg = {}								-- 天关
-	cc.tgjl = {}							-- 天关奖励
-	cc.commodity = {
-		{343, 600, 0, '可重新选择天赋内功', 0},
-		{344, 600, 0, '可重新选择天赋轻功', 0},
-		{345, 600, 0, '可重新选择天赋外功', 0},
-		{346, 600, 0, '可使用四大山战斗魔性', 0},
-		{281, 600, 0, '可在小村商人处换银子', 0},
-	}
 
     cc.base_s = {}                          -- 保存基本数据的结构
     -- 起始位置（从0开始），数据类型（0有符号，1无符号，2字符串），长度
@@ -1252,18 +1254,12 @@ function SetGlobalConst()
 
     -- 以下为控制显示方式的参数
     cc.menu_border_pixel = 5              -- 菜单四周边框留的像素数，也用于绘制字符串的box四周留的像素
-    cc.default_font = math.modf(math.min(cc.screen_w, cc.screen_h) / 320 * 14)
-    cc.small_font = cc.default_font * 3 / 4
-    cc.font_big1 = math.modf(cc.default_font * 1.45)
-    cc.font_big2 = math.modf(cc.default_font * 1.3)
-    cc.font_big3 = math.modf(cc.default_font * 1.15)
-    cc.font_small1 = math.modf(cc.default_font * 0.85)
-    cc.font_small2 = math.modf(cc.default_font * 0.7)
-    cc.font_small3 = math.modf(cc.default_font * 0.65)
-    cc.font_small4 = math.modf(cc.default_font * 0.635)
-    cc.font_small5 = math.modf(cc.default_font * 0.9)
-    cc.font_small6 = math.modf(cc.default_font * 0.92)
-    cc.font_small7 = math.modf(cc.default_font * 0.55)
+    cc.font_size_15 = 15
+    cc.font_size_20 = 20
+    cc.font_size_25 = 25
+    cc.font_size_30 = 30
+    cc.font_size_35 = 35
+    cc.font_size_40 = 40
     cc.row_pixel = math.modf(math.min(cc.screen_w, cc.screen_h) / 100)
 
     -- cc.start_menu_y = 160                  -- 开始菜单Y坐标
@@ -1297,20 +1293,6 @@ function SetGlobalConst()
     else
         cc.menu_thing_num = 5
     end
-
-    cc.thing_gap_out = 4                      -- 物品图像显示四周留白
-    cc.thing_gap_in = 4                       -- 物品图像显示中间间隔
-    cc.start_menu_y = cc.screen_h - 3 * (cc.start_menu_font_size + cc.row_pixel) - 20
-    cc.new_game_y = cc.screen_h - 4 * (cc.new_game_font_size + cc.row_pixel) - 10
-    -- 子菜单的开始坐标
-    cc.main_sub_menu_x = cc.main_menu_x + 2 * cc.menu_border_pixel + 2 * cc.default_font + 5            -- 主菜单为两个汉字
-    cc.main_sub_menu_y = cc.main_menu_y
-    -- 二级子菜单开始坐标
-    cc.main_sub_menu_x2 = cc.main_sub_menu_x + 2 * cc.menu_border_pixel + 4 * cc.default_font + 5        -- 子菜单为四个字符
-    cc.single_line_height = cc.default_font + 2 * cc.menu_border_pixel + 5                           -- 带框的单行字符高
-    cc.start_thing_pic = 0
-    cc.auto_move_event = {[0] = 0}            -- 鼠标操作时是否触发事件，第一个位置0未触发，1触发，2触发并且能够走到面前，第二和第三个位置为XY坐标
-    cc.mmap_address = {}                      -- 大地图地址
 
     --LMSJ = {'少商剑', '商阳剑', '中冲剑', '关冲剑', '少冲剑', '少泽剑'}
     --XL18 = {'亢龙有悔', '见龙在田', '飞龙在天', '双龙出水', '神龙摆尾', '潜龙勿用'}
