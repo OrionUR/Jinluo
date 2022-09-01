@@ -1,4 +1,0 @@
-14:11:11 JY_Main start
-14:11:13 ExitGame();
-14:11:13 ExitSDL();
-14:11:13 main() end;
