@@ -238,7 +238,6 @@ function SetGlobalConst()
     -- 对话
     cc.trp = CONFIG.DataPath..'talk.grp'
     cc.tdx = CONFIG.DataPath..'talk.idx'
-    cc.acvmts = CONFIG.DataPath .. 'achievements'               -- 成就
 
     -- 定义记录文件R×结构
     -- lua不支持结构，无法直接从二进制文件中读取，因此需要这些定义，用table中不同的名字来仿真结构

@@ -222,68 +222,7 @@ function StartMenu()
             do return end
         end
 
-        -- NewGame()
-
-        -- 畅想杨过初始场景
-        if jy.base["畅想"] == 58 then
-            jy.sub_scene = 18
-            jy.base["人X"] = 144
-            jy.base["人Y"] = 218
-            jy.base["人X1"] = 30
-            jy.base["人Y1"] = 32
-        -- 其他人
-        else
-            jy.sub_scene = cc.new_game_scene_id
-            jy.base["人X1"] = cc.new_game_scene_x
-            jy.base["人Y1"] = cc.new_game_scene_y
-        end
-
-        -- 男女主角判定
-        if jy.person[0]["性别"] == 0 then
-            jy.my_pic = cc.new_person_pic_m
-        else
-            jy.my_pic = cc.new_person_pic_f
-        end
-
-        jy.status = GAME_SMAP
-        jy.mmap_music = -1
-        CleanMemory()
-        Init_SMap(0)
-        lib.ShowSlow(20, 0)
-
-        -- 开局事件
-        if jy.base["畅想"] == 58 then             -- 畅想杨过
-            CallCEvent(4187)
-        else                                      -- 其他人
-            CallCEvent(691)
-        end
-
-        -- 畅想开局获得自身的装备
-        if jy.base["畅想"] > 0 then
-            if jy.person[0]["武器"] ~= -1 and jy.base["畅想"] ~= 27 then
-                instruct_2(jy.person[0]["武器"], 1)
-                jy.person[0]["武器"] = -1
-            end
-            if jy.person[0]["防具"] ~= -1 then
-                instruct_2(jy.person[0]["防具"], 1)
-                jy.person[0]["防具"] = -1
-            end
-            if jy.person[0]["坐骑"] ~= -1 then
-                instruct_2(jy.person[0]["坐骑"], 1)
-                jy.person[0]["坐骑"] = -1
-            end
-        end
-
-        -- 畅想尹克西获得一万两
-        if jy.base["畅想"] == 158 then
-            instruct_2(174, 10000)
-        end
-        -- 标主可以在云岭洞花钱学习迷踪步
-        if jy.base["标准"] > 0 then
-            addevent(41, 0, 1, 4144, 1, 8694)
-        end
-        instruct_10(104)
-        instruct_10(105)
+        NewGame()
 
     -- 再战江湖
     elseif menu_return == 2 then
@@ -363,6 +302,30 @@ end
 
 -- 选择新游戏，设置主角初始属性
 function NewGame()
+    Gra_Cls()
+    Gra_ShowScreen()
+    LoadRecord(0)
+
+    -- 所有NPC加入门派，在upedit操作
+
+    -- 选择标主还是畅想（画面）
+    -- page763
+
+    -- 选人，标主列表和畅想列表
+    -- 畅想人物，需要重新配置
+
+    -- 选择游戏难度、游玩模式
+    -- page768
+
+    -- 选择内属、资质
+    -- page1185
+
+    -- 选择初始天赋
+    -- page1191
+
+    -- 最高难度下，NPC随机穿套装
+
+    -- 一些NPC的初始化，根据难度调整属性加成
 end
 
 -- 游戏主循环
