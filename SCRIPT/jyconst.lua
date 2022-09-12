@@ -139,7 +139,8 @@ function SetGlobalConst()
     GAME_WMAP = 5           -- 战斗地图
     GAME_DEAD = 6           -- 死亡画面
     GAME_END  = 7           -- 结束
-    GAME_BLACK = 8          -- 黑屏状态
+    GAME_NEWGAME = 8        -- 开启新游戏
+    GAME_BLACK = 9          -- 黑屏状态
 
     -- 游戏数据全局变量
     cc = {}                 -- 定义游戏中使用的常量

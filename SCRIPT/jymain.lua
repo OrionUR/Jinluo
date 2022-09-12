@@ -310,6 +310,7 @@ function NewGame()
 
     -- 选择标主还是畅想（画面）
     -- page763
+    jy.status = GAME_NEWGAME
 
     -- 选人，标主列表和畅想列表
     -- 畅想人物，需要重新配置
