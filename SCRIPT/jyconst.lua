@@ -55,19 +55,19 @@ function SetGlobalConst()
     VK_PGDN = 1073741902
 
     -- 游戏中颜色定义
-    C_BLACK = Gra_RGB(0, 0, 0)                  -- 黑
-    C_GRAY = Gra_RGB(68, 68, 68)                -- 灰
-    C_SILVER = Gra_RGB(192, 192, 192)           -- 银
-    C_BLUE = Gra_RGB(7, 99, 219)                -- 蓝
-    C_RED = Gra_RGB(216, 20, 24)                -- 红
-    C_WHITE = Gra_RGB(236, 236, 236)            -- 白
-    C_ORANGE = Gra_RGB(252, 148, 16)            -- 橘
-    C_GOLD = Gra_RGB(236, 200, 40)              -- 金
-    C_MATTEDGOLD = Gra_RGB(216, 214, 175)       -- 哑金
-    C_DARKRED = Gra_RGB(132, 0, 4)              -- 暗红
-    C_INDIGO = Gra_RGB(75, 0, 130)              -- 靓蓝色
-    C_SLATEGRAY = Gra_RGB(112, 128, 144)        -- 灰石
-    C_LIMEGREEN = Gra_RGB(100,200, 90)          -- 灰灰绿
+    C_BLACK = RGB(0, 0, 0)                  -- 黑
+    C_GRAY = RGB(68, 68, 68)                -- 灰
+    C_SILVER = RGB(192, 192, 192)           -- 银
+    C_BLUE = RGB(7, 99, 219)                -- 蓝
+    C_RED = RGB(216, 20, 24)                -- 红
+    C_WHITE = RGB(236, 236, 236)            -- 白
+    C_ORANGE = RGB(252, 148, 16)            -- 橘
+    C_GOLD = RGB(236, 200, 40)              -- 金
+    C_MATTEDGOLD = RGB(216, 214, 175)       -- 哑金
+    C_DARKRED = RGB(132, 0, 4)              -- 暗红
+    C_INDIGO = RGB(75, 0, 130)              -- 靓蓝色
+    C_SLATEGRAY = RGB(112, 128, 144)        -- 灰石
+    C_LIMEGREEN = RGB(100,200, 90)          -- 灰灰绿
 
     -- 游戏状态定义
     GAME_START = 0          -- 开始画面
@@ -136,6 +136,7 @@ function SetGlobalConst()
     cc.ui_path = CONFIG.PicturePath .. 'ui/'                    -- UI图案
     cc.ui_num = 1100
     cc.title_image = CONFIG.PicturePath .. 'title.png'          -- 游戏开始画面
+    cc.dead_image = CONFIG.PicturePath .. 'dead.png'            -- 游戏死亡画面
 
     -- save目录下各文件路径地址及说明
     cc.save_path = CONFIG.CurrentPath .. 'save/'                -- 存档路径
@@ -153,10 +154,8 @@ function SetGlobalConst()
     end
 
     -- 画面窗口相关常量
-    cc.screen_w = lib.GetScreenW()          -- 窗口设定的最大宽度
-    cc.screen_h = lib.GetScreenH()          -- 窗口设定的最大高度
-    cc.fit_width = cc.screen_w / 1360       -- 最佳比例宽度
-    cc.fit_high = cc.screen_h / 768         -- 最佳比例高度
+    cc.screen_w = lib.GetScreenW()          -- config设定的最大宽度
+    cc.screen_h = lib.GetScreenH()          -- config设定的最大高度
     cc.m_width = 480                        -- 大地图宽
     cc.m_height = 480                       -- 大地图高
     cc.s_width = 64                         -- 场景地图宽
@@ -188,6 +187,9 @@ function SetGlobalConst()
         '最新补丁请在qq群号758446108下载',
         '本游戏部分素材取自铁血丹心论坛/游侠网/人在江湖/金书红颜录/黑山群侠传/金书群侠传/金门群侠传'
     }
+    cc.team_num = 15
+    cc.my_thing_num = 1000
+    cc.version = 'v2000'
 
     -- 定义记录文件R×结构
     -- lua不支持结构，无法直接从二进制文件中读取，因此需要这些定义，用table中不同的名字来仿真结构

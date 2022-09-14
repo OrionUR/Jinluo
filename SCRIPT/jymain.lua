@@ -57,7 +57,7 @@ function SetGlobal()
     jy.sub_scene = -1                   -- 当前子场景编号
     jy.sub_scene_x = 0                  -- 子场景显示位置偏移，场景移动指令使用
     jy.sub_scene_y = 0
-    jy.thing_use = -1
+    jy.thing_use = -1                   -- 物品使用
     jy.current_d = -1                   -- 当前调用D*的编号
     jy.old_d_pass = -1                  -- 上次触发路过事件的D*编号，避免多次触发
     jy.current_event_type = -1          -- 当前触发事件的方式，1 空格，2 物品，3 路过
@@ -77,19 +77,17 @@ end
 
 -- 主程序入口
 function JY_Main()
-    --os.remove('debug.txt')              -- 清除以前的debug输出
     xpcall(JY_Main_Sub, MyErrFun)       -- 捕获调用错误
 end
 
 -- 错误处理，打印错误信息
 function MyErrFun(err)
-    Debug(err)                      -- 输出错误信息
-    Debug(debug.traceback())        -- 输出调用堆栈信息
+    Debug(err)                          -- 输出错误信息
+    Debug(debug.traceback())            -- 输出调用堆栈信息
 end
 
 -- 真正的游戏主程序入口
 function JY_Main_Sub()
-    ct = {}
     IncludeFile()                       -- 导入其他模块
     SetGlobalConst()                    -- 设置全局变量cc，在JYconst.lua
     SetGlobal()                         -- 设置全局变量jy
@@ -106,10 +104,10 @@ function JY_Main_Sub()
 
     -- 初始化随机数发生器
     math.randomseed(tonumber(tostring(os.time()):reverse():sub(1,6)))
-    jy.status = GAME_START              -- 改变游戏状态
-    PicInit()                       -- 初始化贴图Cache
-    FillColor()                     -- 屏幕黑屏
-    SetAllPNGAddress()              -- 载入所有贴图地址并分配id
+    jy.status = GAME_START              -- 游戏开始
+    PicInit()                           -- 初始化贴图Cache
+    FillColor()                         -- 屏幕黑屏
+    SetAllPngAddress()                  -- 载入所有贴图地址并分配id
 
     while true do
         if jy.restart == 1 then
@@ -121,8 +119,8 @@ function JY_Main_Sub()
         end
 
         PlayMidi(75)                    -- 播放音乐
-        Cls()                       -- 清屏
-        ShowSlow(20, 0)             -- 缓慢显示画面
+        Cls()                           -- 清屏
+        ShowSlow(20, 0)                 -- 缓慢显示画面
 
         local r = StartMenu()           -- 显示游戏开始菜单画面
         if r ~= nil then
@@ -139,8 +137,7 @@ end
 -- 清理lua内存
 function CleanMemory()
     if CONFIG.CleanMemory == 1 then
-        -- 做一次完整的垃圾收集循环
-        collectgarbage('collect')
+        collectgarbage('collect')       -- 做一次完整的垃圾收集循环
     end
 end
 
@@ -148,8 +145,10 @@ end
 -- 函数名不可改，在底层已写死
 function Menu_Exit()
     -- 缓存当前屏幕
-    local surid = lib.SaveSur(0, 0, cc.screen_w, cc.screen_h)
-    local choice = 1            -- 选项，1 继续游戏，2 返回初始，3 离开游戏，默认在1的位置
+    local surid = SaveSur()
+    local choice = 1                    -- 选项，1 继续游戏，2 返回初始，3 离开游戏，默认在1的位置
+    local num                           -- 选项数量
+    local key                           -- 键盘按键
     
     -- 保存当前状态
     local status = jy.status
@@ -160,29 +159,28 @@ function Menu_Exit()
             return
         end
 
-        DrawMenuExit(choice)    -- 绘制菜单
-
-        local key = GetKey()        -- 获取键值
+        num = DrawMenuExit(choice)      -- 绘制菜单，并返回选项数
+        key = GetKey()                  -- 获取键值
         -- 按ESC键，效果等同于选择「继续游戏」
         if key == VK_ESCAPE then
             PlayWav(77)
             jy.status = status
-            lib.LoadSur(surid, 0, 0)
+            LoadSur(surid)
             ShowScreen()
-            lib.FreeSur(surid)
+            FreeSur(surid)
             return 0
         -- 按上、左键
         elseif key == VK_UP or key == VK_LEFT then
             PlayWav(77)
             choice = choice - 1
             if choice < 1 then
-                choice = 3
+                choice = num
             end
         -- 按下、右键
         elseif key == VK_DOWN or key == VK_RIGHT then
             PlayWav(77)
             choice = choice + 1
-            if choice > 3 then
+            if choice > num then
                 choice = 1
             end
         -- 按空格、回车键
@@ -191,20 +189,20 @@ function Menu_Exit()
             -- 选择「离开游戏」
             if choice == 3 then
                 jy.status = GAME_END
-                lib.FreeSur(surid)
+                FreeSur(surid)
                 return 1
             -- 选择「返回初始」
             elseif choice == 2 then
                 jy.restart = 1
                 jy.status = GAME_START
-                lib.FreeSur(surid)
+                FreeSur(surid)
                 return 0
             -- 选择「继续游戏」
             else
                 jy.status = status
-                lib.LoadSur(surid, 0, 0)
+                LoadSur(surid)
                 ShowScreen()
-                lib.FreeSur(surid)
+                FreeSur(surid)
                 return 0
             end
         end
@@ -269,18 +267,22 @@ end
 -- 游戏开始画面选择
 ---@return number 选择的项
 function TitleSelection()
-    local choice = 1            -- 选项，1 开始游戏，2 载入游戏，3 退出游戏，默认在1的位置
+    local choice = 1                    -- 选项，1 开始游戏，2 载入游戏，3 退出游戏，默认在1的位置
+    local num                           -- 选项数量
+    local key                           -- 键盘按键
 
     while true do
         if jy.restart == 1 then
             return
         end
-        local key = GetKey()    -- 获取键值
+
+        num = DrawTitle(choice)         -- 绘制选项
+        key = GetKey()                  -- 获取键值
         -- 按下、右键
         if key == VK_DOWN or key == VK_RIGHT then
             PlayWav(77)
             choice = choice + 1
-            if choice > 3 then
+            if choice > num then
                 choice = 1
             end
         -- 按上、左键
@@ -288,13 +290,11 @@ function TitleSelection()
             PlayWav(77)
             choice = choice - 1
             if choice < 1 then
-                choice = 3
+                choice = num
             end
         elseif key == VK_RETURN then
             break
         end
-
-        DrawTitle(choice)         -- 绘制选项
     end
 
     return choice
@@ -339,17 +339,17 @@ end
 
 -- 设置需要读取所有贴图的fileid
 -- 1 头像，2 物品，3 特效，4 半身像，5 UI
-function SetAllPNGAddress()
+function SetAllPngAddress()
     -- 头像
-    LoadPNGPath(cc.head_path, 1, cc.head_num, LimitX(cc.fit_width * 100, 0, 100))
+    LoadPNGPath(cc.head_path, 1, cc.head_num, 100)
     -- 物品
-    LoadPNGPath(cc.thing_path, 2, cc.thing_num, LimitX(cc.fit_width * 100, 0, 100))
+    LoadPNGPath(cc.thing_path, 2, cc.thing_num, 100)
     -- 特效
-    LoadPNGPath(cc.eft_path, 3, cc.eft_num, LimitX(cc.fit_width * 100, 0, 100))
+    LoadPNGPath(cc.eft_path, 3, cc.eft_num, 100)
     -- 半身像
-    LoadPNGPath(cc.body_path, 4, cc.body_num, LimitX(cc.fit_width * 100, 0, 100))
+    LoadPNGPath(cc.body_path, 4, cc.body_num, 100)
     -- UI
-    LoadPNGPath(cc.ui_path, 5, cc.ui_num, LimitX(cc.fit_width * 100, 0, 100))
+    LoadPNGPath(cc.ui_path, 5, cc.ui_num, 100)
 end
 
 -- 裁剪并清除(x1, y1)-(x2, y2)矩形内的画面，并根据游戏状态显示背景图
@@ -363,84 +363,93 @@ function Cls(x1, y1, x2, y2)
         x1, y1, x2, y2 = 0, 0, 0, 0
     end
 
-    SetClip(x1, y1, x2, y2)         -- 裁剪窗口
+    SetClip(x1, y1, x2, y2)             -- 裁剪窗口
+
     -- 游戏状态为GAME_START，载入开始画面
     if (jy.status == GAME_START) then
-        FillColor(0, 0, 0, 0, 0)
+        FillColor()
         LoadPicture(cc.title_image, -1, -1)
     -- 游戏状态为GAME_MMAP，载入大地图背景
     elseif (jy.status == GAME_MMAP) then
-        DrawMMap(jy.base["人X"], jy.base["人Y"], GetMyPic())
+        --DrawMMap(jy.base["人X"], jy.base["人Y"], GetMyPic())
     -- 游戏状态为GAME_SMAP，载入场景背景
     elseif (jy.status == GAME_SMAP) then
-        DrawSMap()
+        --DrawSMap()
     -- 游戏状态为GAME_WMAP，载入战斗背景
     elseif (jy.status == GAME_WMAP) then
-        WarDrawMap(0)
+        --WarDrawMap(0)
     -- 游戏状态为GAME_DEAD，载入失败画面
     elseif (jy.status == GAME_DEAD) then
-        FillColor(0, 0, 0, 0, 0)
+        FillColor()
         LoadPicture(cc.dead_image, -1, -1)
     -- 其他情况黑屏
     else
-        FillColor(0, 0, 0, 0, 0)
+        FillColor()
     end
-    SetClip(0, 0, 0, 0)             -- 裁剪全屏
+    SetClip()                           -- 裁剪全屏
 end
 
 -- 绘制Menu_Exit的画面
 -- choice 当前选项
+-- return 选项数量
 function DrawMenuExit(choice)
     local size = cc.font_size_30        -- 字体
-    local pos = {                       -- 选项位置
-        {468, 327},
-        {468, 387},
-        {468, 447}
+    local options = {                    -- 选项数组
+        -- 选项文字，选项x轴，选项y轴
+        {'继续游戏', 468, 327},
+        {'返回初始', 468, 387},
+        {'离开游戏', 468, 447}
     }
-    local str = {'继续游戏', '返回初始', '离开游戏'}
 
     Cls()
-    for i = 1, #pos do
-        local color = C_SLATEGRAY     -- 字体颜色
-        local s = str[i]              -- 当前选项文字
+    for i = 1, #options do
+        local color = C_SLATEGRAY       -- 未选中时字体颜色
+        local s = options[i][1]         -- 当前选项文字
         if choice == i then
-            color = C_RED              -- 选中时，改变字体颜色
+            color = C_RED               -- 选中时字体颜色
         end
         -- x轴位置
-        local bx = cc.fit_width * 212 + cc.fit_width * pos[i][1] - string.len(s) / 4 * size
+        local bx = 212 + options[i][2] - string.len(s) / 4 * size
         -- y轴位置
-        local by = cc.fit_high * 33 + cc.fit_high * pos[i][2] - size / 2
+        local by = 33 + options[i][3] - size / 2
+
+        -- 绘制选项
         DrawStr(bx, by, s, color, size)
     end
-
     ShowScreen()
+
+    return #options
 end
 
 -- 绘制TitleSelection的选项
----@param choice number 当前选项
+-- choice 当前选项
+-- return 选项数量
 function DrawTitle(choice)
-    -- 未选中时的ui贴图，选中时的ui贴图，x轴位置，y轴位置
-    local buttons = {
+    local options = {                   -- 选项数组
+        -- 未选中时的ui贴图，选中时的ui贴图，x轴位置，y轴位置
         {3, 6, 560, 350},
         {4, 7, 560, 450},
         {5, 8, 560, 550}
     }
-    local picid                 -- 图像id
+    local picid                         -- 图像id
 
     Cls()
-    for i = 1, #buttons do
-        -- -- 选项贴图
-        picid = buttons[i][1]
+    for i = 1, #options do
+        -- 未选中时选择贴图
+        picid = options[i][1]
         if i == choice then
-            picid = buttons[i][2]
+            -- 选中时选择贴图
+            picid = options[i][2]
         end
         
-        -- UI的fileid = 5
-        LoadPNG(5, picid * 2, buttons[i][3], buttons[i][4], 1)
+        -- ui的fileid = 5
+        LoadPNG(5, picid * 2, options[i][3], options[i][4], 1)
     end
     -- 显示版本号
     DrawStr(610, 260, cc.version, C_INDIGO, cc.font_size_40)
     ShowScreen()
+
+    return #options
 end
 
 -- menu_item 表，每项保存一个子表，内容为一个菜单项的定义
@@ -1517,8 +1526,8 @@ function Say(str, pid, flag, name)
         return
     end
 
-    local bx = cc.fit_width         -- 最大宽度
-    local by = cc.fit_high          -- 最大高度
+    local bx = 1                    -- 最大宽度
+    local by = 1                    -- 最大高度
     local picw = 130                -- 头像图片最大宽度
     local pich = 130                -- 头像图片最大高度
     local talkxnum = 30             -- 最大列数
@@ -2467,6 +2476,22 @@ function ByteSetStr(b, start, length, str)
     end
 
     Byte.setstr(b, start, length, str)
+end
+
+-- 保存当前界面
+-- return：一个id值
+function SaveSur()
+    return lib.SaveSur(0, 0, cc.screen_w, cc.screen_h)
+end
+
+-- 载入保存的界面
+function LoadSur(surid)
+    lib.LoadSur(surid, 0, 0)
+end
+
+-- 清空保存的界面
+function FreeSur(surid)
+    lib.FreeSur(surid)
 end
 
 --------------------------------------------------------------------------------
