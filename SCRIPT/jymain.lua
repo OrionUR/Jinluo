@@ -73,6 +73,7 @@ function SetGlobal()
 
     jy.restart = 0                      -- 返回游戏初始界面
     jy.walk_count = 0                   -- 走路计步
+    jy.draw_menu_exit = nil             -- 绘制Menu_Exit的画面函数
 end
 
 -- 主程序入口
@@ -141,6 +142,41 @@ function CleanMemory()
     end
 end
 
+function OptionSelect(function_draw)
+    local choice = 1                    -- 选项
+    local num                           -- 选项数量
+    local key                           -- 键盘按键
+
+    while true do
+        if jy.restart == 1 then
+            return
+        end
+        num = function_draw(choice)     -- 绘制菜单，并返回选项数
+        key = GetKey()                  -- 获取键值
+
+        -- 按下、右键
+        if key == VK_DOWN or key == VK_RIGHT then
+            PlayWav(77)
+            choice = choice + 1
+            if choice > num then
+                choice = 1
+            end
+        -- 按上、左键
+        elseif key == VK_UP or key == VK_LEFT then
+            PlayWav(77)
+            choice = choice - 1
+            if choice < 1 then
+                choice = num
+            end
+        -- 按空格、回车键
+        elseif key == VK_RETURN or key == VK_SPACE then
+            return choice
+        end
+    end
+
+    return 0
+end
+
 -- 点击右上角X，或者Alt + F4关闭游戏时执行的函数
 -- 函数名不可改，在底层已写死
 function Menu_Exit()
@@ -154,9 +190,28 @@ function Menu_Exit()
     local status = jy.status
     jy.status = GAME_BLACK
 
+    -- choice = OptionSelect(jy.draw_menu_exit)
+    -- if choicee == 1 then
+    --     jy.status = status
+    --     LoadSur(surid)
+    --     ShowScreen()
+    --     FreeSur(surid)
+    --     return 0
+    -- elseif choice == 2 then
+    --     jy.restart = 1
+    --     jy.status = GAME_START
+    --     FreeSur(surid)
+    --     return 0
+    -- elseif choice == 3 then
+    --     jy.status = GAME_END
+    --     FreeSur(surid)
+    --     return 1
+    -- end
+
     while true do
         if jy.restart == 1 then
-            return
+            -- return
+            do return end
         end
 
         num = DrawMenuExit(choice)      -- 绘制菜单，并返回选项数
@@ -259,13 +314,13 @@ function StartMenu()
         --     jy.status = GAME_FIRSTMMAP
         -- end
     -- 离开游戏
-    else
+    elseif menu_return == 3 then
         return -1
     end
 end
 
 -- 游戏开始画面选择
----@return number 选择的项
+-- return 所选选项
 function TitleSelection()
     local choice = 1                    -- 选项，1 开始游戏，2 载入游戏，3 退出游戏，默认在1的位置
     local num                           -- 选项数量
@@ -273,7 +328,8 @@ function TitleSelection()
 
     while true do
         if jy.restart == 1 then
-            return
+            -- return
+            do return end
         end
 
         num = DrawTitle(choice)         -- 绘制选项
@@ -392,6 +448,7 @@ end
 -- 绘制Menu_Exit的画面
 -- choice 当前选项
 -- return 选项数量
+-- jy.draw_menu_exit = function(choice)
 function DrawMenuExit(choice)
     local size = cc.font_size_30        -- 字体
     local options = {                    -- 选项数组
