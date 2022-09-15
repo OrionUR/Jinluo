@@ -89,6 +89,7 @@ end
 
 -- 真正的游戏主程序入口
 function JY_Main_Sub()
+    fun = {}
     IncludeFile()                       -- 导入其他模块
     SetGlobalConst()                    -- 设置全局变量cc，在JYconst.lua
     SetGlobal()                         -- 设置全局变量jy
